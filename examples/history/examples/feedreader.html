@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lfin Feed Reader Example</title>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="https://rss2json.com/gfapi.js"></script>
+<style>
+html, body { margin: 0; padding: 0; }
+form, main, section { box-sizing: border-box; }
+#addFeedForm {
+  background-color: #eee;
+  padding: 10px;
+  height: 40px;
+}
+main {
+  box-sizing: border-box;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 40px);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling:touch;
+}
+section {
+  width: 360px;
+  border: 2px solid #aaa;
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+<form id="addFeedForm">
+ <input type="text" name="feedUrl"><input type="submit" value="Add Feed">
+</form>
+<main id="mainBox">
+</main>
+
+<script type="module">
+import { ListView, TemplateView, FormView, View } from '/lib/flatout.js';
+
+google.load("feeds", "1");
+
+class FeedEntryView extends TemplateView {
+  html(data) { return `\
+    <article>
+     <h3><a href="${data.link}" target="_blank">${data.title}</a></h3>
+     <header><span>${data.publishedDate}</time></header>
+     <div class="content">${data.content}</div>
+    </article>`
+  }  
+}
+
+class FeedView extends TemplateView {
+  load(views, evts) {
+    views.entries = new ListView(this.findEl('#feedEntryList'), FeedEntryView);
+  }
+
+  html(data) { return `\
+    <section>
+     <h2><a href="${data.link}" target="_blank">${data.title}</a></h2>
+     <p>${data.description}</p>
+     <div id="feedEntryList"></div>
+    </section>`
+  }
+}
+
+class MainView extends View {
+  load(views, evts) {
+    var feedList = new ListView('#mainBox', FeedView);
+    views.feedList = feedList;
+
+    evts.addFeedForm_submit = (form, evts) => {
+      var feed = new google.feeds.Feed(form.feedUrl.value);
+      feed.load(function(result){
+        if (!result.error) {
+          feedList.addItem(result.feed);
+        } else {
+          alert("Failed to fetch Feed");
+        }
+      });
+      form.reset();
+    }
+  }
+}
+
+new MainView(document.querySelector('body'));
+</script>
+</body>
+</html>

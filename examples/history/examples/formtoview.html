@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Form to View Example</title>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Form to View</h1>
+  </header>
+  <section id="autoArea">
+    <h2>Auto</h2>
+    <div data-id='content'></div>
+  </section>
+  <section id="manualArea">
+    <h2>Manual</h2>
+    <div data-id='content'></div>
+    <p><button data-id="setData1">Set Data1</button></p>
+    <p><button data-id="setData2">Set Data2</button></p>
+  </section>
+</main>
+<script type="module">
+import { View, FormView, Item } from '/lib/flatout.js';
+
+class Detail extends View {
+  init(defaultData) {
+    return new Item(defaultData);
+  }
+
+  html(data) {
+    return `\
+    <dl>
+      <dt>Name</dt>
+      <dd data-id="name"></dd>
+      <dt>Age</dt>
+      <dd data-id="age"></dd>
+    </dl>`
+  }
+}
+
+class AutoForm extends FormView {
+  html(data) {
+    return `\
+    <form>
+      <label>Name</label><input name="name">
+      <label>Age</label><input name="age" data-type="number">
+    </form>`
+  }
+
+  load(views, evts) {
+    evts.name_keyup = function (sender, e) {
+      this.fire('dataChanged', { name: this.getValueOf('name') })
+    }
+
+    evts.age_keyup = function (sender, e) {
+      this.fire('dataChanged', { age: this.getValueOf('age') })
+    }
+  }
+}
+
+class AutoArea extends View {
+  constructor() {
+    super('autoArea', { container: 'content' })
+  }
+
+  load(views, evts) {
+    const initData = { name: 'Auto', age: 10 }
+    views.detail = new Detail({ data: initData })
+    views.form = new AutoForm({ data: initData })
+
+    evts.dataChanged = (sender, e) => {
+      views.detail.data.update(e.detail)
+    }
+  }
+}
+
+class ManualForm extends FormView {
+  html(data) {
+    return `\
+    <form>
+      <label>Name</label><input name="name">
+      <label>Age</label><input name="age" data-type="number">
+      <button type="submit">Submit</button>
+    </form>`
+  }
+
+  load(views, evts) {
+    evts.submit = function (sender, e) {
+      this.fire('dataChanged', this.data)
+    }
+  }
+}
+
+class ManualArea extends View {
+  constructor() {
+    super(document.getElementById('manualArea'), { container: 'content' })
+  }
+
+  load(views, evts) {
+    const initData = { name: 'Manual', age: 20 }
+    views.detail = new Detail({ data: initData })
+    views.form = new ManualForm({ data: initData })
+
+    evts.dataChanged = (sender, e) => {
+      views.detail.data.update(e.detail)
+    }
+
+    evts.setData1_click = (sender, e) => {
+      views.detail.data = {
+        name: 'Taro', age: 34
+      }
+    }
+
+    evts.setData2_click = (sender, e) => {
+      views.detail.data = {
+        name: 'Hanako', age: 29
+      }
+    }
+  }
+}
+
+new AutoArea()
+new ManualArea()
+</script>
+</body>
+</html>

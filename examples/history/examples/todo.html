@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lfin Example</title>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+<form id="inputForm">
+ <input type="text" name="todoTitle">
+</form>
+<ul id="todoList"></ul>
+<button id="resetButton">Reset</button>
+<button id="greenButton">GREEN</button>
+<button id="redButton">RED</button>
+<p id="msg">MSG</p>
+<script type="module">
+import { List, View, ListView } from '/lib/flatout.js';
+
+const defaulTodoItems = [
+  { title: "Todo 1" },
+  { title: "Todo 2" },
+  { title: "Todo 3" },
+  { title: "Todo 4" }
+];
+
+class MyListView extends ListView {
+  /**
+   * Adding with fade-in effect
+   * @param {Element} listEl parent element for List
+   * @param {Element} newEl an element for new item for List
+   * @param {Element} nextEl next element will be next one for newEl
+   */
+  insertItemEl(listEl, newEl, nextEl) {
+    // listEl.insertBefore(newEl, nextEl);
+    $(newEl).hide().prependTo(listEl).fadeIn(300);
+  }
+
+  /**
+   * Removing with fade-out effect
+   * @param  {[type]} listEl [description]
+   * @param  {[type]} itemEl [description]
+   */
+  removeItemEl(listEl, itemEl) {
+    // listEl.removeChild(itemEl);
+    const $delEl = $(itemEl);
+    $delEl.fadeOut(300, () => { $delEl.remove() });
+  }
+}
+
+
+class TodoItemView extends View {
+  html(data) {
+    return `<li><input type="checkbox" class="checkBox">${data.title}</li>`;
+  }
+
+  load(views, evts) {
+    this.listen('colorChange', function(ctx) {
+      $(this.el).css('backgroundColor', ctx.color);
+    });
+
+    evts.checkBox_change = () => {
+      this.fire('deleteTodo', this);
+    }
+  }
+}
+
+class MainView extends View {
+  constructor(body) {
+    super(body);
+    this.todoItems = new List(defaulTodoItems.concat());
+  }
+
+  load(views, evts) {
+    const msg = views.msg = new View('#msg');
+    msg.listen('colorChange', function(ctx) {
+      $(this.el).css('color', ctx.color);
+    });
+
+    const todoList = views.todoList = new MyListView('#todoList', TodoItemView, { data: this.todoItems });
+
+    evts.inputForm_submit = (form, e) => {
+      this.todoItems.add({ title: form.todoTitle.value }, 0);
+    }
+
+    evts.resetButton_click = () => {
+      this.todoItems.reset(defaulTodoItems.concat());
+    }
+
+    evts.greenButton_click = () => {
+      msg.say('colorChange', { color: 'green'});      
+    }
+
+    evts.redButton_click = () => {
+      this.broadcast('colorChange', { color: 'red' });
+    }
+
+    evts.deleteTodo = (sender, e) => {
+      todoList.removeItem(e.detail)
+    }
+  }
+}
+
+new MainView(document.querySelector('body'));
+</script>
+</body>
+</html>

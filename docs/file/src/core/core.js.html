@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/core/core.js | flatout</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/tilfin/flatout"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app">app</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/app.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HashRouter.html">HashRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HistoryRouter.html">HistoryRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html">HttpClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpError.html">HttpError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-eachEntry">eachEntry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeLFID">makeLFID</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#model">model</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~Binder.html">Binder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ItemBinder.html">ItemBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ListBinder.html">ListBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~Item.html">Item</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#view">view</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/form-view.js~FormView.html">FormView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/list-view.js~ListView.html">ListView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/view.js~View.html">View</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/core/core.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
+
+import { eachEntry } from &apos;../core/util.js&apos;
+
+/**
+ * Core
+ */
+class Core {
+  /**
+   * Create a Core.
+   */
+  constructor() {
+    const dp = {};
+    eachEntry(this._privates(), ([key, value]) =&gt; {
+      dp[key] = { value }
+    })
+    Object.defineProperties(this, dp)
+  }
+
+  /**
+   * Return non-enumerable attribute definitions.
+   *
+   * @access private
+   */
+  _privates() {
+    return { _F_obs: new Map() }
+  }
+
+  /**
+   * Listen a message
+   *
+   * @param {string|Object} nameOrObj - message name, &apos;*&apos; specify any listener.
+   * @param {Function} handler - handler called on message received or target object.
+   * @example
+   * core.listen(&apos;*&apos;, function(){});
+   * core.listen(&apos;evtName1&apos;, function(){});
+   * core.listen({ evtName2: function(){}, evtName3: function(){} })
+   */
+  listen(nameOrObj, handler) {
+    if (handler) {
+      this._listen(nameOrObj, handler);
+    } else {
+      eachEntry(nameOrObj, ([name, handler]) =&gt; this._listen(name, handler));
+    }
+  }
+
+  /**
+   * Unlisten a message
+   *
+   * @param {string} name - message name, &apos;*&apos; specify any listener.
+   * @param {Function|object} handler - handler registered or target registered.
+   */
+  unlisten(name, handler) {
+    const set = this._F_obs.get(name);
+    if (set) set.delete(handler);
+  }
+
+  /**
+   * Unescape HTML
+   * @param  {String} escaped HTML string
+   * @return {String}         raw HTML string
+   */
+  unescapeHtml(escaped) {
+    const doc = new DOMParser().parseFromString(escaped, &quot;text/html&quot;);
+    return doc.documentElement.textContent;
+  }
+
+  /**
+   * Cast a message to the listeners
+   *
+   * @param {string} name - message name
+   * @param {*} ctx - passing value
+   */
+  say(name, ctx) {
+    this._say(name, name, ctx);
+    this._say(&apos;*&apos;, name, ctx);
+  }
+
+  // protected scope
+
+  _listen(name, handler) {
+    const set = this._F_obs.get(name);
+    if (set) {
+      set.add(handler);
+    } else {
+      this._F_obs.set(name, new Set([handler]));
+    }
+  }
+
+  _say(targetName, name, ctx) {
+    const handlers = this._F_obs.get(targetName);
+    if (handlers === undefined) return;
+
+    handlers.forEach(it =&gt; {
+      if (this._isFn(it)) {
+        it.call(this, ctx);
+        return;
+      }
+
+      let method = it[name];
+      if (this._isFn(method)) {
+        method.call(it, ctx);
+      }
+    });
+  }
+
+  _callR(args, target, method, methodOwner) {
+    let t = methodOwner ? this[methodOwner] : this;
+    if (t) t = t[method];
+    if (t) t.apply(this, args);
+
+    const children = this[target];
+    if (!children) return;
+
+    for (let name in children){
+      const c = children[name];
+      if (c._callR) c._callR(args, target, method, methodOwner);
+    }
+  }
+
+  _isStr(v) {
+    return (typeof v === &apos;string&apos;)
+  }
+
+  _isFn(f) {
+    return (typeof f === &apos;function&apos;)
+  }
+}
+
+export default Core
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

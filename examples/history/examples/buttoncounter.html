@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Button Counter Example</title>
+</head>
+<body>
+<main></main>
+<script type="module">
+import { View, View, Item } from '/lib/flatout.js';
+
+class ButtonCounterView extends View {
+  init(defaultData) {
+    return new Item(defaultData);
+  }
+
+  html(data) {
+    return `<button>You clicked me <span data-id="count"></span> times.</button>`
+  }
+
+  load(views, evts) {
+    evts.click = () => {
+      this.data.add('count', 1);
+    }
+  }
+}
+
+class MainView extends View {
+  load(views, evts) {
+    views.buttonCounter = new ButtonCounterView({ data: { count: 0 }});
+  }
+}
+
+new MainView(document.querySelector('main'));
+</script>
+</body>
+</html>

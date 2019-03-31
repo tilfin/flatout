@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Comparison with React examples</title>
+</head>
+<body>
+<h1>Comparison with React examples</h1>
+<main>
+  <div id="sandbox"></div>
+  <footer>
+    <button id="addTimer">Add Timer</button>
+    <button id="removeTimer">Remove Timer</button>
+  </footer>
+</main>
+<script type="module">
+import { View, ListView, FormView, Item, List } from '/lib/flatout.js';
+
+class HelloMessage extends View {
+  html(data) {
+    return `<div>Hello ${data.name}</div>`
+  }
+}
+
+class Timer extends View {
+  init() {
+    return new Item({ seconds: 0 })
+  }
+
+  html() {
+    return `<div>Seconds: <span data-id="seconds"></span></div>`
+  }
+
+  load() {
+    this.interval = setInterval(() => { this.tick() }, 1000)
+  }
+
+  unload() {
+    clearInterval(this.interval)
+  }
+
+  tick() {
+    this.data.add('seconds', 1)
+  }
+}
+
+class TodoListItemView extends View {
+  html(data) {
+    return `<li>${data.text}</li>`
+  }
+}
+
+class AddForm extends FormView {
+  init(defaults) {
+    defaults.newTodo = ''
+  }
+
+  html() {
+    return `\
+    <form data-id="form">
+      <label for="newTodo">What needs to be done?</label>
+      <input name="newTodo">
+      <button>Add #<span data-id="nextNumber"></span></button>
+    </form>`
+  }
+
+  load(views, evts) {
+    evts.submit = () => {
+      const text = this.getValueOf('newTodo');
+      if (!text) {
+        return;
+      }
+
+      this.fire('addNewTodo', { text });
+
+      this.data = {
+        nextNumber: this.data.nextNumber + 1,
+        newTodo   : ''
+      };
+    }
+  }
+}
+
+class TodoApp extends View {
+  init(defaults) {
+    return {
+      list: new List(defaults)
+    }
+  }
+
+  html() {
+    return `\
+    <div>
+      <h3>TODO</h3>
+      <ul data-id="list"></ul>
+      <div data-id="form"></div>
+    </div>`
+  }
+
+  load(views, evts) {
+    views.list = new ListView(TodoListItemView);
+    views.form = new AddForm({ data: { nextNumber: this.data.list.length + 1 }});
+
+    evts.form_addNewTodo = (sender, e) => {
+      this.data.list.add(e.detail)
+    }
+  }
+}
+
+class MainView extends View {
+  load(views, evts) {
+    views.helloMessage = new HelloMessage({ data: { name: "Taylor" }});
+    views.todoApp = new TodoApp({ data: [{ text: 'First Todo' }] });
+    views.timer = new Timer();
+
+    evts.addTimer_click = () => {
+      this.add('timer', new Timer());
+    }
+
+    evts.removeTimer_click = () => {
+      this.remove('timer');
+    }
+  }
+}
+
+new MainView(document.querySelector('main'), { container: 'sandbox' });
+</script>
+</body>
+</html>

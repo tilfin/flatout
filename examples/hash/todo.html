@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lfin Todo</title>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+<form id="inputForm">
+ <input type="text" name="todoTitle">
+</form>
+<ul id="todoList">
+ <template id="todoItem">
+  <li><input type="checkbox" class="checkBox">{{title}}</li>
+ </template>
+</ul>
+<button id="resetButton">Reset</button>
+<button id="clearButton">Clear</button>
+<button id="dumpButton">Dump</button>
+<script type="module">
+import { App, View, Item, List, FormView, ListView } from './lib/flatout.js'; 
+
+var defaulTodoItems = [
+  { title: "Todo 1" },
+  { title: "Todo 2" },
+  { title: "Todo 3" },
+  { title: "Todo 4" }
+];
+
+class TodoItemView extends View {
+  load(views, evts) {
+    evts.checkBox_change = function(){
+      this._data.destroy();
+    }
+  }
+}
+TodoItemView.setTemplate('#todoItem');
+
+class MyListView extends ListView {
+  load(views, evts) {
+    this.listen('colorChange', (ctx) => {
+      this.$el.css('backgroundColor', ctx.color);
+    });
+  }
+
+  /**
+   * If you change inserting item effect, override this method
+   *
+   * @param {Element} listEl parent element for List
+   * @param {Element} newEl an element for new item for List
+   * @param {Element} nextEl next element will be next one for newEl
+   */
+  insertItemEl(listEl, newEl, nextEl) {
+    var $itemEl = $(newEl);
+    $itemEl.hide();
+    listEl.insertBefore(newEl, nextEl);
+    $itemEl.fadeIn(300);
+  }
+
+  removeItemEl(listEl, itemEl) {
+    var $delEl = $(itemEl);
+    $delEl.fadeOut(300, function(){ $delEl.remove() });
+  }
+}
+
+const todoItems = new List(defaulTodoItems, { wrapItem: true });
+
+class MainView extends View {
+  constructor() {
+    super(document.body);
+  }
+
+  load(views, evts) {
+    views.todoList = new MyListView('#todoList', TodoItemView);
+
+    evts.inputForm_submit = function(form, e) {
+      todoItems.add({ title: form.todoTitle.value }, 0);
+    }
+
+    evts.resetButton_click = function() {
+      todoItems.reset(defaulTodoItems);
+    }
+
+    evts.clearButton_click = function() {
+      todoItems.reset();
+    }
+
+    evts.dumpButton_click = function() {
+      console.info(todoItems);
+    }
+  }
+
+  title() {
+    return 'Todo';
+  }
+
+  async context() {
+    return {
+      todoList: todoItems
+    };
+  }
+}
+
+App.activate({ index: MainView }, { mode: 'HASH' });
+</script>
+</body>
+</html>

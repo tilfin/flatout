@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/view/view.js | flatout</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/tilfin/flatout"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app">app</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/app.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HashRouter.html">HashRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HistoryRouter.html">HistoryRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html">HttpClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpError.html">HttpError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-eachEntry">eachEntry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeLFID">makeLFID</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#model">model</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~Binder.html">Binder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ItemBinder.html">ItemBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ListBinder.html">ListBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~Item.html">Item</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#view">view</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/form-view.js~FormView.html">FormView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/list-view.js~ListView.html">ListView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/view.js~View.html">View</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/view/view.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
+
+import Core from &apos;../core/core.js&apos;
+import { eachEntry, makeLFID } from &apos;../core/util.js&apos;
+import { Item } from &apos;../model/item.js&apos;
+import { ItemBinder } from &apos;../model/binder.js&apos;
+
+const HOOK_EVTS = [&apos;click&apos;, &apos;submit&apos;, &apos;change&apos;];
+
+/**
+* View
+*/
+class View extends Core {
+
+  /**
+   * Create a View.
+   *
+   * @param {string|Element} root - Root element ID or root node
+   * @param {object} [props]      - Properties
+   * @param {Class&lt;View&gt;} [props.parent] - parent view this belongs to
+   * @param {string|Element} [props.container] - parent element of child views (specified by data-id or id value).
+   */
+  constructor(root, props) {
+    super();
+
+    /**
+     * Root element
+     * @member {Node}
+     */
+    this.el = null;
+
+    /**
+     * Subview children of the view
+     * @member {object}
+     */
+    this.views = {};
+
+    if (props === undefined &amp;&amp; root &amp;&amp; root.constructor === Object) {
+      props = root;
+      root = null;
+    }
+
+    this._build(root, props || {});
+  }
+
+  /** @override */
+  _privates() {
+    return Object.assign(super._privates(), {
+      _F_onevts: new Set(),
+      _F_binders: [],
+      _F_elcache: new Map()
+    })
+  }
+
+  /**
+   * Initialize props
+   * 
+   * @param {object} defaults - default data.
+   * @return {object|Item} modified data or item.
+   */
+  init(defaults) {
+  }
+
+  /**
+   * For implement creating subviews and setting listener of events.
+   * 
+   * @param {object} views - added subview target (ex. views.list = new ListView(..))
+   * @param {object} evts - added listener target (ex. evts.subview_event)
+   */
+  load(views, evts) {
+  }
+
+  /**
+   * For implement unloading subviews
+   */
+  unload() {
+  }
+
+  /**
+   * Cast a message to all children of view
+   *
+   * @param {string} method - method name
+   * @param {Array} args - arguments
+   */
+  broadcast(method, args = []) {
+    this._callR(args, &apos;views&apos;, method)
+  }
+
+  /**
+   * _loaded resolve after all done
+   */
+  _build(root, props) {
+    console.log(&apos;View#_build&apos;, root, props);
+
+    const defaults = this._setupProps(props);
+    const data = this.init(defaults);
+    this._data = data !== undefined ? data : defaults;
+    this._setRootNode(root, props.parent || null, this._data);
+    if (this.el) this._loadFinish();
+  }
+
+  _setupProps(props) {
+    let defaults;
+    if (props) {
+      // once detach data
+      defaults = props.data;
+      if (&apos;data&apos; in props) delete props.data;
+      Object.assign(this, props);
+    }
+    return defaults;
+  }
+
+  /**
+   * Set root node element to this.el
+   */
+  _setRootNode(root, parent, data) {
+    if (!root &amp;&amp; this.html) {
+      this.el = root = this._buildFromHtml(data);
+      if (parent) {
+        // If this view doesn&apos;t belong to parent views
+        parent.appendEl(root);
+      }
+    } else if (this._isStr(root)) {
+      this.el = parent ? parent.findEl(root) : document.getElementById(root);
+      if (!this.el) {
+        throw new Error(`Failed to create View because element not found ID: ${root}`);
+      }
+    } else if (root) {
+      this.el = root;
+    }
+  }
+
+  _loadFinish() {
+    const ctn = this.container;
+    this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;
+
+    this._loadViewsEvts();
+    this._setDataToChildren();
+    this._bindData();
+  }
+
+  _loadViewsEvts() {
+    console.log(&apos;View#_loadViewsEvts&apos;, this);
+
+    const evts = {};
+    this.load(this.views, evts);
+
+    eachEntry(this.views, ([name, view]) =&gt; {
+      if (!view.el) {
+        view.el = this.findEl(name);
+        view._loadFinish();
+      } else if (view.el.parentNode instanceof DocumentFragment) {
+        const makerEl = this.findEl(name);
+        if (makerEl) {
+          // Embed view at marker if the node exists
+          makerEl.parentNode.replaceChild(view.el, makerEl);
+        } else {
+          this.appendEl(view.el);
+        }
+      }
+    });
+
+    this._setupEvts(View._parseEvts(evts));
+  }
+
+  _bindData() {
+    const data = this._data;
+    if (data instanceof Item) {
+      this._F_binders.push(new ItemBinder(data, this));
+    }
+  }
+
+  _unbindData() {
+    const binder = this._F_binders.pop();
+    if (binder)  binder.destroy();
+  }
+
+  /**
+   * data to elements text or value, innerHTML of elements
+   *
+   * @property {object} data
+   * @example
+   * view.data = { name: &apos;Mike&apos;, inputAge: { value: 24 }, message: { html: &quot;&lt;p&gt;Hello!&lt;/p&gt;&quot; } };
+   */
+  get data() {
+    return this._data
+  }
+
+  set data(value) {
+    console.log(&apos;View#data=&apos;, this);
+    this._data = value;
+    this._unbindData();
+    this._setDataToChildren();
+    this._bindData();
+  }
+
+  /**
+   * Find an element that has specified data-id else call getElementById
+   *
+   * @param id data-id value
+   * @return {Element}
+   * @example
+   * view.findEl(&apos;elementDataId&apos;);
+   */
+  findEl(id) {
+    const cached = this._F_elcache[id];
+    if (cached &amp;&amp; cached.parentNode) {
+      return cached;
+    }
+    const result = this._F_elcache[id]
+      = this.el.querySelector(`[data-id=&quot;${id}&quot;]`) || document.getElementById(id);
+    return result;
+  }
+
+  /**
+   * Append child element
+   *
+   * @param {Element} el - child element
+   */
+  appendEl(el) {
+    this.container.appendChild(el)
+  }
+
+  /**
+   * Add child view as name
+   *
+   * @param {string} name - child name
+   * @param {View} view - child view
+   * @example
+   * parent.add(&apos;child&apos;, view);
+   */
+  add(name, view) {
+    this.views[name] = view;
+    this.appendEl(view.el);
+  }
+
+  /**
+   * Remove child view by name
+   *
+   * @param {string} viewName - child view name
+   * @example
+   * parent.remove(&apos;child&apos;);
+   */
+  remove(viewName) {
+    const view = this.views[viewName];
+    view.destroy();
+    view.el.remove();
+    delete this.views[viewName]
+  }
+
+  /**
+   * Fire event
+   *
+   * @param {string} name - event name
+   * @param {object} ctx - event context
+   * @example
+   * view.fire(&apos;move&apos;, { newPosition: 1 });
+   */
+  fire(name, ctx) {
+    const e = ctx ? new CustomEvent(name, { detail: ctx, bubbles: true })
+                : new Event(name, { bubbles: true });
+    this.el.dispatchEvent(e);
+  }
+
+  /**
+   * Destroy all chidren, unload, and destroy binder, teardown events
+   */
+  destroy() {
+    this.unload();
+
+    Object.values(this.views).forEach(it =&gt; it.destroy());
+    this.views = {};
+    this._F_elcache.clear();
+    this._unbindData();
+    this._teardownEvts();
+    this.parent = null;
+  }
+
+  /**
+   * Set data to subviews or elements in the view.
+   */
+  _setDataToChildren() {
+    const data = this._data;
+    if (data === undefined || !(data instanceof Object)) return;
+    console.log(&apos;View#_setDataToChildren&apos;, this);
+
+    eachEntry(this._data, ([name, val]) =&gt; {
+      this._setFieldValue(name, val)
+    })
+  }
+
+  _updateField(name, newValue, oldValue) {
+    this._setFieldValue(name, newValue)
+  }
+
+  _setFieldValue(name, val) {
+    if (name in this.views) {
+      this.views[name].data = val;
+      return;
+    }
+
+    const el = this.findEl(name);
+    if (!el) return;
+
+    if (el.dataset &amp;&amp; el.dataset.type === &apos;html&apos;) {
+      el.innerHTML = val;
+    } else if (&apos;value&apos; in el) {
+      el.value = val;
+    } else {
+      el.textContent = val;
+    }
+  }
+
+  // private
+
+  _setupEvts(evtMap) {
+    eachEntry(evtMap, ([target, hmap]) =&gt; {
+      if (target === &apos;_&apos;) {
+        this._setEvts(this.el, hmap);
+        return;
+      }
+
+      const el = this.findEl(target);
+      if (!el) {
+        console.log(`Not found event target ${target}`);
+        return;
+      }
+
+      const ts = el instanceof NodeList ? Array.from(el) : [el];
+      ts.forEach(t =&gt; this._setEvts(t, hmap));
+    })
+  }
+
+  /**
+   * Bind targets with event handler set.
+   *
+   * @param {Element} el - event raiser.
+   * @param {object} hmap - handler map. Object&lt;type, value&gt;
+   */
+  _setEvts(el, hmap) {
+    eachEntry(hmap, ([type, handler]) =&gt; {
+      this._trapEvt(this, el, type, handler);
+    })
+  }
+
+  /**
+   * Bind target event with handler.
+   *
+   * @param {View} root - caller
+   * @param {Element} el - event raiser
+   * @param {string} type - event type
+   * @param {function} handler - callback function
+   */
+  _trapEvt(root, el, type, handler) {
+    const hook = function(e) {
+      const rb = handler.call(root, this, e);
+      return rb !== undefined ? rb : false;
+    };
+
+    if (HOOK_EVTS.includes(type)) {
+      el[&apos;on&apos;+type] = hook;
+    } else {
+      el.addEventListener(type, hook);
+    }
+    this._F_onevts.add([el, type, hook]);
+  }
+
+  _teardownEvts() {
+    const onevts = this._F_onevts;
+    onevts.forEach(([el, type, hook]) =&gt; {
+      if (HOOK_EVTS.includes(type)) {
+        el[&apos;on&apos;+type] = null;
+      } else {
+        el.removeEventListener(type, hook);
+      }
+    });
+    onevts.clear();
+  }
+
+  _buildFromHtml(data) {
+    const el = document.createElement(&apos;template&apos;);
+    el.innerHTML = this.html(data || {});
+    const df = document.adoptNode(el.content);
+    return this._firstEl(df);
+  }
+
+  _firstEl(el) {
+    const fec = el.firstElementChild;
+    if (fec !== undefined) return fec;
+
+    // for Safari, Edge
+    const nodes = el.childNodes;
+    for (let i = 0, len = nodes.length; i &lt; len; i++) {
+      const child = nodes[i];
+      if (child.nodeType === Node.ELEMENT_NODE) return child;
+    }
+    return null;
+  }
+
+  // static
+
+  static _parseEvts(handlers) {
+    const emap = { _: {} };
+
+    eachEntry(handlers, ([name, handler]) =&gt; {
+      const pos = name.lastIndexOf(&apos;_&apos;);
+      if (pos === -1) {
+        emap._[name] = handler;
+        return;
+      }
+
+      // ex) button_click
+      const target = name.substr(0, pos),
+            ename = name.substr(pos + 1),
+            hmap = emap[target];
+      if (hmap) {
+        hmap[ename] = handler;
+      } else {
+        emap[target] = { [ename]: handler };
+      }
+    })
+
+    return emap;
+  }
+}
+
+export default View;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

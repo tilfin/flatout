@@ -1,0 +1,158 @@
+{
+  "coverage": "55.67%",
+  "expectCount": 194,
+  "actualCount": 108,
+  "files": {
+    "src/app/app.js": {
+      "expectCount": 13,
+      "actualCount": 8,
+      "undocumentLines": [
+        12,
+        38,
+        53,
+        68,
+        109
+      ]
+    },
+    "src/app/router.js": {
+      "expectCount": 25,
+      "actualCount": 6,
+      "undocumentLines": [
+        111,
+        112,
+        113,
+        114,
+        188,
+        194,
+        211,
+        225,
+        229,
+        238,
+        249,
+        252,
+        283,
+        291,
+        316,
+        318,
+        321,
+        325,
+        345
+      ]
+    },
+    "src/core/core.js": {
+      "expectCount": 12,
+      "actualCount": 7,
+      "undocumentLines": [
+        81,
+        90,
+        107,
+        121,
+        125
+      ]
+    },
+    "src/core/http.js": {
+      "expectCount": 30,
+      "actualCount": 10,
+      "undocumentLines": [
+        14,
+        17,
+        19,
+        20,
+        21,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        49,
+        50,
+        51,
+        52,
+        53,
+        57,
+        192,
+        252,
+        256
+      ]
+    },
+    "src/core/util.js": {
+      "expectCount": 4,
+      "actualCount": 2,
+      "undocumentLines": [
+        8,
+        13
+      ]
+    },
+    "src/model/binder.js": {
+      "expectCount": 14,
+      "actualCount": 11,
+      "undocumentLines": [
+        14,
+        41,
+        66
+      ]
+    },
+    "src/model/item.js": {
+      "expectCount": 30,
+      "actualCount": 21,
+      "undocumentLines": [
+        85,
+        90,
+        94,
+        118,
+        126,
+        284,
+        292,
+        300,
+        307
+      ]
+    },
+    "src/view/form-view.js": {
+      "expectCount": 8,
+      "actualCount": 4,
+      "undocumentLines": [
+        33,
+        63,
+        85,
+        97
+      ]
+    },
+    "src/view/list-view.js": {
+      "expectCount": 17,
+      "actualCount": 15,
+      "undocumentLines": [
+        35,
+        165
+      ]
+    },
+    "src/view/page.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/view/view.js": {
+      "expectCount": 38,
+      "actualCount": 21,
+      "undocumentLines": [
+        8,
+        97,
+        102,
+        133,
+        135,
+        142,
+        166,
+        173,
+        189,
+        276,
+        292,
+        296,
+        316,
+        368,
+        380,
+        387,
+        402
+      ]
+    }
+  }
+}

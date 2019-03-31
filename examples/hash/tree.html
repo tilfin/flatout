@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lfin Tree View Example</title>
+<style>
+p { margin: 0 }
+li { margin: 1em 0 }
+</style>
+</head>
+<body>
+<h1>Tree example not using Collection</h1>
+<main>
+  <ul id="treeRoot"></ul>
+</main>
+
+<script type="module">
+import { App, View, FormView, ListView } from './lib/flatout.js'; 
+
+var treeData = [{
+  name: "Root",
+  children: [
+    {
+      name: "Taro",
+      children: [
+        {
+          name: "Sanshiro"
+        },
+        {
+          name: "Hanako"
+        }
+      ]
+    }, {
+      name: "Jiro",
+      children: [
+        {
+          name: "Jiro jr."
+        }
+      ]
+    },
+    {
+      name: "Saburo"
+    }
+  ]
+}];
+
+
+class TreeNodeView extends View {
+  html(data) {
+    return `\
+    <li>
+      <p>
+       <span data-id="name">${data.name}</span>
+       <button data-id="deleteButton">Del</button>
+      </p>
+      <ul data-id="children"></ul>
+      <form data-id="addChildForm">
+        <input type="text" name="cname"><input type="submit" value="Add child">
+      </form>
+    </li>`
+  }
+
+  load(views, evts) {
+    const childrenView = views.children = new ListView(TreeNodeView);
+
+    this.isExpaneded = true;
+
+    evts.name_click = () => {
+      this.isExpaneded = !this.isExpaneded;
+      childrenView.el.style.display = this.isExpaneded ? 'block' : 'none';
+    }
+
+    evts.deleteButton_click = () => {
+      this.fire('destroy', { target: this });
+    }
+
+    evts.addChildForm_submit = (form, e) => {
+      childrenView.addItem({ name: form.cname.value, children: [] });
+      form.cname.value = null;
+    }
+
+    evts.destroy = (sender, e) => {
+      console.info(this._data.name)
+      if (this === e.detail.target) return; // skip in myself
+      childrenView.removeItemByView(e.detail.target);
+      e.stopPropagation();
+    }
+  }
+}
+
+
+class MainView extends View {
+  load(views, evts) {
+    views.list = new ListView('treeRoot', TreeNodeView);
+  }
+
+  title() {
+    return 'Tree'
+  }
+
+  async context() {
+    return {
+      list: treeData
+    }
+  }
+}
+
+App.activate({ index: MainView }, { mode: 'HASH' });
+</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/model/item.js | flatout</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/tilfin/flatout"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app">app</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/app.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HashRouter.html">HashRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HistoryRouter.html">HistoryRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html">HttpClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpError.html">HttpError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-eachEntry">eachEntry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeLFID">makeLFID</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#model">model</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~Binder.html">Binder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ItemBinder.html">ItemBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ListBinder.html">ListBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~Item.html">Item</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#view">view</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/form-view.js~FormView.html">FormView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/list-view.js~ListView.html">ListView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/view.js~View.html">View</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/model/item.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+import { eachEntry } from &apos;../core/util.js&apos;
+import Core from &apos;../core/core.js&apos;;
+
+/**
+ * Item.
+ * this can be an element of List.
+ * 
+ * @memberOf Lfin
+ */
+export class Item extends Core {
+
+  /**
+   * Constructor.
+   * 
+   * @param {object} [defaultData] - default data
+   */
+  constructor(defaultData = {}) {
+    super();
+    Object.assign(this, defaultData);
+  }
+
+  /**
+   * Add value to field-value.
+   * 
+   * @param {string} field - adding field name
+   * @param {Any} value - adding value
+   */
+  add(field, value) {
+    const cur = this[field];
+    const isArr = cur !== undefined &amp;&amp; cur instanceof Array;
+    let newVal;
+    if (isArr) {
+      cur.push(value);
+      newVal = cur;
+    } else {
+      newVal = cur + value;
+    }
+    this._updateField(field, newVal);
+  }
+
+  /**
+   * Toggle boolean field-value
+   * 
+   * @param {string} field - toggling field name
+   */
+  toggle(field) {
+    const cur = Boolean(this[field]);
+    this._updateField(field, !cur);
+  }
+
+  /**
+   * Update the pairs of field-value.
+   * 
+   * @param {Object} pairs - updating target pairs
+   */
+  update(pairs) {
+    eachEntry(pairs, ([key, val]) =&gt; this._updateField(key, val))
+  }
+
+  /**
+   * Destroy me.
+   */
+  destroy() {
+    this.say(&apos;destroy&apos;, {});
+  }
+
+  /**
+   * Update field with value.
+   * 
+   * @param {string} field - updating target
+   * @param {Any} value    - new value
+   */
+  _updateField(field, value) {
+    const cur = this[field];
+
+    if (cur instanceof Item) {
+      if (cur instanceof List) {
+        cur.reset(value)
+      } else {
+        cur.update(value)
+      }
+    } else {
+      this[field] = value;
+      this.say(&apos;update&apos;, { field, newValue: value, oldValue: cur });
+    }
+  }
+
+  _addListener(target) {
+    this.listen(&apos;*&apos;, target);
+  }
+
+  _removeListener(target) {
+    this.unlisten(&apos;*&apos;, target);
+  }
+}
+
+/**
+ * List for plain object or Item.
+ *
+ * @memberOf Lfin
+ */
+export class List extends Item {
+
+  /**
+   * Constructor.
+   * 
+   * @param {Array} [defaultData] - default data array
+   * @param {object} [opts] - options
+   * @param {boolean|Class&lt;Item&gt;} [opts.wrapItem] - Whether wrapping Item or not, or the sub class of Item.
+   */
+  constructor(defaultData = [], opts = {}) {
+    super();
+
+    if (opts.wrapItem) {
+      if (opts.wrapItem === true) {
+        this._F_itemClass = Item;
+      } else {
+        this._F_itemClass = opts.wrapItem;
+      }
+    } else {
+      this._F_itemClass = null;
+    }
+
+    this._data = defaultData.map(item =&gt; this._wrapItem(item));
+  }
+
+  /**
+   * If you dynamically change wrapping item class according to the item, override this method.
+   *
+   * @param {object} item - an item
+   * @return {Class&lt;View&gt;}
+   */
+  itemClass(item) {
+    return this._F_itemClass
+  }
+
+  /**
+   * Return an item at position.
+   * 
+   * @param  {number} index - item position.
+   * @return {*} item specified by index.
+   */
+  get(index) {
+    return this._data[index];
+  }
+
+  /**
+   * Add an item.
+   * 
+   * @param {Any} item - item
+   * @param {number} [insertIndex] - optional insert position, add last if not defined
+   */
+  add(item, insertIndex) {
+    item = this._wrapItem(item);
+    if (insertIndex === undefined) {
+      this._data.push(item);
+    } else {
+      this._data.splice(insertIndex, 0, item);
+    }
+    this.say(&apos;add&apos;, { item, index: insertIndex });
+  }
+
+  /**
+   * Update an item at index.
+   * 
+   * @param {Any} item - item
+   * @param {number} index - target index
+   */
+  update(item, index) {
+    if (index === undefined) {
+      // for when item updated
+      index = this._data.indexOf(item);
+    }
+    const cur = this._data[index];
+    if (cur !== item) {
+      item = this._wrapItem(item);
+      this._data[index] = item;
+    }
+    this.say(&apos;update&apos;, { item, index });
+  }
+
+  /**
+   * Remove an item (specified by index).
+   * 
+   * @param {object|number} itemOrIndex - target item or the position.
+   */
+  remove(itemOrIndex) {
+    let index;
+    if (typeof itemOrIndex !== &apos;number&apos;) {
+      index = this._data.indexOf(itemOrIndex) // find item
+    } else {
+      index = itemOrIndex;
+    }
+    const item = this._data.splice(index, 1)[0];
+    this.say(&apos;remove&apos;, { item, index });
+  }
+
+  /**
+   * Add items.
+   * 
+   * @param {Array} items - adding items
+   * @param {number} [insertIndex] - insert position
+   */
+  addAll(items, insertIndex) {
+    items.forEach(item =&gt; this.add(item, insertIndex))
+  }
+
+  /**
+   * Remove all items.
+   * 
+   * @param {Object} opts - if opts.reverse is true, removing from last to first.
+   */
+  removeAll(opts = {}) {
+    const { reverse = false } = opts;
+    if (reverse) {
+      for (let idx = this.length - 1; idx &gt;= 0; idx--) {
+        this.remove(idx);
+      }
+    } else {
+      while(this._data.length) {
+        this.remove(0);
+      }
+    }
+  }
+
+  /**
+   * Remove last item.
+   */
+  removeLast() {
+    this.remove(this.length - 1);
+  }
+
+  /**
+   * replace all items
+   *
+   * @param {Array} [newValues] - new values or default empty array
+   */
+  reset(newValues = []) {
+    this.removeAll();
+    this.addAll(newValues);
+  }
+
+  /**
+   * Iterates each item of self, return an index of the first item predicate returns true.
+   * 
+   * @param  {string|Function} predictOrField - predicate function or target field
+   * @param  {*} [value] - finding value for target field
+   * @return {object} matched first item or undefined
+   */
+  find(predictOrField, value) {
+    const i = this.indexOf(predictOrField, value);
+    return i &gt;= 0 ? this._data[i] : undefined;
+  }
+
+  /**
+   * Iterates each item of self, return the first item predicate returns true.
+   * 
+   * @param  {string|Function|Object} predictOrField - predicate function or target field, target object
+   * @param  {*} [value] - finding value for target field
+   * @return {number} matched first item index or -1 if not found
+   */
+  indexOf(predictOrField, value) {
+    let judge;
+    if (value !== undefined) {
+      judge = it =&gt; it[predictOrField] === value
+    } else if (this._isFn(predictOrField)) {
+      judge = predictOrField;
+    } else {
+      return this._data.indexOf(predictOrField)
+    }
+
+    for (let i = 0, len = this._data.length; i &lt; len; i++) {
+      if (judge(this._data[i])) return i;
+    }
+    return -1;
+  }
+
+  /*
+   * forEach method for data
+   * @param {Function} cb - callback.
+   */
+  forEach(cb) {
+    this._data.forEach(cb)
+  }
+
+  /*
+   * some method for data
+   * @param {Function} cb - callback returns true or false.
+   */
+  some(cb) {
+    return this._data.some(cb)
+  }
+
+  /*
+   * Data size
+   * @type {number}
+   */
+  get length() {
+    return this._data.length
+  }
+
+  /*
+   * @return {Iterator} data iterator
+   */
+  [Symbol.iterator]() {
+    return this._data[Symbol.iterator]()
+  }
+
+  /**
+   * Wrap an item by Item class
+   */
+  _wrapItem(item) {
+    if (!(item instanceof Item)) {
+      const cls = this.itemClass(item);
+      if (cls) {
+        return new cls(item);
+      }
+    }
+    return item;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

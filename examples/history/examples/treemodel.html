@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lfin Tree View Example</title>
+<style>
+p { margin: 0 }
+li { margin: 1em 0 }
+</style>
+</head>
+<body>
+<h1>Tree example using List</h1>
+<main id="main">
+  <ul id="treeRoot"></ul>
+</main>
+
+<script type="module">
+import { App, View, List, FormView, ListView } from '/lib/flatout.js'; 
+
+var treeData = new List([{
+  name: "Root",
+  children: new List([
+    {
+      name: "Taro",
+      children: new List([
+        {
+          name: "Sanshiro",
+          children: new List([], { wrapItem: true })
+        },
+        {
+          name: "Hanako",
+          children: new List([], { wrapItem: true })
+        }
+      ], { wrapItem: true })
+    }, {
+      name: "Jiro",
+      children: new List([
+        {
+          name: "Jiro jr."
+        }
+      ], { wrapItem: true })
+    },
+    {
+      name: "Saburo",
+      children: new List([], { wrapItem: true })
+    }
+  ], { wrapItem: true })
+}], { wrapItem: true });
+
+
+class TreeNodeView extends View {
+  html(data) {
+    return `\
+    <li>
+      <p>
+       <span data-id="name">${data.name}</span>
+       <button data-id="deleteButton">Del</button>
+      </p>
+      <ul data-id="children"></ul>
+      <form data-id="addChildForm">
+        <input type="text" name="cname"><input type="submit" value="Add child">
+      </form>
+    </li>`
+  }
+
+  load(views, evts) {
+    const childrenView = views.children = new ListView(TreeNodeView);
+
+    this.isExpaneded = true;
+
+    evts.name_click = function() {
+      this.isExpaneded = !this.isExpaneded;
+      childrenView.el.style.display = this.isExpaneded ? 'block' : 'none';
+    }
+
+    evts.deleteButton_click = function() {
+      this._data.destroy();
+    }
+
+    evts.addChildForm_submit = function(form, evt){
+      this._data.children.add({
+        name: form.cname.value,
+        children: new List([], { wrapItem: true })
+      });
+      form.cname.value = null;
+    }
+  }
+}
+
+
+class MainView extends View {
+  load(views, evts) {
+    views.list = new ListView('treeRoot', TreeNodeView);
+  }
+
+  title() {
+    return 'Tree'
+  }
+}
+
+const main = new MainView('main', {
+  data: {
+    list: treeData
+  }
+});
+</script>
+</body>
+</html>

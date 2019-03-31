@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/view/list-view.js | flatout</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/tilfin/flatout"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app">app</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/app.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HashRouter.html">HashRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HistoryRouter.html">HistoryRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html">HttpClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpError.html">HttpError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-eachEntry">eachEntry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeLFID">makeLFID</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#model">model</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~Binder.html">Binder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ItemBinder.html">ItemBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ListBinder.html">ListBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~Item.html">Item</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#view">view</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/form-view.js~FormView.html">FormView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/list-view.js~ListView.html">ListView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/view.js~View.html">View</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/view/list-view.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
+
+import { makeLFID } from &apos;../core/util.js&apos;
+import { List } from &apos;../model/item.js&apos;
+import { ListBinder } from &apos;../model/binder.js&apos;
+import View from &apos;./view.js&apos;
+
+/**
+* View for the collection of items.
+*
+* @example
+* class ListItemView extends View {
+*   html(data) {
+*     return `&lt;li&gt;${data.title}&lt;/li&gt;`;
+*   }
+* }
+* 
+* let instanceView = new ListView(Node, ListItemView,
+*           {
+*             data: [
+*               { title: &apos;foo&apos; },
+*               { ttile: &apos;bar&apos; }
+*             ]
+*           });
+*/
+class ListView extends View {
+
+  /*
+   * Create a ListView.
+   *
+   * @param {Element} [root] - root node
+   * @param {Class} [itemView] - item view class
+   * @param {Object} [props] - properties
+   */
+  constructor(/*root, itemView, props*/) {
+    let root, props = {};
+    for (let arg of arguments) {
+      if (arg instanceof Node || typeof arg === &apos;string&apos;) {
+        root = arg;
+      } else if (arg &amp;&amp; arg.constructor === Object) {
+        Object.assign(props, arg);
+      } else if (arg !== undefined) {
+        props._F_tmpl = arg; // itemView
+      }
+    }
+    super(root, props);
+  }
+
+  /** @override */
+  _privates() {
+    const pa = super._privates();
+    pa._F_itemSet = new Map();
+    return pa;
+  }
+
+  /**
+   * If you dynamically change creating item view according to the item, override this method.
+   *
+   * @param {object} item - an item
+   * @return {Class&lt;View&gt;}
+   */
+  itemViewClass(item) {
+    return this._F_tmpl
+  }
+
+  /**
+   * Add an item to list
+   *
+   * @param {object} item - an item
+   */
+  addItem(item) {
+    const view = this._createViewByItem(item);
+    this.addItemEl(this.container, view.el);
+    return view;
+  }
+
+  /**
+   * Insert an item to list at index
+   *
+   * @param {object} item - an item
+   * @param {number} index - target position
+   */
+  insertItem(item, index) {
+    const view = this._createViewByItem(item);
+    this.insertItemEl(this.container, view.el, this._childElAt(index));
+    return view;
+  }
+
+  /**
+   * Update an item at index
+   *
+   * @param {object} item - an item
+   * @param {number} index - target position
+   */
+  updateItem(item, index) {
+    const LFID = this._childElAt(index).getAttribute(&apos;_lfid_&apos;);
+    this._F_itemSet.set(LFID, item);
+    this.views[LFID].data = item;
+  }
+
+  /**
+   * Remove item from list
+   *
+   * @param {object} item - an item
+   * @param {number} index - target position
+   */
+  removeItem(item, index) {
+    const el = this._childElAt(index)
+    this._removeItemByEl(el);
+  }
+
+  /**
+   * Remove item with view
+   *
+   * @param {view} view - an view of removing item
+   */
+  removeItemByView(view) {
+    this._removeItemByEl(view.el)
+  }
+
+  /**
+   * If you change adding item effect, override this method.
+   *
+   * @protected
+   * @param {Element} listEl parent element for List
+   * @param {Element} itemEl added element
+   */
+  addItemEl(listEl, itemEl) {
+    listEl.appendChild(itemEl)
+  }
+
+  /**
+   * If you change inserting item effect, override this method.
+   *
+   * @protected
+   * @param {Element} listEl - parent element for List
+   * @param {Element} newEl  - an element for new item for List
+   * @param {Element} nextEl - next element will be next one for newEl
+   */
+  insertItemEl(listEl, newEl, nextEl) {
+    listEl.insertBefore(newEl, nextEl)
+  }
+
+  /**
+   * If you change removing item effect, override this method.
+   *
+   * @protected
+   * @param {Element} listEl - parent element for List
+   * @param {Element} itemEl - removed element
+   */
+  removeItemEl(listEl, itemEl) {
+    listEl.removeChild(itemEl)
+  }
+
+  /**
+   * Return child element at position.
+   *
+   * @param {number} index - item position.
+   * @return {Element} target element
+   */
+  _childElAt(index) {
+    return this.container.children[index];
+  }
+
+  _createViewByItem(item) {
+    const LFID = makeLFID();
+    const cls = this.itemViewClass(item);
+    const view = new cls({ data: item });
+    this._F_itemSet.set(LFID, view);
+    this.views[LFID] = view;
+    view.el.setAttribute(&apos;_lfid_&apos;, LFID);
+    return view;
+  }
+
+  /**
+   * Remove item from list by element
+   *
+   * @param {element} el - removed element
+   */
+  _removeItemByEl(el) {
+    const LFID = el.getAttribute(&apos;_lfid_&apos;);
+    this._F_itemSet.delete(LFID);
+    const vws = this.views
+    vws[LFID].unload();
+    delete vws[LFID];
+    this.removeItemEl(this.container, el);
+  }
+
+  /** @override */
+  _bindData() {
+    const data = this._data;
+    if (data instanceof List) {
+      this._F_binders.push(new ListBinder(data, this))
+    }
+  }
+
+  /** @override */
+  _setDataToChildren() {
+    if (this._data === undefined) return;
+    console.log(&apos;ListView#_setDataToChildren&apos;, this);
+
+    for (let childView of Object.values(this.views)) {
+      this.removeItemByView(childView);
+    }
+
+    for (let item of this._data) {
+      this.addItem(item);
+    }
+  }
+}
+
+export default ListView
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

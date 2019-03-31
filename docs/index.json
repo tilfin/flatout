@@ -1,0 +1,5934 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/app/app.js",
+    "content": "'use strict'\n\nimport { HistoryRouter, HashRouter } from '../app/router.js'\n\n/**\n * Application.\n *\n * @memberOf Lfin\n */\nclass App {\n  /* Do not call */\n  constructor() {}\n\n  /**\n   * Activate application\n   *\n   * @param  {Class<View>} rootViewClass - root view class.\n   * @param  {Object} routeMap - routing map.\n   * @param  {Object} [opts]          - options.\n   * @param  {Object} [opts.mode]     - HISTORY or HASH\n   * @param  {Object} [opts.rootPath] - history root path.\n   * @param  {Object} [opts.pathHead] - hash path prefix.\n   */\n  activate(rootViewClass, routeMap, opts = {}) {\n    /**\n     * Root area.\n     * @type {View}\n     */\n    this._rootArea = new rootViewClass();\n\n    /**\n     * Page area replaced if path changed.\n     * @type {Page}\n     */\n    this._curPage = null;\n\n    const onMove = layer => { this._onMove(layer) };\n    this._router = opts.mode === 'HISTORY'\n      ? new HistoryRouter(routeMap, onMove, opts.rootPath)\n      : new HashRouter(routeMap, onMove, opts.pathHead);\n\n    window.onload = e => { this._router.depart() }\n  }\n\n  /**\n   * Go a page.\n   *\n   * @param  {string} path - URL path\n   * @param  {Object} ctx  - context\n   * @return {boolean} always false.\n   */\n  go(path, ctx) {\n    this._preCtx = ctx;\n    this._router.go(path);\n    return false;\n  }\n\n  /**\n   * Back page.\n   *\n   * @return {boolean} - always false.\n   */\n  back() {\n    window.history.back();\n    return false;\n  }\n\n  _onMove({ view, ctx }) {\n    if (this._preCtx) {\n      // Merge ctx by go to layer.ctx that contains idMap\n      ctx = Object.assign(ctx || {}, this._preCtx);\n      this._preCtx = null;\n    }\n    this._replaceContent(view, ctx);\n    this._updateTitle();\n  }\n\n  /**\n   * Replace layer.\n   *\n   * @param {Class<Page>} view - new page class.\n   * @param {Object} ctx - passing context.\n   */\n  _replaceContent(view, ctx) {\n    const oldPage = this._curPage;\n    if (oldPage) {\n      oldPage.destroy();\n    }\n\n    const baseCtx = Object.assign({}, this._rootArea.context)\n    this._curPage = new view({\n      parent: this._rootArea,\n      context: Object.assign(baseCtx, ctx)\n    });\n  }\n\n  /**\n   * Update page title of browser\n   */\n  _updateTitle() {\n    let ttl = '';\n    if (this._curPage) {\n      ttl = this._curPage.title()\n    }\n    document.title = this._rootArea.title(ttl);\n  }\n}\n\nexport default new App();\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/app/app.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "App",
+    "memberof": "src/app/app.js",
+    "static": true,
+    "longname": "src/app/app.js~App",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/app/app.js",
+    "importStyle": null,
+    "description": "Application.",
+    "lineNumber": 10,
+    "pseudoExport": true,
+    "unknown": [
+      {
+        "tagName": "@memberOf",
+        "tagValue": "Lfin"
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "method",
+    "name": "activate",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#activate",
+    "access": "public",
+    "description": "Activate application",
+    "lineNumber": 24,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Class<View>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rootViewClass",
+        "description": "root view class."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "routeMap",
+        "description": "routing map."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts",
+        "description": "options."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.mode",
+        "description": "HISTORY or HASH"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.rootPath",
+        "description": "history root path."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.pathHead",
+        "description": "hash path prefix."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "_rootArea",
+    "memberof": "src/app/app.js~App",
+    "static": false,
+    "longname": "src/app/app.js~App#_rootArea",
+    "access": "private",
+    "description": "Root area.",
+    "lineNumber": 29,
+    "type": {
+      "nullable": null,
+      "types": [
+        "View"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "_curPage",
+    "memberof": "src/app/app.js~App",
+    "static": false,
+    "longname": "src/app/app.js~App#_curPage",
+    "access": "private",
+    "description": "Page area replaced if path changed.",
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Page"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "_router",
+    "memberof": "src/app/app.js~App",
+    "static": false,
+    "longname": "src/app/app.js~App#_router",
+    "access": "private",
+    "description": null,
+    "lineNumber": 38,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "go",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#go",
+    "access": "public",
+    "description": "Go a page.",
+    "lineNumber": 52,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "URL path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ctx",
+        "description": "context"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "always false."
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "_preCtx",
+    "memberof": "src/app/app.js~App",
+    "static": false,
+    "longname": "src/app/app.js~App#_preCtx",
+    "access": "private",
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "back",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#back",
+    "access": "public",
+    "description": "Back page.",
+    "lineNumber": 63,
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "always false."
+    },
+    "params": []
+  },
+  {
+    "__docId__": 58,
+    "kind": "method",
+    "name": "_onMove",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#_onMove",
+    "access": "private",
+    "description": null,
+    "lineNumber": 68,
+    "undocument": true,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"view\": *, \"ctx\": *}"
+        ],
+        "defaultRaw": {
+          "view": null,
+          "ctx": null
+        },
+        "defaultValue": "{\"view\":null,\"ctx\":null}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "_replaceContent",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#_replaceContent",
+    "access": "private",
+    "description": "Replace layer.",
+    "lineNumber": 84,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Class<Page>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "view",
+        "description": "new page class."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ctx",
+        "description": "passing context."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "_updateTitle",
+    "memberof": "src/app/app.js~App",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/app.js~App#_updateTitle",
+    "access": "private",
+    "description": "Update page title of browser",
+    "lineNumber": 100,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 63,
+    "kind": "variable",
+    "name": "app",
+    "memberof": "src/app/app.js",
+    "static": true,
+    "longname": "src/app/app.js~app",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/app/app.js",
+    "importStyle": "app",
+    "description": null,
+    "lineNumber": 109,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/app/app.js~App"
+      ]
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "file",
+    "name": "src/app/router.js",
+    "content": "'use strict'\n\nimport { eachEntry } from '../core/util.js'\nimport Page from '../view/page.js'\n\n/**** Design memo *********************************************\n\n* Open `http://FQDN/` and Enter in URL bar --> onload\n* Input appending `http://FQDN/#!/` and Enter in URL bar --> onhashchange\n* Open `http://FQDN/#!/xxxx` in URL bar --> onload\n* Reload --> onload\n* Click a link with href=`#!/xxxx` --> onhashchange\n* Run script `window.location.hash = '#!/xxx';` --> onhashchange\n* Back to `#!/xxxx' --> onhashchange\n* Forward to `#!/xxxx' --> onhashchange\n\n```\nconst routeMap = {\n  index: HomeView,                  // /\n  about: AboutView,                 // /about\n  books: {\n    index: BookListView,            // /books\n    ':bookId': {\n      index:   BookView,            // /books/:bookId\n      summary: BookSummaryView,     // /books/:bookId/summary\n      readers: {\n        index: '../',               // redirect to /books/:bookId\n        ':readerId': BookReaderView // /books/:bookId/readers/:readerId\n      }\n    }\n  },\n  docs: {\n    index: DocIndexView,            // /docs\n    api:   DocApiView,              // /docs/api\n  },\n  ':userId': {\n    index: UserView,                // /:userId\n    timeline: UserTimelineView      // /:userId/timeline\n  }\n}\n```\n\nbe converted to\n\n```\nconst _routeTree = {\n  index: HomeView,\n  about: AboutView,\n  books: {\n    index: BookListView,\n    _any_: {\n      id: 'bookId',\n      children: {\n        index: BookView,\n        summary: BookSummaryView,\n        readers: {\n          index: '../',\n          _any_: {\n            view: BookReaderView,\n            id:   'readerId'\n          }\n        }\n      }\n    }\n  },\n  docs: {\n    index: DocIndexView,\n    api: DocApiView\n  },\n  _any_: {\n    id: 'userId',\n    children: {\n      index: UserView,\n      timeline: UserTimelineView\n    }\n  }\n}\n```\n***********************************************************/\n\n/**\n * Router\n *\n * This subclass must override depart() and go(path)\n *\n * @access private\n * @example\n * const routeMap = {\n *   index: HomeView,                  // /\n *   about: AboutView,                 // /about\n *   books: {\n *     index: BookListView,            // /books/\n *     ':bookId': {\n *       index: BookDetailView,        // /books/:bookId\n *       summary: BookSummaryView,     // /books/:bookId/summary\n *       readers: {\n *         index: '../',   // redirect to /books/:bookId\n *         ':readerId': BookReaderView // /books/:bookId/readers/:readerId\n *       }\n *     },\n *     pages: {\n *       index: PagesView,             // /pages/\n *       faq: FaqView,                 // /pages/faq\n *       policy: PolicyView            // /pages/policy\n *     }\n * };\n *\n * const router = new Router(routeMap);\n */\nclass Router {\n  constructor(routeMap, onMove) {\n    this._routeTree = this._parseRoute(routeMap);\n    this._lastRoute = null;\n    this.onMove = onMove;\n  }\n\n  /**\n   * Need call `depart` after first page loaded\n   *\n  depart() {\n  } */\n\n  canGo(path) {\n    return this.getRoute(path) !== null;\n  }\n\n  /**\n   * Need call `go` when History mode and anchor tag clicked\n   * or moving the other page by a script\n   *\n   * @param  {String} path path\n  go(path) {\n  } */\n\n  move(path) {\n    this.onMove(this.getRoute(path));\n  }\n\n  /**\n   * @return {Object} layer\n   * @property {Page} view - page view.\n   * @property {Object} ctx - context (path ids).\n   */\n  getRoute(absPath) {\n    if (!absPath.startsWith('/')) absPath = '/'+absPath;\n\n    let pt = absPath;\n    if (pt === '/') pt += 'index';\n    pt = this._chopEndSlash(pt);\n    if (pt.endsWith('.html')) pt = pt.substr(0, pt.length - 5);\n\n    const paths = this._parsePath(pt);\n    let tree = this._routeTree;\n\n    let idMap = {}, key, route = null;\n    while ((key = paths.shift()) !== undefined) {\n      let target;\n      if (key in tree) {\n        target = tree[key];\n      } else if ('_any_' in tree) {\n        idMap[tree._any_.id] = key;\n        tree = tree._any_.children;\n        if (paths.length > 0) continue;\n        target = tree.index;\n      } else {\n        alert(`${pt} page isn't defined`);\n        throw '/';\n      }\n\n      if (this._isStr(target)) {\n        const redirectPath = this._resolve(absPath, target);\n        window.history.replaceState(null, null, redirectPath);\n        return this.getRoute(redirectPath);\n      } else if (target.prototype instanceof Page) {\n        route = { view: target, ctx: idMap };\n      } else {\n        tree = target;        \n        if (paths.length === 0) paths.unshift('index');\n      }\n    }\n\n    if (route) return route;\n\n    alert(`${path} page not found`);\n    throw '/';\n  }\n\n  _parsePath(path) {\n    const paths = path.split('/');\n    paths.shift();\n    return paths;\n  }\n\n  _parseRoute(map) {\n    const tree = {};\n\n    eachEntry(map, ([key, item]) => {\n      const isViewOrStr = (item.prototype instanceof Page) || this._isStr(item);\n\n      if (key.startsWith(':')) {\n        const leaf = tree._any_ = { id: key.substr(1) }; // strip prefix :\n        leaf.children = isViewOrStr ? { index: item } : this._parseRoute(item);\n      } else {\n        tree[key] = isViewOrStr ? item : this._parseRoute(item);\n      }\n    });\n\n    return tree;\n  }\n\n  _resolve(src, dest) {\n    if (dest.startsWith('/')) return dest;\n\n    const parts = src.split('/');\n\n    let md;\n    while (md = dest.match(/^\\.\\.\\/?(.*)$/)) {\n      parts.pop();\n      dest = md[1];\n    }\n\n    return parts.join('/') + dest;\n  }\n\n  _chopEndSlash(pt) {\n    return pt.endsWith('/') ? pt.substr(0, pt.length - 1) : pt;\n  }\n\n  _isStr(v) {\n    return typeof v === 'string'\n  }\n}\n\n/**\n * @access private\n */\nexport class HistoryRouter extends Router {\n  constructor(routeMap, onMove, rootPath) {\n    super(routeMap, onMove);\n\n    let pt = rootPath;\n    if (!pt) {\n      let base = document.querySelector('base');\n      if (base) {\n        const { pathname } = new URL(base.href);\n        pt = this._chopEndSlash(pathname);\n      }\n    }\n    this.basePath = pt || '';\n  }\n\n  depart() {\n    document.addEventListener('click', e => {\n      this._captureClick(e);\n    }, true);\n\n    const doMove = pt => {\n      try {\n        this.move(pt);\n      } catch(e) {\n        if (this._isStr(e)) {\n          window.location.href = this.basePath + e;\n        } else {\n          console.error(e)\n        }          \n      }\n    }\n\n    window.onpopstate = e => {\n      doMove(e.state ? e.state.path : '/')\n    }\n\n    let path = window.location.pathname.substr(this.basePath.length);\n    if (path.length > 1 && path.endsWith('/')) {\n      // Force strip last with / from path\n      path = path.substr(0, path.length - 1);\n      window.history.replaceState(null, null, path);\n    }\n\n    doMove(path);\n  }\n\n  go(path) {\n    const h = window.history;\n    if (h && h.pushState) {\n      h.pushState({ path }, null, this.basePath + path);\n      this.move(path);\n    }\n  }\n\n  _captureClick(e) {\n    const nxt = document.activeElement;\n    if (!nxt || nxt.tagName !== 'A') return;\n    if (nxt.target === '_top') return;\n\n    if (nxt.href.startsWith(window.location.origin + this.basePath)) {\n      e.preventDefault();\n\n      try {\n        this.go(nxt.pathname.substr(this.basePath.length));\n      } catch(e) {\n        if (this._isStr(e)) {\n          this.go(e);\n        } else {\n          console.error(e)\n        }\n      }\n    }\n  }\n}\n\n/**\n * @access private\n */\nexport class HashRouter extends Router {\n  constructor(routeMap, onMove, pathHead = '#!') {\n    super(routeMap, onMove);\n    this.head = pathHead;\n  }\n\n  get curPath() {\n    return window.location.hash.substr(this.head.length)\n  }\n\n  depart() {\n    const doMove = pt => {\n      try {\n        this.move(pt);\n      } catch(e) {\n        if (this._isStr(e)) {\n          window.location.hash = this.head + e;\n        } else {\n          console.error(e)\n        }\n      }\n    }\n\n    window.onhashchange = e => {\n      doMove(this.curPath || '/')\n    }\n\n    doMove(this.curPath);\n  }\n\n  go(path) {\n    window.location.hash = this.head + path;\n  }\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/app/router.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 65,
+    "kind": "class",
+    "name": "Router",
+    "memberof": "src/app/router.js",
+    "static": true,
+    "longname": "src/app/router.js~Router",
+    "access": "private",
+    "export": false,
+    "importPath": "flatout/src/app/router.js",
+    "importStyle": null,
+    "description": "Router\n\nThis subclass must override depart() and go(path)",
+    "examples": [
+      "const routeMap = {\n  index: HomeView,                  // /\n  about: AboutView,                 // /about\n  books: {\n    index: BookListView,            // /books/\n    ':bookId': {\n      index: BookDetailView,        // /books/:bookId\n      summary: BookSummaryView,     // /books/:bookId/summary\n      readers: {\n        index: '../',   // redirect to /books/:bookId\n        ':readerId': BookReaderView // /books/:bookId/readers/:readerId\n      }\n    },\n    pages: {\n      index: PagesView,             // /pages/\n      faq: FaqView,                 // /pages/faq\n      policy: PolicyView            // /pages/policy\n    }\n};\n\nconst router = new Router(routeMap);"
+    ],
+    "lineNumber": 110,
+    "interface": false,
+    "ignore": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 111,
+    "undocument": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "_routeTree",
+    "memberof": "src/app/router.js~Router",
+    "static": false,
+    "longname": "src/app/router.js~Router#_routeTree",
+    "access": "private",
+    "description": null,
+    "lineNumber": 112,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "_lastRoute",
+    "memberof": "src/app/router.js~Router",
+    "static": false,
+    "longname": "src/app/router.js~Router#_lastRoute",
+    "access": "private",
+    "description": null,
+    "lineNumber": 113,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "name": "onMove",
+    "memberof": "src/app/router.js~Router",
+    "static": false,
+    "longname": "src/app/router.js~Router#onMove",
+    "access": "public",
+    "description": null,
+    "lineNumber": 114,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "name": "canGo",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#canGo",
+    "access": "public",
+    "description": "Need call `depart` after first page loaded\n\ndepart() {\n}",
+    "lineNumber": 123,
+    "params": [
+      {
+        "name": "path",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "move",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#move",
+    "access": "public",
+    "description": "Need call `go` when History mode and anchor tag clicked\nor moving the other page by a script",
+    "lineNumber": 135,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "path\ngo(path) {\n}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "getRoute",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#getRoute",
+    "access": "public",
+    "description": "",
+    "lineNumber": 144,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "Page"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "view",
+        "description": "page view."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ctx",
+        "description": "context (path ids)."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "layer"
+    },
+    "params": [
+      {
+        "name": "absPath",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "_parsePath",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#_parsePath",
+    "access": "private",
+    "description": null,
+    "lineNumber": 188,
+    "undocument": true,
+    "params": [
+      {
+        "name": "path",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "_parseRoute",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#_parseRoute",
+    "access": "private",
+    "description": null,
+    "lineNumber": 194,
+    "undocument": true,
+    "params": [
+      {
+        "name": "map",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "_resolve",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#_resolve",
+    "access": "private",
+    "description": null,
+    "lineNumber": 211,
+    "undocument": true,
+    "params": [
+      {
+        "name": "src",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "dest",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "method",
+    "name": "_chopEndSlash",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#_chopEndSlash",
+    "access": "private",
+    "description": null,
+    "lineNumber": 225,
+    "undocument": true,
+    "params": [
+      {
+        "name": "pt",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "_isStr",
+    "memberof": "src/app/router.js~Router",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~Router#_isStr",
+    "access": "private",
+    "description": null,
+    "lineNumber": 229,
+    "undocument": true,
+    "params": [
+      {
+        "name": "v",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "class",
+    "name": "HistoryRouter",
+    "memberof": "src/app/router.js",
+    "static": true,
+    "longname": "src/app/router.js~HistoryRouter",
+    "access": "private",
+    "export": true,
+    "importPath": "flatout/src/app/router.js",
+    "importStyle": "{HistoryRouter}",
+    "description": "",
+    "lineNumber": 237,
+    "interface": false,
+    "extends": [
+      "Router"
+    ]
+  },
+  {
+    "__docId__": 79,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/app/router.js~HistoryRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HistoryRouter#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 238,
+    "undocument": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "member",
+    "name": "basePath",
+    "memberof": "src/app/router.js~HistoryRouter",
+    "static": false,
+    "longname": "src/app/router.js~HistoryRouter#basePath",
+    "access": "public",
+    "description": null,
+    "lineNumber": 249,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "depart",
+    "memberof": "src/app/router.js~HistoryRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HistoryRouter#depart",
+    "access": "public",
+    "description": null,
+    "lineNumber": 252,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "go",
+    "memberof": "src/app/router.js~HistoryRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HistoryRouter#go",
+    "access": "public",
+    "description": null,
+    "lineNumber": 283,
+    "undocument": true,
+    "params": [
+      {
+        "name": "path",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 83,
+    "kind": "method",
+    "name": "_captureClick",
+    "memberof": "src/app/router.js~HistoryRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HistoryRouter#_captureClick",
+    "access": "private",
+    "description": null,
+    "lineNumber": 291,
+    "undocument": true,
+    "params": [
+      {
+        "name": "e",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 84,
+    "kind": "class",
+    "name": "HashRouter",
+    "memberof": "src/app/router.js",
+    "static": true,
+    "longname": "src/app/router.js~HashRouter",
+    "access": "private",
+    "export": true,
+    "importPath": "flatout/src/app/router.js",
+    "importStyle": "{HashRouter}",
+    "description": "",
+    "lineNumber": 315,
+    "interface": false,
+    "extends": [
+      "Router"
+    ]
+  },
+  {
+    "__docId__": 85,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/app/router.js~HashRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HashRouter#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 316,
+    "undocument": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "member",
+    "name": "head",
+    "memberof": "src/app/router.js~HashRouter",
+    "static": false,
+    "longname": "src/app/router.js~HashRouter#head",
+    "access": "public",
+    "description": null,
+    "lineNumber": 318,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "get",
+    "name": "curPath",
+    "memberof": "src/app/router.js~HashRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HashRouter#curPath",
+    "access": "public",
+    "description": null,
+    "lineNumber": 321,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 88,
+    "kind": "method",
+    "name": "depart",
+    "memberof": "src/app/router.js~HashRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HashRouter#depart",
+    "access": "public",
+    "description": null,
+    "lineNumber": 325,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "name": "go",
+    "memberof": "src/app/router.js~HashRouter",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/app/router.js~HashRouter#go",
+    "access": "public",
+    "description": null,
+    "lineNumber": 345,
+    "undocument": true,
+    "params": [
+      {
+        "name": "path",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 90,
+    "kind": "file",
+    "name": "src/core/core.js",
+    "content": "'use strict'\n\nimport { eachEntry } from '../core/util.js'\n\n/**\n * Core\n */\nclass Core {\n  /**\n   * Create a Core.\n   */\n  constructor() {\n    const dp = {};\n    eachEntry(this._privates(), ([key, value]) => {\n      dp[key] = { value }\n    })\n    Object.defineProperties(this, dp)\n  }\n\n  /**\n   * Return non-enumerable attribute definitions.\n   *\n   * @access private\n   */\n  _privates() {\n    return { _F_obs: new Map() }\n  }\n\n  /**\n   * Listen a message\n   *\n   * @param {string|Object} nameOrObj - message name, '*' specify any listener.\n   * @param {Function} handler - handler called on message received or target object.\n   * @example\n   * core.listen('*', function(){});\n   * core.listen('evtName1', function(){});\n   * core.listen({ evtName2: function(){}, evtName3: function(){} })\n   */\n  listen(nameOrObj, handler) {\n    if (handler) {\n      this._listen(nameOrObj, handler);\n    } else {\n      eachEntry(nameOrObj, ([name, handler]) => this._listen(name, handler));\n    }\n  }\n\n  /**\n   * Unlisten a message\n   *\n   * @param {string} name - message name, '*' specify any listener.\n   * @param {Function|object} handler - handler registered or target registered.\n   */\n  unlisten(name, handler) {\n    const set = this._F_obs.get(name);\n    if (set) set.delete(handler);\n  }\n\n  /**\n   * Unescape HTML\n   * @param  {String} escaped HTML string\n   * @return {String}         raw HTML string\n   */\n  unescapeHtml(escaped) {\n    const doc = new DOMParser().parseFromString(escaped, \"text/html\");\n    return doc.documentElement.textContent;\n  }\n\n  /**\n   * Cast a message to the listeners\n   *\n   * @param {string} name - message name\n   * @param {*} ctx - passing value\n   */\n  say(name, ctx) {\n    this._say(name, name, ctx);\n    this._say('*', name, ctx);\n  }\n\n  // protected scope\n\n  _listen(name, handler) {\n    const set = this._F_obs.get(name);\n    if (set) {\n      set.add(handler);\n    } else {\n      this._F_obs.set(name, new Set([handler]));\n    }\n  }\n\n  _say(targetName, name, ctx) {\n    const handlers = this._F_obs.get(targetName);\n    if (handlers === undefined) return;\n\n    handlers.forEach(it => {\n      if (this._isFn(it)) {\n        it.call(this, ctx);\n        return;\n      }\n\n      let method = it[name];\n      if (this._isFn(method)) {\n        method.call(it, ctx);\n      }\n    });\n  }\n\n  _callR(args, target, method, methodOwner) {\n    let t = methodOwner ? this[methodOwner] : this;\n    if (t) t = t[method];\n    if (t) t.apply(this, args);\n\n    const children = this[target];\n    if (!children) return;\n\n    for (let name in children){\n      const c = children[name];\n      if (c._callR) c._callR(args, target, method, methodOwner);\n    }\n  }\n\n  _isStr(v) {\n    return (typeof v === 'string')\n  }\n\n  _isFn(f) {\n    return (typeof f === 'function')\n  }\n}\n\nexport default Core\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/core/core.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 91,
+    "kind": "class",
+    "name": "Core",
+    "memberof": "src/core/core.js",
+    "static": true,
+    "longname": "src/core/core.js~Core",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/core/core.js",
+    "importStyle": "Core",
+    "description": "Core",
+    "lineNumber": 8,
+    "interface": false
+  },
+  {
+    "__docId__": 92,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#constructor",
+    "access": "public",
+    "description": "Create a Core.",
+    "lineNumber": 12
+  },
+  {
+    "__docId__": 93,
+    "kind": "method",
+    "name": "_privates",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#_privates",
+    "access": "private",
+    "description": "Return non-enumerable attribute definitions.",
+    "lineNumber": 25,
+    "params": [],
+    "return": {
+      "types": [
+        "{\"_F_obs\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "method",
+    "name": "listen",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#listen",
+    "access": "public",
+    "description": "Listen a message",
+    "examples": [
+      "core.listen('*', function(){});\ncore.listen('evtName1', function(){});\ncore.listen({ evtName2: function(){}, evtName3: function(){} })"
+    ],
+    "lineNumber": 39,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "nameOrObj",
+        "description": "message name, '*' specify any listener."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "handler",
+        "description": "handler called on message received or target object."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 95,
+    "kind": "method",
+    "name": "unlisten",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#unlisten",
+    "access": "public",
+    "description": "Unlisten a message",
+    "lineNumber": 53,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "message name, '*' specify any listener."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function",
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "handler",
+        "description": "handler registered or target registered."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 96,
+    "kind": "method",
+    "name": "unescapeHtml",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#unescapeHtml",
+    "access": "public",
+    "description": "Unescape HTML",
+    "lineNumber": 63,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "escaped",
+        "description": "HTML string"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "raw HTML string"
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "method",
+    "name": "say",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#say",
+    "access": "public",
+    "description": "Cast a message to the listeners",
+    "lineNumber": 74,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "message name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ctx",
+        "description": "passing value"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 98,
+    "kind": "method",
+    "name": "_listen",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#_listen",
+    "access": "private",
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "handler",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 99,
+    "kind": "method",
+    "name": "_say",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#_say",
+    "access": "private",
+    "description": null,
+    "lineNumber": 90,
+    "undocument": true,
+    "params": [
+      {
+        "name": "targetName",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "ctx",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 100,
+    "kind": "method",
+    "name": "_callR",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#_callR",
+    "access": "private",
+    "description": null,
+    "lineNumber": 107,
+    "undocument": true,
+    "params": [
+      {
+        "name": "args",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "target",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "method",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "methodOwner",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 101,
+    "kind": "method",
+    "name": "_isStr",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#_isStr",
+    "access": "private",
+    "description": null,
+    "lineNumber": 121,
+    "undocument": true,
+    "params": [
+      {
+        "name": "v",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "_isFn",
+    "memberof": "src/core/core.js~Core",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/core.js~Core#_isFn",
+    "access": "private",
+    "description": null,
+    "lineNumber": 125,
+    "undocument": true,
+    "params": [
+      {
+        "name": "f",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 103,
+    "kind": "file",
+    "name": "src/core/http.js",
+    "content": "'use strict'\n\n/**\n * Http Error\n */\nexport class HttpError {\n\n  /**\n   * @contructor\n   * @param req  request\n   * @param resOrErr response or Error\n   */\n  constructor(req, resOrErr) {\n    this.req = req;\n\n    if (typeof resOrErr === 'string') {\n      this.res = null;\n\n      this.isTimeout = (resOrErr === 'timeout');\n      this.isAborted = (resOrErr === 'abort');\n      this.isNetworkError = (resOrErr === 'error');\n    } else {\n      this.res = resOrErr;\n\n      let code = this.res.status;\n      this.isBadRequest   = (code === 400);\n      this.isUnauthorized = (code === 401);\n      this.isForbidden    = (code === 403);\n      this.isNotFound     = (code === 404);\n      this.isConflict     = (code === 409);\n      this.isServerError  = (code >= 500);\n    }\n  }\n}\n\n/**\n * HTTP Client\n *\n * @class HttpClient\n */\nexport class HttpClient {\n\n  /**\n   * Constructor.\n   * @param {object} [opts] - options\n   * @param {string} [opts.baseURL] - base URL (default empty).\n   */\n  constructor(opts = {}) {\n    this.baseURL = opts.baseURL || '';\n    this.headers = opts.headers || {};\n    this.afterError = opts.afterError || function(){};\n    this.authorize = opts.authorize || function(){};\n    this.unauthorized = opts.unauthorized || function(){};\n\n    const bodyType = opts.bodyType || '';\n    if (bodyType.includes('form')) {\n      this.contentType = 'application/x-www-form-urlencoded';\n    } else {\n      this.contentType = 'application/json;charset=UTF-8';\n    }\n  }\n\n  /**\n   * do GET request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  get(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('GET', path, query, body, headers);\n  }\n\n  /**\n   * do POST request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  post(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('POST', path, query, body, headers);\n  }\n\n  /**\n   * do PUT request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  put(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PUT', path, query, body, headers);\n  }\n\n  /**\n   * do PATCH request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  patch(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PATCH', path, query, body, headers);\n  }\n\n  /**\n   * do DELETE request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  delete(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('DELETE', path, query, body, headers);\n  }\n\n  /**\n   * execute http request.\n   * \n   * @param  {string} method - method\n   * @param  {string} path - request path\n   * @param  {object} query - request query data\n   * @param  {string|object} body - request body\n   * @param  {object} headers - header name and value object\n   * @return {Promise} Promise\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  async exec(method, path, query, body, headers = {}) {\n    if (!('Content-Type' in headers)) {\n      headers['Content-Type'] = this.contentType;\n    }\n\n    const req = { method, path, headers };\n    let httpErr;\n    try {\n      await this.authorize(path, { query, body, headers });\n      const res = await this._request(method, path, { query, body, headers });\n      const stCode = res.status;\n      if (stCode < 400) {\n        return res;\n      }\n\n      httpErr = new HttpError(req, res);\n      if (stCode === 401) {\n        this.unauthorized(httpErr);\n        return;\n      }\n    } catch(errType) {\n      return new HttpError(req, errType);\n    }\n    if (httpErr) throw httpErr;\n  }\n\n  _request(method, path, { query, body, headers }) {\n    let reqBody;\n    if (body) {\n      const cttType = headers['Content-Type'];\n      if (cttType.match(/\\/form-data/)) {\n        reqBody = new FormData();\n        for (let field in body) {\n          reqBody.append(field, body[field]);\n        }\n        delete headers['Content-Type']; // FormData set it with boundary\n      } else if (cttType.match(/\\/json/)) {\n        reqBody = JSON.stringify(body);\n      } else {\n        reqBody = this._formatParams(body);\n      }\n    } else {\n      reqBody = undefined;\n    }\n\n    let url = path;\n    if (this.baseURL && !url.match(/^[a-z]{0,4}\\:\\/\\//)) {\n      url = this.baseURL + url;\n    }\n    if (query) url += '?' + this._formatParams(query);\n\n    return new Promise((resolve, reject) => {\n        let xhr = new XMLHttpRequest();\n        xhr.open(method, url, true);\n\n        for (let name in headers) {\n          xhr.setRequestHeader(name, headers[name]);\n        }\n\n        xhr.onload = (evt) => {\n          let resBody, resCttType = xhr.getResponseHeader('Content-Type');\n          if (resCttType === null) {\n            resBody = null;\n          } else if (resCttType.match(/\\/json/)) {\n            resBody = JSON.parse(xhr.response);\n          } else if (resCttType.match(/\\/form/)) {\n            resBody = this._fromFormData(xhr.response);\n          } else {\n            resBody = xhr.response;\n          }\n\n          resolve({\n            status: xhr.status,\n            headers: xhr.getAllResponseHeaders(),\n            body: resBody\n          });\n        }\n\n        xhr.onabort = function(err){ reject('abort') };\n        xhr.onerror = function(err){ reject('error') };\n        xhr.ontimeout = function(err){ reject('timeout') };\n\n        xhr.send(reqBody);\n      });\n  }\n\n  _formatParams(params) {\n    return new URLSearchParams(params).toString()\n  }\n\n  _fromFormData(body) {\n    const data = {};\n    body.split('&').forEach(item => {\n      const [key, val] = item.split('=');\n      data[decodeURIComponent(key)] = decodeURIComponent(val);\n    });\n    return data;\n  }\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/core/http.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 104,
+    "kind": "class",
+    "name": "HttpError",
+    "memberof": "src/core/http.js",
+    "static": true,
+    "longname": "src/core/http.js~HttpError",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/core/http.js",
+    "importStyle": "{HttpError}",
+    "description": "Http Error",
+    "lineNumber": 6,
+    "interface": false
+  },
+  {
+    "__docId__": 105,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/http.js~HttpError",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpError#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 13,
+    "unknown": [
+      {
+        "tagName": "@contructor",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "req",
+        "description": "request"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "resOrErr",
+        "description": "response or Error"
+      }
+    ]
+  },
+  {
+    "__docId__": 106,
+    "kind": "member",
+    "name": "req",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#req",
+    "access": "public",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 107,
+    "kind": "member",
+    "name": "res",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#res",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 108,
+    "kind": "member",
+    "name": "isTimeout",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isTimeout",
+    "access": "public",
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 109,
+    "kind": "member",
+    "name": "isAborted",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isAborted",
+    "access": "public",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 110,
+    "kind": "member",
+    "name": "isNetworkError",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isNetworkError",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "member",
+    "name": "isBadRequest",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isBadRequest",
+    "access": "public",
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "member",
+    "name": "isUnauthorized",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isUnauthorized",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 114,
+    "kind": "member",
+    "name": "isForbidden",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isForbidden",
+    "access": "public",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 115,
+    "kind": "member",
+    "name": "isNotFound",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isNotFound",
+    "access": "public",
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 116,
+    "kind": "member",
+    "name": "isConflict",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isConflict",
+    "access": "public",
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 117,
+    "kind": "member",
+    "name": "isServerError",
+    "memberof": "src/core/http.js~HttpError",
+    "static": false,
+    "longname": "src/core/http.js~HttpError#isServerError",
+    "access": "public",
+    "description": null,
+    "lineNumber": 31,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 118,
+    "kind": "class",
+    "name": "HttpClient",
+    "memberof": "src/core/http.js",
+    "static": true,
+    "longname": "src/core/http.js~HttpClient",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/core/http.js",
+    "importStyle": "{HttpClient}",
+    "description": "HTTP Client",
+    "lineNumber": 41,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "HttpClient"
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 119,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#constructor",
+    "access": "public",
+    "description": "Constructor.",
+    "lineNumber": 48,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts",
+        "description": "options"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.baseURL",
+        "description": "base URL (default empty)."
+      }
+    ]
+  },
+  {
+    "__docId__": 120,
+    "kind": "member",
+    "name": "baseURL",
+    "memberof": "src/core/http.js~HttpClient",
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#baseURL",
+    "access": "public",
+    "description": null,
+    "lineNumber": 49,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 121,
+    "kind": "member",
+    "name": "headers",
+    "memberof": "src/core/http.js~HttpClient",
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#headers",
+    "access": "public",
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 122,
+    "kind": "member",
+    "name": "afterError",
+    "memberof": "src/core/http.js~HttpClient",
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#afterError",
+    "access": "public",
+    "description": null,
+    "lineNumber": 51,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 123,
+    "kind": "member",
+    "name": "authorize",
+    "memberof": "src/core/http.js~HttpClient",
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#authorize",
+    "access": "public",
+    "description": null,
+    "lineNumber": 52,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 124,
+    "kind": "member",
+    "name": "unauthorized",
+    "memberof": "src/core/http.js~HttpClient",
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#unauthorized",
+    "access": "public",
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 125,
+    "kind": "member",
+    "name": "contentType",
+    "memberof": "src/core/http.js~HttpClient",
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#contentType",
+    "access": "public",
+    "description": null,
+    "lineNumber": 57,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 127,
+    "kind": "method",
+    "name": "get",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#get",
+    "access": "public",
+    "description": "do GET request.",
+    "lineNumber": 76,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx",
+        "description": "context"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise resolves response bodystatus: xhr.status,"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 128,
+    "kind": "method",
+    "name": "post",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#post",
+    "access": "public",
+    "description": "do POST request.",
+    "lineNumber": 94,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx",
+        "description": "context"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise resolves response bodystatus: xhr.status,"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 129,
+    "kind": "method",
+    "name": "put",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#put",
+    "access": "public",
+    "description": "do PUT request.",
+    "lineNumber": 112,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx",
+        "description": "context"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise resolves response bodystatus: xhr.status,"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 130,
+    "kind": "method",
+    "name": "patch",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#patch",
+    "access": "public",
+    "description": "do PATCH request.",
+    "lineNumber": 130,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx",
+        "description": "context"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise resolves response bodystatus: xhr.status,"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 131,
+    "kind": "method",
+    "name": "delete",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#delete",
+    "access": "public",
+    "description": "do DELETE request.",
+    "lineNumber": 148,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx",
+        "description": "context"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise resolves response bodystatus: xhr.status,"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 132,
+    "kind": "method",
+    "name": "exec",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": true,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#exec",
+    "access": "public",
+    "description": "execute http request.",
+    "lineNumber": 166,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "method"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 133,
+    "kind": "method",
+    "name": "_request",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#_request",
+    "access": "private",
+    "description": null,
+    "lineNumber": 192,
+    "undocument": true,
+    "params": [
+      {
+        "name": "method",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "path",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "objectPattern2",
+        "types": [
+          "{\"query\": *, \"body\": *, \"headers\": *}"
+        ],
+        "defaultRaw": {
+          "query": null,
+          "body": null,
+          "headers": null
+        },
+        "defaultValue": "{\"query\":null,\"body\":null,\"headers\":null}"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 134,
+    "kind": "method",
+    "name": "_formatParams",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#_formatParams",
+    "access": "private",
+    "description": null,
+    "lineNumber": 252,
+    "undocument": true,
+    "params": [
+      {
+        "name": "params",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 135,
+    "kind": "method",
+    "name": "_fromFormData",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#_fromFormData",
+    "access": "private",
+    "description": null,
+    "lineNumber": 256,
+    "undocument": true,
+    "params": [
+      {
+        "name": "body",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 136,
+    "kind": "file",
+    "name": "src/core/util.js",
+    "content": "'use strict'\n\n/** @private */\nexport function eachEntry(obj, cb) {\n  Object.entries(obj).forEach(cb)\n}\n\nfunction* idCounter() {\n  let i = 0\n  while (true) yield i++\n}\n\nconst lfidCounter = idCounter()\n\n/** @private */\nexport function makeLFID() {\n  const v = lfidCounter.next().value\n  return `_F_${v}`\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/core/util.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 137,
+    "kind": "function",
+    "name": "eachEntry",
+    "memberof": "src/core/util.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/core/util.js~eachEntry",
+    "access": "private",
+    "export": true,
+    "importPath": "flatout/src/core/util.js",
+    "importStyle": "{eachEntry}",
+    "description": null,
+    "lineNumber": 4,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 138,
+    "kind": "function",
+    "name": "idCounter",
+    "memberof": "src/core/util.js",
+    "generator": true,
+    "async": false,
+    "static": true,
+    "longname": "src/core/util.js~idCounter",
+    "access": "public",
+    "export": false,
+    "importPath": "flatout/src/core/util.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 139,
+    "kind": "variable",
+    "name": "lfidCounter",
+    "memberof": "src/core/util.js",
+    "static": true,
+    "longname": "src/core/util.js~lfidCounter",
+    "access": "public",
+    "export": false,
+    "importPath": "flatout/src/core/util.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 140,
+    "kind": "function",
+    "name": "makeLFID",
+    "memberof": "src/core/util.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/core/util.js~makeLFID",
+    "access": "private",
+    "export": true,
+    "importPath": "flatout/src/core/util.js",
+    "importStyle": "{makeLFID}",
+    "description": null,
+    "lineNumber": 16,
+    "params": [],
+    "return": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 141,
+    "kind": "file",
+    "name": "src/flatout.js",
+    "content": "import Core from './core/core.js';\nimport { HttpClient, HttpError } from './core/http.js';\nimport App  from './app/app.js';\nimport View from './view/view.js';\nimport ListView from './view/list-view.js';\nimport FormView from './view/form-view.js';\nimport Page from './view/page.js';\nimport { Item, List } from './model/item.js';\n\n/*\n* flatout by @tilfin\n*/\nexport {\n  Core,\n  HttpClient, HttpError,\n  App,\n  View,\n  ListView,\n  FormView,\n  Page,\n  Item, List\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/flatout.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 142,
+    "kind": "file",
+    "name": "src/model/binder.js",
+    "content": "'use strict'\n\n/**\n * Binding DataModel and View\n * @access private\n */\nclass Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target item\n   */\n  constructor(item) {\n    this._item = item;\n    item._addListener(this);\n  }\n\n  /**\n   * Remove listening to item\n   */\n  destroy() {\n    this._item._removeListener(this);\n    this._item = null;\n  }\n}\n\n/**\n * Binding Item and View\n * to apply the change of item to View\n * @access protected\n */\nexport class ItemBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target data\n   * @param {View} view - target view\n   */\n  constructor(item, view) {\n    super(item)\n    this._view = view;\n  }\n\n  /**\n   * Updating field of view\n   */\n  update({ field, newValue, oldValue }) {\n    this._view._updateField(field, newValue, oldValue);\n  }\n}\n\n/**\n * Binding List and ListView\n * to apply the change of colleciton to ListView and its child Views\n * @access protected\n */\nexport class ListBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {List} collection - target data\n   * @param {ListView} listView - target view\n   */\n  constructor(collection, listView) {\n    super(collection)\n    this._view = listView;\n  }\n\n  /**\n   * Adding item to ListView at index.\n   */\n  add({ item, index }) {\n    if (index === undefined) {\n      this._view.addItem(item);\n    } else {\n      this._view.insertItem(item, index);\n    }    \n  }\n\n  /**\n   * Updating item of ListView at index.\n   */\n  update({ item, index }) {\n    this._view.updateItem(item, index);\n  }\n\n  /**\n   * Removing item from ListView.\n   */\n  remove({ item, index }) {\n    this._view.removeItem(item, index);\n  }\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/model/binder.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 143,
+    "kind": "class",
+    "name": "Binder",
+    "memberof": "src/model/binder.js",
+    "static": true,
+    "longname": "src/model/binder.js~Binder",
+    "access": "private",
+    "export": false,
+    "importPath": "flatout/src/model/binder.js",
+    "importStyle": null,
+    "description": "Binding DataModel and View",
+    "lineNumber": 7,
+    "interface": false,
+    "ignore": true
+  },
+  {
+    "__docId__": 144,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/model/binder.js~Binder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~Binder#constructor",
+    "access": "public",
+    "description": "Constructor.",
+    "lineNumber": 13,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Item"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "target item"
+      }
+    ]
+  },
+  {
+    "__docId__": 145,
+    "kind": "member",
+    "name": "_item",
+    "memberof": "src/model/binder.js~Binder",
+    "static": false,
+    "longname": "src/model/binder.js~Binder#_item",
+    "access": "private",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 146,
+    "kind": "method",
+    "name": "destroy",
+    "memberof": "src/model/binder.js~Binder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~Binder#destroy",
+    "access": "public",
+    "description": "Remove listening to item",
+    "lineNumber": 21,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 148,
+    "kind": "class",
+    "name": "ItemBinder",
+    "memberof": "src/model/binder.js",
+    "static": true,
+    "longname": "src/model/binder.js~ItemBinder",
+    "access": "protected",
+    "export": true,
+    "importPath": "flatout/src/model/binder.js",
+    "importStyle": "{ItemBinder}",
+    "description": "Binding Item and View\nto apply the change of item to View",
+    "lineNumber": 32,
+    "interface": false,
+    "extends": [
+      "Binder"
+    ]
+  },
+  {
+    "__docId__": 149,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/model/binder.js~ItemBinder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~ItemBinder#constructor",
+    "access": "public",
+    "description": "Constructor.",
+    "lineNumber": 39,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Item"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "target data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "View"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "view",
+        "description": "target view"
+      }
+    ]
+  },
+  {
+    "__docId__": 150,
+    "kind": "member",
+    "name": "_view",
+    "memberof": "src/model/binder.js~ItemBinder",
+    "static": false,
+    "longname": "src/model/binder.js~ItemBinder#_view",
+    "access": "private",
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 151,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/model/binder.js~ItemBinder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~ItemBinder#update",
+    "access": "public",
+    "description": "Updating field of view",
+    "lineNumber": 47,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"field\": *, \"newValue\": *, \"oldValue\": *}"
+        ],
+        "defaultRaw": {
+          "field": null,
+          "newValue": null,
+          "oldValue": null
+        },
+        "defaultValue": "{\"field\":null,\"newValue\":null,\"oldValue\":null}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 152,
+    "kind": "class",
+    "name": "ListBinder",
+    "memberof": "src/model/binder.js",
+    "static": true,
+    "longname": "src/model/binder.js~ListBinder",
+    "access": "protected",
+    "export": true,
+    "importPath": "flatout/src/model/binder.js",
+    "importStyle": "{ListBinder}",
+    "description": "Binding List and ListView\nto apply the change of colleciton to ListView and its child Views",
+    "lineNumber": 57,
+    "interface": false,
+    "extends": [
+      "Binder"
+    ]
+  },
+  {
+    "__docId__": 153,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/model/binder.js~ListBinder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~ListBinder#constructor",
+    "access": "public",
+    "description": "Constructor.",
+    "lineNumber": 64,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "List"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "collection",
+        "description": "target data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "ListView"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listView",
+        "description": "target view"
+      }
+    ]
+  },
+  {
+    "__docId__": 154,
+    "kind": "member",
+    "name": "_view",
+    "memberof": "src/model/binder.js~ListBinder",
+    "static": false,
+    "longname": "src/model/binder.js~ListBinder#_view",
+    "access": "private",
+    "description": null,
+    "lineNumber": 66,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 155,
+    "kind": "method",
+    "name": "add",
+    "memberof": "src/model/binder.js~ListBinder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~ListBinder#add",
+    "access": "public",
+    "description": "Adding item to ListView at index.",
+    "lineNumber": 72,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"item\": *, \"index\": *}"
+        ],
+        "defaultRaw": {
+          "item": null,
+          "index": null
+        },
+        "defaultValue": "{\"item\":null,\"index\":null}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 156,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/model/binder.js~ListBinder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~ListBinder#update",
+    "access": "public",
+    "description": "Updating item of ListView at index.",
+    "lineNumber": 83,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"item\": *, \"index\": *}"
+        ],
+        "defaultRaw": {
+          "item": null,
+          "index": null
+        },
+        "defaultValue": "{\"item\":null,\"index\":null}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 157,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "src/model/binder.js~ListBinder",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/binder.js~ListBinder#remove",
+    "access": "public",
+    "description": "Removing item from ListView.",
+    "lineNumber": 90,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"item\": *, \"index\": *}"
+        ],
+        "defaultRaw": {
+          "item": null,
+          "index": null
+        },
+        "defaultValue": "{\"item\":null,\"index\":null}"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 158,
+    "kind": "file",
+    "name": "src/model/item.js",
+    "content": "'use strict';\n\nimport { eachEntry } from '../core/util.js'\nimport Core from '../core/core.js';\n\n/**\n * Item.\n * this can be an element of List.\n * \n * @memberOf Lfin\n */\nexport class Item extends Core {\n\n  /**\n   * Constructor.\n   * \n   * @param {object} [defaultData] - default data\n   */\n  constructor(defaultData = {}) {\n    super();\n    Object.assign(this, defaultData);\n  }\n\n  /**\n   * Add value to field-value.\n   * \n   * @param {string} field - adding field name\n   * @param {Any} value - adding value\n   */\n  add(field, value) {\n    const cur = this[field];\n    const isArr = cur !== undefined && cur instanceof Array;\n    let newVal;\n    if (isArr) {\n      cur.push(value);\n      newVal = cur;\n    } else {\n      newVal = cur + value;\n    }\n    this._updateField(field, newVal);\n  }\n\n  /**\n   * Toggle boolean field-value\n   * \n   * @param {string} field - toggling field name\n   */\n  toggle(field) {\n    const cur = Boolean(this[field]);\n    this._updateField(field, !cur);\n  }\n\n  /**\n   * Update the pairs of field-value.\n   * \n   * @param {Object} pairs - updating target pairs\n   */\n  update(pairs) {\n    eachEntry(pairs, ([key, val]) => this._updateField(key, val))\n  }\n\n  /**\n   * Destroy me.\n   */\n  destroy() {\n    this.say('destroy', {});\n  }\n\n  /**\n   * Update field with value.\n   * \n   * @param {string} field - updating target\n   * @param {Any} value    - new value\n   */\n  _updateField(field, value) {\n    const cur = this[field];\n\n    if (cur instanceof Item) {\n      if (cur instanceof List) {\n        cur.reset(value)\n      } else {\n        cur.update(value)\n      }\n    } else {\n      this[field] = value;\n      this.say('update', { field, newValue: value, oldValue: cur });\n    }\n  }\n\n  _addListener(target) {\n    this.listen('*', target);\n  }\n\n  _removeListener(target) {\n    this.unlisten('*', target);\n  }\n}\n\n/**\n * List for plain object or Item.\n *\n * @memberOf Lfin\n */\nexport class List extends Item {\n\n  /**\n   * Constructor.\n   * \n   * @param {Array} [defaultData] - default data array\n   * @param {object} [opts] - options\n   * @param {boolean|Class<Item>} [opts.wrapItem] - Whether wrapping Item or not, or the sub class of Item.\n   */\n  constructor(defaultData = [], opts = {}) {\n    super();\n\n    if (opts.wrapItem) {\n      if (opts.wrapItem === true) {\n        this._F_itemClass = Item;\n      } else {\n        this._F_itemClass = opts.wrapItem;\n      }\n    } else {\n      this._F_itemClass = null;\n    }\n\n    this._data = defaultData.map(item => this._wrapItem(item));\n  }\n\n  /**\n   * If you dynamically change wrapping item class according to the item, override this method.\n   *\n   * @param {object} item - an item\n   * @return {Class<View>}\n   */\n  itemClass(item) {\n    return this._F_itemClass\n  }\n\n  /**\n   * Return an item at position.\n   * \n   * @param  {number} index - item position.\n   * @return {*} item specified by index.\n   */\n  get(index) {\n    return this._data[index];\n  }\n\n  /**\n   * Add an item.\n   * \n   * @param {Any} item - item\n   * @param {number} [insertIndex] - optional insert position, add last if not defined\n   */\n  add(item, insertIndex) {\n    item = this._wrapItem(item);\n    if (insertIndex === undefined) {\n      this._data.push(item);\n    } else {\n      this._data.splice(insertIndex, 0, item);\n    }\n    this.say('add', { item, index: insertIndex });\n  }\n\n  /**\n   * Update an item at index.\n   * \n   * @param {Any} item - item\n   * @param {number} index - target index\n   */\n  update(item, index) {\n    if (index === undefined) {\n      // for when item updated\n      index = this._data.indexOf(item);\n    }\n    const cur = this._data[index];\n    if (cur !== item) {\n      item = this._wrapItem(item);\n      this._data[index] = item;\n    }\n    this.say('update', { item, index });\n  }\n\n  /**\n   * Remove an item (specified by index).\n   * \n   * @param {object|number} itemOrIndex - target item or the position.\n   */\n  remove(itemOrIndex) {\n    let index;\n    if (typeof itemOrIndex !== 'number') {\n      index = this._data.indexOf(itemOrIndex) // find item\n    } else {\n      index = itemOrIndex;\n    }\n    const item = this._data.splice(index, 1)[0];\n    this.say('remove', { item, index });\n  }\n\n  /**\n   * Add items.\n   * \n   * @param {Array} items - adding items\n   * @param {number} [insertIndex] - insert position\n   */\n  addAll(items, insertIndex) {\n    items.forEach(item => this.add(item, insertIndex))\n  }\n\n  /**\n   * Remove all items.\n   * \n   * @param {Object} opts - if opts.reverse is true, removing from last to first.\n   */\n  removeAll(opts = {}) {\n    const { reverse = false } = opts;\n    if (reverse) {\n      for (let idx = this.length - 1; idx >= 0; idx--) {\n        this.remove(idx);\n      }\n    } else {\n      while(this._data.length) {\n        this.remove(0);\n      }\n    }\n  }\n\n  /**\n   * Remove last item.\n   */\n  removeLast() {\n    this.remove(this.length - 1);\n  }\n\n  /**\n   * replace all items\n   *\n   * @param {Array} [newValues] - new values or default empty array\n   */\n  reset(newValues = []) {\n    this.removeAll();\n    this.addAll(newValues);\n  }\n\n  /**\n   * Iterates each item of self, return an index of the first item predicate returns true.\n   * \n   * @param  {string|Function} predictOrField - predicate function or target field\n   * @param  {*} [value] - finding value for target field\n   * @return {object} matched first item or undefined\n   */\n  find(predictOrField, value) {\n    const i = this.indexOf(predictOrField, value);\n    return i >= 0 ? this._data[i] : undefined;\n  }\n\n  /**\n   * Iterates each item of self, return the first item predicate returns true.\n   * \n   * @param  {string|Function|Object} predictOrField - predicate function or target field, target object\n   * @param  {*} [value] - finding value for target field\n   * @return {number} matched first item index or -1 if not found\n   */\n  indexOf(predictOrField, value) {\n    let judge;\n    if (value !== undefined) {\n      judge = it => it[predictOrField] === value\n    } else if (this._isFn(predictOrField)) {\n      judge = predictOrField;\n    } else {\n      return this._data.indexOf(predictOrField)\n    }\n\n    for (let i = 0, len = this._data.length; i < len; i++) {\n      if (judge(this._data[i])) return i;\n    }\n    return -1;\n  }\n\n  /*\n   * forEach method for data\n   * @param {Function} cb - callback.\n   */\n  forEach(cb) {\n    this._data.forEach(cb)\n  }\n\n  /*\n   * some method for data\n   * @param {Function} cb - callback returns true or false.\n   */\n  some(cb) {\n    return this._data.some(cb)\n  }\n\n  /*\n   * Data size\n   * @type {number}\n   */\n  get length() {\n    return this._data.length\n  }\n\n  /*\n   * @return {Iterator} data iterator\n   */\n  [Symbol.iterator]() {\n    return this._data[Symbol.iterator]()\n  }\n\n  /**\n   * Wrap an item by Item class\n   */\n  _wrapItem(item) {\n    if (!(item instanceof Item)) {\n      const cls = this.itemClass(item);\n      if (cls) {\n        return new cls(item);\n      }\n    }\n    return item;\n  }\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/model/item.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 159,
+    "kind": "class",
+    "name": "Item",
+    "memberof": "src/model/item.js",
+    "static": true,
+    "longname": "src/model/item.js~Item",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/model/item.js",
+    "importStyle": "{Item}",
+    "description": "Item.\nthis can be an element of List.",
+    "lineNumber": 12,
+    "unknown": [
+      {
+        "tagName": "@memberOf",
+        "tagValue": "Lfin"
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "src/core/core.js~Core"
+    ]
+  },
+  {
+    "__docId__": 160,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#constructor",
+    "access": "public",
+    "description": "Constructor.",
+    "lineNumber": 19,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "defaultData",
+        "description": "default data"
+      }
+    ]
+  },
+  {
+    "__docId__": 161,
+    "kind": "method",
+    "name": "add",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#add",
+    "access": "public",
+    "description": "Add value to field-value.",
+    "lineNumber": 30,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "field",
+        "description": "adding field name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "adding value"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 162,
+    "kind": "method",
+    "name": "toggle",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#toggle",
+    "access": "public",
+    "description": "Toggle boolean field-value",
+    "lineNumber": 48,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "field",
+        "description": "toggling field name"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 163,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#update",
+    "access": "public",
+    "description": "Update the pairs of field-value.",
+    "lineNumber": 58,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pairs",
+        "description": "updating target pairs"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 164,
+    "kind": "method",
+    "name": "destroy",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#destroy",
+    "access": "public",
+    "description": "Destroy me.",
+    "lineNumber": 65,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 165,
+    "kind": "method",
+    "name": "_updateField",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#_updateField",
+    "access": "private",
+    "description": "Update field with value.",
+    "lineNumber": 75,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "field",
+        "description": "updating target"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "new value"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 166,
+    "kind": "member",
+    "name": "[field]",
+    "memberof": "src/model/item.js~Item",
+    "static": false,
+    "longname": "src/model/item.js~Item#[field]",
+    "access": "public",
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 167,
+    "kind": "method",
+    "name": "_addListener",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#_addListener",
+    "access": "private",
+    "description": null,
+    "lineNumber": 90,
+    "undocument": true,
+    "params": [
+      {
+        "name": "target",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 168,
+    "kind": "method",
+    "name": "_removeListener",
+    "memberof": "src/model/item.js~Item",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~Item#_removeListener",
+    "access": "private",
+    "description": null,
+    "lineNumber": 94,
+    "undocument": true,
+    "params": [
+      {
+        "name": "target",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 169,
+    "kind": "class",
+    "name": "List",
+    "memberof": "src/model/item.js",
+    "static": true,
+    "longname": "src/model/item.js~List",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/model/item.js",
+    "importStyle": "{List}",
+    "description": "List for plain object or Item.",
+    "lineNumber": 104,
+    "unknown": [
+      {
+        "tagName": "@memberOf",
+        "tagValue": "Lfin"
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "Item"
+    ]
+  },
+  {
+    "__docId__": 170,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#constructor",
+    "access": "public",
+    "description": "Constructor.",
+    "lineNumber": 113,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "defaultData",
+        "description": "default data array"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts",
+        "description": "options"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean",
+          "Class<Item>"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.wrapItem",
+        "description": "Whether wrapping Item or not, or the sub class of Item."
+      }
+    ]
+  },
+  {
+    "__docId__": 171,
+    "kind": "member",
+    "name": "_F_itemClass",
+    "memberof": "src/model/item.js~List",
+    "static": false,
+    "longname": "src/model/item.js~List#_F_itemClass",
+    "access": "private",
+    "description": null,
+    "lineNumber": 118,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 174,
+    "kind": "member",
+    "name": "_data",
+    "memberof": "src/model/item.js~List",
+    "static": false,
+    "longname": "src/model/item.js~List#_data",
+    "access": "private",
+    "description": null,
+    "lineNumber": 126,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 175,
+    "kind": "method",
+    "name": "itemClass",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#itemClass",
+    "access": "public",
+    "description": "If you dynamically change wrapping item class according to the item, override this method.",
+    "lineNumber": 135,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "an item"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Class<View>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 176,
+    "kind": "method",
+    "name": "get",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#get",
+    "access": "public",
+    "description": "Return an item at position.",
+    "lineNumber": 145,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "index",
+        "description": "item position."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "item specified by index."
+    }
+  },
+  {
+    "__docId__": 177,
+    "kind": "method",
+    "name": "add",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#add",
+    "access": "public",
+    "description": "Add an item.",
+    "lineNumber": 155,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "item"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "insertIndex",
+        "description": "optional insert position, add last if not defined"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 178,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#update",
+    "access": "public",
+    "description": "Update an item at index.",
+    "lineNumber": 171,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Any"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "item"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "index",
+        "description": "target index"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 179,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#remove",
+    "access": "public",
+    "description": "Remove an item (specified by index).",
+    "lineNumber": 189,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object",
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "itemOrIndex",
+        "description": "target item or the position."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 180,
+    "kind": "method",
+    "name": "addAll",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#addAll",
+    "access": "public",
+    "description": "Add items.",
+    "lineNumber": 206,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "items",
+        "description": "adding items"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "insertIndex",
+        "description": "insert position"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 181,
+    "kind": "method",
+    "name": "removeAll",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#removeAll",
+    "access": "public",
+    "description": "Remove all items.",
+    "lineNumber": 215,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": "if opts.reverse is true, removing from last to first."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 182,
+    "kind": "method",
+    "name": "removeLast",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#removeLast",
+    "access": "public",
+    "description": "Remove last item.",
+    "lineNumber": 231,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 183,
+    "kind": "method",
+    "name": "reset",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#reset",
+    "access": "public",
+    "description": "replace all items",
+    "lineNumber": 240,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "newValues",
+        "description": "new values or default empty array"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 184,
+    "kind": "method",
+    "name": "find",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#find",
+    "access": "public",
+    "description": "Iterates each item of self, return an index of the first item predicate returns true.",
+    "lineNumber": 252,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "predictOrField",
+        "description": "predicate function or target field"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "value",
+        "description": "finding value for target field"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "matched first item or undefined"
+    }
+  },
+  {
+    "__docId__": 185,
+    "kind": "method",
+    "name": "indexOf",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#indexOf",
+    "access": "public",
+    "description": "Iterates each item of self, return the first item predicate returns true.",
+    "lineNumber": 264,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Function",
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "predictOrField",
+        "description": "predicate function or target field, target object"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "value",
+        "description": "finding value for target field"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "matched first item index or -1 if not found"
+    }
+  },
+  {
+    "__docId__": 186,
+    "kind": "method",
+    "name": "forEach",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#forEach",
+    "access": "public",
+    "description": null,
+    "lineNumber": 284,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 187,
+    "kind": "method",
+    "name": "some",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#some",
+    "access": "public",
+    "description": null,
+    "lineNumber": 292,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cb",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 188,
+    "kind": "get",
+    "name": "length",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#length",
+    "access": "public",
+    "description": null,
+    "lineNumber": 300,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 189,
+    "kind": "method",
+    "name": "[Symbol.iterator]",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#[Symbol.iterator]",
+    "access": "public",
+    "description": null,
+    "lineNumber": 307,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 190,
+    "kind": "method",
+    "name": "_wrapItem",
+    "memberof": "src/model/item.js~List",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/model/item.js~List#_wrapItem",
+    "access": "private",
+    "description": "Wrap an item by Item class",
+    "lineNumber": 314,
+    "params": [
+      {
+        "name": "item",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 191,
+    "kind": "file",
+    "name": "src/view/form-view.js",
+    "content": "'use strict'\n\nimport { eachEntry } from '../core/util.js'\nimport View from './view.js'\n\n/**\n* A FormView is data fields to bind input, select or textarea by theirs names.\n*\n* @example\n* // Create a FormView bound to loginForm\n* views.form = new FormView('loginForm');\n* \n* evts.form_submit = function(sender, e) {\n*   var body = this.data;\n*   http.post('/login', { body });\n* }\n* @example {@lang xml}\n* <form id=\"loginForm\">\n*   <input type=\"text\" name=\"email\">\n*   <input type=\"password\" name=\"password\">\n*   <button type=\"submit\">Sign in</button>\n* </form>\n*/\nclass FormView extends View {\n\n  /**\n   * @override\n   */\n  get data() {\n    return this._assignFromFields(this._data);\n  }\n\n  set data(value) {\n    super.data = value;\n  }\n\n  /**\n   * Get field value as the type.\n   *\n   * @param {string} field - target field\n   * @return {Any} the value\n   */\n  getValueOf(field) {\n    const el = this.findEl(field);\n    if (el) {\n      return this._valueAsType(el);\n    }\n\n    const vw = this.views[field];\n    if (vw) {\n      return vw.data;\n    }\n  }\n\n  /**\n   * also returns form element by name.\n   * @override\n   */\n  findEl(id) {\n    return this.el[id] || super.findEl(id);\n  }\n\n  _assignFromFields(data = {}) {\n    const result = Object.assign({}, data)\n\n    // FormData cooks radio buttons and no name inputs\n    for (let [name, _] of new FormData(this.el)) {\n      result[name] = this._valueAsType(this.el[name]);\n    }\n\n    for (let fel of this.el.querySelectorAll('[data-id]')) {\n      const val = this._valueAsType(fel);\n      if (val !== undefined) {\n        result[fel.dataset.id] = val;\n      }\n    }\n\n    eachEntry(this.views, ([name, view]) => {\n      result[name] = view.data;\n    });\n\n    return result;\n  }\n\n  _valueAsType(el) {\n    const ds = el.dataset || {};\n    const type = ds.type || 'text';\n    let val = el.value;\n    if (type === 'number') {\n      val = Number(val)\n    } else if (type.startsWith('bool')) {\n      val = Boolean(val)\n    }\n    return val;\n  }\n\n  _setFieldValue(name, val) {\n    const input = this.el[name];\n    if (input) {\n      input.value = val;\n      return;\n    }\n    super._setFieldValue(name, val);\n  }\n}\n\nexport default FormView\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/view/form-view.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 192,
+    "kind": "class",
+    "name": "FormView",
+    "memberof": "src/view/form-view.js",
+    "static": true,
+    "longname": "src/view/form-view.js~FormView",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/view/form-view.js",
+    "importStyle": "FormView",
+    "description": "A FormView is data fields to bind input, select or textarea by theirs names.",
+    "examples": [
+      "// Create a FormView bound to loginForm\nviews.form = new FormView('loginForm');\n\nevts.form_submit = function(sender, e) {\n  var body = this.data;\n  http.post('/login', { body });\n}",
+      "{@lang xml}\n<form id=\"loginForm\">\n  <input type=\"text\" name=\"email\">\n  <input type=\"password\" name=\"password\">\n  <button type=\"submit\">Sign in</button>\n</form>"
+    ],
+    "lineNumber": 24,
+    "interface": false,
+    "extends": [
+      "src/view/view.js~View"
+    ]
+  },
+  {
+    "__docId__": 193,
+    "kind": "get",
+    "name": "data",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#data",
+    "access": "public",
+    "description": "",
+    "lineNumber": 29,
+    "override": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 194,
+    "kind": "set",
+    "name": "data",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#data",
+    "access": "public",
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true
+  },
+  {
+    "__docId__": 195,
+    "kind": "method",
+    "name": "getValueOf",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#getValueOf",
+    "access": "public",
+    "description": "Get field value as the type.",
+    "lineNumber": 43,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "field",
+        "description": "target field"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Any"
+      ],
+      "spread": false,
+      "description": "the value"
+    }
+  },
+  {
+    "__docId__": 196,
+    "kind": "method",
+    "name": "findEl",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#findEl",
+    "access": "public",
+    "description": "also returns form element by name.",
+    "lineNumber": 59,
+    "override": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 197,
+    "kind": "method",
+    "name": "_assignFromFields",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#_assignFromFields",
+    "access": "private",
+    "description": null,
+    "lineNumber": 63,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 198,
+    "kind": "method",
+    "name": "_valueAsType",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#_valueAsType",
+    "access": "private",
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "params": [
+      {
+        "name": "el",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 199,
+    "kind": "method",
+    "name": "_setFieldValue",
+    "memberof": "src/view/form-view.js~FormView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/form-view.js~FormView#_setFieldValue",
+    "access": "private",
+    "description": null,
+    "lineNumber": 97,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "val",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 200,
+    "kind": "file",
+    "name": "src/view/list-view.js",
+    "content": "'use strict'\n\nimport { makeLFID } from '../core/util.js'\nimport { List } from '../model/item.js'\nimport { ListBinder } from '../model/binder.js'\nimport View from './view.js'\n\n/**\n* View for the collection of items.\n*\n* @example\n* class ListItemView extends View {\n*   html(data) {\n*     return `<li>${data.title}</li>`;\n*   }\n* }\n* \n* let instanceView = new ListView(Node, ListItemView,\n*           {\n*             data: [\n*               { title: 'foo' },\n*               { ttile: 'bar' }\n*             ]\n*           });\n*/\nclass ListView extends View {\n\n  /*\n   * Create a ListView.\n   *\n   * @param {Element} [root] - root node\n   * @param {Class} [itemView] - item view class\n   * @param {Object} [props] - properties\n   */\n  constructor(/*root, itemView, props*/) {\n    let root, props = {};\n    for (let arg of arguments) {\n      if (arg instanceof Node || typeof arg === 'string') {\n        root = arg;\n      } else if (arg && arg.constructor === Object) {\n        Object.assign(props, arg);\n      } else if (arg !== undefined) {\n        props._F_tmpl = arg; // itemView\n      }\n    }\n    super(root, props);\n  }\n\n  /** @override */\n  _privates() {\n    const pa = super._privates();\n    pa._F_itemSet = new Map();\n    return pa;\n  }\n\n  /**\n   * If you dynamically change creating item view according to the item, override this method.\n   *\n   * @param {object} item - an item\n   * @return {Class<View>}\n   */\n  itemViewClass(item) {\n    return this._F_tmpl\n  }\n\n  /**\n   * Add an item to list\n   *\n   * @param {object} item - an item\n   */\n  addItem(item) {\n    const view = this._createViewByItem(item);\n    this.addItemEl(this.container, view.el);\n    return view;\n  }\n\n  /**\n   * Insert an item to list at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  insertItem(item, index) {\n    const view = this._createViewByItem(item);\n    this.insertItemEl(this.container, view.el, this._childElAt(index));\n    return view;\n  }\n\n  /**\n   * Update an item at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  updateItem(item, index) {\n    const LFID = this._childElAt(index).getAttribute('_lfid_');\n    this._F_itemSet.set(LFID, item);\n    this.views[LFID].data = item;\n  }\n\n  /**\n   * Remove item from list\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  removeItem(item, index) {\n    const el = this._childElAt(index)\n    this._removeItemByEl(el);\n  }\n\n  /**\n   * Remove item with view\n   *\n   * @param {view} view - an view of removing item\n   */\n  removeItemByView(view) {\n    this._removeItemByEl(view.el)\n  }\n\n  /**\n   * If you change adding item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl parent element for List\n   * @param {Element} itemEl added element\n   */\n  addItemEl(listEl, itemEl) {\n    listEl.appendChild(itemEl)\n  }\n\n  /**\n   * If you change inserting item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} newEl  - an element for new item for List\n   * @param {Element} nextEl - next element will be next one for newEl\n   */\n  insertItemEl(listEl, newEl, nextEl) {\n    listEl.insertBefore(newEl, nextEl)\n  }\n\n  /**\n   * If you change removing item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} itemEl - removed element\n   */\n  removeItemEl(listEl, itemEl) {\n    listEl.removeChild(itemEl)\n  }\n\n  /**\n   * Return child element at position.\n   *\n   * @param {number} index - item position.\n   * @return {Element} target element\n   */\n  _childElAt(index) {\n    return this.container.children[index];\n  }\n\n  _createViewByItem(item) {\n    const LFID = makeLFID();\n    const cls = this.itemViewClass(item);\n    const view = new cls({ data: item });\n    this._F_itemSet.set(LFID, view);\n    this.views[LFID] = view;\n    view.el.setAttribute('_lfid_', LFID);\n    return view;\n  }\n\n  /**\n   * Remove item from list by element\n   *\n   * @param {element} el - removed element\n   */\n  _removeItemByEl(el) {\n    const LFID = el.getAttribute('_lfid_');\n    this._F_itemSet.delete(LFID);\n    const vws = this.views\n    vws[LFID].unload();\n    delete vws[LFID];\n    this.removeItemEl(this.container, el);\n  }\n\n  /** @override */\n  _bindData() {\n    const data = this._data;\n    if (data instanceof List) {\n      this._F_binders.push(new ListBinder(data, this))\n    }\n  }\n\n  /** @override */\n  _setDataToChildren() {\n    if (this._data === undefined) return;\n    console.log('ListView#_setDataToChildren', this);\n\n    for (let childView of Object.values(this.views)) {\n      this.removeItemByView(childView);\n    }\n\n    for (let item of this._data) {\n      this.addItem(item);\n    }\n  }\n}\n\nexport default ListView\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/view/list-view.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 201,
+    "kind": "class",
+    "name": "ListView",
+    "memberof": "src/view/list-view.js",
+    "static": true,
+    "longname": "src/view/list-view.js~ListView",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/view/list-view.js",
+    "importStyle": "ListView",
+    "description": "View for the collection of items.",
+    "examples": [
+      "class ListItemView extends View {\n  html(data) {\n    return `<li>${data.title}</li>`;\n  }\n}\n\nlet instanceView = new ListView(Node, ListItemView,\n          {\n            data: [\n              { title: 'foo' },\n              { ttile: 'bar' }\n            ]\n          });"
+    ],
+    "lineNumber": 26,
+    "interface": false,
+    "extends": [
+      "src/view/view.js~View"
+    ]
+  },
+  {
+    "__docId__": 202,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true
+  },
+  {
+    "__docId__": 203,
+    "kind": "method",
+    "name": "_privates",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#_privates",
+    "access": "private",
+    "description": null,
+    "lineNumber": 50,
+    "override": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 204,
+    "kind": "method",
+    "name": "itemViewClass",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#itemViewClass",
+    "access": "public",
+    "description": "If you dynamically change creating item view according to the item, override this method.",
+    "lineNumber": 62,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "an item"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Class<View>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 205,
+    "kind": "method",
+    "name": "addItem",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#addItem",
+    "access": "public",
+    "description": "Add an item to list",
+    "lineNumber": 71,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "an item"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 206,
+    "kind": "method",
+    "name": "insertItem",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#insertItem",
+    "access": "public",
+    "description": "Insert an item to list at index",
+    "lineNumber": 83,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "an item"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "index",
+        "description": "target position"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 207,
+    "kind": "method",
+    "name": "updateItem",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#updateItem",
+    "access": "public",
+    "description": "Update an item at index",
+    "lineNumber": 95,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "an item"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "index",
+        "description": "target position"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 208,
+    "kind": "method",
+    "name": "removeItem",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#removeItem",
+    "access": "public",
+    "description": "Remove item from list",
+    "lineNumber": 107,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "item",
+        "description": "an item"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "index",
+        "description": "target position"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 209,
+    "kind": "method",
+    "name": "removeItemByView",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#removeItemByView",
+    "access": "public",
+    "description": "Remove item with view",
+    "lineNumber": 117,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "view"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "view",
+        "description": "an view of removing item"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 210,
+    "kind": "method",
+    "name": "addItemEl",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#addItemEl",
+    "access": "protected",
+    "description": "If you change adding item effect, override this method.",
+    "lineNumber": 128,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listEl",
+        "description": "parent element for List"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "itemEl",
+        "description": "added element"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 211,
+    "kind": "method",
+    "name": "insertItemEl",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#insertItemEl",
+    "access": "protected",
+    "description": "If you change inserting item effect, override this method.",
+    "lineNumber": 140,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listEl",
+        "description": "parent element for List"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "newEl",
+        "description": "an element for new item for List"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "nextEl",
+        "description": "next element will be next one for newEl"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 212,
+    "kind": "method",
+    "name": "removeItemEl",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#removeItemEl",
+    "access": "protected",
+    "description": "If you change removing item effect, override this method.",
+    "lineNumber": 151,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "listEl",
+        "description": "parent element for List"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "itemEl",
+        "description": "removed element"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 213,
+    "kind": "method",
+    "name": "_childElAt",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#_childElAt",
+    "access": "private",
+    "description": "Return child element at position.",
+    "lineNumber": 161,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "index",
+        "description": "item position."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Element"
+      ],
+      "spread": false,
+      "description": "target element"
+    }
+  },
+  {
+    "__docId__": 214,
+    "kind": "method",
+    "name": "_createViewByItem",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#_createViewByItem",
+    "access": "private",
+    "description": null,
+    "lineNumber": 165,
+    "undocument": true,
+    "params": [
+      {
+        "name": "item",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 215,
+    "kind": "method",
+    "name": "_removeItemByEl",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#_removeItemByEl",
+    "access": "private",
+    "description": "Remove item from list by element",
+    "lineNumber": 180,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "el",
+        "description": "removed element"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 216,
+    "kind": "method",
+    "name": "_bindData",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#_bindData",
+    "access": "private",
+    "description": null,
+    "lineNumber": 190,
+    "override": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 217,
+    "kind": "method",
+    "name": "_setDataToChildren",
+    "memberof": "src/view/list-view.js~ListView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/list-view.js~ListView#_setDataToChildren",
+    "access": "private",
+    "description": null,
+    "lineNumber": 198,
+    "override": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 218,
+    "kind": "file",
+    "name": "src/view/page.js",
+    "content": "'use strict'\n\nimport View from './view.js'\n\n/**\n* Root view of page\n*\n* @example\n* class DetailPage extends Page {\n*   title() {\n*     return 'Detail Page'\n*   }\n*\n*   html(data) {\n*     return `\\\n*     <div>\n*       <h1>${data.headline}</h1>\n*     </div>\n*     `\n*   }\n* }\n*/\nexport default class Page extends View {\n  /**\n   * Return document title\n   */\n  title() {\n    return ''\n  }\n\n  /** @override */\n  destroy() {\n    super.destroy();\n    this.el.remove();\n  }\n}\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/view/page.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 219,
+    "kind": "class",
+    "name": "Page",
+    "memberof": "src/view/page.js",
+    "static": true,
+    "longname": "src/view/page.js~Page",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/view/page.js",
+    "importStyle": "Page",
+    "description": "Root view of page",
+    "examples": [
+      "class DetailPage extends Page {\n  title() {\n    return 'Detail Page'\n  }\n\n  html(data) {\n    return `\\\n    <div>\n      <h1>${data.headline}</h1>\n    </div>\n    `\n  }\n}"
+    ],
+    "lineNumber": 23,
+    "interface": false,
+    "extends": [
+      "src/view/view.js~View"
+    ]
+  },
+  {
+    "__docId__": 220,
+    "kind": "method",
+    "name": "title",
+    "memberof": "src/view/page.js~Page",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/page.js~Page#title",
+    "access": "public",
+    "description": "Return document title",
+    "lineNumber": 27,
+    "params": [],
+    "return": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 221,
+    "kind": "method",
+    "name": "destroy",
+    "memberof": "src/view/page.js~Page",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/page.js~Page#destroy",
+    "access": "public",
+    "description": null,
+    "lineNumber": 32,
+    "override": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 222,
+    "kind": "file",
+    "name": "src/view/view.js",
+    "content": "'use strict'\n\nimport Core from '../core/core.js'\nimport { eachEntry, makeLFID } from '../core/util.js'\nimport { Item } from '../model/item.js'\nimport { ItemBinder } from '../model/binder.js'\n\nconst HOOK_EVTS = ['click', 'submit', 'change'];\n\n/**\n* View\n*/\nclass View extends Core {\n\n  /**\n   * Create a View.\n   *\n   * @param {string|Element} root - Root element ID or root node\n   * @param {object} [props]      - Properties\n   * @param {Class<View>} [props.parent] - parent view this belongs to\n   * @param {string|Element} [props.container] - parent element of child views (specified by data-id or id value).\n   */\n  constructor(root, props) {\n    super();\n\n    /**\n     * Root element\n     * @member {Node}\n     */\n    this.el = null;\n\n    /**\n     * Subview children of the view\n     * @member {object}\n     */\n    this.views = {};\n\n    if (props === undefined && root && root.constructor === Object) {\n      props = root;\n      root = null;\n    }\n\n    this._build(root, props || {});\n  }\n\n  /** @override */\n  _privates() {\n    return Object.assign(super._privates(), {\n      _F_onevts: new Set(),\n      _F_binders: [],\n      _F_elcache: new Map()\n    })\n  }\n\n  /**\n   * Initialize props\n   * \n   * @param {object} defaults - default data.\n   * @return {object|Item} modified data or item.\n   */\n  init(defaults) {\n  }\n\n  /**\n   * For implement creating subviews and setting listener of events.\n   * \n   * @param {object} views - added subview target (ex. views.list = new ListView(..))\n   * @param {object} evts - added listener target (ex. evts.subview_event)\n   */\n  load(views, evts) {\n  }\n\n  /**\n   * For implement unloading subviews\n   */\n  unload() {\n  }\n\n  /**\n   * Cast a message to all children of view\n   *\n   * @param {string} method - method name\n   * @param {Array} args - arguments\n   */\n  broadcast(method, args = []) {\n    this._callR(args, 'views', method)\n  }\n\n  /**\n   * _loaded resolve after all done\n   */\n  _build(root, props) {\n    console.log('View#_build', root, props);\n\n    const defaults = this._setupProps(props);\n    const data = this.init(defaults);\n    this._data = data !== undefined ? data : defaults;\n    this._setRootNode(root, props.parent || null, this._data);\n    if (this.el) this._loadFinish();\n  }\n\n  _setupProps(props) {\n    let defaults;\n    if (props) {\n      // once detach data\n      defaults = props.data;\n      if ('data' in props) delete props.data;\n      Object.assign(this, props);\n    }\n    return defaults;\n  }\n\n  /**\n   * Set root node element to this.el\n   */\n  _setRootNode(root, parent, data) {\n    if (!root && this.html) {\n      this.el = root = this._buildFromHtml(data);\n      if (parent) {\n        // If this view doesn't belong to parent views\n        parent.appendEl(root);\n      }\n    } else if (this._isStr(root)) {\n      this.el = parent ? parent.findEl(root) : document.getElementById(root);\n      if (!this.el) {\n        throw new Error(`Failed to create View because element not found ID: ${root}`);\n      }\n    } else if (root) {\n      this.el = root;\n    }\n  }\n\n  _loadFinish() {\n    const ctn = this.container;\n    this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;\n\n    this._loadViewsEvts();\n    this._setDataToChildren();\n    this._bindData();\n  }\n\n  _loadViewsEvts() {\n    console.log('View#_loadViewsEvts', this);\n\n    const evts = {};\n    this.load(this.views, evts);\n\n    eachEntry(this.views, ([name, view]) => {\n      if (!view.el) {\n        view.el = this.findEl(name);\n        view._loadFinish();\n      } else if (view.el.parentNode instanceof DocumentFragment) {\n        const makerEl = this.findEl(name);\n        if (makerEl) {\n          // Embed view at marker if the node exists\n          makerEl.parentNode.replaceChild(view.el, makerEl);\n        } else {\n          this.appendEl(view.el);\n        }\n      }\n    });\n\n    this._setupEvts(View._parseEvts(evts));\n  }\n\n  _bindData() {\n    const data = this._data;\n    if (data instanceof Item) {\n      this._F_binders.push(new ItemBinder(data, this));\n    }\n  }\n\n  _unbindData() {\n    const binder = this._F_binders.pop();\n    if (binder)  binder.destroy();\n  }\n\n  /**\n   * data to elements text or value, innerHTML of elements\n   *\n   * @property {object} data\n   * @example\n   * view.data = { name: 'Mike', inputAge: { value: 24 }, message: { html: \"<p>Hello!</p>\" } };\n   */\n  get data() {\n    return this._data\n  }\n\n  set data(value) {\n    console.log('View#data=', this);\n    this._data = value;\n    this._unbindData();\n    this._setDataToChildren();\n    this._bindData();\n  }\n\n  /**\n   * Find an element that has specified data-id else call getElementById\n   *\n   * @param id data-id value\n   * @return {Element}\n   * @example\n   * view.findEl('elementDataId');\n   */\n  findEl(id) {\n    const cached = this._F_elcache[id];\n    if (cached && cached.parentNode) {\n      return cached;\n    }\n    const result = this._F_elcache[id]\n      = this.el.querySelector(`[data-id=\"${id}\"]`) || document.getElementById(id);\n    return result;\n  }\n\n  /**\n   * Append child element\n   *\n   * @param {Element} el - child element\n   */\n  appendEl(el) {\n    this.container.appendChild(el)\n  }\n\n  /**\n   * Add child view as name\n   *\n   * @param {string} name - child name\n   * @param {View} view - child view\n   * @example\n   * parent.add('child', view);\n   */\n  add(name, view) {\n    this.views[name] = view;\n    this.appendEl(view.el);\n  }\n\n  /**\n   * Remove child view by name\n   *\n   * @param {string} viewName - child view name\n   * @example\n   * parent.remove('child');\n   */\n  remove(viewName) {\n    const view = this.views[viewName];\n    view.destroy();\n    view.el.remove();\n    delete this.views[viewName]\n  }\n\n  /**\n   * Fire event\n   *\n   * @param {string} name - event name\n   * @param {object} ctx - event context\n   * @example\n   * view.fire('move', { newPosition: 1 });\n   */\n  fire(name, ctx) {\n    const e = ctx ? new CustomEvent(name, { detail: ctx, bubbles: true })\n                : new Event(name, { bubbles: true });\n    this.el.dispatchEvent(e);\n  }\n\n  /**\n   * Destroy all chidren, unload, and destroy binder, teardown events\n   */\n  destroy() {\n    this.unload();\n\n    Object.values(this.views).forEach(it => it.destroy());\n    this.views = {};\n    this._F_elcache.clear();\n    this._unbindData();\n    this._teardownEvts();\n    this.parent = null;\n  }\n\n  /**\n   * Set data to subviews or elements in the view.\n   */\n  _setDataToChildren() {\n    const data = this._data;\n    if (data === undefined || !(data instanceof Object)) return;\n    console.log('View#_setDataToChildren', this);\n\n    eachEntry(this._data, ([name, val]) => {\n      this._setFieldValue(name, val)\n    })\n  }\n\n  _updateField(name, newValue, oldValue) {\n    this._setFieldValue(name, newValue)\n  }\n\n  _setFieldValue(name, val) {\n    if (name in this.views) {\n      this.views[name].data = val;\n      return;\n    }\n\n    const el = this.findEl(name);\n    if (!el) return;\n\n    if (el.dataset && el.dataset.type === 'html') {\n      el.innerHTML = val;\n    } else if ('value' in el) {\n      el.value = val;\n    } else {\n      el.textContent = val;\n    }\n  }\n\n  // private\n\n  _setupEvts(evtMap) {\n    eachEntry(evtMap, ([target, hmap]) => {\n      if (target === '_') {\n        this._setEvts(this.el, hmap);\n        return;\n      }\n\n      const el = this.findEl(target);\n      if (!el) {\n        console.log(`Not found event target ${target}`);\n        return;\n      }\n\n      const ts = el instanceof NodeList ? Array.from(el) : [el];\n      ts.forEach(t => this._setEvts(t, hmap));\n    })\n  }\n\n  /**\n   * Bind targets with event handler set.\n   *\n   * @param {Element} el - event raiser.\n   * @param {object} hmap - handler map. Object<type, value>\n   */\n  _setEvts(el, hmap) {\n    eachEntry(hmap, ([type, handler]) => {\n      this._trapEvt(this, el, type, handler);\n    })\n  }\n\n  /**\n   * Bind target event with handler.\n   *\n   * @param {View} root - caller\n   * @param {Element} el - event raiser\n   * @param {string} type - event type\n   * @param {function} handler - callback function\n   */\n  _trapEvt(root, el, type, handler) {\n    const hook = function(e) {\n      const rb = handler.call(root, this, e);\n      return rb !== undefined ? rb : false;\n    };\n\n    if (HOOK_EVTS.includes(type)) {\n      el['on'+type] = hook;\n    } else {\n      el.addEventListener(type, hook);\n    }\n    this._F_onevts.add([el, type, hook]);\n  }\n\n  _teardownEvts() {\n    const onevts = this._F_onevts;\n    onevts.forEach(([el, type, hook]) => {\n      if (HOOK_EVTS.includes(type)) {\n        el['on'+type] = null;\n      } else {\n        el.removeEventListener(type, hook);\n      }\n    });\n    onevts.clear();\n  }\n\n  _buildFromHtml(data) {\n    const el = document.createElement('template');\n    el.innerHTML = this.html(data || {});\n    const df = document.adoptNode(el.content);\n    return this._firstEl(df);\n  }\n\n  _firstEl(el) {\n    const fec = el.firstElementChild;\n    if (fec !== undefined) return fec;\n\n    // for Safari, Edge\n    const nodes = el.childNodes;\n    for (let i = 0, len = nodes.length; i < len; i++) {\n      const child = nodes[i];\n      if (child.nodeType === Node.ELEMENT_NODE) return child;\n    }\n    return null;\n  }\n\n  // static\n\n  static _parseEvts(handlers) {\n    const emap = { _: {} };\n\n    eachEntry(handlers, ([name, handler]) => {\n      const pos = name.lastIndexOf('_');\n      if (pos === -1) {\n        emap._[name] = handler;\n        return;\n      }\n\n      // ex) button_click\n      const target = name.substr(0, pos),\n            ename = name.substr(pos + 1),\n            hmap = emap[target];\n      if (hmap) {\n        hmap[ename] = handler;\n      } else {\n        emap[target] = { [ename]: handler };\n      }\n    })\n\n    return emap;\n  }\n}\n\nexport default View;\n",
+    "static": true,
+    "longname": "/home/toshi/work/me/lfin/src/view/view.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 223,
+    "kind": "variable",
+    "name": "HOOK_EVTS",
+    "memberof": "src/view/view.js",
+    "static": true,
+    "longname": "src/view/view.js~HOOK_EVTS",
+    "access": "public",
+    "export": false,
+    "importPath": "flatout/src/view/view.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string[]"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 224,
+    "kind": "class",
+    "name": "View",
+    "memberof": "src/view/view.js",
+    "static": true,
+    "longname": "src/view/view.js~View",
+    "access": "public",
+    "export": true,
+    "importPath": "flatout/src/view/view.js",
+    "importStyle": "View",
+    "description": "View",
+    "lineNumber": 13,
+    "interface": false,
+    "extends": [
+      "src/core/core.js~Core"
+    ]
+  },
+  {
+    "__docId__": 225,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#constructor",
+    "access": "public",
+    "description": "Create a View.",
+    "lineNumber": 23,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "root",
+        "description": "Root element ID or root node"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "props",
+        "description": "Properties"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Class<View>"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "props.parent",
+        "description": "parent view this belongs to"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Element"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "props.container",
+        "description": "parent element of child views (specified by data-id or id value)."
+      }
+    ]
+  },
+  {
+    "__docId__": 226,
+    "kind": "member",
+    "name": "el",
+    "memberof": "src/view/view.js~View",
+    "static": false,
+    "longname": "src/view/view.js~View#el",
+    "access": "public",
+    "description": "Root element",
+    "lineNumber": 30,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 227,
+    "kind": "member",
+    "name": "views",
+    "memberof": "src/view/view.js~View",
+    "static": false,
+    "longname": "src/view/view.js~View#views",
+    "access": "public",
+    "description": "Subview children of the view",
+    "lineNumber": 36,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 228,
+    "kind": "method",
+    "name": "_privates",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_privates",
+    "access": "private",
+    "description": null,
+    "lineNumber": 47,
+    "override": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 229,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#init",
+    "access": "public",
+    "description": "Initialize props",
+    "lineNumber": 61,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "defaults",
+        "description": "default data."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object",
+        "Item"
+      ],
+      "spread": false,
+      "description": "modified data or item."
+    }
+  },
+  {
+    "__docId__": 230,
+    "kind": "method",
+    "name": "load",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#load",
+    "access": "public",
+    "description": "For implement creating subviews and setting listener of events.",
+    "lineNumber": 70,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "views",
+        "description": "added subview target (ex. views.list = new ListView(..))"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "evts",
+        "description": "added listener target (ex. evts.subview_event)"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 231,
+    "kind": "method",
+    "name": "unload",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#unload",
+    "access": "public",
+    "description": "For implement unloading subviews",
+    "lineNumber": 76,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 232,
+    "kind": "method",
+    "name": "broadcast",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#broadcast",
+    "access": "public",
+    "description": "Cast a message to all children of view",
+    "lineNumber": 85,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "method",
+        "description": "method name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "args",
+        "description": "arguments"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 233,
+    "kind": "method",
+    "name": "_build",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_build",
+    "access": "private",
+    "description": "_loaded resolve after all done",
+    "lineNumber": 92,
+    "params": [
+      {
+        "name": "root",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 234,
+    "kind": "member",
+    "name": "_data",
+    "memberof": "src/view/view.js~View",
+    "static": false,
+    "longname": "src/view/view.js~View#_data",
+    "access": "private",
+    "description": null,
+    "lineNumber": 97,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 235,
+    "kind": "method",
+    "name": "_setupProps",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_setupProps",
+    "access": "private",
+    "description": null,
+    "lineNumber": 102,
+    "undocument": true,
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 236,
+    "kind": "method",
+    "name": "_setRootNode",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_setRootNode",
+    "access": "private",
+    "description": "Set root node element to this.el",
+    "lineNumber": 116,
+    "params": [
+      {
+        "name": "root",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "parent",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 240,
+    "kind": "method",
+    "name": "_loadFinish",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_loadFinish",
+    "access": "private",
+    "description": null,
+    "lineNumber": 133,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 241,
+    "kind": "member",
+    "name": "container",
+    "memberof": "src/view/view.js~View",
+    "static": false,
+    "longname": "src/view/view.js~View#container",
+    "access": "public",
+    "description": null,
+    "lineNumber": 135,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 242,
+    "kind": "method",
+    "name": "_loadViewsEvts",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_loadViewsEvts",
+    "access": "private",
+    "description": null,
+    "lineNumber": 142,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 243,
+    "kind": "method",
+    "name": "_bindData",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_bindData",
+    "access": "private",
+    "description": null,
+    "lineNumber": 166,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 244,
+    "kind": "method",
+    "name": "_unbindData",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_unbindData",
+    "access": "private",
+    "description": null,
+    "lineNumber": 173,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 245,
+    "kind": "get",
+    "name": "data",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#data",
+    "access": "public",
+    "description": "data to elements text or value, innerHTML of elements",
+    "examples": [
+      "view.data = { name: 'Mike', inputAge: { value: 24 }, message: { html: \"<p>Hello!</p>\" } };"
+    ],
+    "lineNumber": 185,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 246,
+    "kind": "set",
+    "name": "data",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#data",
+    "access": "public",
+    "description": null,
+    "lineNumber": 189,
+    "undocument": true
+  },
+  {
+    "__docId__": 248,
+    "kind": "method",
+    "name": "findEl",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#findEl",
+    "access": "public",
+    "description": "Find an element that has specified data-id else call getElementById",
+    "examples": [
+      "view.findEl('elementDataId');"
+    ],
+    "lineNumber": 205,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "data-id value"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Element"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 249,
+    "kind": "method",
+    "name": "appendEl",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#appendEl",
+    "access": "public",
+    "description": "Append child element",
+    "lineNumber": 220,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "el",
+        "description": "child element"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 250,
+    "kind": "method",
+    "name": "add",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#add",
+    "access": "public",
+    "description": "Add child view as name",
+    "examples": [
+      "parent.add('child', view);"
+    ],
+    "lineNumber": 232,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "child name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "View"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "view",
+        "description": "child view"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 251,
+    "kind": "method",
+    "name": "remove",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#remove",
+    "access": "public",
+    "description": "Remove child view by name",
+    "examples": [
+      "parent.remove('child');"
+    ],
+    "lineNumber": 244,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "viewName",
+        "description": "child view name"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 252,
+    "kind": "method",
+    "name": "fire",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#fire",
+    "access": "public",
+    "description": "Fire event",
+    "examples": [
+      "view.fire('move', { newPosition: 1 });"
+    ],
+    "lineNumber": 259,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "event name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ctx",
+        "description": "event context"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 253,
+    "kind": "method",
+    "name": "destroy",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#destroy",
+    "access": "public",
+    "description": "Destroy all chidren, unload, and destroy binder, teardown events",
+    "lineNumber": 268,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 255,
+    "kind": "member",
+    "name": "parent",
+    "memberof": "src/view/view.js~View",
+    "static": false,
+    "longname": "src/view/view.js~View#parent",
+    "access": "public",
+    "description": null,
+    "lineNumber": 276,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 256,
+    "kind": "method",
+    "name": "_setDataToChildren",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_setDataToChildren",
+    "access": "private",
+    "description": "Set data to subviews or elements in the view.",
+    "lineNumber": 282,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 257,
+    "kind": "method",
+    "name": "_updateField",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_updateField",
+    "access": "private",
+    "description": null,
+    "lineNumber": 292,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "newValue",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "oldValue",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 258,
+    "kind": "method",
+    "name": "_setFieldValue",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_setFieldValue",
+    "access": "private",
+    "description": null,
+    "lineNumber": 296,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "val",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 259,
+    "kind": "method",
+    "name": "_setupEvts",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_setupEvts",
+    "access": "private",
+    "description": null,
+    "lineNumber": 316,
+    "undocument": true,
+    "params": [
+      {
+        "name": "evtMap",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 260,
+    "kind": "method",
+    "name": "_setEvts",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_setEvts",
+    "access": "private",
+    "description": "Bind targets with event handler set.",
+    "lineNumber": 340,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "el",
+        "description": "event raiser."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hmap",
+        "description": "handler map. Object<type, value>"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 261,
+    "kind": "method",
+    "name": "_trapEvt",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_trapEvt",
+    "access": "private",
+    "description": "Bind target event with handler.",
+    "lineNumber": 354,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "View"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "root",
+        "description": "caller"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "el",
+        "description": "event raiser"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "event type"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "handler",
+        "description": "callback function"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 262,
+    "kind": "method",
+    "name": "_teardownEvts",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_teardownEvts",
+    "access": "private",
+    "description": null,
+    "lineNumber": 368,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 263,
+    "kind": "method",
+    "name": "_buildFromHtml",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_buildFromHtml",
+    "access": "private",
+    "description": null,
+    "lineNumber": 380,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 264,
+    "kind": "method",
+    "name": "_firstEl",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view/view.js~View#_firstEl",
+    "access": "private",
+    "description": null,
+    "lineNumber": 387,
+    "undocument": true,
+    "params": [
+      {
+        "name": "el",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 265,
+    "kind": "method",
+    "name": "_parseEvts",
+    "memberof": "src/view/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/view/view.js~View._parseEvts",
+    "access": "private",
+    "description": null,
+    "lineNumber": 402,
+    "undocument": true,
+    "params": [
+      {
+        "name": "handlers",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "index",
+    "content": "# flatout\n\nLightweight Single-Page-Application framework for JavaScript\n\n## Concepts\n\n- Built by pure JavaScript/ECMAScript\n- Supports only latest browsers\n- Not require compilation\n- Not use Virtual DOM\n- Keeping minimized size less than 16KB\n\n## Provides Classes\n\n- Core\n- Http\n- View\n- ListView\n- FormView\n- Page\n- Item\n- List\n- App\n- Router\n\n## Setup\n\n```\n$ npm install -save @tilfin/flatout\n```\n\n## Generate documents\n\n```\n$ npm run doc\n```\n\n## Start example apps\n\n```\n$ npm run example\n```\n\n## Routing\n\nSupport 2 type\n\n* hash mode (hash path with Static Web server)\n* history mode (HTML5 history API with Web App server)\n\n## Plain data or event handling\n\n### Plain data\nPlain data is an Object or an Array.\n\n### Data with binding views\n\n* An Object is an Item that you can `add`, `update` or `destroy` itself.\n* An Array is a Collection that you can `add`, `update` or `remove` item and `reset` itself.\n\n## Use Application\n\n### History mode\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n<title>History mode</title>\n<base href=\"/app/\"\n</head>\n<body>\n<nav><a href=\"about\">About</a></nav>\n<main id=\"frame\">\n<!-- content area -->\n</main>\n<script type=\"module\">\nimport { App, Page, View } from 'flatout.js'\n\nclass MainView extends View {\n  constructor() {\n    super(document.body, { container: 'frame' })\n  }\n}\n\nconst routeMap = {\n  index: HomeView,   // /\n  about: AboutView,  // /about\n  'userId: UserView  // /:userId\n}\n\nApp.activate(MainView, routeMap, { mode: 'HISTORY '})\n</script>\n</body>\n</html>\n```\n\n### Hash mode\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n<title>Hash mode</title>\n</head>\n<body>\n<nav><a href=\"#!/about\">About</a></nav>\n<main id=\"frame\">\n<!-- content area -->\n</main>\n<script type=\"module\">\nimport { App, Page, View } from 'flatout.js'\n\nclass MainView extends View {\n  constructor() {\n    super(document.body, { container: 'frame' })\n  }\n}\n\nconst routeMap = {\n  index: HomeView,       // /\n  about: AboutView,      // /about\n  books: {\n    index: BookListView, // /books/\n    ':bookId': BookView, // /books/:bookId\n  }\n}\n\nApp.activate(MainView, routeMap, { mode: 'HASH '})\n</script>\n</body>\n</html>\n```\n",
+    "longname": "/home/toshi/work/me/lfin/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"flatout\",\n  \"version\": \"0.5.0\",\n  \"author\": \"Toshimitsu Takahashi\",\n  \"license\": \"MIT\",\n  \"description\": \"Lightweight Single-Page-Application framework for JavaScript\",\n  \"main\": \"dist/flatout.js\",\n  \"engines\": {\n    \"node\": \">=10.10\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\",\n    \"example\": \"examples\"\n  },\n  \"files\": [\n    \"dist/*.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"lint\": \"eslint src/** spec/**\",\n    \"test\": \"mocha --timeout 15000 test/client/**.test.js\",\n    \"coverage\": \"nyc report --reporter=html\",\n    \"debug\": \"node test/inner_debug.js\",\n    \"dist\": \"./bin/dist.sh\",\n    \"doc\": \"esdoc\",\n    \"example\": \"node examples/server.js .\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:tilfin/flatout.git\"\n  },\n  \"keywords\": [\n    \"view\",\n    \"framework\",\n    \"SPA\"\n  ],\n  \"devDependencies\": {\n    \"chai\": \"^4.1.2\",\n    \"chai-spies\": \"^1.0.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^3.19.0\",\n    \"koa\": \"^2.5.1\",\n    \"koa-body\": \"^4.1.0\",\n    \"koa-bodyparser\": \"^4.2.1\",\n    \"koa-pino-logger\": \"^2.1.3\",\n    \"koa-send\": \"^5.0.0\",\n    \"mocha\": \"^5.0.5\",\n    \"nyc\": \"^13.3.0\",\n    \"puppeteer\": \"^1.2.0\",\n    \"puppeteer-to-istanbul\": \"^1.2.2\",\n    \"rollup\": \"^1.4.0\",\n    \"rollup-plugin-terser\": \"^4.0.4\"\n  }\n}\n",
+    "longname": "/home/toshi/work/me/lfin/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

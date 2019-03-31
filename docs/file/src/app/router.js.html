@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/app/router.js | flatout</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/tilfin/flatout"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app">app</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/app.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HashRouter.html">HashRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HistoryRouter.html">HistoryRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html">HttpClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpError.html">HttpError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-eachEntry">eachEntry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeLFID">makeLFID</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#model">model</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~Binder.html">Binder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ItemBinder.html">ItemBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ListBinder.html">ListBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~Item.html">Item</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#view">view</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/form-view.js~FormView.html">FormView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/list-view.js~ListView.html">ListView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/view.js~View.html">View</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/app/router.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
+
+import { eachEntry } from &apos;../core/util.js&apos;
+import Page from &apos;../view/page.js&apos;
+
+/**** Design memo *********************************************
+
+* Open `http://FQDN/` and Enter in URL bar --&gt; onload
+* Input appending `http://FQDN/#!/` and Enter in URL bar --&gt; onhashchange
+* Open `http://FQDN/#!/xxxx` in URL bar --&gt; onload
+* Reload --&gt; onload
+* Click a link with href=`#!/xxxx` --&gt; onhashchange
+* Run script `window.location.hash = &apos;#!/xxx&apos;;` --&gt; onhashchange
+* Back to `#!/xxxx&apos; --&gt; onhashchange
+* Forward to `#!/xxxx&apos; --&gt; onhashchange
+
+```
+const routeMap = {
+  index: HomeView,                  // /
+  about: AboutView,                 // /about
+  books: {
+    index: BookListView,            // /books
+    &apos;:bookId&apos;: {
+      index:   BookView,            // /books/:bookId
+      summary: BookSummaryView,     // /books/:bookId/summary
+      readers: {
+        index: &apos;../&apos;,               // redirect to /books/:bookId
+        &apos;:readerId&apos;: BookReaderView // /books/:bookId/readers/:readerId
+      }
+    }
+  },
+  docs: {
+    index: DocIndexView,            // /docs
+    api:   DocApiView,              // /docs/api
+  },
+  &apos;:userId&apos;: {
+    index: UserView,                // /:userId
+    timeline: UserTimelineView      // /:userId/timeline
+  }
+}
+```
+
+be converted to
+
+```
+const _routeTree = {
+  index: HomeView,
+  about: AboutView,
+  books: {
+    index: BookListView,
+    _any_: {
+      id: &apos;bookId&apos;,
+      children: {
+        index: BookView,
+        summary: BookSummaryView,
+        readers: {
+          index: &apos;../&apos;,
+          _any_: {
+            view: BookReaderView,
+            id:   &apos;readerId&apos;
+          }
+        }
+      }
+    }
+  },
+  docs: {
+    index: DocIndexView,
+    api: DocApiView
+  },
+  _any_: {
+    id: &apos;userId&apos;,
+    children: {
+      index: UserView,
+      timeline: UserTimelineView
+    }
+  }
+}
+```
+***********************************************************/
+
+/**
+ * Router
+ *
+ * This subclass must override depart() and go(path)
+ *
+ * @access private
+ * @example
+ * const routeMap = {
+ *   index: HomeView,                  // /
+ *   about: AboutView,                 // /about
+ *   books: {
+ *     index: BookListView,            // /books/
+ *     &apos;:bookId&apos;: {
+ *       index: BookDetailView,        // /books/:bookId
+ *       summary: BookSummaryView,     // /books/:bookId/summary
+ *       readers: {
+ *         index: &apos;../&apos;,   // redirect to /books/:bookId
+ *         &apos;:readerId&apos;: BookReaderView // /books/:bookId/readers/:readerId
+ *       }
+ *     },
+ *     pages: {
+ *       index: PagesView,             // /pages/
+ *       faq: FaqView,                 // /pages/faq
+ *       policy: PolicyView            // /pages/policy
+ *     }
+ * };
+ *
+ * const router = new Router(routeMap);
+ */
+class Router {
+  constructor(routeMap, onMove) {
+    this._routeTree = this._parseRoute(routeMap);
+    this._lastRoute = null;
+    this.onMove = onMove;
+  }
+
+  /**
+   * Need call `depart` after first page loaded
+   *
+  depart() {
+  } */
+
+  canGo(path) {
+    return this.getRoute(path) !== null;
+  }
+
+  /**
+   * Need call `go` when History mode and anchor tag clicked
+   * or moving the other page by a script
+   *
+   * @param  {String} path path
+  go(path) {
+  } */
+
+  move(path) {
+    this.onMove(this.getRoute(path));
+  }
+
+  /**
+   * @return {Object} layer
+   * @property {Page} view - page view.
+   * @property {Object} ctx - context (path ids).
+   */
+  getRoute(absPath) {
+    if (!absPath.startsWith(&apos;/&apos;)) absPath = &apos;/&apos;+absPath;
+
+    let pt = absPath;
+    if (pt === &apos;/&apos;) pt += &apos;index&apos;;
+    pt = this._chopEndSlash(pt);
+    if (pt.endsWith(&apos;.html&apos;)) pt = pt.substr(0, pt.length - 5);
+
+    const paths = this._parsePath(pt);
+    let tree = this._routeTree;
+
+    let idMap = {}, key, route = null;
+    while ((key = paths.shift()) !== undefined) {
+      let target;
+      if (key in tree) {
+        target = tree[key];
+      } else if (&apos;_any_&apos; in tree) {
+        idMap[tree._any_.id] = key;
+        tree = tree._any_.children;
+        if (paths.length &gt; 0) continue;
+        target = tree.index;
+      } else {
+        alert(`${pt} page isn&apos;t defined`);
+        throw &apos;/&apos;;
+      }
+
+      if (this._isStr(target)) {
+        const redirectPath = this._resolve(absPath, target);
+        window.history.replaceState(null, null, redirectPath);
+        return this.getRoute(redirectPath);
+      } else if (target.prototype instanceof Page) {
+        route = { view: target, ctx: idMap };
+      } else {
+        tree = target;        
+        if (paths.length === 0) paths.unshift(&apos;index&apos;);
+      }
+    }
+
+    if (route) return route;
+
+    alert(`${path} page not found`);
+    throw &apos;/&apos;;
+  }
+
+  _parsePath(path) {
+    const paths = path.split(&apos;/&apos;);
+    paths.shift();
+    return paths;
+  }
+
+  _parseRoute(map) {
+    const tree = {};
+
+    eachEntry(map, ([key, item]) =&gt; {
+      const isViewOrStr = (item.prototype instanceof Page) || this._isStr(item);
+
+      if (key.startsWith(&apos;:&apos;)) {
+        const leaf = tree._any_ = { id: key.substr(1) }; // strip prefix :
+        leaf.children = isViewOrStr ? { index: item } : this._parseRoute(item);
+      } else {
+        tree[key] = isViewOrStr ? item : this._parseRoute(item);
+      }
+    });
+
+    return tree;
+  }
+
+  _resolve(src, dest) {
+    if (dest.startsWith(&apos;/&apos;)) return dest;
+
+    const parts = src.split(&apos;/&apos;);
+
+    let md;
+    while (md = dest.match(/^\.\.\/?(.*)$/)) {
+      parts.pop();
+      dest = md[1];
+    }
+
+    return parts.join(&apos;/&apos;) + dest;
+  }
+
+  _chopEndSlash(pt) {
+    return pt.endsWith(&apos;/&apos;) ? pt.substr(0, pt.length - 1) : pt;
+  }
+
+  _isStr(v) {
+    return typeof v === &apos;string&apos;
+  }
+}
+
+/**
+ * @access private
+ */
+export class HistoryRouter extends Router {
+  constructor(routeMap, onMove, rootPath) {
+    super(routeMap, onMove);
+
+    let pt = rootPath;
+    if (!pt) {
+      let base = document.querySelector(&apos;base&apos;);
+      if (base) {
+        const { pathname } = new URL(base.href);
+        pt = this._chopEndSlash(pathname);
+      }
+    }
+    this.basePath = pt || &apos;&apos;;
+  }
+
+  depart() {
+    document.addEventListener(&apos;click&apos;, e =&gt; {
+      this._captureClick(e);
+    }, true);
+
+    const doMove = pt =&gt; {
+      try {
+        this.move(pt);
+      } catch(e) {
+        if (this._isStr(e)) {
+          window.location.href = this.basePath + e;
+        } else {
+          console.error(e)
+        }          
+      }
+    }
+
+    window.onpopstate = e =&gt; {
+      doMove(e.state ? e.state.path : &apos;/&apos;)
+    }
+
+    let path = window.location.pathname.substr(this.basePath.length);
+    if (path.length &gt; 1 &amp;&amp; path.endsWith(&apos;/&apos;)) {
+      // Force strip last with / from path
+      path = path.substr(0, path.length - 1);
+      window.history.replaceState(null, null, path);
+    }
+
+    doMove(path);
+  }
+
+  go(path) {
+    const h = window.history;
+    if (h &amp;&amp; h.pushState) {
+      h.pushState({ path }, null, this.basePath + path);
+      this.move(path);
+    }
+  }
+
+  _captureClick(e) {
+    const nxt = document.activeElement;
+    if (!nxt || nxt.tagName !== &apos;A&apos;) return;
+    if (nxt.target === &apos;_top&apos;) return;
+
+    if (nxt.href.startsWith(window.location.origin + this.basePath)) {
+      e.preventDefault();
+
+      try {
+        this.go(nxt.pathname.substr(this.basePath.length));
+      } catch(e) {
+        if (this._isStr(e)) {
+          this.go(e);
+        } else {
+          console.error(e)
+        }
+      }
+    }
+  }
+}
+
+/**
+ * @access private
+ */
+export class HashRouter extends Router {
+  constructor(routeMap, onMove, pathHead = &apos;#!&apos;) {
+    super(routeMap, onMove);
+    this.head = pathHead;
+  }
+
+  get curPath() {
+    return window.location.hash.substr(this.head.length)
+  }
+
+  depart() {
+    const doMove = pt =&gt; {
+      try {
+        this.move(pt);
+      } catch(e) {
+        if (this._isStr(e)) {
+          window.location.hash = this.head + e;
+        } else {
+          console.error(e)
+        }
+      }
+    }
+
+    window.onhashchange = e =&gt; {
+      doMove(this.curPath || &apos;/&apos;)
+    }
+
+    doMove(this.curPath);
+  }
+
+  go(path) {
+    window.location.hash = this.head + path;
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

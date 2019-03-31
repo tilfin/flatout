@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">Home | flatout</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/tilfin/flatout"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app">app</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/app.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HashRouter.html">HashRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~HistoryRouter.html">HistoryRouter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/app/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html">HttpClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/http.js~HttpError.html">HttpError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-eachEntry">eachEntry</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-makeLFID">makeLFID</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#model">model</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~Binder.html">Binder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ItemBinder.html">ItemBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/binder.js~ListBinder.html">ListBinder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~Item.html">Item</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/model/item.js~List.html">List</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#view">view</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/form-view.js~FormView.html">FormView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/list-view.js~ListView.html">ListView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/page.js~Page.html">Page</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view/view.js~View.html">View</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="flatout">flatout</h1><p>Lightweight Single-Page-Application framework for JavaScript</p>
+<h2 id="concepts">Concepts</h2><ul>
+<li>Built by pure JavaScript/ECMAScript</li>
+<li>Supports only latest browsers</li>
+<li>Not require compilation</li>
+<li>Not use Virtual DOM</li>
+<li>Keeping minimized size less than 16KB</li>
+</ul>
+<h2 id="provides-classes">Provides Classes</h2><ul>
+<li>Core</li>
+<li>Http</li>
+<li>View</li>
+<li>ListView</li>
+<li>FormView</li>
+<li>Page</li>
+<li>Item</li>
+<li>List</li>
+<li>App</li>
+<li>Router</li>
+</ul>
+<h2 id="setup">Setup</h2><pre><code><code class="source-code prettyprint">$ npm install -save @tilfin/flatout</code>
+</code></pre><h2 id="generate-documents">Generate documents</h2><pre><code><code class="source-code prettyprint">$ npm run doc</code>
+</code></pre><h2 id="start-example-apps">Start example apps</h2><pre><code><code class="source-code prettyprint">$ npm run example</code>
+</code></pre><h2 id="routing">Routing</h2><p>Support 2 type</p>
+<ul>
+<li>hash mode (hash path with Static Web server)</li>
+<li>history mode (HTML5 history API with Web App server)</li>
+</ul>
+<h2 id="plain-data-or-event-handling">Plain data or event handling</h2><h3 id="plain-data">Plain data</h3><p>Plain data is an Object or an Array.</p>
+<h3 id="data-with-binding-views">Data with binding views</h3><ul>
+<li>An Object is an Item that you can <code>add</code>, <code>update</code> or <code>destroy</code> itself.</li>
+<li>An Array is a Collection that you can <code>add</code>, <code>update</code> or <code>remove</code> item and <code>reset</code> itself.</li>
+</ul>
+<h2 id="use-application">Use Application</h2><h3 id="history-mode">History mode</h3><pre><code class="lang-html"><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;History mode&lt;/title&gt;
+&lt;base href=&quot;/app/&quot;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;nav&gt;&lt;a href=&quot;about&quot;&gt;About&lt;/a&gt;&lt;/nav&gt;
+&lt;main id=&quot;frame&quot;&gt;
+&lt;!-- content area --&gt;
+&lt;/main&gt;
+&lt;script type=&quot;module&quot;&gt;
+import { App, Page, View } from &apos;flatout.js&apos;
+
+class MainView extends View {
+  constructor() {
+    super(document.body, { container: &apos;frame&apos; })
+  }
+}
+
+const routeMap = {
+  index: HomeView,   // /
+  about: AboutView,  // /about
+  &apos;userId: UserView  // /:userId
+}
+
+App.activate(MainView, routeMap, { mode: &apos;HISTORY &apos;})
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+</code></pre>
+<h3 id="hash-mode">Hash mode</h3><pre><code class="lang-html"><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Hash mode&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;nav&gt;&lt;a href=&quot;#!/about&quot;&gt;About&lt;/a&gt;&lt;/nav&gt;
+&lt;main id=&quot;frame&quot;&gt;
+&lt;!-- content area --&gt;
+&lt;/main&gt;
+&lt;script type=&quot;module&quot;&gt;
+import { App, Page, View } from &apos;flatout.js&apos;
+
+class MainView extends View {
+  constructor() {
+    super(document.body, { container: &apos;frame&apos; })
+  }
+}
+
+const routeMap = {
+  index: HomeView,       // /
+  about: AboutView,      // /about
+  books: {
+    index: BookListView, // /books/
+    &apos;:bookId&apos;: BookView, // /books/:bookId
+  }
+}
+
+App.activate(MainView, routeMap, { mode: &apos;HASH &apos;})
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+</code></pre>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
