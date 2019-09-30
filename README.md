@@ -86,7 +86,7 @@ class MainView extends View {
 const routeMap = {
   index: HomeView,   // /
   about: AboutView,  // /about
-  'userId: UserView  // /:userId
+  ':userId': UserView  // /:userId
 }
 
 App.activate(MainView, routeMap, { mode: 'HISTORY '})
