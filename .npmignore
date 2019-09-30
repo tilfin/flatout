@@ -1,0 +1,9 @@
+.travis.yml
+.vscode/
+.nyc_output/
+bin/
+build/
+docs/
+test/
+examples/
+coverage/
