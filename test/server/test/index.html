@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Inner Tests</title>
+<link rel="stylesheet" href="/modules/mocha/mocha.css">
+<script src="/modules/mocha/mocha.js"></script>
+<script src="/modules/chai/chai.js"></script>
+<script src="/modules/chai-spies/chai-spies.js"></script>
+</head>
+<body>
+<script>
+const sleep = (msec) => {
+  return new Promise((resolve, _) => setTimeout(resolve, msec))
+}
+mocha.setup('bdd');
+const expect = chai.expect;
+setTimeout(() => {
+  mocha.run();  
+}, 500)
+</script>
+<div id="mocha"></div>
+<script type="module" src="./core/core.test.js"></script>
+<script type="module" src="./core/http.test.js"></script>
+<script type="module" src="./model/item.test.js"></script>
+<script type="module" src="./model/list.test.js"></script>
+<script type="module" src="./view/view.test.js"></script>
+<script type="module" src="./view/form-view.test.js"></script>
+<script type="module" src="./view/list-view.test.js"></script>
+<script type="module" src="./view/view-hierarchy.test.js"></script>
+<script type="module" src="./view-model/view-item.test.js"></script>
+<script type="module" src="./view-model/list.test.js"></script>
+
+<div id="sandbox" style="height: 10px; overflow: scroll-y">
+
+  <template id="fixtureView">
+    <div id="theView">
+      <p data-id="message">Hello!</p>
+      <span data-id="remarkText"></span>
+      <span data-id="remarkHtml" data-type="html"></span>
+      <button data-id="sayButton">Say</button>
+    </div>
+  </template>
+
+  <template id="fixtureForm">
+    <div id="theView">
+      <form id="theForm">
+        <p>
+          <label for="name">Name</label>
+          <input type="text" name="name">
+        </p>
+        <p>
+          <label for="age">Age</label>
+          <input type="text" name="age" data-type="number">
+        </p>
+        <p>
+          <label>Gender</label>
+          <input type="radio" name="gender" value="male">Male
+          <input type="radio" name="gender" value="female">Female
+        </p>
+        <p>
+          <label>Country</label>
+          <select name="country">
+            <option value="japan">Japan</option>
+            <option value="america">USA</option>
+            <option value="uk">United Kingdom</option>
+          </select>
+        </p>
+        <p>
+          <input type="checkbox" name="graduated" data-type="boolean" checked>
+        </p>
+        <p>
+          <button type="submit">Send</button>
+        </p>
+      </form>
+    </div>
+  </template>
+
+  <template id="fixtureList">
+    <ul id="theList">
+    </ul>
+  </template>
+
+</div>
+<div id="areaSandBox">
+</div>
+</body>
+</html>

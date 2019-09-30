@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>Router mode Hash</title>
+</head>
+<body>
+<main id="main"></main>
+
+<script type="module">
+import { App, View, Page } from '../lib/flatout.js';
+
+class MainView extends View {
+  constructor() {
+    super(document.body, { container: 'main' })
+  }
+
+  title(t) {
+    const ttl = 'Example App';
+    return t ? `${t} | ${ttl}` : ttl;
+  }
+}
+
+class HomePage extends Page {
+  title() { return 'Home' }
+  html() {
+    return `
+    <div>
+     <h1>Home Page</h1>
+     <nav>
+      <ul>
+       <li><a href="#!/about">about</a></li>
+       <li><a href="#!/help">help</a></li>
+      </ul>
+     </nav>
+    </div>`
+  }
+}
+
+class AboutPage extends Page {
+  title() { return 'About' }
+
+  html() {
+    return `\
+    <div>
+     <h1>About Page</h1>
+     <nav>
+      <ul>
+       <li><a href="#!/">home</a></li>
+       <li><a href="#!/help">help</a></li>
+      </ul>
+     </nav>
+    </div>`
+  }
+}
+
+class BookListView extends Page {
+  title() { return 'BookList' }
+  html() { return `<div>No content</div>` }
+}
+
+class BookView extends Page {
+  title() { return 'Book' + this.context.bookId }
+  html() { return `<div>No content</div>` }
+}
+
+class BookSummaryView extends Page {
+  title() { return `BookSummary ${this.context.bookId}` }
+  html() { return `<div>No content</div>` }
+}
+
+class BookReaderView extends Page {
+  title() { return `BookReader id:${this.context.bookId} reader:${this.context.readerId}` }
+  html() { return `<div>No content</div>` }
+}
+
+class DocIndexView extends Page {
+  title() { return 'Documents' }
+  html() { return `<div>No content</div>` }
+}
+
+class DocApiView extends Page {
+  title() { return 'API Documents' }
+  html() { return `<div>No content</div>` }
+}
+
+class UserView extends Page {
+  title() { return 'User/' + this.context.userId }
+  html() { return `<div>No content</div>` }
+}
+
+class UserTimelineView extends Page {
+  title() { return `UserTimeline/${this.context.userId}` }
+  html() { return `<div>No content</div>` }
+}
+
+const routeMap = {
+  index: HomePage,                  // /
+  about: AboutPage,                 // /about
+  books: {
+    index: BookListView,            // /books
+    ':bookId': {
+      index:   BookView,            // /books/:bookId
+      summary: BookSummaryView,     // /books/:bookId/summary
+      readers: {
+        index: '../',               // redirect to /books/:bookId
+        ':readerId': BookReaderView // /books/:bookId/readers/:readerId
+      }
+    }
+  },
+  docs: {
+    index: DocIndexView,            // /docs
+    api:   DocApiView,              // /docs/api
+  },
+  ':userId': {
+    index: UserView,                // /:userId
+    timeline: UserTimelineView      // /:userId/timeline
+  }
+};
+
+App.activate(MainView, routeMap, { mode: 'HASH' })
+</script>
+</body>
+</html>

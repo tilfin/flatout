@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>Router mode History with base href</title>
+<base href="/app/history/">
+</head>
+<body>  
+<main id="main"></main>
+<nav>
+  <a class="about" href="about">about</a>
+  <a class="books" href="books">books</a>
+  <a class="book" href="books/5">book</a>
+  <a class="readers" href="books/3/readers">readers</a>
+  <a class="reader" href="books/3/readers/tom">reader</a>
+  <a class="summary" href="books/5/summary">summary</a>
+  <a class="someone" href="someone">someone</a>
+  <a class="docs" href="docs">documents</a>
+  <a class="api" href="docs/api">api</a>
+  <a class="user" href="someone">someone</a>
+  <a class="usertimeline" href="someone/timeline">timeline</a>
+</nav>
+<script type="module">
+import { App, View, Page } from '../../lib/flatout.js';
+
+class MainView extends View {
+  constructor() {
+    super(document.body, { container: 'main' })
+  }
+
+  title(pageTitle) {
+    const title = 'Example App';
+    return pageTitle ? `${pageTitle} | ${title}` : title;
+  }
+}
+
+class HomePage extends Page {
+  title() { return 'Home' }
+  html() {
+    return `
+    <div>
+     <h1>Home Page</h1>
+     <nav>
+      <ul>
+       <li><a href="about">about</a></li>
+       <li><a href="help">help</a></li>
+      </ul>
+     </nav>
+    </div>`
+  }
+}
+
+class AboutPage extends Page {
+  title() { return 'About' }
+
+  html() {
+    return `\
+    <div>
+     <h1>About Page</h1>
+     <nav>
+      <ul>
+       <li><a href="./">home</a></li>
+       <li><a href="help">help</a></li>
+      </ul>
+     </nav>
+    </div>`
+  }
+}
+
+class BookListView extends Page {
+  title() { return 'BookList' }
+  html() { return `<div>No content</div>` }
+}
+
+class BookView extends Page {
+  title() { return 'Book' + this.context.bookId }
+  html() { return `<div>No content</div>` }
+}
+
+class BookSummaryView extends Page {
+  title() { return `BookSummary ${this.context.bookId}` }
+  html() { return `<div>No content</div>` }
+}
+
+class BookReaderView extends Page {
+  title() { return `BookReader id:${this.context.bookId} reader:${this.context.readerId}` }
+  html() { return `<div>No content</div>` }
+}
+
+class DocIndexView extends Page {
+  title() { return 'Documents' }
+  html() { return `<div>No content</div>` }
+}
+
+class DocApiView extends Page {
+  title() { return 'API Documents' }
+  html() { return `<div>No content</div>` }
+}
+
+class UserView extends Page {
+  title() { return 'User/' + this.context.userId }
+  html() { return `<div>No content</div>` }
+}
+
+class UserTimelineView extends Page {
+  title() { return `UserTimeline/${this.context.userId}` }
+  html() { return `<div>No content</div>` }
+}
+
+const routeMap = {
+  index: HomePage,                  // /
+  about: AboutPage,                 // /about
+  books: {
+    index: BookListView,            // /books
+    ':bookId': {
+      index:   BookView,            // /books/:bookId
+      summary: BookSummaryView,     // /books/:bookId/summary
+      readers: {
+        index: '../',               // redirect to /books/:bookId
+        ':readerId': BookReaderView // /books/:bookId/readers/:readerId
+      }
+    }
+  },
+  docs: {
+    index: DocIndexView,            // /docs
+    api:   DocApiView,              // /docs/api
+  },
+  ':userId': {
+    index: UserView,                // /:userId
+    timeline: UserTimelineView      // /:userId/timeline
+  }
+};
+
+App.activate(MainView, routeMap, {
+  mode: 'HISTORY'//, rootPath: '/app/history'
+})
+</script>
+</body>
+</html>
