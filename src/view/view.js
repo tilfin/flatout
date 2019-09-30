@@ -65,9 +65,16 @@ class View extends Core {
    * For implement creating subviews and setting listener of events.
    * 
    * @param {object} views - added subview target (ex. views.list = new ListView(..))
+   */
+  load(views) {
+  }
+
+  /**
+   * Ssetting listener of events.
+   * 
    * @param {object} evts - added listener target (ex. evts.subview_event)
    */
-  load(views, evts) {
+  handle(evts) {
   }
 
   /**
@@ -142,8 +149,7 @@ class View extends Core {
   _loadViewsEvts() {
     console.log('View#_loadViewsEvts', this);
 
-    const evts = {};
-    this.load(this.views, evts);
+    this.load(this.views);
 
     eachEntry(this.views, ([name, view]) => {
       if (!view.el) {
@@ -160,6 +166,8 @@ class View extends Core {
       }
     });
 
+    const evts = {};
+    this.handle(evts);
     this._setupEvts(View._parseEvts(evts));
   }
 
