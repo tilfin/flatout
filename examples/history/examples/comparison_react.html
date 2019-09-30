@@ -65,8 +65,8 @@ class AddForm extends FormView {
     </form>`
   }
 
-  load(views, evts) {
-    evts.submit = () => {
+  handle(evts) {
+    evts.submit = (sender, e) => {
       const text = this.getValueOf('newTodo');
       if (!text) {
         return;
@@ -98,10 +98,12 @@ class TodoApp extends View {
     </div>`
   }
 
-  load(views, evts) {
+  load(views) {
     views.list = new ListView(TodoListItemView);
     views.form = new AddForm({ data: { nextNumber: this.data.list.length + 1 }});
+  }
 
+  handle(evts) {
     evts.form_addNewTodo = (sender, e) => {
       this.data.list.add(e.detail)
     }
@@ -109,11 +111,13 @@ class TodoApp extends View {
 }
 
 class MainView extends View {
-  load(views, evts) {
+  load(views) {
     views.helloMessage = new HelloMessage({ data: { name: "Taylor" }});
     views.todoApp = new TodoApp({ data: [{ text: 'First Todo' }] });
     views.timer = new Timer();
+  }
 
+  handle(evts) {
     evts.addTimer_click = () => {
       this.add('timer', new Timer());
     }

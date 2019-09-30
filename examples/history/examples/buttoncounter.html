@@ -19,7 +19,7 @@ class ButtonCounterView extends View {
     return `<button>You clicked me <span data-id="count"></span> times.</button>`
   }
 
-  load(views, evts) {
+  handle(evts) {
     evts.click = () => {
       this.data.add('count', 1);
     }
@@ -27,7 +27,7 @@ class ButtonCounterView extends View {
 }
 
 class MainView extends View {
-  load(views, evts) {
+  load(views) {
     views.buttonCounter = new ButtonCounterView({ data: { count: 0 }});
   }
 }

@@ -11,9 +11,6 @@
  <input type="text" name="todoTitle">
 </form>
 <ul id="todoList">
- <template id="todoItem">
-  <li><input type="checkbox" class="checkBox">{{title}}</li>
- </template>
 </ul>
 <button id="resetButton">Reset</button>
 <button id="clearButton">Clear</button>
@@ -29,16 +26,23 @@ var defaulTodoItems = [
 ];
 
 class TodoItemView extends View {
-  load(views, evts) {
-    evts.checkBox_change = function(){
-      this._data.destroy();
+  init(defaultData) {
+    return new Item(defaultData);
+  }
+
+  html() {
+    return `<li><input type="checkbox" data-id="checkBox">{{title}}</li>`
+  }
+
+  handle(evts) {
+    evts.checkBox_change = () => {
+      this.data.destroy();
     }
   }
 }
-TodoItemView.setTemplate('#todoItem');
 
 class MyListView extends ListView {
-  load(views, evts) {
+  load(views) {
     this.listen('colorChange', (ctx) => {
       this.$el.css('backgroundColor', ctx.color);
     });
@@ -71,9 +75,11 @@ class MainView extends View {
     super(document.body);
   }
 
-  load(views, evts) {
+  load(views) {
     views.todoList = new MyListView('#todoList', TodoItemView);
+  }
 
+  handle(evts) {
     evts.inputForm_submit = function(form, e) {
       todoItems.add({ title: form.todoTitle.value }, 0);
     }

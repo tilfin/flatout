@@ -44,7 +44,7 @@ class GroupItemView extends View {
     </li>`
   }
 
-  load(views, evts) {
+  handle(evts) {
     evts.cButton_click = (sender, e) => {
       console.log(e);
     }
@@ -65,9 +65,11 @@ class GroupListPage extends Page {
     </section>`
   }
 
-  load(views, evts) {
+  load(views) {
     views.groupList = new ListView(GroupItemView, { data: groups });
+  }
 
+  handle(evts) {
     evts.moreButton_click = () => {
       this.loadMore();
     }
@@ -100,9 +102,6 @@ class GroupDetailPage extends Page {
      <h1>${data.name}</h1>
      <p>This is a list.</p>
     </div>`
-  }
-
-  load(views, evts) {
   }
 }
 
@@ -141,10 +140,10 @@ class Form extends Page {
     </div>`
   }
 
-  load(views, evts) {
+  load(views) {
     class SubForm extends FormView {
-      load(views, evts) {
-        evts.submit = function(sender, e) {
+      handle(evts) {
+        evts.submit = (sender, e) => {
           alert('test');
         }
       }

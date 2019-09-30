@@ -52,26 +52,28 @@ class TreeNodeView extends View {
     </li>`
   }
 
-  load(views, evts) {
-    const childrenView = views.children = new ListView(TreeNodeView);
+  load(views) {
+    views.children = new ListView(TreeNodeView);
+  }
 
+  handle(evts) {
     evts.name_click = () => {
-      if (childrenView.el.style.display === "none") {
-        childrenView.el.style.display = "block";
+      if (this.views.children.el.style.display === "none") {
+        this.views.children.el.style.display = "block";
       } else {
-        childrenView.el.style.display = "none";
+        this.views.children.el.style.display = "none";
       }
     }
 
     evts.addChildForm_submit = (form, evt) => {
-      childrenView.addItem({ name: form.cname.value, children: [] });
+      this.views.children.addItem({ name: form.cname.value, children: [] });
       form.cname.value = null;
     }
   }
 }
 
 class MainView extends View {
-  load(views, evts) {
+  load(views) {
     views.list = new ListView('treeRoot', TreeNodeView, { data: [treeData] });
   }
 }

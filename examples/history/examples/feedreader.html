@@ -58,7 +58,7 @@ class FeedEntryView extends TemplateView {
 }
 
 class FeedView extends TemplateView {
-  load(views, evts) {
+  load(views) {
     views.entries = new ListView(this.findEl('#feedEntryList'), FeedEntryView);
   }
 
@@ -72,15 +72,16 @@ class FeedView extends TemplateView {
 }
 
 class MainView extends View {
-  load(views, evts) {
-    var feedList = new ListView('#mainBox', FeedView);
-    views.feedList = feedList;
+  load(views) {
+    views.feedList = new ListView('#mainBox', FeedView);    
+  }
 
-    evts.addFeedForm_submit = (form, evts) => {
-      var feed = new google.feeds.Feed(form.feedUrl.value);
-      feed.load(function(result){
+  handle(evts) {
+    evts.addFeedForm_submit = (form, e) => {
+      const feed = new google.feeds.Feed(form.feedUrl.value);
+      feed.load(result => {
         if (!result.error) {
-          feedList.addItem(result.feed);
+          this.views.feedList.addItem(result.feed);
         } else {
           alert("Failed to fetch Feed");
         }

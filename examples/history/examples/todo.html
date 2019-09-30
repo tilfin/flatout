@@ -16,7 +16,7 @@
 <button id="redButton">RED</button>
 <p id="msg">MSG</p>
 <script type="module">
-import { List, View, ListView } from '/lib/flatout.js';
+import { List, Item, View, ListView } from '/lib/flatout.js';
 
 const defaulTodoItems = [
   { title: "Todo 1" },
@@ -51,53 +51,66 @@ class MyListView extends ListView {
 
 
 class TodoItemView extends View {
-  html(data) {
-    return `<li><input type="checkbox" class="checkBox">${data.title}</li>`;
+  init(defaultData) {
+    return new Item(defaultData);
   }
 
-  load(views, evts) {
+  html(data) {
+    return `<li><input type="checkbox" data-id="checkBox">${data.title}</li>`;
+  }
+
+  load(views) {
     this.listen('colorChange', function(ctx) {
       $(this.el).css('backgroundColor', ctx.color);
     });
+  }
 
+  handle(evts) {
     evts.checkBox_change = () => {
       this.fire('deleteTodo', this);
     }
   }
+
+  colorChange({ color }) {
+    $(this.el).css('backgroundColor', color);
+  }
 }
 
 class MainView extends View {
-  constructor(body) {
-    super(body);
-    this.todoItems = new List(defaulTodoItems.concat());
+  init() {
+    return {
+      todoItems: new List(defaulTodoItems.concat())
+    }
   }
 
-  load(views, evts) {
+  load(views) {
     const msg = views.msg = new View('#msg');
     msg.listen('colorChange', function(ctx) {
       $(this.el).css('color', ctx.color);
     });
 
-    const todoList = views.todoList = new MyListView('#todoList', TodoItemView, { data: this.todoItems });
+    views.todoItems = new MyListView('#todoList', TodoItemView);
+  }
 
+  handle(evts) {
     evts.inputForm_submit = (form, e) => {
-      this.todoItems.add({ title: form.todoTitle.value }, 0);
+      this.data.todoItems.add({ title: form.todoTitle.value }, 0);
     }
 
     evts.resetButton_click = () => {
-      this.todoItems.reset(defaulTodoItems.concat());
+      this.data.todoItems.reset(defaulTodoItems.concat());
     }
 
     evts.greenButton_click = () => {
-      msg.say('colorChange', { color: 'green'});      
+      this.views.msg.say('colorChange', { color: 'green'});
     }
 
     evts.redButton_click = () => {
-      this.broadcast('colorChange', { color: 'red' });
+      this.broadcast('colorChange', [{ color: 'red' }]);
     }
 
     evts.deleteTodo = (sender, e) => {
-      todoList.removeItem(e.detail)
+      this.views.todoItems.removeItemByView(e.detail)
     }
   }
 }

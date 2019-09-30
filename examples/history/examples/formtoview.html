@@ -49,13 +49,15 @@ class AutoForm extends FormView {
     </form>`
   }
 
-  load(views, evts) {
-    evts.name_keyup = function (sender, e) {
-      this.fire('dataChanged', { name: this.getValueOf('name') })
-    }
+  handle() {
+    return {
+      name_keyup(sender, e) {
+        this.fire('dataChanged', { name: this.getValueOf('name') })
+      }
 
-    evts.age_keyup = function (sender, e) {
-      this.fire('dataChanged', { age: this.getValueOf('age') })
+      age_keyup(sender, e) {
+        this.fire('dataChanged', { age: this.getValueOf('age') })
+      }
     }
   }
 }
@@ -65,13 +67,15 @@ class AutoArea extends View {
     super('autoArea', { container: 'content' })
   }
 
-  load(views, evts) {
+  load(views) {
     const initData = { name: 'Auto', age: 10 }
     views.detail = new Detail({ data: initData })
     views.form = new AutoForm({ data: initData })
+  }
 
+  handle(evts) {
     evts.dataChanged = (sender, e) => {
-      views.detail.data.update(e.detail)
+      this.views.detail.data.update(e.detail)
     }
   }
 }
@@ -86,9 +90,11 @@ class ManualForm extends FormView {
     </form>`
   }
 
-  load(views, evts) {
-    evts.submit = function (sender, e) {
-      this.fire('dataChanged', this.data)
+  handle() {
+    return {
+      submit(sender, e) {
+        this.fire('dataChanged', this.data)
+      }
     }
   }
 }
@@ -98,11 +104,13 @@ class ManualArea extends View {
     super(document.getElementById('manualArea'), { container: 'content' })
   }
 
-  load(views, evts) {
+  load(views) {
     const initData = { name: 'Manual', age: 20 }
     views.detail = new Detail({ data: initData })
     views.form = new ManualForm({ data: initData })
+  }
 
+  handle(evts) {
     evts.dataChanged = (sender, e) => {
       views.detail.data.update(e.detail)
     }

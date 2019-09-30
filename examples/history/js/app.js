@@ -62,10 +62,11 @@ class GroupList extends Page {
     </section>`
   }
 
-  load(views, evts) {
+  load(views) {
     views.groupList1 = new ListView(GroupListItem, { data: groups });
     views.groupList2 = new ListView(GroupListItem, { data: groups });
 
+  handle(evts) {
     evts.moreButton_click = (sender, e) => {
       this.loadMore();
     }

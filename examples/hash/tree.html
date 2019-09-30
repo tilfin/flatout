@@ -61,10 +61,14 @@ class TreeNodeView extends View {
     </li>`
   }
 
-  load(views, evts) {
-    const childrenView = views.children = new ListView(TreeNodeView);
+  load(views) {
+    views.children = new ListView(TreeNodeView);
 
     this.isExpaneded = true;
+  }
+
+  handle(evts) {
+    const childrenView = this.views.children;
 
     evts.name_click = () => {
       this.isExpaneded = !this.isExpaneded;
