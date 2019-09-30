@@ -128,7 +128,7 @@ class View extends Core {
         parent.appendEl(root);
       }
     } else if (this._isStr(root)) {
-      this.el = parent ? parent.findEl(root) : document.getElementById(root);
+      this.el = parent ? parent.findEl(root) : document.querySelector(root);
       if (!this.el) {
         throw new Error(`Failed to create View because element not found ID: ${root}`);
       }
