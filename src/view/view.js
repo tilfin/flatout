@@ -128,7 +128,7 @@ class View extends Core {
         parent.appendEl(root);
       }
     } else if (this._isStr(root)) {
-      this.el = parent ? parent.findEl(root) : document.querySelector(root);
+      this.el = parent ? parent.findEl(root) : document.getElementById(root);
       if (!this.el) {
         throw new Error(`Failed to create View because element not found ID: ${root}`);
       }
@@ -211,12 +211,12 @@ class View extends Core {
    * view.findEl('elementDataId');
    */
   findEl(id) {
-    const cached = this._F_elcache[id];
+    const cached = this._F_elcache.get(id);
     if (cached && cached.parentNode) {
       return cached;
     }
-    const result = this._F_elcache[id]
-      = this.el.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
+    const result = this.el.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
+    this._F_elcache.set(id, result);
     return result;
   }
 

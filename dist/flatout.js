@@ -858,7 +858,7 @@ class View extends Core {
     return Object.assign(super._privates(), {
       _F_onevts: new Set(),
       _F_binders: [],
-      _F_elcache: new Map()
+      _F_elcache: {}
     })
   }
 
@@ -1025,8 +1025,7 @@ class View extends Core {
     if (cached && cached.parentNode) {
       return cached;
     }
-    const result = this._F_elcache[id]
-      = this.el.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
+    const result = this._F_elcache[id] = this.el.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
     return result;
   }
 
