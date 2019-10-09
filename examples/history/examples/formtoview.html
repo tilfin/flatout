@@ -49,33 +49,37 @@ class AutoForm extends FormView {
     </form>`
   }
 
-  handle() {
-    return {
-      name_keyup(sender, e) {
-        this.fire('dataChanged', { name: this.getValueOf('name') })
-      }
+  handle(evts) {
+    evts.name_keyup = (sender, e) => {
+      this.fire('dataChanged', { name: this.getValueOf('name') })
+    }
 
-      age_keyup(sender, e) {
-        this.fire('dataChanged', { age: this.getValueOf('age') })
-      }
+    evts.age_keyup = (sender, e) => {
+      this.fire('dataChanged', { age: this.getValueOf('age') })
     }
   }
 }
 
 class AutoArea extends View {
   constructor() {
-    super('autoArea', { container: 'content' })
+    super('#autoArea', { container: 'content' })
+  }
+
+  init() {
+    return {
+      detail: new Item({ name: 'Auto', age: 10 }),
+      form: new Item({ name: 'Auto', age: 10 }),
+    }
   }
 
   load(views) {
-    const initData = { name: 'Auto', age: 10 }
-    views.detail = new Detail({ data: initData })
-    views.form = new AutoForm({ data: initData })
+    views.detail = new Detail()
+    views.form = new AutoForm()
   }
 
   handle(evts) {
     evts.dataChanged = (sender, e) => {
-      this.views.detail.data.update(e.detail)
+      this.data.detail.update(e.detail)
     }
   }
 }
@@ -90,11 +94,9 @@ class ManualForm extends FormView {
     </form>`
   }
 
-  handle() {
-    return {
-      submit(sender, e) {
-        this.fire('dataChanged', this.data)
-      }
+  handle(evts) {
+    evts.submit = (sender, e) => {
+      this.fire('dataChanged', this.data)
     }
   }
 }
@@ -104,27 +106,33 @@ class ManualArea extends View {
     super(document.getElementById('manualArea'), { container: 'content' })
   }
 
+  init() {
+    return {
+      detail: new Item({ name: 'Manual', age: 20 }),
+      form: new Item({ name: 'Manual', age: 20 }),
+    }
+  }
+
   load(views) {
-    const initData = { name: 'Manual', age: 20 }
-    views.detail = new Detail({ data: initData })
-    views.form = new ManualForm({ data: initData })
+    views.detail = new Detail()
+    views.form = new ManualForm()
   }
 
   handle(evts) {
     evts.dataChanged = (sender, e) => {
-      views.detail.data.update(e.detail)
+      this.data.detail.update(e.detail)
     }
 
     evts.setData1_click = (sender, e) => {
-      views.detail.data = {
+      this.data.detail.update({
         name: 'Taro', age: 34
-      }
+      })
     }
 
     evts.setData2_click = (sender, e) => {
-      views.detail.data = {
+      this.data.detail.update({
         name: 'Hanako', age: 29
-      }
+      })
     }
   }
 }

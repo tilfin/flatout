@@ -142,7 +142,7 @@ class View extends Core {
     this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;
 
     this._loadViewsEvts();
-    this._setDataToChildren();
+    this._setDataToUI();
     this._bindData();
   }
 
@@ -198,7 +198,7 @@ class View extends Core {
     console.log('View#data=', this);
     this._data = value;
     this._unbindData();
-    this._setDataToChildren();
+    this._setDataToUI();
     this._bindData();
   }
 
@@ -287,10 +287,10 @@ class View extends Core {
   /**
    * Set data to subviews or elements in the view.
    */
-  _setDataToChildren() {
+  _setDataToUI() {
     const data = this._data;
     if (data === undefined || !(data instanceof Object)) return;
-    console.log('View#_setDataToChildren', this);
+    console.log('View#_setDataToUI', this);
 
     eachEntry(this._data, ([name, val]) => {
       this._setFieldValue(name, val)
