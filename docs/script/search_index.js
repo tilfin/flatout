@@ -1194,9 +1194,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/view/list-view.js~listview#_setdatatochildren",
-    "class/src/view/list-view.js~ListView.html#instance-method-_setDataToChildren",
-    "src/view/list-view.js~ListView#_setDataToChildren",
+    "src/view/list-view.js~listview#_setdatatoui",
+    "class/src/view/list-view.js~ListView.html#instance-method-_setDataToUI",
+    "src/view/list-view.js~ListView#_setDataToUI",
     "method"
   ],
   [
@@ -1332,9 +1332,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/view/view.js~view#_setdatatochildren",
-    "class/src/view/view.js~View.html#instance-method-_setDataToChildren",
-    "src/view/view.js~View#_setDataToChildren",
+    "src/view/view.js~view#_setdatatoui",
+    "class/src/view/view.js~View.html#instance-method-_setDataToUI",
+    "src/view/view.js~View#_setDataToUI",
     "method"
   ],
   [
@@ -1455,6 +1455,12 @@ window.esdocSearchIndex = [
     "src/view/view.js~view#fire",
     "class/src/view/view.js~View.html#instance-method-fire",
     "src/view/view.js~View#fire",
+    "method"
+  ],
+  [
+    "src/view/view.js~view#handle",
+    "class/src/view/view.js~View.html#instance-method-handle",
+    "src/view/view.js~View#handle",
     "method"
   ],
   [

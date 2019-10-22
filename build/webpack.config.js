@@ -5,14 +5,13 @@ const rootDir = path.resolve(__dirname, '..');
 module.exports = {
   cache: true,
   entry: {
-    'lfin': `${rootDir}/src/flatout.js`,
-    'lfin-view': `${rootDir}/src/lfin-view.js`,
+    'flatout': `${rootDir}/src/flatout.js`
   },
   output: {
     path: `${rootDir}/dist`,
     filename: "[name].js",
     sourceMapFilename: "[name].map",
-    library: 'Lfin'
+    library: 'flatout'
   },
   devtool: "#source-map",
   resolve: {

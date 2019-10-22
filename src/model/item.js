@@ -7,7 +7,7 @@ import Core from '../core/core.js';
  * Item.
  * this can be an element of List.
  * 
- * @memberOf Lfin
+ * @memberOf flatout
  */
 export class Item extends Core {
 
@@ -99,7 +99,7 @@ export class Item extends Core {
 /**
  * List for plain object or Item.
  *
- * @memberOf Lfin
+ * @memberOf flatout
  */
 export class List extends Item {
 

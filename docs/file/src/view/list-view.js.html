@@ -250,9 +250,9 @@ class ListView extends View {
   }
 
   /** @override */
-  _setDataToChildren() {
+  _setDataToUI() {
     if (this._data === undefined) return;
-    console.log(&apos;ListView#_setDataToChildren&apos;, this);
+    console.log(&apos;ListView#_setDataToUI&apos;, this);
 
     for (let childView of Object.values(this.views)) {
       this.removeItemByView(childView);

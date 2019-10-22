@@ -5,7 +5,7 @@ import { HistoryRouter, HashRouter } from '../app/router.js'
 /**
  * Application.
  *
- * @memberOf Lfin
+ * @memberOf flatout
  */
 class App {
   /* Do not call */
