@@ -185,13 +185,15 @@ class HttpClient {
    * Constructor.
    * @param {object} [opts] - options
    * @param {string} [opts.baseURL] - base URL (default empty).
+   * @param {object} [opts.headers] - custom headers
+   * @param {Promise} [opts.beforeRequest] - async function called before the request
+   * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error
    */
   constructor(opts = {}) {
     this.baseURL = opts.baseURL || '';
     this.headers = opts.headers || {};
-    this.afterError = opts.afterError || function(){};
-    this.authorize = opts.authorize || function(){};
-    this.unauthorized = opts.unauthorized || function(){};
+    this.beforeRequest = opts.beforeRequest || (async () => {});
+    this.beforeError = opts.beforeError || (async () => true);
 
     const bodyType = opts.bodyType || '';
     if (bodyType.includes('form')) {
@@ -309,25 +311,25 @@ class HttpClient {
       headers['Content-Type'] = this.contentType;
     }
 
+    await this.beforeRequest(path, { query, body, headers });
+
     const req = { method, path, headers };
     let httpErr;
     try {
-      await this.authorize(path, { query, body, headers });
       const res = await this._request(method, path, { query, body, headers });
-      const stCode = res.status;
-      if (stCode < 400) {
+      const { status } = res;
+      if (status < 400) {
         return res;
       }
 
       httpErr = new HttpError(req, res);
-      if (stCode === 401) {
-        this.unauthorized(httpErr);
-        return;
-      }
     } catch(errType) {
-      return new HttpError(req, errType);
+      httpErr = new HttpError(req, errType);
     }
-    if (httpErr) throw httpErr;
+
+    if (await this.beforeError(httpErr) !== false) {
+      throw httpErr;
+    }
   }
 
   _request(method, path, { query, body, headers }) {
@@ -408,7 +410,7 @@ class HttpClient {
  * Item.
  * this can be an element of List.
  * 
- * @memberOf Lfin
+ * @memberOf flatout
  */
 class Item extends Core {
 
@@ -500,7 +502,7 @@ class Item extends Core {
 /**
  * List for plain object or Item.
  *
- * @memberOf Lfin
+ * @memberOf flatout
  */
 class List extends Item {
 
@@ -858,7 +860,7 @@ class View extends Core {
     return Object.assign(super._privates(), {
       _F_onevts: new Set(),
       _F_binders: [],
-      _F_elcache: {}
+      _F_elcache: new Map()
     })
   }
 
@@ -938,7 +940,7 @@ class View extends Core {
         parent.appendEl(root);
       }
     } else if (this._isStr(root)) {
-      this.el = parent ? parent.findEl(root) : document.querySelector(root);
+      this.el = parent ? parent.findEl(root) : document.getElementById(root);
       if (!this.el) {
         throw new Error(`Failed to create View because element not found ID: ${root}`);
       }
@@ -1021,11 +1023,12 @@ class View extends Core {
    * view.findEl('elementDataId');
    */
   findEl(id) {
-    const cached = this._F_elcache[id];
+    const cached = this._F_elcache.get(id);
     if (cached && cached.parentNode) {
       return cached;
     }
-    const result = this._F_elcache[id] = this.el.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
+    const result = this.el.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
+    this._F_elcache.set(id, result);
     return result;
   }
 
@@ -1621,7 +1624,7 @@ class HashRouter extends Router {
 /**
  * Application.
  *
- * @memberOf Lfin
+ * @memberOf flatout
  */
 class App {
   /* Do not call */

@@ -44,13 +44,15 @@ export class HttpClient {
    * Constructor.
    * @param {object} [opts] - options
    * @param {string} [opts.baseURL] - base URL (default empty).
+   * @param {object} [opts.headers] - custom headers
+   * @param {Promise} [opts.beforeRequest] - async function called before the request
+   * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error
    */
   constructor(opts = {}) {
     this.baseURL = opts.baseURL || '';
     this.headers = opts.headers || {};
-    this.afterError = opts.afterError || function(){};
-    this.authorize = opts.authorize || function(){};
-    this.unauthorized = opts.unauthorized || function(){};
+    this.beforeRequest = opts.beforeRequest || (async () => {});
+    this.beforeError = opts.beforeError || (async () => true);
 
     const bodyType = opts.bodyType || '';
     if (bodyType.includes('form')) {
@@ -168,25 +170,25 @@ export class HttpClient {
       headers['Content-Type'] = this.contentType;
     }
 
+    await this.beforeRequest(path, { query, body, headers })
+
     const req = { method, path, headers };
     let httpErr;
     try {
-      await this.authorize(path, { query, body, headers });
       const res = await this._request(method, path, { query, body, headers });
-      const stCode = res.status;
-      if (stCode < 400) {
+      const { status } = res;
+      if (status < 400) {
         return res;
       }
 
       httpErr = new HttpError(req, res);
-      if (stCode === 401) {
-        this.unauthorized(httpErr);
-        return;
-      }
     } catch(errType) {
-      return new HttpError(req, errType);
+      httpErr = new HttpError(req, errType);
     }
-    if (httpErr) throw httpErr;
+
+    if (await this.beforeError(httpErr) !== false) {
+      throw httpErr;
+    }
   }
 
   _request(method, path, { query, body, headers }) {
