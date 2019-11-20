@@ -1846,7 +1846,7 @@
     "__docId__": 103,
     "kind": "file",
     "name": "src/core/http.js",
-    "content": "'use strict'\n\n/**\n * Http Error\n */\nexport class HttpError {\n\n  /**\n   * @contructor\n   * @param req  request\n   * @param resOrErr response or Error\n   */\n  constructor(req, resOrErr) {\n    this.req = req;\n\n    if (typeof resOrErr === 'string') {\n      this.res = null;\n\n      this.isTimeout = (resOrErr === 'timeout');\n      this.isAborted = (resOrErr === 'abort');\n      this.isNetworkError = (resOrErr === 'error');\n    } else {\n      this.res = resOrErr;\n\n      let code = this.res.status;\n      this.isBadRequest   = (code === 400);\n      this.isUnauthorized = (code === 401);\n      this.isForbidden    = (code === 403);\n      this.isNotFound     = (code === 404);\n      this.isConflict     = (code === 409);\n      this.isServerError  = (code >= 500);\n    }\n  }\n}\n\n/**\n * HTTP Client\n *\n * @class HttpClient\n */\nexport class HttpClient {\n\n  /**\n   * Constructor.\n   * @param {object} [opts] - options\n   * @param {string} [opts.baseURL] - base URL (default empty).\n   */\n  constructor(opts = {}) {\n    this.baseURL = opts.baseURL || '';\n    this.headers = opts.headers || {};\n    this.afterError = opts.afterError || function(){};\n    this.authorize = opts.authorize || function(){};\n    this.unauthorized = opts.unauthorized || function(){};\n\n    const bodyType = opts.bodyType || '';\n    if (bodyType.includes('form')) {\n      this.contentType = 'application/x-www-form-urlencoded';\n    } else {\n      this.contentType = 'application/json;charset=UTF-8';\n    }\n  }\n\n  /**\n   * do GET request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  get(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('GET', path, query, body, headers);\n  }\n\n  /**\n   * do POST request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  post(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('POST', path, query, body, headers);\n  }\n\n  /**\n   * do PUT request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  put(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PUT', path, query, body, headers);\n  }\n\n  /**\n   * do PATCH request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  patch(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PATCH', path, query, body, headers);\n  }\n\n  /**\n   * do DELETE request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  delete(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('DELETE', path, query, body, headers);\n  }\n\n  /**\n   * execute http request.\n   * \n   * @param  {string} method - method\n   * @param  {string} path - request path\n   * @param  {object} query - request query data\n   * @param  {string|object} body - request body\n   * @param  {object} headers - header name and value object\n   * @return {Promise} Promise\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  async exec(method, path, query, body, headers = {}) {\n    if (!('Content-Type' in headers)) {\n      headers['Content-Type'] = this.contentType;\n    }\n\n    const req = { method, path, headers };\n    let httpErr;\n    try {\n      await this.authorize(path, { query, body, headers });\n      const res = await this._request(method, path, { query, body, headers });\n      const stCode = res.status;\n      if (stCode < 400) {\n        return res;\n      }\n\n      httpErr = new HttpError(req, res);\n      if (stCode === 401) {\n        this.unauthorized(httpErr);\n        return;\n      }\n    } catch(errType) {\n      return new HttpError(req, errType);\n    }\n    if (httpErr) throw httpErr;\n  }\n\n  _request(method, path, { query, body, headers }) {\n    let reqBody;\n    if (body) {\n      const cttType = headers['Content-Type'];\n      if (cttType.match(/\\/form-data/)) {\n        reqBody = new FormData();\n        for (let field in body) {\n          reqBody.append(field, body[field]);\n        }\n        delete headers['Content-Type']; // FormData set it with boundary\n      } else if (cttType.match(/\\/json/)) {\n        reqBody = JSON.stringify(body);\n      } else {\n        reqBody = this._formatParams(body);\n      }\n    } else {\n      reqBody = undefined;\n    }\n\n    let url = path;\n    if (this.baseURL && !url.match(/^[a-z]{0,4}\\:\\/\\//)) {\n      url = this.baseURL + url;\n    }\n    if (query) url += '?' + this._formatParams(query);\n\n    return new Promise((resolve, reject) => {\n        let xhr = new XMLHttpRequest();\n        xhr.open(method, url, true);\n\n        for (let name in headers) {\n          xhr.setRequestHeader(name, headers[name]);\n        }\n\n        xhr.onload = (evt) => {\n          let resBody, resCttType = xhr.getResponseHeader('Content-Type');\n          if (resCttType === null) {\n            resBody = null;\n          } else if (resCttType.match(/\\/json/)) {\n            resBody = JSON.parse(xhr.response);\n          } else if (resCttType.match(/\\/form/)) {\n            resBody = this._fromFormData(xhr.response);\n          } else {\n            resBody = xhr.response;\n          }\n\n          resolve({\n            status: xhr.status,\n            headers: xhr.getAllResponseHeaders(),\n            body: resBody\n          });\n        }\n\n        xhr.onabort = function(err){ reject('abort') };\n        xhr.onerror = function(err){ reject('error') };\n        xhr.ontimeout = function(err){ reject('timeout') };\n\n        xhr.send(reqBody);\n      });\n  }\n\n  _formatParams(params) {\n    return new URLSearchParams(params).toString()\n  }\n\n  _fromFormData(body) {\n    const data = {};\n    body.split('&').forEach(item => {\n      const [key, val] = item.split('=');\n      data[decodeURIComponent(key)] = decodeURIComponent(val);\n    });\n    return data;\n  }\n}\n",
+    "content": "'use strict'\n\n/**\n * Http Error\n */\nexport class HttpError {\n\n  /**\n   * @contructor\n   * @param req  request\n   * @param resOrErr response or Error\n   */\n  constructor(req, resOrErr) {\n    this.req = req;\n\n    if (typeof resOrErr === 'string') {\n      this.res = null;\n\n      this.isTimeout = (resOrErr === 'timeout');\n      this.isAborted = (resOrErr === 'abort');\n      this.isNetworkError = (resOrErr === 'error');\n    } else {\n      this.res = resOrErr;\n\n      let code = this.res.status;\n      this.isBadRequest   = (code === 400);\n      this.isUnauthorized = (code === 401);\n      this.isForbidden    = (code === 403);\n      this.isNotFound     = (code === 404);\n      this.isConflict     = (code === 409);\n      this.isServerError  = (code >= 500);\n    }\n  }\n}\n\n/**\n * HTTP Client\n *\n * @class HttpClient\n */\nexport class HttpClient {\n\n  /**\n   * Constructor.\n   * @param {object} [opts] - options\n   * @param {string} [opts.baseURL] - base URL (default empty).\n   * @param {object} [opts.headers] - custom headers\n   * @param {Promise} [opts.beforeRequest] - async function called before the request\n   * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error\n   */\n  constructor(opts = {}) {\n    this.baseURL = opts.baseURL || '';\n    this.headers = opts.headers || {};\n    this.beforeRequest = opts.beforeRequest || (async () => {});\n    this.beforeError = opts.beforeError || (async () => true);\n\n    const bodyType = opts.bodyType || '';\n    if (bodyType.includes('form')) {\n      this.contentType = 'application/x-www-form-urlencoded';\n    } else {\n      this.contentType = 'application/json;charset=UTF-8';\n    }\n  }\n\n  /**\n   * do GET request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  get(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('GET', path, query, body, headers);\n  }\n\n  /**\n   * do POST request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  post(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('POST', path, query, body, headers);\n  }\n\n  /**\n   * do PUT request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  put(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PUT', path, query, body, headers);\n  }\n\n  /**\n   * do PATCH request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  patch(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PATCH', path, query, body, headers);\n  }\n\n  /**\n   * do DELETE request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  delete(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('DELETE', path, query, body, headers);\n  }\n\n  /**\n   * execute http request.\n   * \n   * @param  {string} method - method\n   * @param  {string} path - request path\n   * @param  {object} query - request query data\n   * @param  {string|object} body - request body\n   * @param  {object} headers - header name and value object\n   * @return {Promise} Promise\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  async exec(method, path, query, body, headers = {}) {\n    if (!('Content-Type' in headers)) {\n      headers['Content-Type'] = this.contentType;\n    }\n\n    await this.beforeRequest(path, { query, body, headers })\n\n    const req = { method, path, headers };\n    let httpErr;\n    try {\n      const res = await this._request(method, path, { query, body, headers });\n      const { status } = res;\n      if (status < 400) {\n        return res;\n      }\n\n      httpErr = new HttpError(req, res);\n    } catch(errType) {\n      httpErr = new HttpError(req, errType);\n    }\n\n    if (await this.beforeError(httpErr) !== false) {\n      throw httpErr;\n    }\n  }\n\n  _request(method, path, { query, body, headers }) {\n    let reqBody;\n    if (body) {\n      const cttType = headers['Content-Type'];\n      if (cttType.match(/\\/form-data/)) {\n        reqBody = new FormData();\n        for (let field in body) {\n          reqBody.append(field, body[field]);\n        }\n        delete headers['Content-Type']; // FormData set it with boundary\n      } else if (cttType.match(/\\/json/)) {\n        reqBody = JSON.stringify(body);\n      } else {\n        reqBody = this._formatParams(body);\n      }\n    } else {\n      reqBody = undefined;\n    }\n\n    let url = path;\n    if (this.baseURL && !url.match(/^[a-z]{0,4}\\:\\/\\//)) {\n      url = this.baseURL + url;\n    }\n    if (query) url += '?' + this._formatParams(query);\n\n    return new Promise((resolve, reject) => {\n        let xhr = new XMLHttpRequest();\n        xhr.open(method, url, true);\n\n        for (let name in headers) {\n          xhr.setRequestHeader(name, headers[name]);\n        }\n\n        xhr.onload = (evt) => {\n          let resBody, resCttType = xhr.getResponseHeader('Content-Type');\n          if (resCttType === null) {\n            resBody = null;\n          } else if (resCttType.match(/\\/json/)) {\n            resBody = JSON.parse(xhr.response);\n          } else if (resCttType.match(/\\/form/)) {\n            resBody = this._fromFormData(xhr.response);\n          } else {\n            resBody = xhr.response;\n          }\n\n          resolve({\n            status: xhr.status,\n            headers: xhr.getAllResponseHeaders(),\n            body: resBody\n          });\n        }\n\n        xhr.onabort = function(err){ reject('abort') };\n        xhr.onerror = function(err){ reject('error') };\n        xhr.ontimeout = function(err){ reject('timeout') };\n\n        xhr.send(reqBody);\n      });\n  }\n\n  _formatParams(params) {\n    return new URLSearchParams(params).toString()\n  }\n\n  _fromFormData(body) {\n    const data = {};\n    body.split('&').forEach(item => {\n      const [key, val] = item.split('=');\n      data[decodeURIComponent(key)] = decodeURIComponent(val);\n    });\n    return data;\n  }\n}\n",
     "static": true,
     "longname": "/home/toshi/work/me/flatout/src/core/http.js",
     "access": "public",
@@ -2128,7 +2128,7 @@
     "longname": "src/core/http.js~HttpClient#constructor",
     "access": "public",
     "description": "Constructor.",
-    "lineNumber": 48,
+    "lineNumber": 51,
     "params": [
       {
         "nullable": null,
@@ -2149,6 +2149,36 @@
         "optional": true,
         "name": "opts.baseURL",
         "description": "base URL (default empty)."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.headers",
+        "description": "custom headers"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Promise"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.beforeRequest",
+        "description": "async function called before the request"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Promise"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "opts.beforeError",
+        "description": "async function called before throw an error. if return false, stop throwing the error"
       }
     ]
   },
@@ -2161,7 +2191,7 @@
     "longname": "src/core/http.js~HttpClient#baseURL",
     "access": "public",
     "description": null,
-    "lineNumber": 49,
+    "lineNumber": 52,
     "undocument": true,
     "type": {
       "types": [
@@ -2178,7 +2208,7 @@
     "longname": "src/core/http.js~HttpClient#headers",
     "access": "public",
     "description": null,
-    "lineNumber": 50,
+    "lineNumber": 53,
     "undocument": true,
     "type": {
       "types": [
@@ -2189,13 +2219,13 @@
   {
     "__docId__": 122,
     "kind": "member",
-    "name": "afterError",
+    "name": "beforeRequest",
     "memberof": "src/core/http.js~HttpClient",
     "static": false,
-    "longname": "src/core/http.js~HttpClient#afterError",
+    "longname": "src/core/http.js~HttpClient#beforeRequest",
     "access": "public",
     "description": null,
-    "lineNumber": 51,
+    "lineNumber": 54,
     "undocument": true,
     "type": {
       "types": [
@@ -2206,13 +2236,13 @@
   {
     "__docId__": 123,
     "kind": "member",
-    "name": "authorize",
+    "name": "beforeError",
     "memberof": "src/core/http.js~HttpClient",
     "static": false,
-    "longname": "src/core/http.js~HttpClient#authorize",
+    "longname": "src/core/http.js~HttpClient#beforeError",
     "access": "public",
     "description": null,
-    "lineNumber": 52,
+    "lineNumber": 55,
     "undocument": true,
     "type": {
       "types": [
@@ -2223,30 +2253,13 @@
   {
     "__docId__": 124,
     "kind": "member",
-    "name": "unauthorized",
-    "memberof": "src/core/http.js~HttpClient",
-    "static": false,
-    "longname": "src/core/http.js~HttpClient#unauthorized",
-    "access": "public",
-    "description": null,
-    "lineNumber": 53,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 125,
-    "kind": "member",
     "name": "contentType",
     "memberof": "src/core/http.js~HttpClient",
     "static": false,
     "longname": "src/core/http.js~HttpClient#contentType",
     "access": "public",
     "description": null,
-    "lineNumber": 57,
+    "lineNumber": 59,
     "undocument": true,
     "type": {
       "types": [
@@ -2255,7 +2268,7 @@
     }
   },
   {
-    "__docId__": 127,
+    "__docId__": 126,
     "kind": "method",
     "name": "get",
     "memberof": "src/core/http.js~HttpClient",
@@ -2265,7 +2278,88 @@
     "longname": "src/core/http.js~HttpClient#get",
     "access": "public",
     "description": "do GET request.",
-    "lineNumber": 76,
+    "lineNumber": 78,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "path",
+        "description": "request path"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx",
+        "description": "context"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.query",
+        "description": "request query data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.body",
+        "description": "request body"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "ctx.headers",
+        "description": "header name and value object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise resolves response bodystatus: xhr.status,"
+    },
+    "type": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 127,
+    "kind": "method",
+    "name": "post",
+    "memberof": "src/core/http.js~HttpClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/http.js~HttpClient#post",
+    "access": "public",
+    "description": "do POST request.",
+    "lineNumber": 96,
     "params": [
       {
         "nullable": null,
@@ -2338,15 +2432,15 @@
   {
     "__docId__": 128,
     "kind": "method",
-    "name": "post",
+    "name": "put",
     "memberof": "src/core/http.js~HttpClient",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/core/http.js~HttpClient#post",
+    "longname": "src/core/http.js~HttpClient#put",
     "access": "public",
-    "description": "do POST request.",
-    "lineNumber": 94,
+    "description": "do PUT request.",
+    "lineNumber": 114,
     "params": [
       {
         "nullable": null,
@@ -2419,15 +2513,15 @@
   {
     "__docId__": 129,
     "kind": "method",
-    "name": "put",
+    "name": "patch",
     "memberof": "src/core/http.js~HttpClient",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/core/http.js~HttpClient#put",
+    "longname": "src/core/http.js~HttpClient#patch",
     "access": "public",
-    "description": "do PUT request.",
-    "lineNumber": 112,
+    "description": "do PATCH request.",
+    "lineNumber": 132,
     "params": [
       {
         "nullable": null,
@@ -2500,15 +2594,15 @@
   {
     "__docId__": 130,
     "kind": "method",
-    "name": "patch",
+    "name": "delete",
     "memberof": "src/core/http.js~HttpClient",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/core/http.js~HttpClient#patch",
+    "longname": "src/core/http.js~HttpClient#delete",
     "access": "public",
-    "description": "do PATCH request.",
-    "lineNumber": 130,
+    "description": "do DELETE request.",
+    "lineNumber": 150,
     "params": [
       {
         "nullable": null,
@@ -2581,87 +2675,6 @@
   {
     "__docId__": 131,
     "kind": "method",
-    "name": "delete",
-    "memberof": "src/core/http.js~HttpClient",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/core/http.js~HttpClient#delete",
-    "access": "public",
-    "description": "do DELETE request.",
-    "lineNumber": 148,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "path",
-        "description": "request path"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "ctx",
-        "description": "context"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "ctx.query",
-        "description": "request query data"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "ctx.body",
-        "description": "request body"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "ctx.headers",
-        "description": "header name and value object"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "Promise"
-      ],
-      "spread": false,
-      "description": "Promise resolves response bodystatus: xhr.status,"
-    },
-    "type": {
-      "nullable": null,
-      "types": [
-        "*"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 132,
-    "kind": "method",
     "name": "exec",
     "memberof": "src/core/http.js~HttpClient",
     "generator": false,
@@ -2670,7 +2683,7 @@
     "longname": "src/core/http.js~HttpClient#exec",
     "access": "public",
     "description": "execute http request.",
-    "lineNumber": 166,
+    "lineNumber": 168,
     "params": [
       {
         "nullable": null,
@@ -2742,7 +2755,7 @@
     }
   },
   {
-    "__docId__": 133,
+    "__docId__": 132,
     "kind": "method",
     "name": "_request",
     "memberof": "src/core/http.js~HttpClient",
@@ -2752,7 +2765,7 @@
     "longname": "src/core/http.js~HttpClient#_request",
     "access": "private",
     "description": null,
-    "lineNumber": 192,
+    "lineNumber": 194,
     "undocument": true,
     "params": [
       {
@@ -2787,7 +2800,7 @@
     }
   },
   {
-    "__docId__": 134,
+    "__docId__": 133,
     "kind": "method",
     "name": "_formatParams",
     "memberof": "src/core/http.js~HttpClient",
@@ -2797,7 +2810,7 @@
     "longname": "src/core/http.js~HttpClient#_formatParams",
     "access": "private",
     "description": null,
-    "lineNumber": 252,
+    "lineNumber": 254,
     "undocument": true,
     "params": [
       {
@@ -2814,7 +2827,7 @@
     }
   },
   {
-    "__docId__": 135,
+    "__docId__": 134,
     "kind": "method",
     "name": "_fromFormData",
     "memberof": "src/core/http.js~HttpClient",
@@ -2824,7 +2837,7 @@
     "longname": "src/core/http.js~HttpClient#_fromFormData",
     "access": "private",
     "description": null,
-    "lineNumber": 256,
+    "lineNumber": 258,
     "undocument": true,
     "params": [
       {
@@ -2841,7 +2854,7 @@
     }
   },
   {
-    "__docId__": 136,
+    "__docId__": 135,
     "kind": "file",
     "name": "src/core/util.js",
     "content": "'use strict'\n\n/** @private */\nexport function eachEntry(obj, cb) {\n  Object.entries(obj).forEach(cb)\n}\n\nfunction* idCounter() {\n  let i = 0\n  while (true) yield i++\n}\n\nconst lfidCounter = idCounter()\n\n/** @private */\nexport function makeLFID() {\n  const v = lfidCounter.next().value\n  return `_F_${v}`\n}\n",
@@ -2852,7 +2865,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 137,
+    "__docId__": 136,
     "kind": "function",
     "name": "eachEntry",
     "memberof": "src/core/util.js",
@@ -2883,7 +2896,7 @@
     "return": null
   },
   {
-    "__docId__": 138,
+    "__docId__": 137,
     "kind": "function",
     "name": "idCounter",
     "memberof": "src/core/util.js",
@@ -2903,7 +2916,7 @@
     "ignore": true
   },
   {
-    "__docId__": 139,
+    "__docId__": 138,
     "kind": "variable",
     "name": "lfidCounter",
     "memberof": "src/core/util.js",
@@ -2924,7 +2937,7 @@
     "ignore": true
   },
   {
-    "__docId__": 140,
+    "__docId__": 139,
     "kind": "function",
     "name": "makeLFID",
     "memberof": "src/core/util.js",
@@ -2946,7 +2959,7 @@
     }
   },
   {
-    "__docId__": 141,
+    "__docId__": 140,
     "kind": "file",
     "name": "src/flatout.js",
     "content": "import Core from './core/core.js';\nimport { HttpClient, HttpError } from './core/http.js';\nimport App  from './app/app.js';\nimport View from './view/view.js';\nimport ListView from './view/list-view.js';\nimport FormView from './view/form-view.js';\nimport Page from './view/page.js';\nimport { Item, List } from './model/item.js';\n\n/*\n* flatout by @tilfin\n*/\nexport {\n  Core,\n  HttpClient, HttpError,\n  App,\n  View,\n  ListView,\n  FormView,\n  Page,\n  Item, List\n}\n",
@@ -2957,7 +2970,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 142,
+    "__docId__": 141,
     "kind": "file",
     "name": "src/model/binder.js",
     "content": "'use strict'\n\n/**\n * Binding DataModel and View\n * @access private\n */\nclass Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target item\n   */\n  constructor(item) {\n    this._item = item;\n    item._addListener(this);\n  }\n\n  /**\n   * Remove listening to item\n   */\n  destroy() {\n    this._item._removeListener(this);\n    this._item = null;\n  }\n}\n\n/**\n * Binding Item and View\n * to apply the change of item to View\n * @access protected\n */\nexport class ItemBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target data\n   * @param {View} view - target view\n   */\n  constructor(item, view) {\n    super(item)\n    this._view = view;\n  }\n\n  /**\n   * Updating field of view\n   */\n  update({ field, newValue, oldValue }) {\n    this._view._updateField(field, newValue, oldValue);\n  }\n}\n\n/**\n * Binding List and ListView\n * to apply the change of colleciton to ListView and its child Views\n * @access protected\n */\nexport class ListBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {List} collection - target data\n   * @param {ListView} listView - target view\n   */\n  constructor(collection, listView) {\n    super(collection)\n    this._view = listView;\n  }\n\n  /**\n   * Adding item to ListView at index.\n   */\n  add({ item, index }) {\n    if (index === undefined) {\n      this._view.addItem(item);\n    } else {\n      this._view.insertItem(item, index);\n    }    \n  }\n\n  /**\n   * Updating item of ListView at index.\n   */\n  update({ item, index }) {\n    this._view.updateItem(item, index);\n  }\n\n  /**\n   * Removing item from ListView.\n   */\n  remove({ item, index }) {\n    this._view.removeItem(item, index);\n  }\n}\n",
@@ -2968,7 +2981,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 143,
+    "__docId__": 142,
     "kind": "class",
     "name": "Binder",
     "memberof": "src/model/binder.js",
@@ -2984,7 +2997,7 @@
     "ignore": true
   },
   {
-    "__docId__": 144,
+    "__docId__": 143,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/model/binder.js~Binder",
@@ -3009,7 +3022,7 @@
     ]
   },
   {
-    "__docId__": 145,
+    "__docId__": 144,
     "kind": "member",
     "name": "_item",
     "memberof": "src/model/binder.js~Binder",
@@ -3026,7 +3039,7 @@
     }
   },
   {
-    "__docId__": 146,
+    "__docId__": 145,
     "kind": "method",
     "name": "destroy",
     "memberof": "src/model/binder.js~Binder",
@@ -3041,7 +3054,7 @@
     "return": null
   },
   {
-    "__docId__": 148,
+    "__docId__": 147,
     "kind": "class",
     "name": "ItemBinder",
     "memberof": "src/model/binder.js",
@@ -3059,7 +3072,7 @@
     ]
   },
   {
-    "__docId__": 149,
+    "__docId__": 148,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/model/binder.js~ItemBinder",
@@ -3094,7 +3107,7 @@
     ]
   },
   {
-    "__docId__": 150,
+    "__docId__": 149,
     "kind": "member",
     "name": "_view",
     "memberof": "src/model/binder.js~ItemBinder",
@@ -3111,7 +3124,7 @@
     }
   },
   {
-    "__docId__": 151,
+    "__docId__": 150,
     "kind": "method",
     "name": "update",
     "memberof": "src/model/binder.js~ItemBinder",
@@ -3139,7 +3152,7 @@
     "return": null
   },
   {
-    "__docId__": 152,
+    "__docId__": 151,
     "kind": "class",
     "name": "ListBinder",
     "memberof": "src/model/binder.js",
@@ -3157,7 +3170,7 @@
     ]
   },
   {
-    "__docId__": 153,
+    "__docId__": 152,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/model/binder.js~ListBinder",
@@ -3192,7 +3205,7 @@
     ]
   },
   {
-    "__docId__": 154,
+    "__docId__": 153,
     "kind": "member",
     "name": "_view",
     "memberof": "src/model/binder.js~ListBinder",
@@ -3209,7 +3222,7 @@
     }
   },
   {
-    "__docId__": 155,
+    "__docId__": 154,
     "kind": "method",
     "name": "add",
     "memberof": "src/model/binder.js~ListBinder",
@@ -3236,7 +3249,7 @@
     "return": null
   },
   {
-    "__docId__": 156,
+    "__docId__": 155,
     "kind": "method",
     "name": "update",
     "memberof": "src/model/binder.js~ListBinder",
@@ -3263,7 +3276,7 @@
     "return": null
   },
   {
-    "__docId__": 157,
+    "__docId__": 156,
     "kind": "method",
     "name": "remove",
     "memberof": "src/model/binder.js~ListBinder",
@@ -3290,7 +3303,7 @@
     "return": null
   },
   {
-    "__docId__": 158,
+    "__docId__": 157,
     "kind": "file",
     "name": "src/model/item.js",
     "content": "'use strict';\n\nimport { eachEntry } from '../core/util.js'\nimport Core from '../core/core.js';\n\n/**\n * Item.\n * this can be an element of List.\n * \n * @memberOf flatout\n */\nexport class Item extends Core {\n\n  /**\n   * Constructor.\n   * \n   * @param {object} [defaultData] - default data\n   */\n  constructor(defaultData = {}) {\n    super();\n    Object.assign(this, defaultData);\n  }\n\n  /**\n   * Add value to field-value.\n   * \n   * @param {string} field - adding field name\n   * @param {Any} value - adding value\n   */\n  add(field, value) {\n    const cur = this[field];\n    const isArr = cur !== undefined && cur instanceof Array;\n    let newVal;\n    if (isArr) {\n      cur.push(value);\n      newVal = cur;\n    } else {\n      newVal = cur + value;\n    }\n    this._updateField(field, newVal);\n  }\n\n  /**\n   * Toggle boolean field-value\n   * \n   * @param {string} field - toggling field name\n   */\n  toggle(field) {\n    const cur = Boolean(this[field]);\n    this._updateField(field, !cur);\n  }\n\n  /**\n   * Update the pairs of field-value.\n   * \n   * @param {Object} pairs - updating target pairs\n   */\n  update(pairs) {\n    eachEntry(pairs, ([key, val]) => this._updateField(key, val))\n  }\n\n  /**\n   * Destroy me.\n   */\n  destroy() {\n    this.say('destroy', {});\n  }\n\n  /**\n   * Update field with value.\n   * \n   * @param {string} field - updating target\n   * @param {Any} value    - new value\n   */\n  _updateField(field, value) {\n    const cur = this[field];\n\n    if (cur instanceof Item) {\n      if (cur instanceof List) {\n        cur.reset(value)\n      } else {\n        cur.update(value)\n      }\n    } else {\n      this[field] = value;\n      this.say('update', { field, newValue: value, oldValue: cur });\n    }\n  }\n\n  _addListener(target) {\n    this.listen('*', target);\n  }\n\n  _removeListener(target) {\n    this.unlisten('*', target);\n  }\n}\n\n/**\n * List for plain object or Item.\n *\n * @memberOf flatout\n */\nexport class List extends Item {\n\n  /**\n   * Constructor.\n   * \n   * @param {Array} [defaultData] - default data array\n   * @param {object} [opts] - options\n   * @param {boolean|Class<Item>} [opts.wrapItem] - Whether wrapping Item or not, or the sub class of Item.\n   */\n  constructor(defaultData = [], opts = {}) {\n    super();\n\n    if (opts.wrapItem) {\n      if (opts.wrapItem === true) {\n        this._F_itemClass = Item;\n      } else {\n        this._F_itemClass = opts.wrapItem;\n      }\n    } else {\n      this._F_itemClass = null;\n    }\n\n    this._data = defaultData.map(item => this._wrapItem(item));\n  }\n\n  /**\n   * If you dynamically change wrapping item class according to the item, override this method.\n   *\n   * @param {object} item - an item\n   * @return {Class<View>}\n   */\n  itemClass(item) {\n    return this._F_itemClass\n  }\n\n  /**\n   * Return an item at position.\n   * \n   * @param  {number} index - item position.\n   * @return {*} item specified by index.\n   */\n  get(index) {\n    return this._data[index];\n  }\n\n  /**\n   * Add an item.\n   * \n   * @param {Any} item - item\n   * @param {number} [insertIndex] - optional insert position, add last if not defined\n   */\n  add(item, insertIndex) {\n    item = this._wrapItem(item);\n    if (insertIndex === undefined) {\n      this._data.push(item);\n    } else {\n      this._data.splice(insertIndex, 0, item);\n    }\n    this.say('add', { item, index: insertIndex });\n  }\n\n  /**\n   * Update an item at index.\n   * \n   * @param {Any} item - item\n   * @param {number} index - target index\n   */\n  update(item, index) {\n    if (index === undefined) {\n      // for when item updated\n      index = this._data.indexOf(item);\n    }\n    const cur = this._data[index];\n    if (cur !== item) {\n      item = this._wrapItem(item);\n      this._data[index] = item;\n    }\n    this.say('update', { item, index });\n  }\n\n  /**\n   * Remove an item (specified by index).\n   * \n   * @param {object|number} itemOrIndex - target item or the position.\n   */\n  remove(itemOrIndex) {\n    let index;\n    if (typeof itemOrIndex !== 'number') {\n      index = this._data.indexOf(itemOrIndex) // find item\n    } else {\n      index = itemOrIndex;\n    }\n    const item = this._data.splice(index, 1)[0];\n    this.say('remove', { item, index });\n  }\n\n  /**\n   * Add items.\n   * \n   * @param {Array} items - adding items\n   * @param {number} [insertIndex] - insert position\n   */\n  addAll(items, insertIndex) {\n    items.forEach(item => this.add(item, insertIndex))\n  }\n\n  /**\n   * Remove all items.\n   * \n   * @param {Object} opts - if opts.reverse is true, removing from last to first.\n   */\n  removeAll(opts = {}) {\n    const { reverse = false } = opts;\n    if (reverse) {\n      for (let idx = this.length - 1; idx >= 0; idx--) {\n        this.remove(idx);\n      }\n    } else {\n      while(this._data.length) {\n        this.remove(0);\n      }\n    }\n  }\n\n  /**\n   * Remove last item.\n   */\n  removeLast() {\n    this.remove(this.length - 1);\n  }\n\n  /**\n   * replace all items\n   *\n   * @param {Array} [newValues] - new values or default empty array\n   */\n  reset(newValues = []) {\n    this.removeAll();\n    this.addAll(newValues);\n  }\n\n  /**\n   * Iterates each item of self, return an index of the first item predicate returns true.\n   * \n   * @param  {string|Function} predictOrField - predicate function or target field\n   * @param  {*} [value] - finding value for target field\n   * @return {object} matched first item or undefined\n   */\n  find(predictOrField, value) {\n    const i = this.indexOf(predictOrField, value);\n    return i >= 0 ? this._data[i] : undefined;\n  }\n\n  /**\n   * Iterates each item of self, return the first item predicate returns true.\n   * \n   * @param  {string|Function|Object} predictOrField - predicate function or target field, target object\n   * @param  {*} [value] - finding value for target field\n   * @return {number} matched first item index or -1 if not found\n   */\n  indexOf(predictOrField, value) {\n    let judge;\n    if (value !== undefined) {\n      judge = it => it[predictOrField] === value\n    } else if (this._isFn(predictOrField)) {\n      judge = predictOrField;\n    } else {\n      return this._data.indexOf(predictOrField)\n    }\n\n    for (let i = 0, len = this._data.length; i < len; i++) {\n      if (judge(this._data[i])) return i;\n    }\n    return -1;\n  }\n\n  /*\n   * forEach method for data\n   * @param {Function} cb - callback.\n   */\n  forEach(cb) {\n    this._data.forEach(cb)\n  }\n\n  /*\n   * some method for data\n   * @param {Function} cb - callback returns true or false.\n   */\n  some(cb) {\n    return this._data.some(cb)\n  }\n\n  /*\n   * Data size\n   * @type {number}\n   */\n  get length() {\n    return this._data.length\n  }\n\n  /*\n   * @return {Iterator} data iterator\n   */\n  [Symbol.iterator]() {\n    return this._data[Symbol.iterator]()\n  }\n\n  /**\n   * Wrap an item by Item class\n   */\n  _wrapItem(item) {\n    if (!(item instanceof Item)) {\n      const cls = this.itemClass(item);\n      if (cls) {\n        return new cls(item);\n      }\n    }\n    return item;\n  }\n}\n",
@@ -3301,7 +3314,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 159,
+    "__docId__": 158,
     "kind": "class",
     "name": "Item",
     "memberof": "src/model/item.js",
@@ -3325,7 +3338,7 @@
     ]
   },
   {
-    "__docId__": 160,
+    "__docId__": 159,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/model/item.js~Item",
@@ -3350,7 +3363,7 @@
     ]
   },
   {
-    "__docId__": 161,
+    "__docId__": 160,
     "kind": "method",
     "name": "add",
     "memberof": "src/model/item.js~Item",
@@ -3386,7 +3399,7 @@
     "return": null
   },
   {
-    "__docId__": 162,
+    "__docId__": 161,
     "kind": "method",
     "name": "toggle",
     "memberof": "src/model/item.js~Item",
@@ -3412,7 +3425,7 @@
     "return": null
   },
   {
-    "__docId__": 163,
+    "__docId__": 162,
     "kind": "method",
     "name": "update",
     "memberof": "src/model/item.js~Item",
@@ -3438,7 +3451,7 @@
     "return": null
   },
   {
-    "__docId__": 164,
+    "__docId__": 163,
     "kind": "method",
     "name": "destroy",
     "memberof": "src/model/item.js~Item",
@@ -3453,7 +3466,7 @@
     "return": null
   },
   {
-    "__docId__": 165,
+    "__docId__": 164,
     "kind": "method",
     "name": "_updateField",
     "memberof": "src/model/item.js~Item",
@@ -3489,7 +3502,7 @@
     "return": null
   },
   {
-    "__docId__": 166,
+    "__docId__": 165,
     "kind": "member",
     "name": "[field]",
     "memberof": "src/model/item.js~Item",
@@ -3506,7 +3519,7 @@
     }
   },
   {
-    "__docId__": 167,
+    "__docId__": 166,
     "kind": "method",
     "name": "_addListener",
     "memberof": "src/model/item.js~Item",
@@ -3529,7 +3542,7 @@
     "return": null
   },
   {
-    "__docId__": 168,
+    "__docId__": 167,
     "kind": "method",
     "name": "_removeListener",
     "memberof": "src/model/item.js~Item",
@@ -3552,7 +3565,7 @@
     "return": null
   },
   {
-    "__docId__": 169,
+    "__docId__": 168,
     "kind": "class",
     "name": "List",
     "memberof": "src/model/item.js",
@@ -3576,7 +3589,7 @@
     ]
   },
   {
-    "__docId__": 170,
+    "__docId__": 169,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/model/item.js~List",
@@ -3622,7 +3635,7 @@
     ]
   },
   {
-    "__docId__": 171,
+    "__docId__": 170,
     "kind": "member",
     "name": "_F_itemClass",
     "memberof": "src/model/item.js~List",
@@ -3639,7 +3652,7 @@
     }
   },
   {
-    "__docId__": 174,
+    "__docId__": 173,
     "kind": "member",
     "name": "_data",
     "memberof": "src/model/item.js~List",
@@ -3656,7 +3669,7 @@
     }
   },
   {
-    "__docId__": 175,
+    "__docId__": 174,
     "kind": "method",
     "name": "itemClass",
     "memberof": "src/model/item.js~List",
@@ -3689,7 +3702,7 @@
     }
   },
   {
-    "__docId__": 176,
+    "__docId__": 175,
     "kind": "method",
     "name": "get",
     "memberof": "src/model/item.js~List",
@@ -3722,7 +3735,7 @@
     }
   },
   {
-    "__docId__": 177,
+    "__docId__": 176,
     "kind": "method",
     "name": "add",
     "memberof": "src/model/item.js~List",
@@ -3758,7 +3771,7 @@
     "return": null
   },
   {
-    "__docId__": 178,
+    "__docId__": 177,
     "kind": "method",
     "name": "update",
     "memberof": "src/model/item.js~List",
@@ -3794,7 +3807,7 @@
     "return": null
   },
   {
-    "__docId__": 179,
+    "__docId__": 178,
     "kind": "method",
     "name": "remove",
     "memberof": "src/model/item.js~List",
@@ -3821,7 +3834,7 @@
     "return": null
   },
   {
-    "__docId__": 180,
+    "__docId__": 179,
     "kind": "method",
     "name": "addAll",
     "memberof": "src/model/item.js~List",
@@ -3857,7 +3870,7 @@
     "return": null
   },
   {
-    "__docId__": 181,
+    "__docId__": 180,
     "kind": "method",
     "name": "removeAll",
     "memberof": "src/model/item.js~List",
@@ -3883,7 +3896,7 @@
     "return": null
   },
   {
-    "__docId__": 182,
+    "__docId__": 181,
     "kind": "method",
     "name": "removeLast",
     "memberof": "src/model/item.js~List",
@@ -3898,7 +3911,7 @@
     "return": null
   },
   {
-    "__docId__": 183,
+    "__docId__": 182,
     "kind": "method",
     "name": "reset",
     "memberof": "src/model/item.js~List",
@@ -3924,7 +3937,7 @@
     "return": null
   },
   {
-    "__docId__": 184,
+    "__docId__": 183,
     "kind": "method",
     "name": "find",
     "memberof": "src/model/item.js~List",
@@ -3968,7 +3981,7 @@
     }
   },
   {
-    "__docId__": 185,
+    "__docId__": 184,
     "kind": "method",
     "name": "indexOf",
     "memberof": "src/model/item.js~List",
@@ -4013,7 +4026,7 @@
     }
   },
   {
-    "__docId__": 186,
+    "__docId__": 185,
     "kind": "method",
     "name": "forEach",
     "memberof": "src/model/item.js~List",
@@ -4036,7 +4049,7 @@
     "return": null
   },
   {
-    "__docId__": 187,
+    "__docId__": 186,
     "kind": "method",
     "name": "some",
     "memberof": "src/model/item.js~List",
@@ -4063,7 +4076,7 @@
     }
   },
   {
-    "__docId__": 188,
+    "__docId__": 187,
     "kind": "get",
     "name": "length",
     "memberof": "src/model/item.js~List",
@@ -4082,7 +4095,7 @@
     }
   },
   {
-    "__docId__": 189,
+    "__docId__": 188,
     "kind": "method",
     "name": "[Symbol.iterator]",
     "memberof": "src/model/item.js~List",
@@ -4102,7 +4115,7 @@
     }
   },
   {
-    "__docId__": 190,
+    "__docId__": 189,
     "kind": "method",
     "name": "_wrapItem",
     "memberof": "src/model/item.js~List",
@@ -4128,7 +4141,7 @@
     }
   },
   {
-    "__docId__": 191,
+    "__docId__": 190,
     "kind": "file",
     "name": "src/view/form-view.js",
     "content": "'use strict'\n\nimport { eachEntry } from '../core/util.js'\nimport View from './view.js'\n\n/**\n* A FormView is data fields to bind input, select or textarea by theirs names.\n*\n* @example\n* // Create a FormView bound to loginForm\n* views.form = new FormView('loginForm');\n* \n* evts.form_submit = function(sender, e) {\n*   var body = this.data;\n*   http.post('/login', { body });\n* }\n* @example {@lang xml}\n* <form id=\"loginForm\">\n*   <input type=\"text\" name=\"email\">\n*   <input type=\"password\" name=\"password\">\n*   <button type=\"submit\">Sign in</button>\n* </form>\n*/\nclass FormView extends View {\n\n  /**\n   * @override\n   */\n  get data() {\n    return this._assignFromFields(this._data);\n  }\n\n  set data(value) {\n    super.data = value;\n  }\n\n  /**\n   * Get field value as the type.\n   *\n   * @param {string} field - target field\n   * @return {Any} the value\n   */\n  getValueOf(field) {\n    const el = this.findEl(field);\n    if (el) {\n      return this._valueAsType(el);\n    }\n\n    const vw = this.views[field];\n    if (vw) {\n      return vw.data;\n    }\n  }\n\n  /**\n   * also returns form element by name.\n   * @override\n   */\n  findEl(id) {\n    return this.el[id] || super.findEl(id);\n  }\n\n  _assignFromFields(data = {}) {\n    const result = Object.assign({}, data)\n\n    // FormData cooks radio buttons and no name inputs\n    for (let [name, _] of new FormData(this.el)) {\n      result[name] = this._valueAsType(this.el[name]);\n    }\n\n    for (let fel of this.el.querySelectorAll('[data-id]')) {\n      const val = this._valueAsType(fel);\n      if (val !== undefined) {\n        result[fel.dataset.id] = val;\n      }\n    }\n\n    eachEntry(this.views, ([name, view]) => {\n      result[name] = view.data;\n    });\n\n    return result;\n  }\n\n  _valueAsType(el) {\n    const ds = el.dataset || {};\n    const type = ds.type || 'text';\n    let val = el.value;\n    if (type === 'number') {\n      val = Number(val)\n    } else if (type.startsWith('bool')) {\n      val = Boolean(val)\n    }\n    return val;\n  }\n\n  _setFieldValue(name, val) {\n    const input = this.el[name];\n    if (input) {\n      input.value = val;\n      return;\n    }\n    super._setFieldValue(name, val);\n  }\n}\n\nexport default FormView\n",
@@ -4139,7 +4152,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 192,
+    "__docId__": 191,
     "kind": "class",
     "name": "FormView",
     "memberof": "src/view/form-view.js",
@@ -4161,7 +4174,7 @@
     ]
   },
   {
-    "__docId__": 193,
+    "__docId__": 192,
     "kind": "get",
     "name": "data",
     "memberof": "src/view/form-view.js~FormView",
@@ -4180,7 +4193,7 @@
     }
   },
   {
-    "__docId__": 194,
+    "__docId__": 193,
     "kind": "set",
     "name": "data",
     "memberof": "src/view/form-view.js~FormView",
@@ -4194,7 +4207,7 @@
     "undocument": true
   },
   {
-    "__docId__": 195,
+    "__docId__": 194,
     "kind": "method",
     "name": "getValueOf",
     "memberof": "src/view/form-view.js~FormView",
@@ -4227,7 +4240,7 @@
     }
   },
   {
-    "__docId__": 196,
+    "__docId__": 195,
     "kind": "method",
     "name": "findEl",
     "memberof": "src/view/form-view.js~FormView",
@@ -4254,7 +4267,7 @@
     }
   },
   {
-    "__docId__": 197,
+    "__docId__": 196,
     "kind": "method",
     "name": "_assignFromFields",
     "memberof": "src/view/form-view.js~FormView",
@@ -4284,7 +4297,7 @@
     }
   },
   {
-    "__docId__": 198,
+    "__docId__": 197,
     "kind": "method",
     "name": "_valueAsType",
     "memberof": "src/view/form-view.js~FormView",
@@ -4311,7 +4324,7 @@
     }
   },
   {
-    "__docId__": 199,
+    "__docId__": 198,
     "kind": "method",
     "name": "_setFieldValue",
     "memberof": "src/view/form-view.js~FormView",
@@ -4340,7 +4353,7 @@
     "return": null
   },
   {
-    "__docId__": 200,
+    "__docId__": 199,
     "kind": "file",
     "name": "src/view/list-view.js",
     "content": "'use strict'\n\nimport { makeLFID } from '../core/util.js'\nimport { List } from '../model/item.js'\nimport { ListBinder } from '../model/binder.js'\nimport View from './view.js'\n\n/**\n* View for the collection of items.\n*\n* @example\n* class ListItemView extends View {\n*   html(data) {\n*     return `<li>${data.title}</li>`;\n*   }\n* }\n* \n* let instanceView = new ListView(Node, ListItemView,\n*           {\n*             data: [\n*               { title: 'foo' },\n*               { ttile: 'bar' }\n*             ]\n*           });\n*/\nclass ListView extends View {\n\n  /*\n   * Create a ListView.\n   *\n   * @param {Element} [root] - root node\n   * @param {Class} [itemView] - item view class\n   * @param {Object} [props] - properties\n   */\n  constructor(/*root, itemView, props*/) {\n    let root, props = {};\n    for (let arg of arguments) {\n      if (arg instanceof Node || typeof arg === 'string') {\n        root = arg;\n      } else if (arg && arg.constructor === Object) {\n        Object.assign(props, arg);\n      } else if (arg !== undefined) {\n        props._F_tmpl = arg; // itemView\n      }\n    }\n    super(root, props);\n  }\n\n  /** @override */\n  _privates() {\n    const pa = super._privates();\n    pa._F_itemSet = new Map();\n    return pa;\n  }\n\n  /**\n   * If you dynamically change creating item view according to the item, override this method.\n   *\n   * @param {object} item - an item\n   * @return {Class<View>}\n   */\n  itemViewClass(item) {\n    return this._F_tmpl\n  }\n\n  /**\n   * Add an item to list\n   *\n   * @param {object} item - an item\n   */\n  addItem(item) {\n    const view = this._createViewByItem(item);\n    this.addItemEl(this.container, view.el);\n    return view;\n  }\n\n  /**\n   * Insert an item to list at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  insertItem(item, index) {\n    const view = this._createViewByItem(item);\n    this.insertItemEl(this.container, view.el, this._childElAt(index));\n    return view;\n  }\n\n  /**\n   * Update an item at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  updateItem(item, index) {\n    const LFID = this._childElAt(index).getAttribute('_lfid_');\n    this._F_itemSet.set(LFID, item);\n    this.views[LFID].data = item;\n  }\n\n  /**\n   * Remove item from list\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  removeItem(item, index) {\n    const el = this._childElAt(index)\n    this._removeItemByEl(el);\n  }\n\n  /**\n   * Remove item with view\n   *\n   * @param {view} view - an view of removing item\n   */\n  removeItemByView(view) {\n    this._removeItemByEl(view.el)\n  }\n\n  /**\n   * If you change adding item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl parent element for List\n   * @param {Element} itemEl added element\n   */\n  addItemEl(listEl, itemEl) {\n    listEl.appendChild(itemEl)\n  }\n\n  /**\n   * If you change inserting item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} newEl  - an element for new item for List\n   * @param {Element} nextEl - next element will be next one for newEl\n   */\n  insertItemEl(listEl, newEl, nextEl) {\n    listEl.insertBefore(newEl, nextEl)\n  }\n\n  /**\n   * If you change removing item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} itemEl - removed element\n   */\n  removeItemEl(listEl, itemEl) {\n    listEl.removeChild(itemEl)\n  }\n\n  /**\n   * Return child element at position.\n   *\n   * @param {number} index - item position.\n   * @return {Element} target element\n   */\n  _childElAt(index) {\n    return this.container.children[index];\n  }\n\n  _createViewByItem(item) {\n    const LFID = makeLFID();\n    const cls = this.itemViewClass(item);\n    const view = new cls({ data: item });\n    this._F_itemSet.set(LFID, view);\n    this.views[LFID] = view;\n    view.el.setAttribute('_lfid_', LFID);\n    return view;\n  }\n\n  /**\n   * Remove item from list by element\n   *\n   * @param {element} el - removed element\n   */\n  _removeItemByEl(el) {\n    const LFID = el.getAttribute('_lfid_');\n    this._F_itemSet.delete(LFID);\n    const vws = this.views\n    vws[LFID].unload();\n    delete vws[LFID];\n    this.removeItemEl(this.container, el);\n  }\n\n  /** @override */\n  _bindData() {\n    const data = this._data;\n    if (data instanceof List) {\n      this._F_binders.push(new ListBinder(data, this))\n    }\n  }\n\n  /** @override */\n  _setDataToUI() {\n    if (this._data === undefined) return;\n    console.log('ListView#_setDataToUI', this);\n\n    for (let childView of Object.values(this.views)) {\n      this.removeItemByView(childView);\n    }\n\n    for (let item of this._data) {\n      this.addItem(item);\n    }\n  }\n}\n\nexport default ListView\n",
@@ -4351,7 +4364,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 201,
+    "__docId__": 200,
     "kind": "class",
     "name": "ListView",
     "memberof": "src/view/list-view.js",
@@ -4372,7 +4385,7 @@
     ]
   },
   {
-    "__docId__": 202,
+    "__docId__": 201,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/view/list-view.js~ListView",
@@ -4386,7 +4399,7 @@
     "undocument": true
   },
   {
-    "__docId__": 203,
+    "__docId__": 202,
     "kind": "method",
     "name": "_privates",
     "memberof": "src/view/list-view.js~ListView",
@@ -4406,7 +4419,7 @@
     }
   },
   {
-    "__docId__": 204,
+    "__docId__": 203,
     "kind": "method",
     "name": "itemViewClass",
     "memberof": "src/view/list-view.js~ListView",
@@ -4439,7 +4452,7 @@
     }
   },
   {
-    "__docId__": 205,
+    "__docId__": 204,
     "kind": "method",
     "name": "addItem",
     "memberof": "src/view/list-view.js~ListView",
@@ -4469,7 +4482,7 @@
     }
   },
   {
-    "__docId__": 206,
+    "__docId__": 205,
     "kind": "method",
     "name": "insertItem",
     "memberof": "src/view/list-view.js~ListView",
@@ -4509,7 +4522,7 @@
     }
   },
   {
-    "__docId__": 207,
+    "__docId__": 206,
     "kind": "method",
     "name": "updateItem",
     "memberof": "src/view/list-view.js~ListView",
@@ -4545,7 +4558,7 @@
     "return": null
   },
   {
-    "__docId__": 208,
+    "__docId__": 207,
     "kind": "method",
     "name": "removeItem",
     "memberof": "src/view/list-view.js~ListView",
@@ -4581,7 +4594,7 @@
     "return": null
   },
   {
-    "__docId__": 209,
+    "__docId__": 208,
     "kind": "method",
     "name": "removeItemByView",
     "memberof": "src/view/list-view.js~ListView",
@@ -4607,7 +4620,7 @@
     "return": null
   },
   {
-    "__docId__": 210,
+    "__docId__": 209,
     "kind": "method",
     "name": "addItemEl",
     "memberof": "src/view/list-view.js~ListView",
@@ -4643,7 +4656,7 @@
     "return": null
   },
   {
-    "__docId__": 211,
+    "__docId__": 210,
     "kind": "method",
     "name": "insertItemEl",
     "memberof": "src/view/list-view.js~ListView",
@@ -4689,7 +4702,7 @@
     "return": null
   },
   {
-    "__docId__": 212,
+    "__docId__": 211,
     "kind": "method",
     "name": "removeItemEl",
     "memberof": "src/view/list-view.js~ListView",
@@ -4725,7 +4738,7 @@
     "return": null
   },
   {
-    "__docId__": 213,
+    "__docId__": 212,
     "kind": "method",
     "name": "_childElAt",
     "memberof": "src/view/list-view.js~ListView",
@@ -4758,7 +4771,7 @@
     }
   },
   {
-    "__docId__": 214,
+    "__docId__": 213,
     "kind": "method",
     "name": "_createViewByItem",
     "memberof": "src/view/list-view.js~ListView",
@@ -4785,7 +4798,7 @@
     }
   },
   {
-    "__docId__": 215,
+    "__docId__": 214,
     "kind": "method",
     "name": "_removeItemByEl",
     "memberof": "src/view/list-view.js~ListView",
@@ -4811,7 +4824,7 @@
     "return": null
   },
   {
-    "__docId__": 216,
+    "__docId__": 215,
     "kind": "method",
     "name": "_bindData",
     "memberof": "src/view/list-view.js~ListView",
@@ -4827,7 +4840,7 @@
     "return": null
   },
   {
-    "__docId__": 217,
+    "__docId__": 216,
     "kind": "method",
     "name": "_setDataToUI",
     "memberof": "src/view/list-view.js~ListView",
@@ -4843,7 +4856,7 @@
     "return": null
   },
   {
-    "__docId__": 218,
+    "__docId__": 217,
     "kind": "file",
     "name": "src/view/page.js",
     "content": "'use strict'\n\nimport View from './view.js'\n\n/**\n* Root view of page\n*\n* @example\n* class DetailPage extends Page {\n*   title() {\n*     return 'Detail Page'\n*   }\n*\n*   html(data) {\n*     return `\\\n*     <div>\n*       <h1>${data.headline}</h1>\n*     </div>\n*     `\n*   }\n* }\n*/\nexport default class Page extends View {\n  /**\n   * Return document title\n   */\n  title() {\n    return ''\n  }\n\n  /** @override */\n  destroy() {\n    super.destroy();\n    this.el.remove();\n  }\n}\n",
@@ -4854,7 +4867,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 219,
+    "__docId__": 218,
     "kind": "class",
     "name": "Page",
     "memberof": "src/view/page.js",
@@ -4875,7 +4888,7 @@
     ]
   },
   {
-    "__docId__": 220,
+    "__docId__": 219,
     "kind": "method",
     "name": "title",
     "memberof": "src/view/page.js~Page",
@@ -4894,7 +4907,7 @@
     }
   },
   {
-    "__docId__": 221,
+    "__docId__": 220,
     "kind": "method",
     "name": "destroy",
     "memberof": "src/view/page.js~Page",
@@ -4910,7 +4923,7 @@
     "return": null
   },
   {
-    "__docId__": 222,
+    "__docId__": 221,
     "kind": "file",
     "name": "src/view/view.js",
     "content": "'use strict'\n\nimport Core from '../core/core.js'\nimport { eachEntry, makeLFID } from '../core/util.js'\nimport { Item } from '../model/item.js'\nimport { ItemBinder } from '../model/binder.js'\n\nconst HOOK_EVTS = ['click', 'submit', 'change'];\n\n/**\n* View\n*/\nclass View extends Core {\n\n  /**\n   * Create a View.\n   *\n   * @param {string|Element} root - Root element ID or root node\n   * @param {object} [props]      - Properties\n   * @param {Class<View>} [props.parent] - parent view this belongs to\n   * @param {string|Element} [props.container] - parent element of child views (specified by data-id or id value).\n   */\n  constructor(root, props) {\n    super();\n\n    /**\n     * Root element\n     * @member {Node}\n     */\n    this.el = null;\n\n    /**\n     * Subview children of the view\n     * @member {object}\n     */\n    this.views = {};\n\n    if (props === undefined && root && root.constructor === Object) {\n      props = root;\n      root = null;\n    }\n\n    this._build(root, props || {});\n  }\n\n  /** @override */\n  _privates() {\n    return Object.assign(super._privates(), {\n      _F_onevts: new Set(),\n      _F_binders: [],\n      _F_elcache: new Map()\n    })\n  }\n\n  /**\n   * Initialize props\n   * \n   * @param {object} defaults - default data.\n   * @return {object|Item} modified data or item.\n   */\n  init(defaults) {\n  }\n\n  /**\n   * For implement creating subviews and setting listener of events.\n   * \n   * @param {object} views - added subview target (ex. views.list = new ListView(..))\n   */\n  load(views) {\n  }\n\n  /**\n   * Ssetting listener of events.\n   * \n   * @param {object} evts - added listener target (ex. evts.subview_event)\n   */\n  handle(evts) {\n  }\n\n  /**\n   * For implement unloading subviews\n   */\n  unload() {\n  }\n\n  /**\n   * Cast a message to all children of view\n   *\n   * @param {string} method - method name\n   * @param {Array} args - arguments\n   */\n  broadcast(method, args = []) {\n    this._callR(args, 'views', method)\n  }\n\n  /**\n   * _loaded resolve after all done\n   */\n  _build(root, props) {\n    console.log('View#_build', root, props);\n\n    const defaults = this._setupProps(props);\n    const data = this.init(defaults);\n    this._data = data !== undefined ? data : defaults;\n    this._setRootNode(root, props.parent || null, this._data);\n    if (this.el) this._loadFinish();\n  }\n\n  _setupProps(props) {\n    let defaults;\n    if (props) {\n      // once detach data\n      defaults = props.data;\n      if ('data' in props) delete props.data;\n      Object.assign(this, props);\n    }\n    return defaults;\n  }\n\n  /**\n   * Set root node element to this.el\n   */\n  _setRootNode(root, parent, data) {\n    if (!root && this.html) {\n      this.el = root = this._buildFromHtml(data);\n      if (parent) {\n        // If this view doesn't belong to parent views\n        parent.appendEl(root);\n      }\n    } else if (this._isStr(root)) {\n      this.el = parent ? parent.findEl(root) : document.getElementById(root);\n      if (!this.el) {\n        throw new Error(`Failed to create View because element not found ID: ${root}`);\n      }\n    } else if (root) {\n      this.el = root;\n    }\n  }\n\n  _loadFinish() {\n    const ctn = this.container;\n    this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;\n\n    this._loadViewsEvts();\n    this._setDataToUI();\n    this._bindData();\n  }\n\n  _loadViewsEvts() {\n    console.log('View#_loadViewsEvts', this);\n\n    this.load(this.views);\n\n    eachEntry(this.views, ([name, view]) => {\n      if (!view.el) {\n        view.el = this.findEl(name);\n        view._loadFinish();\n      } else if (view.el.parentNode instanceof DocumentFragment) {\n        const makerEl = this.findEl(name);\n        if (makerEl) {\n          // Embed view at marker if the node exists\n          makerEl.parentNode.replaceChild(view.el, makerEl);\n        } else {\n          this.appendEl(view.el);\n        }\n      }\n    });\n\n    const evts = {};\n    this.handle(evts);\n    this._setupEvts(View._parseEvts(evts));\n  }\n\n  _bindData() {\n    const data = this._data;\n    if (data instanceof Item) {\n      this._F_binders.push(new ItemBinder(data, this));\n    }\n  }\n\n  _unbindData() {\n    const binder = this._F_binders.pop();\n    if (binder)  binder.destroy();\n  }\n\n  /**\n   * data to elements text or value, innerHTML of elements\n   *\n   * @property {object} data\n   * @example\n   * view.data = { name: 'Mike', inputAge: { value: 24 }, message: { html: \"<p>Hello!</p>\" } };\n   */\n  get data() {\n    return this._data\n  }\n\n  set data(value) {\n    console.log('View#data=', this);\n    this._data = value;\n    this._unbindData();\n    this._setDataToUI();\n    this._bindData();\n  }\n\n  /**\n   * Find an element that has specified data-id else call getElementById\n   *\n   * @param id data-id value\n   * @return {Element}\n   * @example\n   * view.findEl('elementDataId');\n   */\n  findEl(id) {\n    const cached = this._F_elcache.get(id);\n    if (cached && cached.parentNode) {\n      return cached;\n    }\n    const result = this.el.querySelector(`[data-id=\"${id}\"]`) || document.getElementById(id);\n    this._F_elcache.set(id, result);\n    return result;\n  }\n\n  /**\n   * Append child element\n   *\n   * @param {Element} el - child element\n   */\n  appendEl(el) {\n    this.container.appendChild(el)\n  }\n\n  /**\n   * Add child view as name\n   *\n   * @param {string} name - child name\n   * @param {View} view - child view\n   * @example\n   * parent.add('child', view);\n   */\n  add(name, view) {\n    this.views[name] = view;\n    this.appendEl(view.el);\n  }\n\n  /**\n   * Remove child view by name\n   *\n   * @param {string} viewName - child view name\n   * @example\n   * parent.remove('child');\n   */\n  remove(viewName) {\n    const view = this.views[viewName];\n    view.destroy();\n    view.el.remove();\n    delete this.views[viewName]\n  }\n\n  /**\n   * Fire event\n   *\n   * @param {string} name - event name\n   * @param {object} ctx - event context\n   * @example\n   * view.fire('move', { newPosition: 1 });\n   */\n  fire(name, ctx) {\n    const e = ctx ? new CustomEvent(name, { detail: ctx, bubbles: true })\n                : new Event(name, { bubbles: true });\n    this.el.dispatchEvent(e);\n  }\n\n  /**\n   * Destroy all chidren, unload, and destroy binder, teardown events\n   */\n  destroy() {\n    this.unload();\n\n    Object.values(this.views).forEach(it => it.destroy());\n    this.views = {};\n    this._F_elcache.clear();\n    this._unbindData();\n    this._teardownEvts();\n    this.parent = null;\n  }\n\n  /**\n   * Set data to subviews or elements in the view.\n   */\n  _setDataToUI() {\n    const data = this._data;\n    if (data === undefined || !(data instanceof Object)) return;\n    console.log('View#_setDataToUI', this);\n\n    eachEntry(this._data, ([name, val]) => {\n      this._setFieldValue(name, val)\n    })\n  }\n\n  _updateField(name, newValue, oldValue) {\n    this._setFieldValue(name, newValue)\n  }\n\n  _setFieldValue(name, val) {\n    if (name in this.views) {\n      this.views[name].data = val;\n      return;\n    }\n\n    const el = this.findEl(name);\n    if (!el) return;\n\n    if (el.dataset && el.dataset.type === 'html') {\n      el.innerHTML = val;\n    } else if ('value' in el) {\n      el.value = val;\n    } else {\n      el.textContent = val;\n    }\n  }\n\n  // private\n\n  _setupEvts(evtMap) {\n    eachEntry(evtMap, ([target, hmap]) => {\n      if (target === '_') {\n        this._setEvts(this.el, hmap);\n        return;\n      }\n\n      const el = this.findEl(target);\n      if (!el) {\n        console.log(`Not found event target ${target}`);\n        return;\n      }\n\n      const ts = el instanceof NodeList ? Array.from(el) : [el];\n      ts.forEach(t => this._setEvts(t, hmap));\n    })\n  }\n\n  /**\n   * Bind targets with event handler set.\n   *\n   * @param {Element} el - event raiser.\n   * @param {object} hmap - handler map. Object<type, value>\n   */\n  _setEvts(el, hmap) {\n    eachEntry(hmap, ([type, handler]) => {\n      this._trapEvt(this, el, type, handler);\n    })\n  }\n\n  /**\n   * Bind target event with handler.\n   *\n   * @param {View} root - caller\n   * @param {Element} el - event raiser\n   * @param {string} type - event type\n   * @param {function} handler - callback function\n   */\n  _trapEvt(root, el, type, handler) {\n    const hook = function(e) {\n      const rb = handler.call(root, this, e);\n      return rb !== undefined ? rb : false;\n    };\n\n    if (HOOK_EVTS.includes(type)) {\n      el['on'+type] = hook;\n    } else {\n      el.addEventListener(type, hook);\n    }\n    this._F_onevts.add([el, type, hook]);\n  }\n\n  _teardownEvts() {\n    const onevts = this._F_onevts;\n    onevts.forEach(([el, type, hook]) => {\n      if (HOOK_EVTS.includes(type)) {\n        el['on'+type] = null;\n      } else {\n        el.removeEventListener(type, hook);\n      }\n    });\n    onevts.clear();\n  }\n\n  _buildFromHtml(data) {\n    const el = document.createElement('template');\n    el.innerHTML = this.html(data || {});\n    const df = document.adoptNode(el.content);\n    return this._firstEl(df);\n  }\n\n  _firstEl(el) {\n    const fec = el.firstElementChild;\n    if (fec !== undefined) return fec;\n\n    // for Safari, Edge\n    const nodes = el.childNodes;\n    for (let i = 0, len = nodes.length; i < len; i++) {\n      const child = nodes[i];\n      if (child.nodeType === Node.ELEMENT_NODE) return child;\n    }\n    return null;\n  }\n\n  // static\n\n  static _parseEvts(handlers) {\n    const emap = { _: {} };\n\n    eachEntry(handlers, ([name, handler]) => {\n      const pos = name.lastIndexOf('_');\n      if (pos === -1) {\n        emap._[name] = handler;\n        return;\n      }\n\n      // ex) button_click\n      const target = name.substr(0, pos),\n            ename = name.substr(pos + 1),\n            hmap = emap[target];\n      if (hmap) {\n        hmap[ename] = handler;\n      } else {\n        emap[target] = { [ename]: handler };\n      }\n    })\n\n    return emap;\n  }\n}\n\nexport default View;\n",
@@ -4921,7 +4934,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 223,
+    "__docId__": 222,
     "kind": "variable",
     "name": "HOOK_EVTS",
     "memberof": "src/view/view.js",
@@ -4942,7 +4955,7 @@
     "ignore": true
   },
   {
-    "__docId__": 224,
+    "__docId__": 223,
     "kind": "class",
     "name": "View",
     "memberof": "src/view/view.js",
@@ -4960,7 +4973,7 @@
     ]
   },
   {
-    "__docId__": 225,
+    "__docId__": 224,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/view/view.js~View",
@@ -5017,7 +5030,7 @@
     ]
   },
   {
-    "__docId__": 226,
+    "__docId__": 225,
     "kind": "member",
     "name": "el",
     "memberof": "src/view/view.js~View",
@@ -5033,7 +5046,7 @@
     }
   },
   {
-    "__docId__": 227,
+    "__docId__": 226,
     "kind": "member",
     "name": "views",
     "memberof": "src/view/view.js~View",
@@ -5049,7 +5062,7 @@
     }
   },
   {
-    "__docId__": 228,
+    "__docId__": 227,
     "kind": "method",
     "name": "_privates",
     "memberof": "src/view/view.js~View",
@@ -5069,7 +5082,7 @@
     }
   },
   {
-    "__docId__": 229,
+    "__docId__": 228,
     "kind": "method",
     "name": "init",
     "memberof": "src/view/view.js~View",
@@ -5103,7 +5116,7 @@
     }
   },
   {
-    "__docId__": 230,
+    "__docId__": 229,
     "kind": "method",
     "name": "load",
     "memberof": "src/view/view.js~View",
@@ -5129,7 +5142,7 @@
     "return": null
   },
   {
-    "__docId__": 231,
+    "__docId__": 230,
     "kind": "method",
     "name": "handle",
     "memberof": "src/view/view.js~View",
@@ -5155,7 +5168,7 @@
     "return": null
   },
   {
-    "__docId__": 232,
+    "__docId__": 231,
     "kind": "method",
     "name": "unload",
     "memberof": "src/view/view.js~View",
@@ -5170,7 +5183,7 @@
     "return": null
   },
   {
-    "__docId__": 233,
+    "__docId__": 232,
     "kind": "method",
     "name": "broadcast",
     "memberof": "src/view/view.js~View",
@@ -5206,7 +5219,7 @@
     "return": null
   },
   {
-    "__docId__": 234,
+    "__docId__": 233,
     "kind": "method",
     "name": "_build",
     "memberof": "src/view/view.js~View",
@@ -5234,7 +5247,7 @@
     "return": null
   },
   {
-    "__docId__": 235,
+    "__docId__": 234,
     "kind": "member",
     "name": "_data",
     "memberof": "src/view/view.js~View",
@@ -5251,7 +5264,7 @@
     }
   },
   {
-    "__docId__": 236,
+    "__docId__": 235,
     "kind": "method",
     "name": "_setupProps",
     "memberof": "src/view/view.js~View",
@@ -5278,7 +5291,7 @@
     }
   },
   {
-    "__docId__": 237,
+    "__docId__": 236,
     "kind": "method",
     "name": "_setRootNode",
     "memberof": "src/view/view.js~View",
@@ -5312,7 +5325,7 @@
     "return": null
   },
   {
-    "__docId__": 241,
+    "__docId__": 240,
     "kind": "method",
     "name": "_loadFinish",
     "memberof": "src/view/view.js~View",
@@ -5328,7 +5341,7 @@
     "return": null
   },
   {
-    "__docId__": 242,
+    "__docId__": 241,
     "kind": "member",
     "name": "container",
     "memberof": "src/view/view.js~View",
@@ -5345,7 +5358,7 @@
     }
   },
   {
-    "__docId__": 243,
+    "__docId__": 242,
     "kind": "method",
     "name": "_loadViewsEvts",
     "memberof": "src/view/view.js~View",
@@ -5361,7 +5374,7 @@
     "return": null
   },
   {
-    "__docId__": 244,
+    "__docId__": 243,
     "kind": "method",
     "name": "_bindData",
     "memberof": "src/view/view.js~View",
@@ -5377,7 +5390,7 @@
     "return": null
   },
   {
-    "__docId__": 245,
+    "__docId__": 244,
     "kind": "method",
     "name": "_unbindData",
     "memberof": "src/view/view.js~View",
@@ -5393,7 +5406,7 @@
     "return": null
   },
   {
-    "__docId__": 246,
+    "__docId__": 245,
     "kind": "get",
     "name": "data",
     "memberof": "src/view/view.js~View",
@@ -5426,7 +5439,7 @@
     }
   },
   {
-    "__docId__": 247,
+    "__docId__": 246,
     "kind": "set",
     "name": "data",
     "memberof": "src/view/view.js~View",
@@ -5440,7 +5453,7 @@
     "undocument": true
   },
   {
-    "__docId__": 249,
+    "__docId__": 248,
     "kind": "method",
     "name": "findEl",
     "memberof": "src/view/view.js~View",
@@ -5476,7 +5489,7 @@
     }
   },
   {
-    "__docId__": 250,
+    "__docId__": 249,
     "kind": "method",
     "name": "appendEl",
     "memberof": "src/view/view.js~View",
@@ -5502,7 +5515,7 @@
     "return": null
   },
   {
-    "__docId__": 251,
+    "__docId__": 250,
     "kind": "method",
     "name": "add",
     "memberof": "src/view/view.js~View",
@@ -5541,7 +5554,7 @@
     "return": null
   },
   {
-    "__docId__": 252,
+    "__docId__": 251,
     "kind": "method",
     "name": "remove",
     "memberof": "src/view/view.js~View",
@@ -5570,7 +5583,7 @@
     "return": null
   },
   {
-    "__docId__": 253,
+    "__docId__": 252,
     "kind": "method",
     "name": "fire",
     "memberof": "src/view/view.js~View",
@@ -5609,7 +5622,7 @@
     "return": null
   },
   {
-    "__docId__": 254,
+    "__docId__": 253,
     "kind": "method",
     "name": "destroy",
     "memberof": "src/view/view.js~View",
@@ -5624,7 +5637,7 @@
     "return": null
   },
   {
-    "__docId__": 256,
+    "__docId__": 255,
     "kind": "member",
     "name": "parent",
     "memberof": "src/view/view.js~View",
@@ -5641,7 +5654,7 @@
     }
   },
   {
-    "__docId__": 257,
+    "__docId__": 256,
     "kind": "method",
     "name": "_setDataToUI",
     "memberof": "src/view/view.js~View",
@@ -5656,7 +5669,7 @@
     "return": null
   },
   {
-    "__docId__": 258,
+    "__docId__": 257,
     "kind": "method",
     "name": "_updateField",
     "memberof": "src/view/view.js~View",
@@ -5691,7 +5704,7 @@
     "return": null
   },
   {
-    "__docId__": 259,
+    "__docId__": 258,
     "kind": "method",
     "name": "_setFieldValue",
     "memberof": "src/view/view.js~View",
@@ -5720,7 +5733,7 @@
     "return": null
   },
   {
-    "__docId__": 260,
+    "__docId__": 259,
     "kind": "method",
     "name": "_setupEvts",
     "memberof": "src/view/view.js~View",
@@ -5743,7 +5756,7 @@
     "return": null
   },
   {
-    "__docId__": 261,
+    "__docId__": 260,
     "kind": "method",
     "name": "_setEvts",
     "memberof": "src/view/view.js~View",
@@ -5779,7 +5792,7 @@
     "return": null
   },
   {
-    "__docId__": 262,
+    "__docId__": 261,
     "kind": "method",
     "name": "_trapEvt",
     "memberof": "src/view/view.js~View",
@@ -5835,7 +5848,7 @@
     "return": null
   },
   {
-    "__docId__": 263,
+    "__docId__": 262,
     "kind": "method",
     "name": "_teardownEvts",
     "memberof": "src/view/view.js~View",
@@ -5851,7 +5864,7 @@
     "return": null
   },
   {
-    "__docId__": 264,
+    "__docId__": 263,
     "kind": "method",
     "name": "_buildFromHtml",
     "memberof": "src/view/view.js~View",
@@ -5878,7 +5891,7 @@
     }
   },
   {
-    "__docId__": 265,
+    "__docId__": 264,
     "kind": "method",
     "name": "_firstEl",
     "memberof": "src/view/view.js~View",
@@ -5905,7 +5918,7 @@
     }
   },
   {
-    "__docId__": 266,
+    "__docId__": 265,
     "kind": "method",
     "name": "_parseEvts",
     "memberof": "src/view/view.js~View",
@@ -5941,7 +5954,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"flatout\",\n  \"version\": \"0.6.2\",\n  \"author\": \"Toshimitsu Takahashi\",\n  \"license\": \"MIT\",\n  \"description\": \"Lightweight Single-Page-Application framework for JavaScript\",\n  \"main\": \"dist/flatout.js\",\n  \"engines\": {\n    \"node\": \">=10.10\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\",\n    \"example\": \"examples\"\n  },\n  \"files\": [\n    \"dist/*.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"lint\": \"eslint src/** spec/**\",\n    \"test\": \"mocha --timeout 15000 test/client/**.test.js\",\n    \"coverage\": \"nyc report --reporter=html\",\n    \"debug\": \"node test/inner_debug.js\",\n    \"dist\": \"./bin/dist.sh\",\n    \"doc\": \"esdoc\",\n    \"example\": \"node examples/server.js .\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:tilfin/flatout.git\"\n  },\n  \"keywords\": [\n    \"view\",\n    \"framework\",\n    \"SPA\"\n  ],\n  \"devDependencies\": {\n    \"chai\": \"^4.2.0\",\n    \"chai-spies\": \"^1.0.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^6.5.0\",\n    \"koa\": \"^2.8.2\",\n    \"koa-body\": \"^4.1.1\",\n    \"koa-bodyparser\": \"^4.2.1\",\n    \"koa-pino-logger\": \"^2.1.3\",\n    \"koa-send\": \"^5.0.0\",\n    \"mocha\": \"^6.2.1\",\n    \"nyc\": \"^14.1.1\",\n    \"puppeteer\": \"^1.20.0\",\n    \"puppeteer-to-istanbul\": \"^1.2.2\",\n    \"rollup\": \"^1.22.0\",\n    \"rollup-plugin-terser\": \"^4.0.4\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"flatout\",\n  \"version\": \"0.7.0\",\n  \"author\": \"Toshimitsu Takahashi\",\n  \"license\": \"MIT\",\n  \"description\": \"Lightweight Single-Page-Application framework for JavaScript\",\n  \"main\": \"dist/flatout.js\",\n  \"engines\": {\n    \"node\": \">=10.10\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\",\n    \"example\": \"examples\"\n  },\n  \"files\": [\n    \"dist/*.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"lint\": \"eslint src/** spec/**\",\n    \"test\": \"mocha --timeout 15000 test/client/**.test.js\",\n    \"coverage\": \"nyc report --reporter=html\",\n    \"debug\": \"node test/inner_debug.js\",\n    \"dist\": \"./bin/dist.sh\",\n    \"doc\": \"esdoc\",\n    \"example\": \"node examples/server.js .\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:tilfin/flatout.git\"\n  },\n  \"keywords\": [\n    \"view\",\n    \"framework\",\n    \"SPA\"\n  ],\n  \"devDependencies\": {\n    \"chai\": \"^4.2.0\",\n    \"chai-spies\": \"^1.0.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^6.5.0\",\n    \"koa\": \"^2.8.2\",\n    \"koa-body\": \"^4.1.1\",\n    \"koa-bodyparser\": \"^4.2.1\",\n    \"koa-pino-logger\": \"^2.1.3\",\n    \"koa-send\": \"^5.0.0\",\n    \"mocha\": \"^6.2.1\",\n    \"nyc\": \"^14.1.1\",\n    \"puppeteer\": \"^1.20.0\",\n    \"puppeteer-to-istanbul\": \"^1.2.2\",\n    \"rollup\": \"^1.22.0\",\n    \"rollup-plugin-terser\": \"^4.0.4\"\n  }\n}\n",
     "longname": "/home/toshi/work/me/flatout/package.json",
     "name": "package.json",
     "static": true,

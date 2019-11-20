@@ -148,63 +148,63 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-afterError">afterError</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-authorize">authorize</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
           <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-baseURL">baseURL</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-beforeError">beforeError</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-beforeRequest">beforeRequest</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -261,34 +261,6 @@
           
           
           <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-headers">headers</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/core/http.js~HttpClient.html#instance-member-unauthorized">unauthorized</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -595,7 +567,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber48">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
@@ -629,6 +601,27 @@
       <td data-ice="description"><p>base URL (default empty).</p>
 </td>
     </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" class="code" data-depth="1">opts.headers</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>custom headers</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" class="code" data-depth="1">opts.beforeRequest</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>async function called before the request</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" class="code" data-depth="1">opts.beforeError</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>async function called before throw an error. if return false, stop throwing the error</p>
+</td>
+    </tr>
 </tbody>
   </table>
 </div>
@@ -655,57 +648,14 @@
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-afterError">
+  <h3 data-ice="anchor" id="instance-member-baseURL">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">afterError</span><span class="code" data-ice="signature">: <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber51">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-authorize">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">authorize</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">baseURL</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -741,18 +691,61 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-baseURL">
+  <h3 data-ice="anchor" id="instance-member-beforeError">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">baseURL</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">beforeError</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber49">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber55">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-beforeRequest">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">beforeRequest</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber54">source</a></span></span>
     </span>
   </h3>
 
@@ -795,7 +788,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber57">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber59">source</a></span></span>
     </span>
   </h3>
 
@@ -835,49 +828,6 @@
     
     
     <span class="code" data-ice="name">headers</span><span class="code" data-ice="signature">: <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber50">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-unauthorized">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">unauthorized</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -927,7 +877,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber148">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber150">source</a></span></span>
     </span>
   </h3>
 
@@ -1029,7 +979,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber166">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber168">source</a></span></span>
     </span>
   </h3>
 
@@ -1131,7 +1081,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber76">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber78">source</a></span></span>
     </span>
   </h3>
 
@@ -1233,7 +1183,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber130">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber132">source</a></span></span>
     </span>
   </h3>
 
@@ -1335,7 +1285,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber94">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber96">source</a></span></span>
     </span>
   </h3>
 
@@ -1437,7 +1387,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber112">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber114">source</a></span></span>
     </span>
   </h3>
 
@@ -1541,7 +1491,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber252">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber254">source</a></span></span>
     </span>
   </h3>
 
@@ -1612,7 +1562,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber256">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber258">source</a></span></span>
     </span>
   </h3>
 
@@ -1683,7 +1633,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber192">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/http.js.html#lineNumber194">source</a></span></span>
     </span>
   </h3>
 

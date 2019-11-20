@@ -23,6 +23,10 @@ Lightweight Single-Page-Application framework for JavaScript
 - App
 - Router
 
+## Document
+
+https://tilfin.github.io/flatout/
+
 ## Setup
 
 ```

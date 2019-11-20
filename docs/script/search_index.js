@@ -702,21 +702,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/core/http.js~httpclient#aftererror",
-    "class/src/core/http.js~HttpClient.html#instance-member-afterError",
-    "src/core/http.js~HttpClient#afterError",
-    "member"
-  ],
-  [
-    "src/core/http.js~httpclient#authorize",
-    "class/src/core/http.js~HttpClient.html#instance-member-authorize",
-    "src/core/http.js~HttpClient#authorize",
-    "member"
-  ],
-  [
     "src/core/http.js~httpclient#baseurl",
     "class/src/core/http.js~HttpClient.html#instance-member-baseURL",
     "src/core/http.js~HttpClient#baseURL",
+    "member"
+  ],
+  [
+    "src/core/http.js~httpclient#beforeerror",
+    "class/src/core/http.js~HttpClient.html#instance-member-beforeError",
+    "src/core/http.js~HttpClient#beforeError",
+    "member"
+  ],
+  [
+    "src/core/http.js~httpclient#beforerequest",
+    "class/src/core/http.js~HttpClient.html#instance-member-beforeRequest",
+    "src/core/http.js~HttpClient#beforeRequest",
     "member"
   ],
   [
@@ -772,12 +772,6 @@ window.esdocSearchIndex = [
     "class/src/core/http.js~HttpClient.html#instance-method-put",
     "src/core/http.js~HttpClient#put",
     "method"
-  ],
-  [
-    "src/core/http.js~httpclient#unauthorized",
-    "class/src/core/http.js~HttpClient.html#instance-member-unauthorized",
-    "src/core/http.js~HttpClient#unauthorized",
-    "member"
   ],
   [
     "src/core/http.js~httperror#constructor",
@@ -1135,13 +1129,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/view/form-view.js~formview#data",
-    "class/src/view/form-view.js~FormView.html#instance-get-data",
+    "class/src/view/form-view.js~FormView.html#instance-set-data",
     "src/view/form-view.js~FormView#data",
     "member"
   ],
   [
     "src/view/form-view.js~formview#data",
-    "class/src/view/form-view.js~FormView.html#instance-set-data",
+    "class/src/view/form-view.js~FormView.html#instance-get-data",
     "src/view/form-view.js~FormView#data",
     "member"
   ],
@@ -1423,13 +1417,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/view/view.js~view#data",
-    "class/src/view/view.js~View.html#instance-get-data",
+    "class/src/view/view.js~View.html#instance-set-data",
     "src/view/view.js~View#data",
     "member"
   ],
   [
     "src/view/view.js~view#data",
-    "class/src/view/view.js~View.html#instance-set-data",
+    "class/src/view/view.js~View.html#instance-get-data",
     "src/view/view.js~View#data",
     "member"
   ],
