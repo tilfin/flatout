@@ -166,6 +166,8 @@ export class HttpClient {
    * @type {*} body - response body
    */
   async exec(method, path, query, body, headers = {}) {
+    headers = Object.assign({}, this.headers, headers)
+
     if (!('Content-Type' in headers)) {
       headers['Content-Type'] = this.contentType;
     }
