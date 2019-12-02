@@ -1129,13 +1129,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/view/form-view.js~formview#data",
-    "class/src/view/form-view.js~FormView.html#instance-set-data",
+    "class/src/view/form-view.js~FormView.html#instance-get-data",
     "src/view/form-view.js~FormView#data",
     "member"
   ],
   [
     "src/view/form-view.js~formview#data",
-    "class/src/view/form-view.js~FormView.html#instance-get-data",
+    "class/src/view/form-view.js~FormView.html#instance-set-data",
     "src/view/form-view.js~FormView#data",
     "member"
   ],
@@ -1380,12 +1380,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/view/view.js~view#_updatefield",
-    "class/src/view/view.js~View.html#instance-method-_updateField",
-    "src/view/view.js~View#_updateField",
-    "method"
-  ],
-  [
     "src/view/view.js~view#add",
     "class/src/view/view.js~View.html#instance-method-add",
     "src/view/view.js~View#add",
@@ -1417,13 +1411,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/view/view.js~view#data",
-    "class/src/view/view.js~View.html#instance-set-data",
+    "class/src/view/view.js~View.html#instance-get-data",
     "src/view/view.js~View#data",
     "member"
   ],
   [
     "src/view/view.js~view#data",
-    "class/src/view/view.js~View.html#instance-get-data",
+    "class/src/view/view.js~View.html#instance-set-data",
     "src/view/view.js~View#data",
     "member"
   ],
@@ -1485,6 +1479,12 @@ window.esdocSearchIndex = [
     "src/view/view.js~view#unload",
     "class/src/view/view.js~View.html#instance-method-unload",
     "src/view/view.js~View#unload",
+    "method"
+  ],
+  [
+    "src/view/view.js~view#update",
+    "class/src/view/view.js~View.html#instance-method-update",
+    "src/view/view.js~View#update",
     "method"
   ],
   [

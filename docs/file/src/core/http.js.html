@@ -221,6 +221,8 @@ export class HttpClient {
    * @type {*} body - response body
    */
   async exec(method, path, query, body, headers = {}) {
+    headers = Object.assign({}, this.headers, headers)
+
     if (!(&apos;Content-Type&apos; in headers)) {
       headers[&apos;Content-Type&apos;] = this.contentType;
     }
@@ -266,7 +268,7 @@ export class HttpClient {
     }
 
     let url = path;
-    if (this.baseURL &amp;&amp; !url.match(/^[a-z]{0,4}\:\/\//)) {
+    if (this.baseURL &amp;&amp; !url.match(/^[a-z]{0,5}\:\/\//)) {
       url = this.baseURL + url;
     }
     if (query) url += &apos;?&apos; + this._formatParams(query);

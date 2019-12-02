@@ -285,6 +285,18 @@ class View extends Core {
   }
 
   /**
+   * Called when the binding data is updated.
+   * 
+   * @param {string} name field name
+   * @param {*} newValue new data value
+   * @param {*} oldValue old data value
+   * @return {boolean} true if setting field value succeeded
+   */
+  update(name, newValue, oldValue) {
+    return this._setFieldValue(name, newValue)
+  }
+
+  /**
    * Set data to subviews or elements in the view.
    */
   _setDataToUI() {
@@ -297,18 +309,14 @@ class View extends Core {
     })
   }
 
-  _updateField(name, newValue, oldValue) {
-    this._setFieldValue(name, newValue)
-  }
-
   _setFieldValue(name, val) {
     if (name in this.views) {
       this.views[name].data = val;
-      return;
+      return true;
     }
 
     const el = this.findEl(name);
-    if (!el) return;
+    if (!el) return false;
 
     if (el.dataset && el.dataset.type === 'html') {
       el.innerHTML = val;
@@ -317,6 +325,8 @@ class View extends Core {
     } else {
       el.textContent = val;
     }
+
+    return true;
   }
 
   // private

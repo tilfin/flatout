@@ -100,7 +100,7 @@ export class ItemBinder extends Binder {
    * Updating field of view
    */
   update({ field, newValue, oldValue }) {
-    this._view._updateField(field, newValue, oldValue);
+    this._view.update(field, newValue, oldValue);
   }
 }
 
