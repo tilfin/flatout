@@ -1670,7 +1670,9 @@ class App {
       ? new HistoryRouter(routeMap, onMove, opts.rootPath)
       : new HashRouter(routeMap, onMove, opts.pathHead);
 
-    window.onload = e => { this._router.depart(); };
+    const loadCb = e => { this._router.depart(); };
+    if (document.readyState !== 'loading') loadCb();
+    else document.addEventListener('DOMContentLoaded', loadCb, false);
   }
 
   /**
