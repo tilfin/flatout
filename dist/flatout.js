@@ -41,30 +41,30 @@ class Core {
   }
 
   /**
-   * Listen a message
+   * Add handler or listener for saying message
    *
    * @param {string|Object} nameOrObj - message name, '*' specify any listener.
-   * @param {Function} handler - handler called on message received or target object.
+   * @param {Function} handler - handler called on message received or listener.
    * @example
-   * core.listen('*', function(){});
-   * core.listen('evtName1', function(){});
-   * core.listen({ evtName2: function(){}, evtName3: function(){} })
+   * core.listened('*', function(){});
+   * core.listened('evtName1', function(){});
+   * core.listened({ evtName2: function(){}, evtName3: function(){} })
    */
-  listen(nameOrObj, handler) {
+  listened(nameOrObj, handler) {
     if (handler) {
-      this._listen(nameOrObj, handler);
+      this._listened(nameOrObj, handler);
     } else {
-      eachEntry(nameOrObj, ([name, handler]) => this._listen(name, handler));
+      eachEntry(nameOrObj, ([name, handler]) => this._listened(name, handler));
     }
   }
 
   /**
-   * Unlisten a message
+   * Remove handler or listener
    *
    * @param {string} name - message name, '*' specify any listener.
-   * @param {Function|object} handler - handler registered or target registered.
+   * @param {Function|object} handler - handler registered or listener registered.
    */
-  unlisten(name, handler) {
+  unlistened(name, handler) {
     const set = this._F_obs.get(name);
     if (set) set.delete(handler);
   }
@@ -92,7 +92,7 @@ class Core {
 
   // protected scope
 
-  _listen(name, handler) {
+  _listened(name, handler) {
     const set = this._F_obs.get(name);
     if (set) {
       set.add(handler);
@@ -491,14 +491,6 @@ class Item extends Core {
       this.say('update', { field, newValue: value, oldValue: cur });
     }
   }
-
-  _addListener(target) {
-    this.listen('*', target);
-  }
-
-  _removeListener(target) {
-    this.unlisten('*', target);
-  }
 }
 
 /**
@@ -739,14 +731,14 @@ class Binder {
    */
   constructor(item) {
     this._item = item;
-    item._addListener(this);
+    item.listened('*', this);
   }
 
   /**
    * Remove listening to item
    */
   destroy() {
-    this._item._removeListener(this);
+    this._item.unlistened('*', this);
     this._item = null;
   }
 }

@@ -12,14 +12,14 @@ class Binder {
    */
   constructor(item) {
     this._item = item;
-    item._addListener(this);
+    item.listened('*', this);
   }
 
   /**
    * Remove listening to item
    */
   destroy() {
-    this._item._removeListener(this);
+    this._item.unlistened('*', this);
     this._item = null;
   }
 }

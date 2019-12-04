@@ -10,21 +10,21 @@ export default describe('Core', () => {
   describe("#listen", () => {
     it("adds a handler for a name", () => {
       const handler = () => {};
-      core.listen('name', handler);
+      core.listened('name', handler);
       expect(core._F_obs.get('name')).to.include(handler);
     })
 
     it("adds a handler for each name at once", () => {
       const handlerA = () => {};
       const handlerB = () => {};
-      core.listen({ nameA: handlerA, nameB: handlerB });
+      core.listened({ nameA: handlerA, nameB: handlerB });
       expect(core._F_obs.get('nameA')).to.include(handlerA);
       expect(core._F_obs.get('nameB')).to.include(handlerB);
     })
 
     it("adds a handler for any names", () => {
       const handler = () => {};
-      core.listen({ nameA: handler, nameB: handler });
+      core.listened({ nameA: handler, nameB: handler });
       expect(core._F_obs.get('nameA')).to.include(handler);
       expect(core._F_obs.get('nameB')).to.include(handler);
     })
@@ -32,9 +32,9 @@ export default describe('Core', () => {
     it("adds handlers for a name", () => {
       const handlerA = () => {};
       const handlerB = () => {};
-      core.listen('nameC', handlerA);
+      core.listened('nameC', handlerA);
       expect(core._F_obs.get('nameC')).to.include(handlerA);
-      core.listen('nameC', handlerB);
+      core.listened('nameC', handlerB);
       expect(core._F_obs.get('nameC')).to.include(handlerA);
       expect(core._F_obs.get('nameC')).to.include(handlerB);
     })
@@ -48,22 +48,22 @@ export default describe('Core', () => {
     const handlerB = () => {};
 
     beforeEach(() => {
-      core.listen(nameA, handlerA1);
-      core.listen(nameA, handlerA2);
-      core.listen(nameB, handlerB);
+      core.listened(nameA, handlerA1);
+      core.listened(nameA, handlerA2);
+      core.listened(nameB, handlerB);
     })
 
     it("removes a handler for a name", () => {
-      core.unlisten(nameB, handlerB);
+      core.unlistened(nameB, handlerB);
       expect(core._F_obs.get(nameB)).not.to.include(handlerB);
       expect(core._F_obs.get(nameA)).to.include(handlerA1); // not affect
     })
 
     it("removes each handler for a name", () => {
-      core.unlisten(nameA, handlerA1);
+      core.unlistened(nameA, handlerA1);
       expect(core._F_obs.get(nameA)).not.to.include(handlerA1);
       expect(core._F_obs.get(nameA)).to.include(handlerA2); // remain
-      core.unlisten(nameA, handlerA2);
+      core.unlistened(nameA, handlerA2);
       expect(core._F_obs.get(nameA)).not.to.include(handlerA2);
       expect(core._F_obs.get(nameB)).to.include(handlerB); // not affect
     })
@@ -81,9 +81,9 @@ export default describe('Core', () => {
       handlerA1 = chai.spy();
       handlerA2 = chai.spy();
       handlerB = chai.spy();
-      core.listen(nameA, handlerA1);
-      core.listen(nameA, handlerA2);
-      core.listen(nameB, handlerB);
+      core.listened(nameA, handlerA1);
+      core.listened(nameA, handlerA2);
+      core.listened(nameB, handlerB);
     })
 
     it("cast a message", () => {

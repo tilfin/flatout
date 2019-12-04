@@ -21,7 +21,7 @@ describe('Item', () => {
     context('its value is a number', () => {
       it('adds new value to old value', () => {
         const item = new Item({ count: 2 })
-        item.listen('update', ({ field, newValue, oldValue }) => {
+        item.listened('update', ({ field, newValue, oldValue }) => {
           expect(field).to.eq('count')
           expect(newValue).to.eq(5)
           expect(oldValue).to.eq(2)
@@ -34,7 +34,7 @@ describe('Item', () => {
     context('its value is an array', () => {
       it('pushes new value to its array', () => {
         const item = new Item({ array: [1] })
-        item.listen('update', ({ field, newValue, oldValue }) => {
+        item.listened('update', ({ field, newValue, oldValue }) => {
           expect(field).to.eq('array')
           expect(newValue).to.deep.eq([1, 2])
           expect(oldValue).to.deep.eq([1, 2]) // Destruction

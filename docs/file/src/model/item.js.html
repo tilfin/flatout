@@ -141,14 +141,6 @@ export class Item extends Core {
       this.say(&apos;update&apos;, { field, newValue: value, oldValue: cur });
     }
   }
-
-  _addListener(target) {
-    this.listen(&apos;*&apos;, target);
-  }
-
-  _removeListener(target) {
-    this.unlisten(&apos;*&apos;, target);
-  }
 }
 
 /**

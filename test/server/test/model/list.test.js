@@ -69,7 +69,7 @@ describe('List', () => {
         const A = {}, B = {}
         const list = new List([A, B])
         const deletedItems = []
-        list.listen('remove', ({ item, index }) => deletedItems.push(item))
+        list.listened('remove', ({ item, index }) => deletedItems.push(item))
         list.removeAll()
         expect(deletedItems).to.deep.eq([A, B])
       })
@@ -80,7 +80,7 @@ describe('List', () => {
         const A = {}, B = {}
         const list = new List([A, B])
         const deletedItems = []
-        list.listen('remove', ({ item, index }) => deletedItems.push(item))
+        list.listened('remove', ({ item, index }) => deletedItems.push(item))
         list.removeAll()
         expect(deletedItems).to.deep.eq([A, B])
       })
@@ -91,7 +91,7 @@ describe('List', () => {
         const A = {}, B = {}
         const list = new List([A, B])
         const deletedItems = []
-        list.listen('remove', ({ item, index }) => deletedItems.push(item))
+        list.listened('remove', ({ item, index }) => deletedItems.push(item))
         list.removeAll()
         expect(deletedItems).to.deep.eq([B, A])
       })

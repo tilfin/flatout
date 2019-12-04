@@ -630,9 +630,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/core/core.js~core#_listen",
-    "class/src/core/core.js~Core.html#instance-method-_listen",
-    "src/core/core.js~Core#_listen",
+    "src/core/core.js~core#_listened",
+    "class/src/core/core.js~Core.html#instance-method-_listened",
+    "src/core/core.js~Core#_listened",
     "method"
   ],
   [
@@ -654,9 +654,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/core/core.js~core#listen",
-    "class/src/core/core.js~Core.html#instance-method-listen",
-    "src/core/core.js~Core#listen",
+    "src/core/core.js~core#listened",
+    "class/src/core/core.js~Core.html#instance-method-listened",
+    "src/core/core.js~Core#listened",
     "method"
   ],
   [
@@ -672,9 +672,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/core/core.js~core#unlisten",
-    "class/src/core/core.js~Core.html#instance-method-unlisten",
-    "src/core/core.js~Core#unlisten",
+    "src/core/core.js~core#unlistened",
+    "class/src/core/core.js~Core.html#instance-method-unlistened",
+    "src/core/core.js~Core#unlistened",
     "method"
   ],
   [
@@ -940,18 +940,6 @@ window.esdocSearchIndex = [
     "class/src/model/item.js~Item.html#instance-member-[field]",
     "src/model/item.js~Item#[field]",
     "member"
-  ],
-  [
-    "src/model/item.js~item#_addlistener",
-    "class/src/model/item.js~Item.html#instance-method-_addListener",
-    "src/model/item.js~Item#_addListener",
-    "method"
-  ],
-  [
-    "src/model/item.js~item#_removelistener",
-    "class/src/model/item.js~Item.html#instance-method-_removeListener",
-    "src/model/item.js~Item#_removeListener",
-    "method"
   ],
   [
     "src/model/item.js~item#_updatefield",

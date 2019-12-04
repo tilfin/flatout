@@ -43,6 +43,6 @@ module.exports = app
 
 if (!module.parent) {
   const port = process.env.PORT || 18888
-  app.listen(port)
+  app.listened(port)
   console.info(`Open http://localhost:${port}/`)
 }

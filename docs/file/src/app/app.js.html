@@ -94,7 +94,9 @@ class App {
       ? new HistoryRouter(routeMap, onMove, opts.rootPath)
       : new HashRouter(routeMap, onMove, opts.pathHead);
 
-    window.onload = e =&gt; { this._router.depart() }
+    const loadCb = e =&gt; { this._router.depart() }
+    if (document.readyState !== &apos;loading&apos;) loadCb()
+    else document.addEventListener(&apos;DOMContentLoaded&apos;, loadCb, false)
   }
 
   /**

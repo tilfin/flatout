@@ -149,13 +149,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/core/core.js~Core.html#instance-method-listen">listen</a></span></span><span class="code" data-ice="signature">(nameOrObj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/core/core.js~Core.html#instance-method-listened">listened</a></span></span><span class="code" data-ice="signature">(nameOrObj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Listen a message</p>
+        <div data-ice="description"><p>Add handler or listener for saying message</p>
 </div>
       </div>
     </td>
@@ -236,13 +236,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/core/core.js~Core.html#instance-method-unlisten">unlisten</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/core/core.js~Core.html#instance-method-unlistened">unlistened</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Unlisten a message</p>
+        <div data-ice="description"><p>Remove handler or listener</p>
 </div>
       </div>
     </td>
@@ -355,7 +355,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/core/core.js~Core.html#instance-method-_listen">_listen</a></span></span><span class="code" data-ice="signature">(name: <span>*</span>, handler: <span>*</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/core/core.js~Core.html#instance-method-_listened">_listened</a></span></span><span class="code" data-ice="signature">(name: <span>*</span>, handler: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -485,14 +485,14 @@
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-listen">
+  <h3 data-ice="anchor" id="instance-method-listened">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">listen</span><span class="code" data-ice="signature">(nameOrObj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>)</span>
+    <span class="code" data-ice="name">listened</span><span class="code" data-ice="signature">(nameOrObj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>)</span>
     <span class="right-info">
       
       
@@ -503,7 +503,7 @@
   
   
   
-  <div data-ice="description"><p>Listen a message</p>
+  <div data-ice="description"><p>Add handler or listener for saying message</p>
 </div>
 
   
@@ -527,7 +527,7 @@
       <td data-ice="name" class="code" data-depth="0">handler</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>handler called on message received or target object.</p>
+      <td data-ice="description"><p>handler called on message received or listener.</p>
 </td>
     </tr>
 </tbody>
@@ -550,9 +550,9 @@
     
   <div class="example-doc" data-ice="exampleDoc">
       
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">core.listen(&apos;*&apos;, function(){});
-core.listen(&apos;evtName1&apos;, function(){});
-core.listen({ evtName2: function(){}, evtName3: function(){} })</code></pre>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">core.listened(&apos;*&apos;, function(){});
+core.listened(&apos;evtName1&apos;, function(){});
+core.listened({ evtName2: function(){}, evtName3: function(){} })</code></pre>
     </div>
 </div>
 
@@ -704,14 +704,14 @@ core.listen({ evtName2: function(){}, evtName3: function(){} })</code></pre>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-unlisten">
+  <h3 data-ice="anchor" id="instance-method-unlistened">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">unlisten</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+    <span class="code" data-ice="name">unlistened</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, handler: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
     <span class="right-info">
       
       
@@ -722,7 +722,7 @@ core.listen({ evtName2: function(){}, evtName3: function(){} })</code></pre>
   
   
   
-  <div data-ice="description"><p>Unlisten a message</p>
+  <div data-ice="description"><p>Remove handler or listener</p>
 </div>
 
   
@@ -746,7 +746,7 @@ core.listen({ evtName2: function(){}, evtName3: function(){} })</code></pre>
       <td data-ice="name" class="code" data-depth="0">handler</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>handler registered or target registered.</p>
+      <td data-ice="description"><p>handler registered or listener registered.</p>
 </td>
     </tr>
 </tbody>
@@ -993,14 +993,14 @@ core.listen({ evtName2: function(){}, evtName3: function(){} })</code></pre>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-_listen">
+  <h3 data-ice="anchor" id="instance-method-_listened">
     <span class="access" data-ice="access">private</span>
     
     
     
     
     
-    <span class="code" data-ice="name">_listen</span><span class="code" data-ice="signature">(name: <span>*</span>, handler: <span>*</span>)</span>
+    <span class="code" data-ice="name">_listened</span><span class="code" data-ice="signature">(name: <span>*</span>, handler: <span>*</span>)</span>
     <span class="right-info">
       
       
