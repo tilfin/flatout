@@ -927,16 +927,20 @@ class View extends Core {
    * Set root node element to this.el
    */
   _setRootNode(root, parent, data) {
-    if (!root && this.html) {
-      this.el = root = this._buildFromHtml(data);
+    if (this._isStr(root)) {
+      root = parent ? parent.findEl(root) : document.getElementById(root);
+      if (!root) {
+        throw new Error(`Failed to create View because element not found ID: ${root}`);
+      }
+    }
+
+    if (this.html) {
+      this.el = this._buildFromHtml(data);
       if (parent) {
         // If this view doesn't belong to parent views
-        parent.appendEl(root);
-      }
-    } else if (this._isStr(root)) {
-      this.el = parent ? parent.findEl(root) : document.getElementById(root);
-      if (!this.el) {
-        throw new Error(`Failed to create View because element not found ID: ${root}`);
+        parent.appendEl(this.el);
+      } else if (root) {
+        root.parentNode.replaceChild(this.el, root);
       }
     } else if (root) {
       this.el = root;
