@@ -1,7 +1,7 @@
 'use strict'
 
 import Core from '../core/core.js'
-import { eachEntry, makeLFID } from '../core/util.js'
+import { eachEntry } from '../core/util.js'
 import { Item } from '../model/item.js'
 import { ItemBinder } from '../model/binder.js'
 
@@ -184,7 +184,7 @@ class View extends Core {
 
   _unbindData() {
     const binder = this._F_binders.pop();
-    if (binder)  binder.destroy();
+    if (binder) binder.destroy();
   }
 
   /**

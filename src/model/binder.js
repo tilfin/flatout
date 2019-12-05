@@ -58,11 +58,11 @@ export class ListBinder extends Binder {
   /**
    * Constructor.
    * 
-   * @param {List} collection - target data
+   * @param {List} list - target data
    * @param {ListView} listView - target view
    */
-  constructor(collection, listView) {
-    super(collection)
+  constructor(list, listView) {
+    super(list)
     this._view = listView;
   }
 

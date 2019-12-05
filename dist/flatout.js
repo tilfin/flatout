@@ -354,7 +354,7 @@ class HttpClient {
     }
 
     let url = path;
-    if (this.baseURL && !url.match(/^[a-z]{0,5}\:\/\//)) {
+    if (this.baseURL && !url.match(/^[a-z]{2,5}:\/\//)) {
       url = this.baseURL + url;
     }
     if (query) url += '?' + this._formatParams(query);
@@ -777,11 +777,11 @@ class ListBinder extends Binder {
   /**
    * Constructor.
    * 
-   * @param {List} collection - target data
+   * @param {List} list - target data
    * @param {ListView} listView - target view
    */
-  constructor(collection, listView) {
-    super(collection);
+  constructor(list, listView) {
+    super(list);
     this._view = listView;
   }
 
@@ -990,7 +990,7 @@ class View extends Core {
 
   _unbindData() {
     const binder = this._F_binders.pop();
-    if (binder)  binder.destroy();
+    if (binder) binder.destroy();
   }
 
   /**
