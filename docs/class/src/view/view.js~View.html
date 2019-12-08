@@ -146,7 +146,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(root: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>Element</span>, props: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(props: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -182,7 +182,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-member-container">container</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-member-contentEl">contentEl</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1569,7 +1569,7 @@
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(root: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>Element</span>, props: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(props: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
     <span class="right-info">
       
       
@@ -1594,17 +1594,17 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">root</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>Element</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Root element ID or root node</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">props</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
       <td data-ice="description"><p>Properties</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="1">
+      <td data-ice="name" class="code" data-depth="1">props.rootEl</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>Element</span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>root element ID or root node</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="1">
@@ -1615,7 +1615,7 @@
 </td>
     </tr>
 <tr data-ice="property" data-depth="1">
-      <td data-ice="name" class="code" data-depth="1">props.container</td>
+      <td data-ice="name" class="code" data-depth="1">props.contentEl</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>Element</span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
       <td data-ice="description"><p>parent element of child views (specified by data-id or id value).</p>
@@ -1647,14 +1647,14 @@
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-container">
+  <h3 data-ice="anchor" id="instance-member-contentEl">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">container</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">contentEl</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -1944,7 +1944,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber100">source</a></span></span>
     </span>
   </h3>
 
@@ -2126,7 +2126,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber88">source</a></span></span>
     </span>
   </h3>
 
@@ -2393,7 +2393,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber77">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber73">source</a></span></span>
     </span>
   </h3>
 
@@ -2454,7 +2454,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber61">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber57">source</a></span></span>
     </span>
   </h3>
 
@@ -2528,7 +2528,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber69">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber65">source</a></span></span>
     </span>
   </h3>
 
@@ -2657,7 +2657,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber83">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber79">source</a></span></span>
     </span>
   </h3>
 
@@ -2834,7 +2834,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber99">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber95">source</a></span></span>
     </span>
   </h3>
 
@@ -3128,7 +3128,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber47">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber43">source</a></span></span>
     </span>
   </h3>
 
@@ -3373,7 +3373,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber123">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber119">source</a></span></span>
     </span>
   </h3>
 
@@ -3504,7 +3504,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber109">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber105">source</a></span></span>
     </span>
   </h3>
 

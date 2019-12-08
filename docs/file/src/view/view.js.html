@@ -56,7 +56,7 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
 
 import Core from &apos;../core/core.js&apos;
-import { eachEntry, makeLFID } from &apos;../core/util.js&apos;
+import { eachEntry } from &apos;../core/util.js&apos;
 import { Item } from &apos;../model/item.js&apos;
 import { ItemBinder } from &apos;../model/binder.js&apos;
 
@@ -70,12 +70,12 @@ class View extends Core {
   /**
    * Create a View.
    *
-   * @param {string|Element} root - Root element ID or root node
-   * @param {object} [props]      - Properties
+   * @param {object} [props] - Properties
+   * @param {string|Element} [props.rootEl] - root element ID or root node
    * @param {Class&lt;View&gt;} [props.parent] - parent view this belongs to
-   * @param {string|Element} [props.container] - parent element of child views (specified by data-id or id value).
+   * @param {string|Element} [props.contentEl] - parent element of child views (specified by data-id or id value).
    */
-  constructor(root, props) {
+  constructor(props = {}) {
     super();
 
     /**
@@ -90,12 +90,8 @@ class View extends Core {
      */
     this.views = {};
 
-    if (props === undefined &amp;&amp; root &amp;&amp; root.constructor === Object) {
-      props = root;
-      root = null;
-    }
-
-    this._build(root, props || {});
+    const { rootEl, ...props_ } = props;
+    this._build(rootEl, props_);
   }
 
   /** @override */
@@ -176,16 +172,20 @@ class View extends Core {
    * Set root node element to this.el
    */
   _setRootNode(root, parent, data) {
-    if (!root &amp;&amp; this.html) {
-      this.el = root = this._buildFromHtml(data);
+    if (this._isStr(root)) {
+      root = parent ? parent.findEl(root) : document.getElementById(root);
+      if (!root) {
+        throw new Error(`Failed to create View because element not found ID: ${root}`);
+      }
+    }
+
+    if (this.html) {
+      this.el = this._buildFromHtml(data);
       if (parent) {
         // If this view doesn&apos;t belong to parent views
-        parent.appendEl(root);
-      }
-    } else if (this._isStr(root)) {
-      this.el = parent ? parent.findEl(root) : document.getElementById(root);
-      if (!this.el) {
-        throw new Error(`Failed to create View because element not found ID: ${root}`);
+        parent.appendEl(this.el);
+      } else if (root) {
+        root.parentNode.replaceChild(this.el, root);
       }
     } else if (root) {
       this.el = root;
@@ -193,8 +193,8 @@ class View extends Core {
   }
 
   _loadFinish() {
-    const ctn = this.container;
-    this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;
+    const ctn = this.contentEl;
+    this.contentEl = this._isStr(ctn) ? this.findEl(ctn) : this.el;
 
     this._loadViewsEvts();
     this._setDataToUI();
@@ -235,7 +235,7 @@ class View extends Core {
 
   _unbindData() {
     const binder = this._F_binders.pop();
-    if (binder)  binder.destroy();
+    if (binder) binder.destroy();
   }
 
   /**
@@ -281,7 +281,7 @@ class View extends Core {
    * @param {Element} el - child element
    */
   appendEl(el) {
-    this.container.appendChild(el)
+    this.contentEl.appendChild(el)
   }
 
   /**

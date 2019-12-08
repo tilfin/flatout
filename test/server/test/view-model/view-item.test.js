@@ -5,7 +5,7 @@ import { Item } from '/lib/model/item.js';
 const expect = chai.expect;
 
 describe('View-Item', () => {
-  const rootArea = new View('areaSandBox');
+  const rootArea = new View({ rootEl: 'areaSandBox' });
 
   beforeEach(() => {
     document.getElementById('areaSandBox').innerHTML = ''

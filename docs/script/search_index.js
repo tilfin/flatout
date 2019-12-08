@@ -1392,9 +1392,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/view/view.js~view#container",
-    "class/src/view/view.js~View.html#instance-member-container",
-    "src/view/view.js~View#container",
+    "src/view/view.js~view#contentel",
+    "class/src/view/view.js~View.html#instance-member-contentEl",
+    "src/view/view.js~View#contentEl",
     "member"
   ],
   [

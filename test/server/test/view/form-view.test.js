@@ -15,13 +15,13 @@ describe('FormView', () => {
   })
 
   it('creates new instance', async () => {
-    const form = new FormView('theForm')
+    const form = new FormView({ rootEl: 'theForm' })
     expect(form.el.id).to.eq("theForm")
     expect(form.el.name.value).to.be.empty
   })
 
   it('creates new instance with prop', async () => {
-    const form = new FormView('theForm', { prop1: 100, prop2: 'foo' })
+    const form = new FormView({ rootEl: 'theForm', prop1: 100, prop2: 'foo' })
     expect(form.el.id).to.eq("theForm");
     expect(form.el.name.value).to.be.empty
     expect(form.prop1).to.eq(100);
@@ -29,7 +29,8 @@ describe('FormView', () => {
   })
 
   it('creates new instance expanding data of prop', () => {
-    const form = new FormView('theForm', {
+    const form = new FormView({
+        rootEl: 'theForm',
         data: { name: 'Nancy', age: 25, gender: 'female', country: 'uk' },
         fields: ['name', 'age', 'gender', 'country']
       })
@@ -45,7 +46,8 @@ describe('FormView', () => {
   })
 
   it('creates new instance with fields, data and load', () => {
-    const form = new FormView('theForm', {
+    const form = new FormView({
+        rootEl: 'theForm',
         prop1: 100,
         fields: 'name gender',
         data: {
@@ -80,7 +82,8 @@ describe('FormView', () => {
         }
       }
 
-      const form = new SubFormView('theForm', {
+      const form = new SubFormView({
+                      rootEl: 'theForm',
                       data: {
                         name: 'Ken',
                         gender: 'male',

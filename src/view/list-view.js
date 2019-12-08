@@ -28,22 +28,15 @@ class ListView extends View {
   /*
    * Create a ListView.
    *
-   * @param {Element} [root] - root node
+   * @param {object} [props] - Properties
+   * @param {string|Element} [props.rootEl] - root element ID or root node
    * @param {Class} [itemView] - item view class
-   * @param {Object} [props] - properties
+   * @param {Class<View>} [props.parent] - parent view this belongs to
+   * @param {string|Element} [props.contentEl] - parent element of child views (specified by data-id or id value).
    */
-  constructor(/*root, itemView, props*/) {
-    let root, props = {};
-    for (let arg of arguments) {
-      if (arg instanceof Node || typeof arg === 'string') {
-        root = arg;
-      } else if (arg && arg.constructor === Object) {
-        Object.assign(props, arg);
-      } else if (arg !== undefined) {
-        props._F_tmpl = arg; // itemView
-      }
-    }
-    super(root, props);
+  constructor(itemView, props = {}) {
+    props._F_tmpl = itemView;
+    super(props);
   }
 
   /** @override */
@@ -70,7 +63,7 @@ class ListView extends View {
    */
   addItem(item) {
     const view = this._createViewByItem(item);
-    this.addItemEl(this.container, view.el);
+    this.addItemEl(this.contentEl, view.el);
     return view;
   }
 
@@ -82,7 +75,7 @@ class ListView extends View {
    */
   insertItem(item, index) {
     const view = this._createViewByItem(item);
-    this.insertItemEl(this.container, view.el, this._childElAt(index));
+    this.insertItemEl(this.contentEl, view.el, this._childElAt(index));
     return view;
   }
 
@@ -159,7 +152,7 @@ class ListView extends View {
    * @return {Element} target element
    */
   _childElAt(index) {
-    return this.container.children[index];
+    return this.contentEl.children[index];
   }
 
   _createViewByItem(item) {
@@ -183,7 +176,7 @@ class ListView extends View {
     const vws = this.views
     vws[LFID].unload();
     delete vws[LFID];
-    this.removeItemEl(this.container, el);
+    this.removeItemEl(this.contentEl, el);
   }
 
   /** @override */

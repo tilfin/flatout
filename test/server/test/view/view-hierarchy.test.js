@@ -19,13 +19,19 @@ class TestSubArea extends View {
 }
 
 describe('View hierarchy', () => {
+  let sandBoxView = null
+
+  beforeEach(() => {
+    sandBoxView = new View({ rootEl: 'areaSandBox' })
+  })
+
   afterEach(() => {
     document.getElementById('areaSandBox').innerHTML = ''
   })
 
   describe('Root element specified by element ID', () => {
     it('View.el is valid', () => {
-      const testArea = new View('areaSandBox')
+      const testArea = new View({ rootEl: 'areaSandBox' })
       expect(document.getElementById('areaSandBox')).to.eq(testArea.el)
     })
   })
@@ -43,10 +49,12 @@ describe('View hierarchy', () => {
   })
 
   describe('appendEl', () => {
-    context('container is specified by string', () => {
-      it('appends child area to container of parent area', () => {
-        const testArea = new TestArea({ container: 'contentBox' })
-        document.getElementById('areaSandBox').appendChild(testArea.el)
+    context('content is specified by string', () => {
+      it('appends child area to content of parent area', () => {
+        const testArea = new TestArea({
+          parent: sandBoxView,
+          contentEl: 'contentBox'
+        })
 
         const testSubArea = new TestSubArea({
           parent: testArea,

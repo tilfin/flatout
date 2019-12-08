@@ -23,7 +23,7 @@ import { App, View, Page } from '../../lib/flatout.js';
 
 class MainView extends View {
   constructor() {
-    super(document.body, { container: 'main' })
+    super({ rootEl: document.body, contentEl: 'main' })
   }
 
   title(pageTitle) {

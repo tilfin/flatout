@@ -1846,7 +1846,7 @@
     "__docId__": 103,
     "kind": "file",
     "name": "src/core/http.js",
-    "content": "'use strict'\n\n/**\n * Http Error\n */\nexport class HttpError {\n\n  /**\n   * @contructor\n   * @param req  request\n   * @param resOrErr response or Error\n   */\n  constructor(req, resOrErr) {\n    this.req = req;\n\n    if (typeof resOrErr === 'string') {\n      this.res = null;\n\n      this.isTimeout = (resOrErr === 'timeout');\n      this.isAborted = (resOrErr === 'abort');\n      this.isNetworkError = (resOrErr === 'error');\n    } else {\n      this.res = resOrErr;\n\n      let code = this.res.status;\n      this.isBadRequest   = (code === 400);\n      this.isUnauthorized = (code === 401);\n      this.isForbidden    = (code === 403);\n      this.isNotFound     = (code === 404);\n      this.isConflict     = (code === 409);\n      this.isServerError  = (code >= 500);\n    }\n  }\n}\n\n/**\n * HTTP Client\n *\n * @class HttpClient\n */\nexport class HttpClient {\n\n  /**\n   * Constructor.\n   * @param {object} [opts] - options\n   * @param {string} [opts.baseURL] - base URL (default empty).\n   * @param {object} [opts.headers] - custom headers\n   * @param {Promise} [opts.beforeRequest] - async function called before the request\n   * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error\n   */\n  constructor(opts = {}) {\n    this.baseURL = opts.baseURL || '';\n    this.headers = opts.headers || {};\n    this.beforeRequest = opts.beforeRequest || (async () => {});\n    this.beforeError = opts.beforeError || (async () => true);\n\n    const bodyType = opts.bodyType || '';\n    if (bodyType.includes('form')) {\n      this.contentType = 'application/x-www-form-urlencoded';\n    } else {\n      this.contentType = 'application/json;charset=UTF-8';\n    }\n  }\n\n  /**\n   * do GET request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  get(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('GET', path, query, body, headers);\n  }\n\n  /**\n   * do POST request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  post(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('POST', path, query, body, headers);\n  }\n\n  /**\n   * do PUT request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  put(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PUT', path, query, body, headers);\n  }\n\n  /**\n   * do PATCH request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  patch(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PATCH', path, query, body, headers);\n  }\n\n  /**\n   * do DELETE request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  delete(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('DELETE', path, query, body, headers);\n  }\n\n  /**\n   * execute http request.\n   * \n   * @param  {string} method - method\n   * @param  {string} path - request path\n   * @param  {object} query - request query data\n   * @param  {string|object} body - request body\n   * @param  {object} headers - header name and value object\n   * @return {Promise} Promise\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  async exec(method, path, query, body, headers = {}) {\n    headers = Object.assign({}, this.headers, headers)\n\n    if (!('Content-Type' in headers)) {\n      headers['Content-Type'] = this.contentType;\n    }\n\n    await this.beforeRequest(path, { query, body, headers })\n\n    const req = { method, path, headers };\n    let httpErr;\n    try {\n      const res = await this._request(method, path, { query, body, headers });\n      const { status } = res;\n      if (status < 400) {\n        return res;\n      }\n\n      httpErr = new HttpError(req, res);\n    } catch(errType) {\n      httpErr = new HttpError(req, errType);\n    }\n\n    if (await this.beforeError(httpErr) !== false) {\n      throw httpErr;\n    }\n  }\n\n  _request(method, path, { query, body, headers }) {\n    let reqBody;\n    if (body) {\n      const cttType = headers['Content-Type'];\n      if (cttType.match(/\\/form-data/)) {\n        reqBody = new FormData();\n        for (let field in body) {\n          reqBody.append(field, body[field]);\n        }\n        delete headers['Content-Type']; // FormData set it with boundary\n      } else if (cttType.match(/\\/json/)) {\n        reqBody = JSON.stringify(body);\n      } else {\n        reqBody = this._formatParams(body);\n      }\n    } else {\n      reqBody = undefined;\n    }\n\n    let url = path;\n    if (this.baseURL && !url.match(/^[a-z]{0,5}\\:\\/\\//)) {\n      url = this.baseURL + url;\n    }\n    if (query) url += '?' + this._formatParams(query);\n\n    return new Promise((resolve, reject) => {\n        let xhr = new XMLHttpRequest();\n        xhr.open(method, url, true);\n\n        for (let name in headers) {\n          xhr.setRequestHeader(name, headers[name]);\n        }\n\n        xhr.onload = (evt) => {\n          let resBody, resCttType = xhr.getResponseHeader('Content-Type');\n          if (resCttType === null) {\n            resBody = null;\n          } else if (resCttType.match(/\\/json/)) {\n            resBody = JSON.parse(xhr.response);\n          } else if (resCttType.match(/\\/form/)) {\n            resBody = this._fromFormData(xhr.response);\n          } else {\n            resBody = xhr.response;\n          }\n\n          resolve({\n            status: xhr.status,\n            headers: xhr.getAllResponseHeaders(),\n            body: resBody\n          });\n        }\n\n        xhr.onabort = function(err){ reject('abort') };\n        xhr.onerror = function(err){ reject('error') };\n        xhr.ontimeout = function(err){ reject('timeout') };\n\n        xhr.send(reqBody);\n      });\n  }\n\n  _formatParams(params) {\n    return new URLSearchParams(params).toString()\n  }\n\n  _fromFormData(body) {\n    const data = {};\n    body.split('&').forEach(item => {\n      const [key, val] = item.split('=');\n      data[decodeURIComponent(key)] = decodeURIComponent(val);\n    });\n    return data;\n  }\n}\n",
+    "content": "'use strict'\n\n/**\n * Http Error\n */\nexport class HttpError {\n\n  /**\n   * @contructor\n   * @param req  request\n   * @param resOrErr response or Error\n   */\n  constructor(req, resOrErr) {\n    this.req = req;\n\n    if (typeof resOrErr === 'string') {\n      this.res = null;\n\n      this.isTimeout = (resOrErr === 'timeout');\n      this.isAborted = (resOrErr === 'abort');\n      this.isNetworkError = (resOrErr === 'error');\n    } else {\n      this.res = resOrErr;\n\n      let code = this.res.status;\n      this.isBadRequest   = (code === 400);\n      this.isUnauthorized = (code === 401);\n      this.isForbidden    = (code === 403);\n      this.isNotFound     = (code === 404);\n      this.isConflict     = (code === 409);\n      this.isServerError  = (code >= 500);\n    }\n  }\n}\n\n/**\n * HTTP Client\n *\n * @class HttpClient\n */\nexport class HttpClient {\n\n  /**\n   * Constructor.\n   * @param {object} [opts] - options\n   * @param {string} [opts.baseURL] - base URL (default empty).\n   * @param {object} [opts.headers] - custom headers\n   * @param {Promise} [opts.beforeRequest] - async function called before the request\n   * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error\n   */\n  constructor(opts = {}) {\n    this.baseURL = opts.baseURL || '';\n    this.headers = opts.headers || {};\n    this.beforeRequest = opts.beforeRequest || (async () => {});\n    this.beforeError = opts.beforeError || (async () => true);\n\n    const bodyType = opts.bodyType || '';\n    if (bodyType.includes('form')) {\n      this.contentType = 'application/x-www-form-urlencoded';\n    } else {\n      this.contentType = 'application/json;charset=UTF-8';\n    }\n  }\n\n  /**\n   * do GET request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  get(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('GET', path, query, body, headers);\n  }\n\n  /**\n   * do POST request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  post(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('POST', path, query, body, headers);\n  }\n\n  /**\n   * do PUT request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  put(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PUT', path, query, body, headers);\n  }\n\n  /**\n   * do PATCH request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  patch(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('PATCH', path, query, body, headers);\n  }\n\n  /**\n   * do DELETE request.\n   * \n   * @param  {String} path - request path\n   * @param  {object} [ctx] - context\n   * @param  {object} [ctx.query] - request query data\n   * @param  {object} [ctx.body] - request body\n   * @param  {object} [ctx.headers] - header name and value object\n   * @return {Promise} Promise resolves response bodystatus: xhr.status,\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  delete(path, ctx = {}) {\n    const { query, body, headers } = ctx;\n    return this.exec('DELETE', path, query, body, headers);\n  }\n\n  /**\n   * execute http request.\n   * \n   * @param  {string} method - method\n   * @param  {string} path - request path\n   * @param  {object} query - request query data\n   * @param  {string|object} body - request body\n   * @param  {object} headers - header name and value object\n   * @return {Promise} Promise\n   * @type {number} status - status code\n   * @type {object} headers - response header name and value object\n   * @type {*} body - response body\n   */\n  async exec(method, path, query, body, headers = {}) {\n    headers = Object.assign({}, this.headers, headers)\n\n    if (!('Content-Type' in headers)) {\n      headers['Content-Type'] = this.contentType;\n    }\n\n    await this.beforeRequest(path, { query, body, headers })\n\n    const req = { method, path, headers };\n    let httpErr;\n    try {\n      const res = await this._request(method, path, { query, body, headers });\n      const { status } = res;\n      if (status < 400) {\n        return res;\n      }\n\n      httpErr = new HttpError(req, res);\n    } catch(errType) {\n      httpErr = new HttpError(req, errType);\n    }\n\n    if (await this.beforeError(httpErr) !== false) {\n      throw httpErr;\n    }\n  }\n\n  _request(method, path, { query, body, headers }) {\n    let reqBody;\n    if (body) {\n      const cttType = headers['Content-Type'];\n      if (cttType.match(/\\/form-data/)) {\n        reqBody = new FormData();\n        for (let field in body) {\n          reqBody.append(field, body[field]);\n        }\n        delete headers['Content-Type']; // FormData set it with boundary\n      } else if (cttType.match(/\\/json/)) {\n        reqBody = JSON.stringify(body);\n      } else {\n        reqBody = this._formatParams(body);\n      }\n    } else {\n      reqBody = undefined;\n    }\n\n    let url = path;\n    if (this.baseURL && !url.match(/^[a-z]{2,5}:\\/\\//)) {\n      url = this.baseURL + url;\n    }\n    if (query) url += '?' + this._formatParams(query);\n\n    return new Promise((resolve, reject) => {\n        let xhr = new XMLHttpRequest();\n        xhr.open(method, url, true);\n\n        for (let name in headers) {\n          xhr.setRequestHeader(name, headers[name]);\n        }\n\n        xhr.onload = (evt) => {\n          let resBody, resCttType = xhr.getResponseHeader('Content-Type');\n          if (resCttType === null) {\n            resBody = null;\n          } else if (resCttType.match(/\\/json/)) {\n            resBody = JSON.parse(xhr.response);\n          } else if (resCttType.match(/\\/form/)) {\n            resBody = this._fromFormData(xhr.response);\n          } else {\n            resBody = xhr.response;\n          }\n\n          resolve({\n            status: xhr.status,\n            headers: xhr.getAllResponseHeaders(),\n            body: resBody\n          });\n        }\n\n        xhr.onabort = function(err){ reject('abort') };\n        xhr.onerror = function(err){ reject('error') };\n        xhr.ontimeout = function(err){ reject('timeout') };\n\n        xhr.send(reqBody);\n      });\n  }\n\n  _formatParams(params) {\n    return new URLSearchParams(params).toString()\n  }\n\n  _fromFormData(body) {\n    const data = {};\n    body.split('&').forEach(item => {\n      const [key, val] = item.split('=');\n      data[decodeURIComponent(key)] = decodeURIComponent(val);\n    });\n    return data;\n  }\n}\n",
     "static": true,
     "longname": "/home/toshi/work/me/flatout/src/core/http.js",
     "access": "public",
@@ -2973,7 +2973,7 @@
     "__docId__": 141,
     "kind": "file",
     "name": "src/model/binder.js",
-    "content": "'use strict'\n\n/**\n * Binding DataModel and View\n * @access private\n */\nclass Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target item\n   */\n  constructor(item) {\n    this._item = item;\n    item.listened('*', this);\n  }\n\n  /**\n   * Remove listening to item\n   */\n  destroy() {\n    this._item.unlistened('*', this);\n    this._item = null;\n  }\n}\n\n/**\n * Binding Item and View\n * to apply the change of item to View\n * @access protected\n */\nexport class ItemBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target data\n   * @param {View} view - target view\n   */\n  constructor(item, view) {\n    super(item)\n    this._view = view;\n  }\n\n  /**\n   * Updating field of view\n   */\n  update({ field, newValue, oldValue }) {\n    this._view.update(field, newValue, oldValue);\n  }\n}\n\n/**\n * Binding List and ListView\n * to apply the change of colleciton to ListView and its child Views\n * @access protected\n */\nexport class ListBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {List} collection - target data\n   * @param {ListView} listView - target view\n   */\n  constructor(collection, listView) {\n    super(collection)\n    this._view = listView;\n  }\n\n  /**\n   * Adding item to ListView at index.\n   */\n  add({ item, index }) {\n    if (index === undefined) {\n      this._view.addItem(item);\n    } else {\n      this._view.insertItem(item, index);\n    }    \n  }\n\n  /**\n   * Updating item of ListView at index.\n   */\n  update({ item, index }) {\n    this._view.updateItem(item, index);\n  }\n\n  /**\n   * Removing item from ListView.\n   */\n  remove({ item, index }) {\n    this._view.removeItem(item, index);\n  }\n}\n",
+    "content": "'use strict'\n\n/**\n * Binding DataModel and View\n * @access private\n */\nclass Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target item\n   */\n  constructor(item) {\n    this._item = item;\n    item.listened('*', this);\n  }\n\n  /**\n   * Remove listening to item\n   */\n  destroy() {\n    this._item.unlistened('*', this);\n    this._item = null;\n  }\n}\n\n/**\n * Binding Item and View\n * to apply the change of item to View\n * @access protected\n */\nexport class ItemBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {Item} item - target data\n   * @param {View} view - target view\n   */\n  constructor(item, view) {\n    super(item)\n    this._view = view;\n  }\n\n  /**\n   * Updating field of view\n   */\n  update({ field, newValue, oldValue }) {\n    this._view.update(field, newValue, oldValue);\n  }\n}\n\n/**\n * Binding List and ListView\n * to apply the change of colleciton to ListView and its child Views\n * @access protected\n */\nexport class ListBinder extends Binder {\n  /**\n   * Constructor.\n   * \n   * @param {List} list - target data\n   * @param {ListView} listView - target view\n   */\n  constructor(list, listView) {\n    super(list)\n    this._view = listView;\n  }\n\n  /**\n   * Adding item to ListView at index.\n   */\n  add({ item, index }) {\n    if (index === undefined) {\n      this._view.addItem(item);\n    } else {\n      this._view.insertItem(item, index);\n    }    \n  }\n\n  /**\n   * Updating item of ListView at index.\n   */\n  update({ item, index }) {\n    this._view.updateItem(item, index);\n  }\n\n  /**\n   * Removing item from ListView.\n   */\n  remove({ item, index }) {\n    this._view.removeItem(item, index);\n  }\n}\n",
     "static": true,
     "longname": "/home/toshi/work/me/flatout/src/model/binder.js",
     "access": "public",
@@ -3189,7 +3189,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "collection",
+        "name": "list",
         "description": "target data"
       },
       {
@@ -4310,7 +4310,7 @@
     "__docId__": 197,
     "kind": "file",
     "name": "src/view/list-view.js",
-    "content": "'use strict'\n\nimport { makeLFID } from '../core/util.js'\nimport { List } from '../model/item.js'\nimport { ListBinder } from '../model/binder.js'\nimport View from './view.js'\n\n/**\n* View for the collection of items.\n*\n* @example\n* class ListItemView extends View {\n*   html(data) {\n*     return `<li>${data.title}</li>`;\n*   }\n* }\n* \n* let instanceView = new ListView(Node, ListItemView,\n*           {\n*             data: [\n*               { title: 'foo' },\n*               { ttile: 'bar' }\n*             ]\n*           });\n*/\nclass ListView extends View {\n\n  /*\n   * Create a ListView.\n   *\n   * @param {Element} [root] - root node\n   * @param {Class} [itemView] - item view class\n   * @param {Object} [props] - properties\n   */\n  constructor(/*root, itemView, props*/) {\n    let root, props = {};\n    for (let arg of arguments) {\n      if (arg instanceof Node || typeof arg === 'string') {\n        root = arg;\n      } else if (arg && arg.constructor === Object) {\n        Object.assign(props, arg);\n      } else if (arg !== undefined) {\n        props._F_tmpl = arg; // itemView\n      }\n    }\n    super(root, props);\n  }\n\n  /** @override */\n  _privates() {\n    const pa = super._privates();\n    pa._F_itemSet = new Map();\n    return pa;\n  }\n\n  /**\n   * If you dynamically change creating item view according to the item, override this method.\n   *\n   * @param {object} item - an item\n   * @return {Class<View>}\n   */\n  itemViewClass(item) {\n    return this._F_tmpl\n  }\n\n  /**\n   * Add an item to list\n   *\n   * @param {object} item - an item\n   */\n  addItem(item) {\n    const view = this._createViewByItem(item);\n    this.addItemEl(this.container, view.el);\n    return view;\n  }\n\n  /**\n   * Insert an item to list at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  insertItem(item, index) {\n    const view = this._createViewByItem(item);\n    this.insertItemEl(this.container, view.el, this._childElAt(index));\n    return view;\n  }\n\n  /**\n   * Update an item at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  updateItem(item, index) {\n    const LFID = this._childElAt(index).getAttribute('_lfid_');\n    this._F_itemSet.set(LFID, item);\n    this.views[LFID].data = item;\n  }\n\n  /**\n   * Remove item from list\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  removeItem(item, index) {\n    const el = this._childElAt(index)\n    this._removeItemByEl(el);\n  }\n\n  /**\n   * Remove item with view\n   *\n   * @param {view} view - an view of removing item\n   */\n  removeItemByView(view) {\n    this._removeItemByEl(view.el)\n  }\n\n  /**\n   * If you change adding item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl parent element for List\n   * @param {Element} itemEl added element\n   */\n  addItemEl(listEl, itemEl) {\n    listEl.appendChild(itemEl)\n  }\n\n  /**\n   * If you change inserting item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} newEl  - an element for new item for List\n   * @param {Element} nextEl - next element will be next one for newEl\n   */\n  insertItemEl(listEl, newEl, nextEl) {\n    listEl.insertBefore(newEl, nextEl)\n  }\n\n  /**\n   * If you change removing item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} itemEl - removed element\n   */\n  removeItemEl(listEl, itemEl) {\n    listEl.removeChild(itemEl)\n  }\n\n  /**\n   * Return child element at position.\n   *\n   * @param {number} index - item position.\n   * @return {Element} target element\n   */\n  _childElAt(index) {\n    return this.container.children[index];\n  }\n\n  _createViewByItem(item) {\n    const LFID = makeLFID();\n    const cls = this.itemViewClass(item);\n    const view = new cls({ data: item });\n    this._F_itemSet.set(LFID, view);\n    this.views[LFID] = view;\n    view.el.setAttribute('_lfid_', LFID);\n    return view;\n  }\n\n  /**\n   * Remove item from list by element\n   *\n   * @param {element} el - removed element\n   */\n  _removeItemByEl(el) {\n    const LFID = el.getAttribute('_lfid_');\n    this._F_itemSet.delete(LFID);\n    const vws = this.views\n    vws[LFID].unload();\n    delete vws[LFID];\n    this.removeItemEl(this.container, el);\n  }\n\n  /** @override */\n  _bindData() {\n    const data = this._data;\n    if (data instanceof List) {\n      this._F_binders.push(new ListBinder(data, this))\n    }\n  }\n\n  /** @override */\n  _setDataToUI() {\n    if (this._data === undefined) return;\n    console.log('ListView#_setDataToUI', this);\n\n    for (let childView of Object.values(this.views)) {\n      this.removeItemByView(childView);\n    }\n\n    for (let item of this._data) {\n      this.addItem(item);\n    }\n  }\n}\n\nexport default ListView\n",
+    "content": "'use strict'\n\nimport { makeLFID } from '../core/util.js'\nimport { List } from '../model/item.js'\nimport { ListBinder } from '../model/binder.js'\nimport View from './view.js'\n\n/**\n* View for the collection of items.\n*\n* @example\n* class ListItemView extends View {\n*   html(data) {\n*     return `<li>${data.title}</li>`;\n*   }\n* }\n* \n* let instanceView = new ListView(Node, ListItemView,\n*           {\n*             data: [\n*               { title: 'foo' },\n*               { ttile: 'bar' }\n*             ]\n*           });\n*/\nclass ListView extends View {\n\n  /*\n   * Create a ListView.\n   *\n   * @param {object} [props] - Properties\n   * @param {string|Element} [props.rootEl] - root element ID or root node\n   * @param {Class} [itemView] - item view class\n   * @param {Class<View>} [props.parent] - parent view this belongs to\n   * @param {string|Element} [props.contentEl] - parent element of child views (specified by data-id or id value).\n   */\n  constructor(itemView, props = {}) {\n    props._F_tmpl = itemView;\n    super(props);\n  }\n\n  /** @override */\n  _privates() {\n    const pa = super._privates();\n    pa._F_itemSet = new Map();\n    return pa;\n  }\n\n  /**\n   * If you dynamically change creating item view according to the item, override this method.\n   *\n   * @param {object} item - an item\n   * @return {Class<View>}\n   */\n  itemViewClass(item) {\n    return this._F_tmpl\n  }\n\n  /**\n   * Add an item to list\n   *\n   * @param {object} item - an item\n   */\n  addItem(item) {\n    const view = this._createViewByItem(item);\n    this.addItemEl(this.contentEl, view.el);\n    return view;\n  }\n\n  /**\n   * Insert an item to list at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  insertItem(item, index) {\n    const view = this._createViewByItem(item);\n    this.insertItemEl(this.contentEl, view.el, this._childElAt(index));\n    return view;\n  }\n\n  /**\n   * Update an item at index\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  updateItem(item, index) {\n    const LFID = this._childElAt(index).getAttribute('_lfid_');\n    this._F_itemSet.set(LFID, item);\n    this.views[LFID].data = item;\n  }\n\n  /**\n   * Remove item from list\n   *\n   * @param {object} item - an item\n   * @param {number} index - target position\n   */\n  removeItem(item, index) {\n    const el = this._childElAt(index)\n    this._removeItemByEl(el);\n  }\n\n  /**\n   * Remove item with view\n   *\n   * @param {view} view - an view of removing item\n   */\n  removeItemByView(view) {\n    this._removeItemByEl(view.el)\n  }\n\n  /**\n   * If you change adding item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl parent element for List\n   * @param {Element} itemEl added element\n   */\n  addItemEl(listEl, itemEl) {\n    listEl.appendChild(itemEl)\n  }\n\n  /**\n   * If you change inserting item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} newEl  - an element for new item for List\n   * @param {Element} nextEl - next element will be next one for newEl\n   */\n  insertItemEl(listEl, newEl, nextEl) {\n    listEl.insertBefore(newEl, nextEl)\n  }\n\n  /**\n   * If you change removing item effect, override this method.\n   *\n   * @protected\n   * @param {Element} listEl - parent element for List\n   * @param {Element} itemEl - removed element\n   */\n  removeItemEl(listEl, itemEl) {\n    listEl.removeChild(itemEl)\n  }\n\n  /**\n   * Return child element at position.\n   *\n   * @param {number} index - item position.\n   * @return {Element} target element\n   */\n  _childElAt(index) {\n    return this.contentEl.children[index];\n  }\n\n  _createViewByItem(item) {\n    const LFID = makeLFID();\n    const cls = this.itemViewClass(item);\n    const view = new cls({ data: item });\n    this._F_itemSet.set(LFID, view);\n    this.views[LFID] = view;\n    view.el.setAttribute('_lfid_', LFID);\n    return view;\n  }\n\n  /**\n   * Remove item from list by element\n   *\n   * @param {element} el - removed element\n   */\n  _removeItemByEl(el) {\n    const LFID = el.getAttribute('_lfid_');\n    this._F_itemSet.delete(LFID);\n    const vws = this.views\n    vws[LFID].unload();\n    delete vws[LFID];\n    this.removeItemEl(this.contentEl, el);\n  }\n\n  /** @override */\n  _bindData() {\n    const data = this._data;\n    if (data instanceof List) {\n      this._F_binders.push(new ListBinder(data, this))\n    }\n  }\n\n  /** @override */\n  _setDataToUI() {\n    if (this._data === undefined) return;\n    console.log('ListView#_setDataToUI', this);\n\n    for (let childView of Object.values(this.views)) {\n      this.removeItemByView(childView);\n    }\n\n    for (let item of this._data) {\n      this.addItem(item);\n    }\n  }\n}\n\nexport default ListView\n",
     "static": true,
     "longname": "/home/toshi/work/me/flatout/src/view/list-view.js",
     "access": "public",
@@ -4349,7 +4349,7 @@
     "longname": "src/view/list-view.js~ListView#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 35,
+    "lineNumber": 37,
     "undocument": true
   },
   {
@@ -4363,7 +4363,7 @@
     "longname": "src/view/list-view.js~ListView#_privates",
     "access": "private",
     "description": null,
-    "lineNumber": 50,
+    "lineNumber": 43,
     "override": true,
     "params": [],
     "return": {
@@ -4383,7 +4383,7 @@
     "longname": "src/view/list-view.js~ListView#itemViewClass",
     "access": "public",
     "description": "If you dynamically change creating item view according to the item, override this method.",
-    "lineNumber": 62,
+    "lineNumber": 55,
     "params": [
       {
         "nullable": null,
@@ -4416,7 +4416,7 @@
     "longname": "src/view/list-view.js~ListView#addItem",
     "access": "public",
     "description": "Add an item to list",
-    "lineNumber": 71,
+    "lineNumber": 64,
     "params": [
       {
         "nullable": null,
@@ -4446,7 +4446,7 @@
     "longname": "src/view/list-view.js~ListView#insertItem",
     "access": "public",
     "description": "Insert an item to list at index",
-    "lineNumber": 83,
+    "lineNumber": 76,
     "params": [
       {
         "nullable": null,
@@ -4486,7 +4486,7 @@
     "longname": "src/view/list-view.js~ListView#updateItem",
     "access": "public",
     "description": "Update an item at index",
-    "lineNumber": 95,
+    "lineNumber": 88,
     "params": [
       {
         "nullable": null,
@@ -4522,7 +4522,7 @@
     "longname": "src/view/list-view.js~ListView#removeItem",
     "access": "public",
     "description": "Remove item from list",
-    "lineNumber": 107,
+    "lineNumber": 100,
     "params": [
       {
         "nullable": null,
@@ -4558,7 +4558,7 @@
     "longname": "src/view/list-view.js~ListView#removeItemByView",
     "access": "public",
     "description": "Remove item with view",
-    "lineNumber": 117,
+    "lineNumber": 110,
     "params": [
       {
         "nullable": null,
@@ -4584,7 +4584,7 @@
     "longname": "src/view/list-view.js~ListView#addItemEl",
     "access": "protected",
     "description": "If you change adding item effect, override this method.",
-    "lineNumber": 128,
+    "lineNumber": 121,
     "params": [
       {
         "nullable": null,
@@ -4620,7 +4620,7 @@
     "longname": "src/view/list-view.js~ListView#insertItemEl",
     "access": "protected",
     "description": "If you change inserting item effect, override this method.",
-    "lineNumber": 140,
+    "lineNumber": 133,
     "params": [
       {
         "nullable": null,
@@ -4666,7 +4666,7 @@
     "longname": "src/view/list-view.js~ListView#removeItemEl",
     "access": "protected",
     "description": "If you change removing item effect, override this method.",
-    "lineNumber": 151,
+    "lineNumber": 144,
     "params": [
       {
         "nullable": null,
@@ -4702,7 +4702,7 @@
     "longname": "src/view/list-view.js~ListView#_childElAt",
     "access": "private",
     "description": "Return child element at position.",
-    "lineNumber": 161,
+    "lineNumber": 154,
     "params": [
       {
         "nullable": null,
@@ -4735,7 +4735,7 @@
     "longname": "src/view/list-view.js~ListView#_createViewByItem",
     "access": "private",
     "description": null,
-    "lineNumber": 165,
+    "lineNumber": 158,
     "undocument": true,
     "params": [
       {
@@ -4762,7 +4762,7 @@
     "longname": "src/view/list-view.js~ListView#_removeItemByEl",
     "access": "private",
     "description": "Remove item from list by element",
-    "lineNumber": 180,
+    "lineNumber": 173,
     "params": [
       {
         "nullable": null,
@@ -4788,7 +4788,7 @@
     "longname": "src/view/list-view.js~ListView#_bindData",
     "access": "private",
     "description": null,
-    "lineNumber": 190,
+    "lineNumber": 183,
     "override": true,
     "params": [],
     "return": null
@@ -4804,7 +4804,7 @@
     "longname": "src/view/list-view.js~ListView#_setDataToUI",
     "access": "private",
     "description": null,
-    "lineNumber": 198,
+    "lineNumber": 191,
     "override": true,
     "params": [],
     "return": null
@@ -4880,7 +4880,7 @@
     "__docId__": 219,
     "kind": "file",
     "name": "src/view/view.js",
-    "content": "'use strict'\n\nimport Core from '../core/core.js'\nimport { eachEntry, makeLFID } from '../core/util.js'\nimport { Item } from '../model/item.js'\nimport { ItemBinder } from '../model/binder.js'\n\nconst HOOK_EVTS = ['click', 'submit', 'change'];\n\n/**\n* View\n*/\nclass View extends Core {\n\n  /**\n   * Create a View.\n   *\n   * @param {string|Element} root - Root element ID or root node\n   * @param {object} [props]      - Properties\n   * @param {Class<View>} [props.parent] - parent view this belongs to\n   * @param {string|Element} [props.container] - parent element of child views (specified by data-id or id value).\n   */\n  constructor(root, props) {\n    super();\n\n    /**\n     * Root element\n     * @member {Node}\n     */\n    this.el = null;\n\n    /**\n     * Subview children of the view\n     * @member {object}\n     */\n    this.views = {};\n\n    if (props === undefined && root && root.constructor === Object) {\n      props = root;\n      root = null;\n    }\n\n    this._build(root, props || {});\n  }\n\n  /** @override */\n  _privates() {\n    return Object.assign(super._privates(), {\n      _F_onevts: new Set(),\n      _F_binders: [],\n      _F_elcache: new Map()\n    })\n  }\n\n  /**\n   * Initialize props\n   * \n   * @param {object} defaults - default data.\n   * @return {object|Item} modified data or item.\n   */\n  init(defaults) {\n  }\n\n  /**\n   * For implement creating subviews and setting listener of events.\n   * \n   * @param {object} views - added subview target (ex. views.list = new ListView(..))\n   */\n  load(views) {\n  }\n\n  /**\n   * Ssetting listener of events.\n   * \n   * @param {object} evts - added listener target (ex. evts.subview_event)\n   */\n  handle(evts) {\n  }\n\n  /**\n   * For implement unloading subviews\n   */\n  unload() {\n  }\n\n  /**\n   * Cast a message to all children of view\n   *\n   * @param {string} method - method name\n   * @param {Array} args - arguments\n   */\n  broadcast(method, args = []) {\n    this._callR(args, 'views', method)\n  }\n\n  /**\n   * _loaded resolve after all done\n   */\n  _build(root, props) {\n    console.log('View#_build', root, props);\n\n    const defaults = this._setupProps(props);\n    const data = this.init(defaults);\n    this._data = data !== undefined ? data : defaults;\n    this._setRootNode(root, props.parent || null, this._data);\n    if (this.el) this._loadFinish();\n  }\n\n  _setupProps(props) {\n    let defaults;\n    if (props) {\n      // once detach data\n      defaults = props.data;\n      if ('data' in props) delete props.data;\n      Object.assign(this, props);\n    }\n    return defaults;\n  }\n\n  /**\n   * Set root node element to this.el\n   */\n  _setRootNode(root, parent, data) {\n    if (!root && this.html) {\n      this.el = root = this._buildFromHtml(data);\n      if (parent) {\n        // If this view doesn't belong to parent views\n        parent.appendEl(root);\n      }\n    } else if (this._isStr(root)) {\n      this.el = parent ? parent.findEl(root) : document.getElementById(root);\n      if (!this.el) {\n        throw new Error(`Failed to create View because element not found ID: ${root}`);\n      }\n    } else if (root) {\n      this.el = root;\n    }\n  }\n\n  _loadFinish() {\n    const ctn = this.container;\n    this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;\n\n    this._loadViewsEvts();\n    this._setDataToUI();\n    this._bindData();\n  }\n\n  _loadViewsEvts() {\n    console.log('View#_loadViewsEvts', this);\n\n    this.load(this.views);\n\n    eachEntry(this.views, ([name, view]) => {\n      if (!view.el) {\n        view.el = this.findEl(name);\n        view._loadFinish();\n      } else if (view.el.parentNode instanceof DocumentFragment) {\n        const makerEl = this.findEl(name);\n        if (makerEl) {\n          // Embed view at marker if the node exists\n          makerEl.parentNode.replaceChild(view.el, makerEl);\n        } else {\n          this.appendEl(view.el);\n        }\n      }\n    });\n\n    const evts = {};\n    this.handle(evts);\n    this._setupEvts(View._parseEvts(evts));\n  }\n\n  _bindData() {\n    const data = this._data;\n    if (data instanceof Item) {\n      this._F_binders.push(new ItemBinder(data, this));\n    }\n  }\n\n  _unbindData() {\n    const binder = this._F_binders.pop();\n    if (binder)  binder.destroy();\n  }\n\n  /**\n   * data to elements text or value, innerHTML of elements\n   *\n   * @property {object} data\n   * @example\n   * view.data = { name: 'Mike', inputAge: { value: 24 }, message: { html: \"<p>Hello!</p>\" } };\n   */\n  get data() {\n    return this._data\n  }\n\n  set data(value) {\n    console.log('View#data=', this);\n    this._data = value;\n    this._unbindData();\n    this._setDataToUI();\n    this._bindData();\n  }\n\n  /**\n   * Find an element that has specified data-id else call getElementById\n   *\n   * @param id data-id value\n   * @return {Element}\n   * @example\n   * view.findEl('elementDataId');\n   */\n  findEl(id) {\n    const cached = this._F_elcache.get(id);\n    if (cached && cached.parentNode) {\n      return cached;\n    }\n    const result = this.el.querySelector(`[data-id=\"${id}\"]`) || document.getElementById(id);\n    this._F_elcache.set(id, result);\n    return result;\n  }\n\n  /**\n   * Append child element\n   *\n   * @param {Element} el - child element\n   */\n  appendEl(el) {\n    this.container.appendChild(el)\n  }\n\n  /**\n   * Add child view as name\n   *\n   * @param {string} name - child name\n   * @param {View} view - child view\n   * @example\n   * parent.add('child', view);\n   */\n  add(name, view) {\n    this.views[name] = view;\n    this.appendEl(view.el);\n  }\n\n  /**\n   * Remove child view by name\n   *\n   * @param {string} viewName - child view name\n   * @example\n   * parent.remove('child');\n   */\n  remove(viewName) {\n    const view = this.views[viewName];\n    view.destroy();\n    view.el.remove();\n    delete this.views[viewName]\n  }\n\n  /**\n   * Fire event\n   *\n   * @param {string} name - event name\n   * @param {object} ctx - event context\n   * @example\n   * view.fire('move', { newPosition: 1 });\n   */\n  fire(name, ctx) {\n    const e = ctx ? new CustomEvent(name, { detail: ctx, bubbles: true })\n                : new Event(name, { bubbles: true });\n    this.el.dispatchEvent(e);\n  }\n\n  /**\n   * Destroy all chidren, unload, and destroy binder, teardown events\n   */\n  destroy() {\n    this.unload();\n\n    Object.values(this.views).forEach(it => it.destroy());\n    this.views = {};\n    this._F_elcache.clear();\n    this._unbindData();\n    this._teardownEvts();\n    this.parent = null;\n  }\n\n  /**\n   * Called when the binding data is updated.\n   * \n   * @param {string} name field name\n   * @param {*} newValue new data value\n   * @param {*} oldValue old data value\n   * @return {boolean} true if setting field value succeeded\n   */\n  update(name, newValue, oldValue) {\n    return this._setFieldValue(name, newValue)\n  }\n\n  /**\n   * Set data to subviews or elements in the view.\n   */\n  _setDataToUI() {\n    const data = this._data;\n    if (data === undefined || !(data instanceof Object)) return;\n    console.log('View#_setDataToUI', this);\n\n    eachEntry(this._data, ([name, val]) => {\n      this._setFieldValue(name, val)\n    })\n  }\n\n  _setFieldValue(name, val) {\n    if (name in this.views) {\n      this.views[name].data = val;\n      return true;\n    }\n\n    const el = this.findEl(name);\n    if (!el) return false;\n\n    if (el.dataset && el.dataset.type === 'html') {\n      el.innerHTML = val;\n    } else if ('value' in el) {\n      el.value = val;\n    } else {\n      el.textContent = val;\n    }\n\n    return true;\n  }\n\n  // private\n\n  _setupEvts(evtMap) {\n    eachEntry(evtMap, ([target, hmap]) => {\n      if (target === '_') {\n        this._setEvts(this.el, hmap);\n        return;\n      }\n\n      const el = this.findEl(target);\n      if (!el) {\n        console.log(`Not found event target ${target}`);\n        return;\n      }\n\n      const ts = el instanceof NodeList ? Array.from(el) : [el];\n      ts.forEach(t => this._setEvts(t, hmap));\n    })\n  }\n\n  /**\n   * Bind targets with event handler set.\n   *\n   * @param {Element} el - event raiser.\n   * @param {object} hmap - handler map. Object<type, value>\n   */\n  _setEvts(el, hmap) {\n    eachEntry(hmap, ([type, handler]) => {\n      this._trapEvt(this, el, type, handler);\n    })\n  }\n\n  /**\n   * Bind target event with handler.\n   *\n   * @param {View} root - caller\n   * @param {Element} el - event raiser\n   * @param {string} type - event type\n   * @param {function} handler - callback function\n   */\n  _trapEvt(root, el, type, handler) {\n    const hook = function(e) {\n      const rb = handler.call(root, this, e);\n      return rb !== undefined ? rb : false;\n    };\n\n    if (HOOK_EVTS.includes(type)) {\n      el['on'+type] = hook;\n    } else {\n      el.addEventListener(type, hook);\n    }\n    this._F_onevts.add([el, type, hook]);\n  }\n\n  _teardownEvts() {\n    const onevts = this._F_onevts;\n    onevts.forEach(([el, type, hook]) => {\n      if (HOOK_EVTS.includes(type)) {\n        el['on'+type] = null;\n      } else {\n        el.removeEventListener(type, hook);\n      }\n    });\n    onevts.clear();\n  }\n\n  _buildFromHtml(data) {\n    const el = document.createElement('template');\n    el.innerHTML = this.html(data || {});\n    const df = document.adoptNode(el.content);\n    return this._firstEl(df);\n  }\n\n  _firstEl(el) {\n    const fec = el.firstElementChild;\n    if (fec !== undefined) return fec;\n\n    // for Safari, Edge\n    const nodes = el.childNodes;\n    for (let i = 0, len = nodes.length; i < len; i++) {\n      const child = nodes[i];\n      if (child.nodeType === Node.ELEMENT_NODE) return child;\n    }\n    return null;\n  }\n\n  // static\n\n  static _parseEvts(handlers) {\n    const emap = { _: {} };\n\n    eachEntry(handlers, ([name, handler]) => {\n      const pos = name.lastIndexOf('_');\n      if (pos === -1) {\n        emap._[name] = handler;\n        return;\n      }\n\n      // ex) button_click\n      const target = name.substr(0, pos),\n            ename = name.substr(pos + 1),\n            hmap = emap[target];\n      if (hmap) {\n        hmap[ename] = handler;\n      } else {\n        emap[target] = { [ename]: handler };\n      }\n    })\n\n    return emap;\n  }\n}\n\nexport default View;\n",
+    "content": "'use strict'\n\nimport Core from '../core/core.js'\nimport { eachEntry } from '../core/util.js'\nimport { Item } from '../model/item.js'\nimport { ItemBinder } from '../model/binder.js'\n\nconst HOOK_EVTS = ['click', 'submit', 'change'];\n\n/**\n* View\n*/\nclass View extends Core {\n\n  /**\n   * Create a View.\n   *\n   * @param {object} [props] - Properties\n   * @param {string|Element} [props.rootEl] - root element ID or root node\n   * @param {Class<View>} [props.parent] - parent view this belongs to\n   * @param {string|Element} [props.contentEl] - parent element of child views (specified by data-id or id value).\n   */\n  constructor(props = {}) {\n    super();\n\n    /**\n     * Root element\n     * @member {Node}\n     */\n    this.el = null;\n\n    /**\n     * Subview children of the view\n     * @member {object}\n     */\n    this.views = {};\n\n    const { rootEl, ...props_ } = props;\n    this._build(rootEl, props_);\n  }\n\n  /** @override */\n  _privates() {\n    return Object.assign(super._privates(), {\n      _F_onevts: new Set(),\n      _F_binders: [],\n      _F_elcache: new Map()\n    })\n  }\n\n  /**\n   * Initialize props\n   * \n   * @param {object} defaults - default data.\n   * @return {object|Item} modified data or item.\n   */\n  init(defaults) {\n  }\n\n  /**\n   * For implement creating subviews and setting listener of events.\n   * \n   * @param {object} views - added subview target (ex. views.list = new ListView(..))\n   */\n  load(views) {\n  }\n\n  /**\n   * Ssetting listener of events.\n   * \n   * @param {object} evts - added listener target (ex. evts.subview_event)\n   */\n  handle(evts) {\n  }\n\n  /**\n   * For implement unloading subviews\n   */\n  unload() {\n  }\n\n  /**\n   * Cast a message to all children of view\n   *\n   * @param {string} method - method name\n   * @param {Array} args - arguments\n   */\n  broadcast(method, args = []) {\n    this._callR(args, 'views', method)\n  }\n\n  /**\n   * _loaded resolve after all done\n   */\n  _build(root, props) {\n    console.log('View#_build', root, props);\n\n    const defaults = this._setupProps(props);\n    const data = this.init(defaults);\n    this._data = data !== undefined ? data : defaults;\n    this._setRootNode(root, props.parent || null, this._data);\n    if (this.el) this._loadFinish();\n  }\n\n  _setupProps(props) {\n    let defaults;\n    if (props) {\n      // once detach data\n      defaults = props.data;\n      if ('data' in props) delete props.data;\n      Object.assign(this, props);\n    }\n    return defaults;\n  }\n\n  /**\n   * Set root node element to this.el\n   */\n  _setRootNode(root, parent, data) {\n    if (this._isStr(root)) {\n      root = parent ? parent.findEl(root) : document.getElementById(root);\n      if (!root) {\n        throw new Error(`Failed to create View because element not found ID: ${root}`);\n      }\n    }\n\n    if (this.html) {\n      this.el = this._buildFromHtml(data);\n      if (parent) {\n        // If this view doesn't belong to parent views\n        parent.appendEl(this.el);\n      } else if (root) {\n        root.parentNode.replaceChild(this.el, root);\n      }\n    } else if (root) {\n      this.el = root;\n    }\n  }\n\n  _loadFinish() {\n    const ctn = this.contentEl;\n    this.contentEl = this._isStr(ctn) ? this.findEl(ctn) : this.el;\n\n    this._loadViewsEvts();\n    this._setDataToUI();\n    this._bindData();\n  }\n\n  _loadViewsEvts() {\n    console.log('View#_loadViewsEvts', this);\n\n    this.load(this.views);\n\n    eachEntry(this.views, ([name, view]) => {\n      if (!view.el) {\n        view.el = this.findEl(name);\n        view._loadFinish();\n      } else if (view.el.parentNode instanceof DocumentFragment) {\n        const makerEl = this.findEl(name);\n        if (makerEl) {\n          // Embed view at marker if the node exists\n          makerEl.parentNode.replaceChild(view.el, makerEl);\n        } else {\n          this.appendEl(view.el);\n        }\n      }\n    });\n\n    const evts = {};\n    this.handle(evts);\n    this._setupEvts(View._parseEvts(evts));\n  }\n\n  _bindData() {\n    const data = this._data;\n    if (data instanceof Item) {\n      this._F_binders.push(new ItemBinder(data, this));\n    }\n  }\n\n  _unbindData() {\n    const binder = this._F_binders.pop();\n    if (binder) binder.destroy();\n  }\n\n  /**\n   * data to elements text or value, innerHTML of elements\n   *\n   * @property {object} data\n   * @example\n   * view.data = { name: 'Mike', inputAge: { value: 24 }, message: { html: \"<p>Hello!</p>\" } };\n   */\n  get data() {\n    return this._data\n  }\n\n  set data(value) {\n    console.log('View#data=', this);\n    this._data = value;\n    this._unbindData();\n    this._setDataToUI();\n    this._bindData();\n  }\n\n  /**\n   * Find an element that has specified data-id else call getElementById\n   *\n   * @param id data-id value\n   * @return {Element}\n   * @example\n   * view.findEl('elementDataId');\n   */\n  findEl(id) {\n    const cached = this._F_elcache.get(id);\n    if (cached && cached.parentNode) {\n      return cached;\n    }\n    const result = this.el.querySelector(`[data-id=\"${id}\"]`) || document.getElementById(id);\n    this._F_elcache.set(id, result);\n    return result;\n  }\n\n  /**\n   * Append child element\n   *\n   * @param {Element} el - child element\n   */\n  appendEl(el) {\n    this.contentEl.appendChild(el)\n  }\n\n  /**\n   * Add child view as name\n   *\n   * @param {string} name - child name\n   * @param {View} view - child view\n   * @example\n   * parent.add('child', view);\n   */\n  add(name, view) {\n    this.views[name] = view;\n    this.appendEl(view.el);\n  }\n\n  /**\n   * Remove child view by name\n   *\n   * @param {string} viewName - child view name\n   * @example\n   * parent.remove('child');\n   */\n  remove(viewName) {\n    const view = this.views[viewName];\n    view.destroy();\n    view.el.remove();\n    delete this.views[viewName]\n  }\n\n  /**\n   * Fire event\n   *\n   * @param {string} name - event name\n   * @param {object} ctx - event context\n   * @example\n   * view.fire('move', { newPosition: 1 });\n   */\n  fire(name, ctx) {\n    const e = ctx ? new CustomEvent(name, { detail: ctx, bubbles: true })\n                : new Event(name, { bubbles: true });\n    this.el.dispatchEvent(e);\n  }\n\n  /**\n   * Destroy all chidren, unload, and destroy binder, teardown events\n   */\n  destroy() {\n    this.unload();\n\n    Object.values(this.views).forEach(it => it.destroy());\n    this.views = {};\n    this._F_elcache.clear();\n    this._unbindData();\n    this._teardownEvts();\n    this.parent = null;\n  }\n\n  /**\n   * Called when the binding data is updated.\n   * \n   * @param {string} name field name\n   * @param {*} newValue new data value\n   * @param {*} oldValue old data value\n   * @return {boolean} true if setting field value succeeded\n   */\n  update(name, newValue, oldValue) {\n    return this._setFieldValue(name, newValue)\n  }\n\n  /**\n   * Set data to subviews or elements in the view.\n   */\n  _setDataToUI() {\n    const data = this._data;\n    if (data === undefined || !(data instanceof Object)) return;\n    console.log('View#_setDataToUI', this);\n\n    eachEntry(this._data, ([name, val]) => {\n      this._setFieldValue(name, val)\n    })\n  }\n\n  _setFieldValue(name, val) {\n    if (name in this.views) {\n      this.views[name].data = val;\n      return true;\n    }\n\n    const el = this.findEl(name);\n    if (!el) return false;\n\n    if (el.dataset && el.dataset.type === 'html') {\n      el.innerHTML = val;\n    } else if ('value' in el) {\n      el.value = val;\n    } else {\n      el.textContent = val;\n    }\n\n    return true;\n  }\n\n  // private\n\n  _setupEvts(evtMap) {\n    eachEntry(evtMap, ([target, hmap]) => {\n      if (target === '_') {\n        this._setEvts(this.el, hmap);\n        return;\n      }\n\n      const el = this.findEl(target);\n      if (!el) {\n        console.log(`Not found event target ${target}`);\n        return;\n      }\n\n      const ts = el instanceof NodeList ? Array.from(el) : [el];\n      ts.forEach(t => this._setEvts(t, hmap));\n    })\n  }\n\n  /**\n   * Bind targets with event handler set.\n   *\n   * @param {Element} el - event raiser.\n   * @param {object} hmap - handler map. Object<type, value>\n   */\n  _setEvts(el, hmap) {\n    eachEntry(hmap, ([type, handler]) => {\n      this._trapEvt(this, el, type, handler);\n    })\n  }\n\n  /**\n   * Bind target event with handler.\n   *\n   * @param {View} root - caller\n   * @param {Element} el - event raiser\n   * @param {string} type - event type\n   * @param {function} handler - callback function\n   */\n  _trapEvt(root, el, type, handler) {\n    const hook = function(e) {\n      const rb = handler.call(root, this, e);\n      return rb !== undefined ? rb : false;\n    };\n\n    if (HOOK_EVTS.includes(type)) {\n      el['on'+type] = hook;\n    } else {\n      el.addEventListener(type, hook);\n    }\n    this._F_onevts.add([el, type, hook]);\n  }\n\n  _teardownEvts() {\n    const onevts = this._F_onevts;\n    onevts.forEach(([el, type, hook]) => {\n      if (HOOK_EVTS.includes(type)) {\n        el['on'+type] = null;\n      } else {\n        el.removeEventListener(type, hook);\n      }\n    });\n    onevts.clear();\n  }\n\n  _buildFromHtml(data) {\n    const el = document.createElement('template');\n    el.innerHTML = this.html(data || {});\n    const df = document.adoptNode(el.content);\n    return this._firstEl(df);\n  }\n\n  _firstEl(el) {\n    const fec = el.firstElementChild;\n    if (fec !== undefined) return fec;\n\n    // for Safari, Edge\n    const nodes = el.childNodes;\n    for (let i = 0, len = nodes.length; i < len; i++) {\n      const child = nodes[i];\n      if (child.nodeType === Node.ELEMENT_NODE) return child;\n    }\n    return null;\n  }\n\n  // static\n\n  static _parseEvts(handlers) {\n    const emap = { _: {} };\n\n    eachEntry(handlers, ([name, handler]) => {\n      const pos = name.lastIndexOf('_');\n      if (pos === -1) {\n        emap._[name] = handler;\n        return;\n      }\n\n      // ex) button_click\n      const target = name.substr(0, pos),\n            ename = name.substr(pos + 1),\n            hmap = emap[target];\n      if (hmap) {\n        hmap[ename] = handler;\n      } else {\n        emap[target] = { [ename]: handler };\n      }\n    })\n\n    return emap;\n  }\n}\n\nexport default View;\n",
     "static": true,
     "longname": "/home/toshi/work/me/flatout/src/view/view.js",
     "access": "public",
@@ -4942,23 +4942,23 @@
       {
         "nullable": null,
         "types": [
-          "string",
-          "Element"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "root",
-        "description": "Root element ID or root node"
-      },
-      {
-        "nullable": null,
-        "types": [
           "object"
         ],
         "spread": false,
         "optional": true,
         "name": "props",
         "description": "Properties"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Element"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "props.rootEl",
+        "description": "root element ID or root node"
       },
       {
         "nullable": null,
@@ -4978,7 +4978,7 @@
         ],
         "spread": false,
         "optional": true,
-        "name": "props.container",
+        "name": "props.contentEl",
         "description": "parent element of child views (specified by data-id or id value)."
       }
     ]
@@ -5026,7 +5026,7 @@
     "longname": "src/view/view.js~View#_privates",
     "access": "private",
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 43,
     "override": true,
     "params": [],
     "return": {
@@ -5046,7 +5046,7 @@
     "longname": "src/view/view.js~View#init",
     "access": "public",
     "description": "Initialize props",
-    "lineNumber": 61,
+    "lineNumber": 57,
     "params": [
       {
         "nullable": null,
@@ -5080,7 +5080,7 @@
     "longname": "src/view/view.js~View#load",
     "access": "public",
     "description": "For implement creating subviews and setting listener of events.",
-    "lineNumber": 69,
+    "lineNumber": 65,
     "params": [
       {
         "nullable": null,
@@ -5106,7 +5106,7 @@
     "longname": "src/view/view.js~View#handle",
     "access": "public",
     "description": "Ssetting listener of events.",
-    "lineNumber": 77,
+    "lineNumber": 73,
     "params": [
       {
         "nullable": null,
@@ -5132,7 +5132,7 @@
     "longname": "src/view/view.js~View#unload",
     "access": "public",
     "description": "For implement unloading subviews",
-    "lineNumber": 83,
+    "lineNumber": 79,
     "params": [],
     "return": null
   },
@@ -5147,7 +5147,7 @@
     "longname": "src/view/view.js~View#broadcast",
     "access": "public",
     "description": "Cast a message to all children of view",
-    "lineNumber": 92,
+    "lineNumber": 88,
     "params": [
       {
         "nullable": null,
@@ -5183,7 +5183,7 @@
     "longname": "src/view/view.js~View#_build",
     "access": "private",
     "description": "_loaded resolve after all done",
-    "lineNumber": 99,
+    "lineNumber": 95,
     "params": [
       {
         "name": "root",
@@ -5209,7 +5209,7 @@
     "longname": "src/view/view.js~View#_data",
     "access": "private",
     "description": null,
-    "lineNumber": 104,
+    "lineNumber": 100,
     "undocument": true,
     "type": {
       "types": [
@@ -5228,7 +5228,7 @@
     "longname": "src/view/view.js~View#_setupProps",
     "access": "private",
     "description": null,
-    "lineNumber": 109,
+    "lineNumber": 105,
     "undocument": true,
     "params": [
       {
@@ -5255,7 +5255,7 @@
     "longname": "src/view/view.js~View#_setRootNode",
     "access": "private",
     "description": "Set root node element to this.el",
-    "lineNumber": 123,
+    "lineNumber": 119,
     "params": [
       {
         "name": "root",
@@ -5279,7 +5279,7 @@
     "return": null
   },
   {
-    "__docId__": 238,
+    "__docId__": 237,
     "kind": "method",
     "name": "_loadFinish",
     "memberof": "src/view/view.js~View",
@@ -5295,12 +5295,12 @@
     "return": null
   },
   {
-    "__docId__": 239,
+    "__docId__": 238,
     "kind": "member",
-    "name": "container",
+    "name": "contentEl",
     "memberof": "src/view/view.js~View",
     "static": false,
-    "longname": "src/view/view.js~View#container",
+    "longname": "src/view/view.js~View#contentEl",
     "access": "public",
     "description": null,
     "lineNumber": 142,
@@ -5312,7 +5312,7 @@
     }
   },
   {
-    "__docId__": 240,
+    "__docId__": 239,
     "kind": "method",
     "name": "_loadViewsEvts",
     "memberof": "src/view/view.js~View",
@@ -5328,7 +5328,7 @@
     "return": null
   },
   {
-    "__docId__": 241,
+    "__docId__": 240,
     "kind": "method",
     "name": "_bindData",
     "memberof": "src/view/view.js~View",
@@ -5344,7 +5344,7 @@
     "return": null
   },
   {
-    "__docId__": 242,
+    "__docId__": 241,
     "kind": "method",
     "name": "_unbindData",
     "memberof": "src/view/view.js~View",
@@ -5360,7 +5360,7 @@
     "return": null
   },
   {
-    "__docId__": 243,
+    "__docId__": 242,
     "kind": "get",
     "name": "data",
     "memberof": "src/view/view.js~View",
@@ -5393,7 +5393,7 @@
     }
   },
   {
-    "__docId__": 244,
+    "__docId__": 243,
     "kind": "set",
     "name": "data",
     "memberof": "src/view/view.js~View",
@@ -5407,7 +5407,7 @@
     "undocument": true
   },
   {
-    "__docId__": 246,
+    "__docId__": 245,
     "kind": "method",
     "name": "findEl",
     "memberof": "src/view/view.js~View",
@@ -5443,7 +5443,7 @@
     }
   },
   {
-    "__docId__": 247,
+    "__docId__": 246,
     "kind": "method",
     "name": "appendEl",
     "memberof": "src/view/view.js~View",
@@ -5469,7 +5469,7 @@
     "return": null
   },
   {
-    "__docId__": 248,
+    "__docId__": 247,
     "kind": "method",
     "name": "add",
     "memberof": "src/view/view.js~View",
@@ -5508,7 +5508,7 @@
     "return": null
   },
   {
-    "__docId__": 249,
+    "__docId__": 248,
     "kind": "method",
     "name": "remove",
     "memberof": "src/view/view.js~View",
@@ -5537,7 +5537,7 @@
     "return": null
   },
   {
-    "__docId__": 250,
+    "__docId__": 249,
     "kind": "method",
     "name": "fire",
     "memberof": "src/view/view.js~View",
@@ -5576,7 +5576,7 @@
     "return": null
   },
   {
-    "__docId__": 251,
+    "__docId__": 250,
     "kind": "method",
     "name": "destroy",
     "memberof": "src/view/view.js~View",
@@ -5591,7 +5591,7 @@
     "return": null
   },
   {
-    "__docId__": 253,
+    "__docId__": 252,
     "kind": "member",
     "name": "parent",
     "memberof": "src/view/view.js~View",
@@ -5608,7 +5608,7 @@
     }
   },
   {
-    "__docId__": 254,
+    "__docId__": 253,
     "kind": "method",
     "name": "update",
     "memberof": "src/view/view.js~View",
@@ -5661,7 +5661,7 @@
     }
   },
   {
-    "__docId__": 255,
+    "__docId__": 254,
     "kind": "method",
     "name": "_setDataToUI",
     "memberof": "src/view/view.js~View",
@@ -5676,7 +5676,7 @@
     "return": null
   },
   {
-    "__docId__": 256,
+    "__docId__": 255,
     "kind": "method",
     "name": "_setFieldValue",
     "memberof": "src/view/view.js~View",
@@ -5709,7 +5709,7 @@
     }
   },
   {
-    "__docId__": 257,
+    "__docId__": 256,
     "kind": "method",
     "name": "_setupEvts",
     "memberof": "src/view/view.js~View",
@@ -5732,7 +5732,7 @@
     "return": null
   },
   {
-    "__docId__": 258,
+    "__docId__": 257,
     "kind": "method",
     "name": "_setEvts",
     "memberof": "src/view/view.js~View",
@@ -5768,7 +5768,7 @@
     "return": null
   },
   {
-    "__docId__": 259,
+    "__docId__": 258,
     "kind": "method",
     "name": "_trapEvt",
     "memberof": "src/view/view.js~View",
@@ -5824,7 +5824,7 @@
     "return": null
   },
   {
-    "__docId__": 260,
+    "__docId__": 259,
     "kind": "method",
     "name": "_teardownEvts",
     "memberof": "src/view/view.js~View",
@@ -5840,7 +5840,7 @@
     "return": null
   },
   {
-    "__docId__": 261,
+    "__docId__": 260,
     "kind": "method",
     "name": "_buildFromHtml",
     "memberof": "src/view/view.js~View",
@@ -5867,7 +5867,7 @@
     }
   },
   {
-    "__docId__": 262,
+    "__docId__": 261,
     "kind": "method",
     "name": "_firstEl",
     "memberof": "src/view/view.js~View",
@@ -5894,7 +5894,7 @@
     }
   },
   {
-    "__docId__": 263,
+    "__docId__": 262,
     "kind": "method",
     "name": "_parseEvts",
     "memberof": "src/view/view.js~View",
@@ -5930,7 +5930,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"flatout\",\n  \"version\": \"0.7.5\",\n  \"author\": \"Toshimitsu Takahashi\",\n  \"license\": \"MIT\",\n  \"description\": \"Lightweight Single-Page-Application framework for JavaScript\",\n  \"main\": \"dist/flatout.js\",\n  \"engines\": {\n    \"node\": \">=10.10\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\",\n    \"example\": \"examples\"\n  },\n  \"files\": [\n    \"dist/*.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"lint\": \"eslint src/** spec/**\",\n    \"test\": \"mocha --timeout 15000 test/client/**.test.js\",\n    \"coverage\": \"nyc report --reporter=html\",\n    \"debug\": \"node test/inner_debug.js\",\n    \"dist\": \"./bin/dist.sh\",\n    \"doc\": \"esdoc\",\n    \"example\": \"node examples/server.js .\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:tilfin/flatout.git\"\n  },\n  \"keywords\": [\n    \"view\",\n    \"framework\",\n    \"SPA\"\n  ],\n  \"devDependencies\": {\n    \"chai\": \"^4.2.0\",\n    \"chai-spies\": \"^1.0.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^6.5.0\",\n    \"koa\": \"^2.8.2\",\n    \"koa-body\": \"^4.1.1\",\n    \"koa-bodyparser\": \"^4.2.1\",\n    \"koa-pino-logger\": \"^2.1.3\",\n    \"koa-send\": \"^5.0.0\",\n    \"mocha\": \"^6.2.1\",\n    \"nyc\": \"^14.1.1\",\n    \"puppeteer\": \"^1.20.0\",\n    \"puppeteer-to-istanbul\": \"^1.2.2\",\n    \"rollup\": \"^1.22.0\",\n    \"rollup-plugin-terser\": \"^4.0.4\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"flatout\",\n  \"version\": \"0.8.0\",\n  \"author\": \"Toshimitsu Takahashi\",\n  \"license\": \"MIT\",\n  \"description\": \"Lightweight Single-Page-Application framework for JavaScript\",\n  \"main\": \"dist/flatout.js\",\n  \"engines\": {\n    \"node\": \">=10.10\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\",\n    \"example\": \"examples\"\n  },\n  \"files\": [\n    \"dist/*.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"lint\": \"eslint src/** spec/**\",\n    \"test\": \"mocha --timeout 15000 test/client/**.test.js\",\n    \"coverage\": \"nyc report --reporter=html\",\n    \"debug\": \"node test/inner_debug.js\",\n    \"dist\": \"./bin/dist.sh\",\n    \"doc\": \"esdoc\",\n    \"example\": \"node examples/server.js .\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:tilfin/flatout.git\"\n  },\n  \"keywords\": [\n    \"view\",\n    \"framework\",\n    \"SPA\"\n  ],\n  \"devDependencies\": {\n    \"chai\": \"^4.2.0\",\n    \"chai-spies\": \"^1.0.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^6.5.0\",\n    \"koa\": \"^2.8.2\",\n    \"koa-body\": \"^4.1.1\",\n    \"koa-bodyparser\": \"^4.2.1\",\n    \"koa-pino-logger\": \"^2.1.3\",\n    \"koa-send\": \"^5.0.0\",\n    \"mocha\": \"^6.2.1\",\n    \"nyc\": \"^14.1.1\",\n    \"puppeteer\": \"^1.20.0\",\n    \"puppeteer-to-istanbul\": \"^1.2.2\",\n    \"rollup\": \"^1.22.0\",\n    \"rollup-plugin-terser\": \"^4.0.4\"\n  }\n}\n",
     "longname": "/home/toshi/work/me/flatout/package.json",
     "name": "package.json",
     "static": true,

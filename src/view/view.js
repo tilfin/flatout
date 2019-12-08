@@ -15,12 +15,12 @@ class View extends Core {
   /**
    * Create a View.
    *
-   * @param {string|Element} root - Root element ID or root node
-   * @param {object} [props]      - Properties
+   * @param {object} [props] - Properties
+   * @param {string|Element} [props.rootEl] - root element ID or root node
    * @param {Class<View>} [props.parent] - parent view this belongs to
-   * @param {string|Element} [props.container] - parent element of child views (specified by data-id or id value).
+   * @param {string|Element} [props.contentEl] - parent element of child views (specified by data-id or id value).
    */
-  constructor(root, props) {
+  constructor(props = {}) {
     super();
 
     /**
@@ -35,12 +35,8 @@ class View extends Core {
      */
     this.views = {};
 
-    if (props === undefined && root && root.constructor === Object) {
-      props = root;
-      root = null;
-    }
-
-    this._build(root, props || {});
+    const { rootEl, ...props_ } = props;
+    this._build(rootEl, props_);
   }
 
   /** @override */
@@ -142,8 +138,8 @@ class View extends Core {
   }
 
   _loadFinish() {
-    const ctn = this.container;
-    this.container = this._isStr(ctn) ? this.findEl(ctn) : this.el;
+    const ctn = this.contentEl;
+    this.contentEl = this._isStr(ctn) ? this.findEl(ctn) : this.el;
 
     this._loadViewsEvts();
     this._setDataToUI();
@@ -230,7 +226,7 @@ class View extends Core {
    * @param {Element} el - child element
    */
   appendEl(el) {
-    this.container.appendChild(el)
+    this.contentEl.appendChild(el)
   }
 
   /**

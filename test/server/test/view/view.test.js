@@ -33,20 +33,20 @@ describe('View', () => {
   })
 
   it('creates new instance', () => {
-    const view = new View('theView')
+    const view = new View({ rootEl: 'theView' })
     expect(view.el.id).to.eq('theView')
     expect(view.findEl('message').textContent).to.include('Hello!')
   })
 
   it('creates new instance with prop', () => {
-    const view = new View('theView', { prop1: 100 })
+    const view = new View({ rootEl: 'theView', prop1: 100 })
     expect(view.el.id).to.eq('theView')
     expect(view.findEl('message').textContent).to.include('Hello!')
     expect(view.prop1).to.eq(100)
   })
 
   it('creates new instance expanding data of prop', () => {
-    const view = new View('theView', { data })
+    const view = new View({ rootEl: 'theView', data })
     expect(view.el.id).to.eq('theView')
     expect(view.findEl('message').textContent).to.include(data.message)
   })
@@ -54,7 +54,7 @@ describe('View', () => {
   it('creates new instance with load', () => {
     var load = chai.spy();
 
-    const view = new View('theView', null, load)
+    const view = new View({ rootEl: 'theView', load })
     expect(view.el.id).to.eq('theView')
     expect(view.findEl('message').textContent).to.include('Hello!')
     expect(load).to.have.been.called
@@ -63,7 +63,7 @@ describe('View', () => {
   it('creates new instance with prop that contains data and load', () => {
     var load = chai.spy();
 
-    const view = new View('theView', { prop1: 100, data }, load)
+    const view = new View({ rootEl: 'theView', prop1: 100, data }, load)
     expect(view.el.id).to.eq('theView')
     expect(view.findEl('message').textContent).to.include(data.message)
     expect(view.prop1).to.eq(100)
@@ -79,7 +79,7 @@ describe('View', () => {
       }
     }
 
-    const view = new AView('theView', { prop1: 100, data })
+    const view = new AView({ rootEl: 'theView', prop1: 100, data })
     view.findEl('sayButton').dispatchEvent(new Event('click'))
 
     expect(view.el.id).to.eq('theView');
@@ -91,7 +91,7 @@ describe('View', () => {
 
   describe('data=', () => {
     it('causes to render field contents', () => {
-      const view = new View('theView')
+      const view = new View({ rootEl: 'theView' })
       expect(view.el.querySelector('span[data-id="remarkText"]').textContent).to.eq('')
       expect(view.el.querySelector('span[data-id="remarkHtml"]').innerHTML).to.eq('')
 
@@ -114,7 +114,7 @@ describe('View', () => {
 
       expect(load).not.to.have.been.called
 
-      const view = new SubView('theView')
+      const view = new SubView({ rootEl: 'theView' })
       expect(view.el.id).to.eq('theView')
       expect(view.findEl('message').textContent).to.include('Hello!')
       expect(load).to.have.been.called

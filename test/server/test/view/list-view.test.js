@@ -22,19 +22,25 @@ describe('ListView', () => {
   }
 
   it('creates new instance', async () => {
-    const list = new ListView(document.getElementById('theList'))
+    const list = new ListView(ListItemView, { rootEl: 'theList' })
     expect(list.el.id).to.eq('theList')
   })
 
   it('creates new instance with prop', async () => {
-    const list = new ListView(document.getElementById('theList'), ListItemView, { prop1: 100, prop2: 'foo' })
+    const list = new ListView(ListItemView, {
+      rootEl: 'theList',
+      prop1: 100, prop2: 'foo'
+    })
     expect(list.el.id).to.eq('theList')
     expect(list.prop1).to.eq(100)
     expect(list.prop2).to.eq('foo')
   })
 
   it('creates new instance expanding data of prop', async () => {
-    const list = new ListView(document.getElementById('theList'), ListItemView, { data: [] })
+    const list = new ListView(ListItemView, {
+      rootEl: 'theList',
+      data: []
+    })
     expect(list.el.id).to.eq('theList')
 
     list.data = [{
@@ -50,16 +56,17 @@ describe('ListView', () => {
   it('creates new instance with fields, data and load', async () => {
     class AListView extends ListView {}
 
-    const list = new AListView(document.getElementById('theList'), ListItemView, {
-        prop1: 100,
-        data: [{
-          title: 'Key'
-        }, {
-          title: 'Micheal'
-        }, {
-          title: 'Cindy'
-        }]
-      })
+    const list = new AListView(ListItemView, {
+      rootEl: document.getElementById('theList'),
+      prop1: 100,
+      data: [{
+        title: 'Key'
+      }, {
+        title: 'Micheal'
+      }, {
+        title: 'Cindy'
+      }]
+    })
     await sleep(1)
     expect(list.el.id).to.eq('theList')
     expect(list.prop1).to.eq(100)
@@ -71,7 +78,7 @@ describe('ListView', () => {
 
       class SubListView extends ListView {
         constructor() {
-          super(document.getElementById('theList'), ListItemView);
+          super(ListItemView, { rootEl: document.getElementById('theList') });
         }
 
         load(views) {

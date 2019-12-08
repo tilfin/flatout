@@ -1,11 +1,11 @@
 import View from '/lib/view/view.js';
 import ListView from '/lib/view/list-view.js';
-import { Item, List } from '/lib/model/item.js';
+import { List } from '/lib/model/item.js';
 
 const expect = chai.expect;
 
 describe('ListView-List', () => {
-  const rootArea = new View('areaSandBox');
+  const rootArea = new View({ rootEl: 'areaSandBox' });
 
   beforeEach(() => {
     document.getElementById('areaSandBox').innerHTML = ''

@@ -119,8 +119,8 @@
       "expectCount": 17,
       "actualCount": 15,
       "undocumentLines": [
-        35,
-        165
+        37,
+        158
       ]
     },
     "src/view/page.js": {
@@ -133,8 +133,8 @@
       "actualCount": 23,
       "undocumentLines": [
         8,
-        104,
-        109,
+        100,
+        105,
         140,
         142,
         149,

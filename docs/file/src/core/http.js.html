@@ -268,7 +268,7 @@ export class HttpClient {
     }
 
     let url = path;
-    if (this.baseURL &amp;&amp; !url.match(/^[a-z]{0,5}\:\/\//)) {
+    if (this.baseURL &amp;&amp; !url.match(/^[a-z]{2,5}:\/\//)) {
       url = this.baseURL + url;
     }
     if (query) url += &apos;?&apos; + this._formatParams(query);
