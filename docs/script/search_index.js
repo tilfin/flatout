@@ -1386,6 +1386,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/view/view.js~view#completed",
+    "class/src/view/view.js~View.html#instance-method-completed",
+    "src/view/view.js~View#completed",
+    "method"
+  ],
+  [
     "src/view/view.js~view#constructor",
     "class/src/view/view.js~View.html#instance-constructor-constructor",
     "src/view/view.js~View#constructor",

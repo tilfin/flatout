@@ -880,6 +880,12 @@ class View extends Core {
   }
 
   /**
+   * For implement after loading completed
+   */
+  completed() {
+  }
+
+  /**
    * For implement unloading subviews
    */
   unload() {
@@ -950,6 +956,8 @@ class View extends Core {
     this._loadViewsEvts();
     this._setDataToUI();
     this._bindData();
+
+    this.completed();
   }
 
   _loadViewsEvts() {
