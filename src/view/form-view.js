@@ -86,21 +86,35 @@ class FormView extends View {
     const ds = el.dataset || {};
     const type = ds.type || 'text';
     let val = el.value;
-    if (type === 'number') {
+    if (type.startsWith('date') || el.type === 'datetime-local') {
+      val = new Date(val)
+    } else if (type === 'number') {
       val = Number(val)
     } else if (type.startsWith('bool')) {
       val = Boolean(val)
-    }
+    } 
     return val;
   }
 
   _setFieldValue(name, val) {
     const input = this.el[name];
     if (input) {
+      if (input.type === 'datetime-local') {
+        val = this.formatLocalDateTime(new Date(val))
+      }
       input.value = val;
       return;
     }
     super._setFieldValue(name, val);
+  }
+
+  formatLocalDateTime(date) {
+    return [date.getFullYear(), '-',
+      ('0' + (date.getMonth() + 1)).slice(-2), '-',
+      ('0' + date.getDate()).slice(-2), 'T',
+      ('0' + date.getHours()).slice(-2), ':',
+      ('0' + date.getMinutes()).slice(-2)
+    ].join('')
   }
 }
 

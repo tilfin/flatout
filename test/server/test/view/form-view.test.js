@@ -73,7 +73,7 @@ describe('FormView', () => {
 
       class SubFormView extends FormView {
         init() {
-          this.fields = 'name age gender country';
+          this.fields = 'name age gender country startDateTime';
         }
 
         handle(evts) {
@@ -88,7 +88,8 @@ describe('FormView', () => {
                         name: 'Ken',
                         gender: 'male',
                         age: 16,
-                        country: 'america'
+                        country: 'america',
+                        startDateTime: '2019-10-01T12:00:00Z',
                       }
                     })
 
@@ -98,6 +99,7 @@ describe('FormView', () => {
       expect(form.el.age.value).to.eq("16")
       expect(form.el.gender.value).to.eq("male")
       expect(form.el.country.value).to.eq("america")
+      expect(form.el.startDateTime.value).to.eq('2019-10-01T21:00')
 
       const submitEvt = document.createEvent("HTMLEvents")
       submitEvt.initEvent('submit', true, true)
@@ -114,7 +116,8 @@ describe('FormView', () => {
         age: 16,
         gender: 'female',
         country: 'america',
-        graduated: true
+        graduated: true,
+        startDateTime: new Date('2019-10-01T12:00:00Z'),
       })
     })
   })
