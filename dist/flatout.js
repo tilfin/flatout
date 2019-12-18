@@ -1185,8 +1185,13 @@ class View extends Core {
    */
   _trapEvt(root, el, type, handler) {
     const hook = function(e) {
-      const rb = handler.call(root, this, e);
-      return rb !== undefined ? rb : false;
+      let rb;
+      try {
+        rb = handler.call(root, this, e);
+      } catch(err) {
+        console.error(err);
+      }
+      return rb !== undefined ? rb : false
     };
 
     if (HOOK_EVTS.includes(type)) {

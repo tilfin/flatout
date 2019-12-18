@@ -1,6 +1,6 @@
 {
   "name": "flatout",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "author": "Toshimitsu Takahashi",
   "license": "MIT",
   "description": "Lightweight Single-Page-Application framework for JavaScript",
