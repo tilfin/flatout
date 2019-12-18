@@ -68,13 +68,6 @@ class FormView extends View {
       result[name] = this._valueAsType(this.el[name]);
     }
 
-    for (let fel of this.el.querySelectorAll('[data-id]')) {
-      const val = this._valueAsType(fel);
-      if (val !== undefined) {
-        result[fel.dataset.id] = val;
-      }
-    }
-
     eachEntry(this.views, ([name, view]) => {
       result[name] = view.data;
     });
