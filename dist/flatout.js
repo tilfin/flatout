@@ -1472,7 +1472,7 @@ class Router {
 
     if (route) return route;
 
-    alert(`${path} page not found`);
+    alert(`${absPath} page not found`);
     throw '/';
   }
 
