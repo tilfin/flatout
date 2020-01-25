@@ -1,3 +1,5 @@
+.esdoc.json
+.eslintrc
 .travis.yml
 .vscode/
 .nyc_output/
