@@ -1,6 +1,6 @@
 {
-  "name": "flatout",
-  "version": "0.9.0",
+  "name": "@tilfin/flatout",
+  "version": "0.9.4",
   "author": "Toshimitsu Takahashi",
   "license": "MIT",
   "description": "Lightweight Single-Page-Application framework for JavaScript",
@@ -13,10 +13,6 @@
     "doc": "docs",
     "example": "examples"
   },
-  "files": [
-    "dist/*.js",
-    "src"
-  ],
   "scripts": {
     "lint": "eslint src/** spec/**",
     "test": "mocha --timeout 15000 test/client/**.test.js",

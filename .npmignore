@@ -5,7 +5,7 @@
 .nyc_output/
 bin/
 build/
-dist/
+src/
 docs/
 test/
 examples/
