@@ -1,4 +1,4 @@
-declare module 'flatout' {
+declare module '@tilfin/flatout' {
     interface HttpRequest {
         method: string;
         path: string;
