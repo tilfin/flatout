@@ -38,6 +38,24 @@ declare module '@tilfin/flatout' {
      */
     class HttpClient {
         /**
+         * Constructor.
+         * 
+         * @param {object} [opts] - options
+         * @param {string} [opts.baseURL] - base URL (default empty).
+         * @param {object} [opts.headers] - custom headers
+         * @param {Promise} [opts.beforeRequest] - async function called before the request
+         * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error
+         * @param {string} [opts.bodyType] - body type.
+         */
+        constructor(opts?: {
+            baseURL?: string,
+            headers?: Record<string, any>,
+            beforeRequest?: Function,
+            beforeError?: Function,
+            bodyType?: string
+        });
+
+        /**
          * do GET request.
          *
          * @param path - request path
@@ -94,9 +112,9 @@ declare module '@tilfin/flatout' {
          * @return {Promise<Response>} Promise resolves response bodystatus: xhr.status,
          */
         patch(path: string, ctx?: {
-            query?: Record<string, any>;
-            body?: any;
-            headers?: Record<string, any>;
+            query?: Record<string, any>,
+            body?: any,
+            headers?: Record<string, any>,
         }): Promise<HttpResponse>;
 
         /**
@@ -110,9 +128,9 @@ declare module '@tilfin/flatout' {
          * @return {Promise<Response>} Promise resolves response bodystatus: xhr.status,
          */
         delete(path: string, ctx?: {
-            query?: Record<string, any>;
-            body?: any;
-            headers?: Record<string, any>;
+            query?: Record<string, any>,
+            body?: any,
+            headers?: Record<string, any>,
         }): Promise<HttpResponse>;
 
         /**
@@ -131,7 +149,7 @@ declare module '@tilfin/flatout' {
 
     namespace App {
         /**
-         * Activate application
+         * Activate application.
          *
          * @param rootViewClass - root view class.
          * @param routeMap - routing map.
@@ -145,6 +163,14 @@ declare module '@tilfin/flatout' {
             rootPath?: string,
             pathHead?: string,
         }): void;
+
+        /**
+         * Go a page.
+         *
+         * @param {string} path - URL path
+         * @param {Object} [ctx] - context
+         */
+        export function go(path: string, ctx?: any): boolean;
     }
 
     class Core {
@@ -303,6 +329,10 @@ declare module '@tilfin/flatout' {
         indexOf(predictOrField: string | Function | Object, value?: any): number;
     }
 
+    type EventHandler = (sender: Element, e: Event) => {}
+    type ViewMap = Record<string, View>
+    type EventMap = Record<string, EventHandler>
+
     class View {
         /**
          * Create a View.
@@ -313,9 +343,10 @@ declare module '@tilfin/flatout' {
          * @param {string|Element} [props.contentEl] - parent element of child views (specified by data-id or id value).
          */
         constructor(props?: {
-            rootEl?: string | Element;
-            parent?: typeof View;
-            contentEl?: string | Element;
+            rootEl?: string | Element,
+            parent?: typeof View,
+            contentEl?: string | Element,
+            [field: string]: any,
         });
 
         /**
@@ -332,7 +363,7 @@ declare module '@tilfin/flatout' {
         /**
          * Subview children of the view
          */
-        views: Record<string, View>;
+        views: ViewMap;
 
         /**
          * Initialize props
@@ -346,14 +377,14 @@ declare module '@tilfin/flatout' {
          *
          * @param views - added subview target (ex. views.list = new ListView(..))
          */
-        load(views: Record<string, View>): void;
+        load(views: ViewMap): void;
 
         /**
          * Ssetting listener of events.
          *
          * @param evts - added listener target (ex. evts.subview_event)
          */
-        handle(evts: Record<string, Function>): void;
+        handle(evts: EventMap): void;
 
         /**
          * For implement after loading completed
