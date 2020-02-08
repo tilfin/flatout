@@ -329,7 +329,7 @@ declare module '@tilfin/flatout' {
         indexOf(predictOrField: string | Function | Object, value?: any): number;
     }
 
-    type EventHandler = (sender: Element, e: Event) => {}
+    type EventHandler = (sender: Element, e: Event) => void
     type ViewMap = Record<string, View>
     type EventMap = Record<string, EventHandler>
 
