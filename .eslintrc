@@ -12,7 +12,7 @@
   "rules": {
     "no-unused-vars": [1, {"vars": "local", "args": "none"}]
   },
-  "globals": {,
+  "globals": {
     "$": true,
     "expect": true,
     "exports": true,
