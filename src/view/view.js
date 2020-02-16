@@ -318,23 +318,33 @@ class View extends Core {
    */
   _setDataToUI() {
     const data = this._data;
-    if (data === undefined || !(data instanceof Object)) return;
+    if (data === undefined) return;
     console.log('View#_setDataToUI', this);
 
-    eachEntry(this._data, ([name, val]) => {
-      this._setFieldValue(name, val)
-    })
+    if (data instanceof Object) {
+      eachEntry(data, ([name, val]) => this._setFieldValue(name, val))
+    } else {
+      this._setVal(this.el, data)
+    }
   }
 
   _setFieldValue(name, val) {
-    if (name in this.views) {
-      this.views[name].data = val;
+    const it = this.views[name];
+    if (it) {
+      it.data = val;
       return true;
     }
 
     const el = this.findEl(name);
     if (!el) return false;
 
+    this._setVal(el, val)
+    return true;
+  }
+
+  // private
+
+  _setVal(el, val) {
     if (el.dataset && el.dataset.type === 'html') {
       el.innerHTML = val;
     } else if ('value' in el) {
@@ -342,11 +352,7 @@ class View extends Core {
     } else {
       el.textContent = val;
     }
-
-    return true;
   }
-
-  // private
 
   _parseEvts(evts, emap) {
     eachEntry(evts, ([name, handler]) => {

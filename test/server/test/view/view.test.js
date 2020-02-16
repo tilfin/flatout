@@ -1,4 +1,5 @@
 import View from '/lib/view/view.js';
+import { Item } from '/lib/model/item.js';
 
 const expect = chai.expect;
 
@@ -89,35 +90,37 @@ describe('View', () => {
     expect(clickHandler).to.have.been.called.with(view.findEl('sayButton'));
   })
 
-  it('set attached handle evts', () => {
-    let clickHandler = chai.spy();
+  describe('#set', () => {
+    it('set attached handle evts', () => {
+      let clickHandler = chai.spy();
 
-    class FooView extends View {
-      html() {
-        return `<input id="foo">`
-      }
-    }
-
-    class TestView extends View {
-      init() {
-        return {
-          foo: { value: 'foo' },
+      class FooView extends View {
+        html() {
+          return `<input id="foo">`
         }
       }
 
-      handle(evts) {
-        evts.foo_click = clickHandler
+      class TestView extends View {
+        init() {
+          return new Item({ foo: 'initFooValue' })
+        }
+
+        handle(evts) {
+          evts.foo_click = clickHandler
+        }
+
+        completed() {
+          this.set('foo', new FooView())
+        }
       }
 
-      completed() {
-        this.set('foo', new FooView())
-      }
-    }
-
-    const view = new TestView({ rootEl: 'theView' })
-    expect(view.findEl('foo').value).to.eq('')
-    view.findEl('foo').dispatchEvent(new Event('click'))
-    expect(clickHandler).to.have.been.called.with(view.findEl('foo'));
+      const view = new TestView({ rootEl: 'theView' })
+      expect(view.findEl('foo').value).to.eq('') // initFooValue not applied
+      view.findEl('foo').dispatchEvent(new Event('click'))
+      expect(clickHandler).to.have.been.called.with(view.findEl('foo'));
+      view.data.update({ foo: 'newFooValue' })
+      expect(view.findEl('foo').value).to.eq('newFooValue')
+    })
   })
 
   describe('data=', () => {
