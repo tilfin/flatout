@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/view/form-view.js | flatout</title>
+  <title data-ice="title">src/view/form-view.js | @tilfin/flatout</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@tilfin/flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -123,13 +123,6 @@ class FormView extends View {
       result[name] = this._valueAsType(this.el[name]);
     }
 
-    for (let fel of this.el.querySelectorAll(&apos;[data-id]&apos;)) {
-      const val = this._valueAsType(fel);
-      if (val !== undefined) {
-        result[fel.dataset.id] = val;
-      }
-    }
-
     eachEntry(this.views, ([name, view]) =&gt; {
       result[name] = view.data;
     });
@@ -141,21 +134,35 @@ class FormView extends View {
     const ds = el.dataset || {};
     const type = ds.type || &apos;text&apos;;
     let val = el.value;
-    if (type === &apos;number&apos;) {
+    if (type.startsWith(&apos;date&apos;) || el.type === &apos;datetime-local&apos;) {
+      val = new Date(val)
+    } else if (type === &apos;number&apos;) {
       val = Number(val)
     } else if (type.startsWith(&apos;bool&apos;)) {
       val = Boolean(val)
-    }
+    } 
     return val;
   }
 
   _setFieldValue(name, val) {
     const input = this.el[name];
     if (input) {
+      if (input.type === &apos;datetime-local&apos;) {
+        val = this.formatLocalDateTime(new Date(val))
+      }
       input.value = val;
       return;
     }
     super._setFieldValue(name, val);
+  }
+
+  formatLocalDateTime(date) {
+    return [date.getFullYear(), &apos;-&apos;,
+      (&apos;0&apos; + (date.getMonth() + 1)).slice(-2), &apos;-&apos;,
+      (&apos;0&apos; + date.getDate()).slice(-2), &apos;T&apos;,
+      (&apos;0&apos; + date.getHours()).slice(-2), &apos;:&apos;,
+      (&apos;0&apos; + date.getMinutes()).slice(-2)
+    ].join(&apos;&apos;)
   }
 }
 

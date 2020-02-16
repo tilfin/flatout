@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/view/view.js | flatout</title>
+  <title data-ice="title">src/view/view.js | @tilfin/flatout</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
+<meta name="description" content="Lightweight Single-Page-Application framework for JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@tilfin/flatout"><meta property="twitter:description" content="Lightweight Single-Page-Application framework for JavaScript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -99,7 +99,8 @@ class View extends Core {
     return Object.assign(super._privates(), {
       _F_onevts: new Set(),
       _F_binders: [],
-      _F_elcache: new Map()
+      _F_elcache: new Map(),
+      _F_emap: { _: {} },
     })
   }
 
@@ -231,7 +232,20 @@ class View extends Core {
 
     const evts = {};
     this.handle(evts);
-    this._setupEvts(View._parseEvts(evts));
+    this._parseEvts(evts);
+    
+    // attach events to current views
+    eachEntry(this._F_emap, ([target, hmap]) =&gt; {
+      if (target === &apos;_&apos;) {
+        this._setEvts(this.el, hmap);
+        return;
+      }
+
+      const el = this.findEl(target);
+      if (!el) return;
+
+      this._setEvts(el, hmap)
+    })
   }
 
   _bindData() {
@@ -293,7 +307,7 @@ class View extends Core {
   }
 
   /**
-   * Add child view as name
+   * Add child view as name after load
    *
    * @param {string} name - child name
    * @param {View} view - child view
@@ -303,6 +317,7 @@ class View extends Core {
   add(name, view) {
     this.views[name] = view;
     this.appendEl(view.el);
+    this._setEvts(view.el, this._F_emap[name])
   }
 
   /**
@@ -394,21 +409,25 @@ class View extends Core {
 
   // private
 
-  _setupEvts(evtMap) {
-    eachEntry(evtMap, ([target, hmap]) =&gt; {
-      if (target === &apos;_&apos;) {
-        this._setEvts(this.el, hmap);
+  _parseEvts(evts) {
+    const emap = this._F_emap;
+
+    eachEntry(evts, ([name, handler]) =&gt; {
+      const pos = name.lastIndexOf(&apos;_&apos;);
+      if (pos === -1) {
+        emap._[name] = handler;
         return;
       }
 
-      const el = this.findEl(target);
-      if (!el) {
-        console.log(`Not found event target ${target}`);
-        return;
+      // ex) button_click
+      const target = name.substr(0, pos),
+            ename = name.substr(pos + 1),
+            hmap = emap[target];
+      if (hmap) {
+        hmap[ename] = handler;
+      } else {
+        emap[target] = { [ename]: handler };
       }
-
-      const ts = el instanceof NodeList ? Array.from(el) : [el];
-      ts.forEach(t =&gt; this._setEvts(t, hmap));
     })
   }
 
@@ -419,8 +438,9 @@ class View extends Core {
    * @param {object} hmap - handler map. Object&lt;type, value&gt;
    */
   _setEvts(el, hmap) {
+    const ts = el instanceof NodeList ? Array.from(el) : [el];
     eachEntry(hmap, ([type, handler]) =&gt; {
-      this._trapEvt(this, el, type, handler);
+      ts.forEach(it =&gt; this._trapEvt(this, it, type, handler))
     })
   }
 
@@ -434,8 +454,13 @@ class View extends Core {
    */
   _trapEvt(root, el, type, handler) {
     const hook = function(e) {
-      const rb = handler.call(root, this, e);
-      return rb !== undefined ? rb : false;
+      let rb;
+      try {
+        rb = handler.call(root, this, e)
+      } catch(err) {
+        console.error(err)
+      }
+      return rb !== undefined ? rb : false
     };
 
     if (HOOK_EVTS.includes(type)) {
@@ -476,32 +501,6 @@ class View extends Core {
       if (child.nodeType === Node.ELEMENT_NODE) return child;
     }
     return null;
-  }
-
-  // static
-
-  static _parseEvts(handlers) {
-    const emap = { _: {} };
-
-    eachEntry(handlers, ([name, handler]) =&gt; {
-      const pos = name.lastIndexOf(&apos;_&apos;);
-      if (pos === -1) {
-        emap._[name] = handler;
-        return;
-      }
-
-      // ex) button_click
-      const target = name.substr(0, pos),
-            ename = name.substr(pos + 1),
-            hmap = emap[target];
-      if (hmap) {
-        hmap[ename] = handler;
-      } else {
-        emap[target] = { [ename]: handler };
-      }
-    })
-
-    return emap;
   }
 }
 

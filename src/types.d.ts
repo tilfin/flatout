@@ -419,19 +419,12 @@ declare module '@tilfin/flatout' {
         appendEl(el: Element): void;
 
         /**
-         * Add child view as name
+         * Set child view as name after load
          *
-         * @param name - child name
-         * @param view - child view
+         * @param name - view name
+         * @param [view] - child view. remove if null, replace one if exist
          */
-        add(name: string, view: View): void;
-
-        /**
-         * Remove child view by name
-         *
-         * @param viewName - child view name
-         */
-        remove(viewName: string): void;
+        set(name: string, view?: View): void;
 
         /**
          * Fire event

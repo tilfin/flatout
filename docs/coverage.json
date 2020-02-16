@@ -106,13 +106,14 @@
       ]
     },
     "src/view/form-view.js": {
-      "expectCount": 8,
+      "expectCount": 9,
       "actualCount": 4,
       "undocumentLines": [
         33,
         63,
-        85,
-        97
+        78,
+        92,
+        104
       ]
     },
     "src/view/list-view.js": {
@@ -129,25 +130,24 @@
       "undocumentLines": []
     },
     "src/view/view.js": {
-      "expectCount": 40,
+      "expectCount": 39,
       "actualCount": 24,
       "undocumentLines": [
         8,
-        106,
-        111,
-        146,
-        148,
-        157,
-        182,
-        189,
-        205,
-        292,
-        320,
-        342,
-        394,
-        406,
-        413,
-        428
+        107,
+        112,
+        147,
+        149,
+        158,
+        196,
+        203,
+        219,
+        307,
+        335,
+        357,
+        419,
+        431,
+        438
       ]
     }
   }

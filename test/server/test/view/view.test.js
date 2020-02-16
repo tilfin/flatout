@@ -89,6 +89,37 @@ describe('View', () => {
     expect(clickHandler).to.have.been.called.with(view.findEl('sayButton'));
   })
 
+  it('set attached handle evts', () => {
+    let clickHandler = chai.spy();
+
+    class FooView extends View {
+      html() {
+        return `<input id="foo">`
+      }
+    }
+
+    class TestView extends View {
+      init() {
+        return {
+          foo: { value: 'foo' },
+        }
+      }
+
+      handle(evts) {
+        evts.foo_click = clickHandler
+      }
+
+      completed() {
+        this.set('foo', new FooView())
+      }
+    }
+
+    const view = new TestView({ rootEl: 'theView' })
+    expect(view.findEl('foo').value).to.eq('')
+    view.findEl('foo').dispatchEvent(new Event('click'))
+    expect(clickHandler).to.have.been.called.with(view.findEl('foo'));
+  })
+
   describe('data=', () => {
     it('causes to render field contents', () => {
       const view = new View({ rootEl: 'theView' })

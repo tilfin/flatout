@@ -850,7 +850,8 @@ class View extends Core {
     return Object.assign(super._privates(), {
       _F_onevts: new Set(),
       _F_binders: [],
-      _F_elcache: new Map()
+      _F_elcache: new Map(),
+      _F_emap: { _: {} },
     })
   }
 
@@ -980,9 +981,22 @@ class View extends Core {
       }
     });
 
-    const evts = {};
+    const evts = {}, emap = this._F_emap;
     this.handle(evts);
-    this._setupEvts(View._parseEvts(evts));
+    this._parseEvts(evts, emap);
+
+    // attach events to current views
+    eachEntry(emap, ([target, hmap]) => {
+      if (target === '_') {
+        this._setEvts(this.el, hmap);
+        return;
+      }
+
+      const el = this.findEl(target);
+      if (!el) return;
+
+      this._setEvts(el, hmap);
+    });
   }
 
   _bindData() {
@@ -1044,30 +1058,25 @@ class View extends Core {
   }
 
   /**
-   * Add child view as name
+   * Set child view as name after load
    *
-   * @param {string} name - child name
-   * @param {View} view - child view
+   * @param {string} name - view name
+   * @param {View} view - child view. remove if null
    * @example
-   * parent.add('child', view);
+   * parent.set('name', view);
    */
-  add(name, view) {
-    this.views[name] = view;
-    this.appendEl(view.el);
-  }
-
-  /**
-   * Remove child view by name
-   *
-   * @param {string} viewName - child view name
-   * @example
-   * parent.remove('child');
-   */
-  remove(viewName) {
-    const view = this.views[viewName];
-    view.destroy();
-    view.el.remove();
-    delete this.views[viewName];
+  set(name, view) {
+    const t = this, curvw = t.views[name];
+    if (curvw) {
+      curvw.destroy();
+      curvw.el.remove();
+      delete t.views[name];
+    }
+    if (view) {
+      t.views[name] = view;
+      t.appendEl(view.el);
+      t._setEvts(view.el, t._F_emap[name] || {});
+    }
   }
 
   /**
@@ -1145,21 +1154,23 @@ class View extends Core {
 
   // private
 
-  _setupEvts(evtMap) {
-    eachEntry(evtMap, ([target, hmap]) => {
-      if (target === '_') {
-        this._setEvts(this.el, hmap);
+  _parseEvts(evts, emap) {
+    eachEntry(evts, ([name, handler]) => {
+      const pos = name.lastIndexOf('_');
+      if (pos === -1) {
+        emap._[name] = handler;
         return;
       }
 
-      const el = this.findEl(target);
-      if (!el) {
-        console.log(`Not found event target ${target}`);
-        return;
+      // ex) button_click
+      const target = name.substr(0, pos),
+            ename = name.substr(pos + 1),
+            hmap = emap[target];
+      if (hmap) {
+        hmap[ename] = handler;
+      } else {
+        emap[target] = { [ename]: handler };
       }
-
-      const ts = el instanceof NodeList ? Array.from(el) : [el];
-      ts.forEach(t => this._setEvts(t, hmap));
     });
   }
 
@@ -1170,8 +1181,9 @@ class View extends Core {
    * @param {object} hmap - handler map. Object<type, value>
    */
   _setEvts(el, hmap) {
+    const ts = el instanceof NodeList ? Array.from(el) : [el];
     eachEntry(hmap, ([type, handler]) => {
-      this._trapEvt(this, el, type, handler);
+      ts.forEach(it => this._trapEvt(this, it, type, handler));
     });
   }
 
@@ -1232,32 +1244,6 @@ class View extends Core {
       if (child.nodeType === Node.ELEMENT_NODE) return child;
     }
     return null;
-  }
-
-  // static
-
-  static _parseEvts(handlers) {
-    const emap = { _: {} };
-
-    eachEntry(handlers, ([name, handler]) => {
-      const pos = name.lastIndexOf('_');
-      if (pos === -1) {
-        emap._[name] = handler;
-        return;
-      }
-
-      // ex) button_click
-      const target = name.substr(0, pos),
-            ename = name.substr(pos + 1),
-            hmap = emap[target];
-      if (hmap) {
-        hmap[ename] = handler;
-      } else {
-        emap[target] = { [ename]: handler };
-      }
-    });
-
-    return emap;
   }
 }
 
