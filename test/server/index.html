@@ -3,8 +3,14 @@
 <title>Router mode History</title>
 </head>
 <body>  
-<main id="main"></main>
+<main id="main">
+  <div>
+    <h1>Home Page</h1>
+    <p id="rendered">SSR</p>
+  </div>
+</main>
 <nav>
+  <a class="home" href="/">home</a>
   <a class="about" href="/about">about</a>
   <a class="books" href="/books">books</a>
   <a class="book" href="/books/5">book</a>
@@ -37,6 +43,7 @@ class HomePage extends Page {
     return `
     <div>
      <h1>Home Page</h1>
+     <p id="rendered">CSR</p>
      <nav>
       <ul>
        <li><a href="/about">about</a></li>

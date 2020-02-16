@@ -1350,6 +1350,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/view/view.js~view#_setval",
+    "class/src/view/view.js~View.html#instance-method-_setVal",
+    "src/view/view.js~View#_setVal",
+    "method"
+  ],
+  [
     "src/view/view.js~view#_setupprops",
     "class/src/view/view.js~View.html#instance-method-_setupProps",
     "src/view/view.js~View#_setupProps",
@@ -1371,12 +1377,6 @@ window.esdocSearchIndex = [
     "src/view/view.js~view#_unbinddata",
     "class/src/view/view.js~View.html#instance-method-_unbindData",
     "src/view/view.js~View#_unbindData",
-    "method"
-  ],
-  [
-    "src/view/view.js~view#add",
-    "class/src/view/view.js~View.html#instance-method-add",
-    "src/view/view.js~View#add",
     "method"
   ],
   [
@@ -1470,9 +1470,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/view/view.js~view#remove",
-    "class/src/view/view.js~View.html#instance-method-remove",
-    "src/view/view.js~View#remove",
+    "src/view/view.js~view#set",
+    "class/src/view/view.js~View.html#instance-method-set",
+    "src/view/view.js~View#set",
     "method"
   ],
   [

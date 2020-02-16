@@ -360,35 +360,6 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-add">add</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, view: <span><a href="class/src/view/view.js~View.html">View</a></span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Add child view as name after load</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
           <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-appendEl">appendEl</a></span></span><span class="code" data-ice="signature">(el: <span>Element</span>)</span>
         </p>
       </div>
@@ -650,13 +621,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-remove">remove</a></span></span><span class="code" data-ice="signature">(viewName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-set">set</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, view: <span><a href="class/src/view/view.js~View.html">View</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Remove child view by name</p>
+        <div data-ice="description"><p>Set child view as name after load</p>
 </div>
       </div>
     </td>
@@ -912,7 +883,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-_parseEvts">_parseEvts</a></span></span><span class="code" data-ice="signature">(evts: <span>*</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-_parseEvts">_parseEvts</a></span></span><span class="code" data-ice="signature">(evts: <span>*</span>, emap: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -1062,6 +1033,34 @@
         
         <div data-ice="description"><p>Set root node element to this.el</p>
 </div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/view/view.js~View.html#instance-method-_setVal">_setVal</a></span></span><span class="code" data-ice="signature">(el: <span>*</span>, val: <span>*</span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
       </div>
     </td>
     <td>
@@ -1777,7 +1776,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber307">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber301">source</a></span></span>
     </span>
   </h3>
 
@@ -1900,81 +1899,6 @@
 </div>
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-add">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">add</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, view: <span><a href="class/src/view/view.js~View.html">View</a></span>)</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber262">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Add child view as name after load</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">name</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>child name</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">view</td>
-      <td data-ice="type" class="code"><span><a href="class/src/view/view.js~View.html">View</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>child view</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  <div data-ice="example">
-    <h4>Example:</h4>
-    
-  <div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">parent.add(&apos;child&apos;, view);</code></pre>
-    </div>
-</div>
-
-  
-
-  
-  
-</div>
 <div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-appendEl">
     <span class="access" data-ice="access">public</span>
@@ -2160,7 +2084,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber299">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber293">source</a></span></span>
     </span>
   </h3>
 
@@ -2284,7 +2208,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber290">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber284">source</a></span></span>
     </span>
   </h3>
 
@@ -2544,25 +2468,25 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-remove">
+  <h3 data-ice="anchor" id="instance-method-set">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">remove</span><span class="code" data-ice="signature">(viewName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
+    <span class="code" data-ice="name">set</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, view: <span><a href="class/src/view/view.js~View.html">View</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber275">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber262">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Remove child view by name</p>
+  <div data-ice="description"><p>Set child view as name after load</p>
 </div>
 
   
@@ -2576,10 +2500,17 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">viewName</td>
+      <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>child view name</p>
+      <td data-ice="description"><p>view name</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">view</td>
+      <td data-ice="type" class="code"><span><a href="class/src/view/view.js~View.html">View</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>child view. remove if null</p>
 </td>
     </tr>
 </tbody>
@@ -2602,7 +2533,7 @@
     
   <div class="example-doc" data-ice="exampleDoc">
       
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">parent.remove(&apos;child&apos;);</code></pre>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">parent.set(&apos;name&apos;, view);</code></pre>
     </div>
 </div>
 
@@ -2667,7 +2598,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber318">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber312">source</a></span></span>
     </span>
   </h3>
 
@@ -2866,7 +2797,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber431">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber429">source</a></span></span>
     </span>
   </h3>
 
@@ -2937,7 +2868,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber438">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber436">source</a></span></span>
     </span>
   </h3>
 
@@ -3090,7 +3021,7 @@
     
     
     
-    <span class="code" data-ice="name">_parseEvts</span><span class="code" data-ice="signature">(evts: <span>*</span>)</span>
+    <span class="code" data-ice="name">_parseEvts</span><span class="code" data-ice="signature">(evts: <span>*</span>, emap: <span>*</span>)</span>
     <span class="right-info">
       
       
@@ -3115,6 +3046,12 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">evts</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">emap</td>
       <td data-ice="type" class="code"><span>*</span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
@@ -3209,7 +3146,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber325">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber319">source</a></span></span>
     </span>
   </h3>
 
@@ -3253,7 +3190,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber385">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber383">source</a></span></span>
     </span>
   </h3>
 
@@ -3321,7 +3258,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber335">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber331">source</a></span></span>
     </span>
   </h3>
 
@@ -3459,6 +3396,71 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-_setVal">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">_setVal</span><span class="code" data-ice="signature">(el: <span>*</span>, val: <span>*</span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber347">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">el</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">val</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-_setupProps">
     <span class="access" data-ice="access">private</span>
     
@@ -3541,7 +3543,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber419">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber417">source</a></span></span>
     </span>
   </h3>
 
@@ -3584,7 +3586,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber400">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/view/view.js.html#lineNumber398">source</a></span></span>
     </span>
   </h3>
 

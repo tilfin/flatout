@@ -1,6 +1,6 @@
 {
   "name": "@tilfin/flatout",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "author": "Toshimitsu Takahashi",
   "license": "MIT",
   "description": "Lightweight Single-Page-Application framework for JavaScript",

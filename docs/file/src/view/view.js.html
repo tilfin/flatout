@@ -230,12 +230,12 @@ class View extends Core {
       }
     });
 
-    const evts = {};
+    const evts = {}, emap = this._F_emap;
     this.handle(evts);
-    this._parseEvts(evts);
-    
+    this._parseEvts(evts, emap);
+
     // attach events to current views
-    eachEntry(this._F_emap, ([target, hmap]) =&gt; {
+    eachEntry(emap, ([target, hmap]) =&gt; {
       if (target === &apos;_&apos;) {
         this._setEvts(this.el, hmap);
         return;
@@ -307,31 +307,25 @@ class View extends Core {
   }
 
   /**
-   * Add child view as name after load
+   * Set child view as name after load
    *
-   * @param {string} name - child name
-   * @param {View} view - child view
+   * @param {string} name - view name
+   * @param {View} view - child view. remove if null
    * @example
-   * parent.add(&apos;child&apos;, view);
+   * parent.set(&apos;name&apos;, view);
    */
-  add(name, view) {
-    this.views[name] = view;
-    this.appendEl(view.el);
-    this._setEvts(view.el, this._F_emap[name])
-  }
-
-  /**
-   * Remove child view by name
-   *
-   * @param {string} viewName - child view name
-   * @example
-   * parent.remove(&apos;child&apos;);
-   */
-  remove(viewName) {
-    const view = this.views[viewName];
-    view.destroy();
-    view.el.remove();
-    delete this.views[viewName]
+  set(name, view) {
+    const t = this, curvw = t.views[name];
+    if (curvw) {
+      curvw.destroy();
+      curvw.el.remove();
+      delete t.views[name];
+    }
+    if (view) {
+      t.views[name] = view;
+      t.appendEl(view.el);
+      t._setEvts(view.el, t._F_emap[name] || {})
+    }
   }
 
   /**
@@ -379,23 +373,33 @@ class View extends Core {
    */
   _setDataToUI() {
     const data = this._data;
-    if (data === undefined || !(data instanceof Object)) return;
+    if (data === undefined) return;
     console.log(&apos;View#_setDataToUI&apos;, this);
 
-    eachEntry(this._data, ([name, val]) =&gt; {
-      this._setFieldValue(name, val)
-    })
+    if (data instanceof Object) {
+      eachEntry(data, ([name, val]) =&gt; this._setFieldValue(name, val))
+    } else {
+      this._setVal(this.el, data)
+    }
   }
 
   _setFieldValue(name, val) {
-    if (name in this.views) {
-      this.views[name].data = val;
+    const it = this.views[name];
+    if (it) {
+      it.data = val;
       return true;
     }
 
     const el = this.findEl(name);
     if (!el) return false;
 
+    this._setVal(el, val)
+    return true;
+  }
+
+  // private
+
+  _setVal(el, val) {
     if (el.dataset &amp;&amp; el.dataset.type === &apos;html&apos;) {
       el.innerHTML = val;
     } else if (&apos;value&apos; in el) {
@@ -403,15 +407,9 @@ class View extends Core {
     } else {
       el.textContent = val;
     }
-
-    return true;
   }
 
-  // private
-
-  _parseEvts(evts) {
-    const emap = this._F_emap;
-
+  _parseEvts(evts, emap) {
     eachEntry(evts, ([name, handler]) =&gt; {
       const pos = name.lastIndexOf(&apos;_&apos;);
       if (pos === -1) {
