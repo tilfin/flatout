@@ -1458,6 +1458,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/view/view.js~view#isssr",
+    "class/src/view/view.js~View.html#instance-member-isSSR",
+    "src/view/view.js~View#isSSR",
+    "member"
+  ],
+  [
     "src/view/view.js~view#load",
     "class/src/view/view.js~View.html#instance-method-load",
     "src/view/view.js~View#load",

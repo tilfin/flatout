@@ -12,13 +12,15 @@ describe('Router works history mode', () => {
   })
 
   it("tour each page", async () => {
-    let title, rendered;
+    let title, rendered, initData;
 
     await page.goto(`${__ENDPOINT__}/`, { waitUntil: 'networkidle2' })
     title = await page.evaluate(() => document.title)
     assert.equal(title, 'Home | Example App')
     rendered = await page.evaluate(() => document.getElementById('rendered').textContent)
     assert.equal(rendered, 'SSR')
+    assert.equal(await page.evaluate(() => document.getElementById('foo').textContent), 'FOO')
+    assert.equal(await page.evaluate(() => document.getElementById('bar').textContent), 'BAR')
 
     await Promise.all([
       page.click('a.about'),
@@ -99,5 +101,7 @@ describe('Router works history mode', () => {
     assert.equal(title, 'Home | Example App')
     rendered = await page.evaluate(() => document.getElementById('rendered').textContent)
     assert.equal(rendered, 'CSR')
+    assert.equal(await page.evaluate(() => document.getElementById('foo').textContent), '')
+    assert.isNull(await page.evaluate(() => document.getElementById('bar')))
   })
 })

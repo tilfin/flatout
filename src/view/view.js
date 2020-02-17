@@ -35,6 +35,12 @@ class View extends Core {
      */
     this.views = {};
 
+    /**
+     * Whether server side rendering or not
+     * @member {boolean}
+     */
+    this.isSSR = false
+
     const { rootEl, ...props_ } = props;
     this._build(rootEl, props_);
   }
@@ -131,7 +137,7 @@ class View extends Core {
       }
     }
 
-    if (this.html) {
+    if (!this.isSSR && this.html) {
       this.el = this._buildFromHtml(data);
       if (parent) {
         // If this view doesn't belong to parent views

@@ -1,4 +1,13 @@
 declare module '@tilfin/flatout' {
+    global {
+        interface Window {
+            /**
+             * initial page data if SSR
+             */
+            initPageData?: any
+        }
+    }
+
     interface HttpRequest {
         method: string;
         path: string;
@@ -364,6 +373,11 @@ declare module '@tilfin/flatout' {
          * Subview children of the view
          */
         views: ViewMap;
+
+        /**
+         * Whether server side rendering or not
+         */
+        isSSR: boolean;
 
         /**
          * Initialize props

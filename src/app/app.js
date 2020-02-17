@@ -85,18 +85,20 @@ class App {
    */
   _replaceContent(view, ctx) {
     const ra = this._rootArea, oldPage = this._curPage;
-    let rootEl = null;
+    let rootEl = null, data = null;
     if (oldPage) {
       oldPage.destroy()
     } else {
       // rootEl set from SSR if initial page
       rootEl = ra._firstEl(ra.contentEl);
+      data = window.initPageData || {};
+      delete window.initPageData;
     }
 
     const params = Object.assign({
       parent: ra,
       context: Object.assign({}, ra.context, ctx)
-    }, rootEl ? { rootEl, html: null }: {});
+    }, rootEl ? { rootEl, isSSR: true, data } : {});
     this._curPage = new view(params)
   }
 

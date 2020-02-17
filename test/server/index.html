@@ -7,6 +7,8 @@
   <div>
     <h1>Home Page</h1>
     <p id="rendered">SSR</p>
+    <span id="foo"></span>
+    <span id="bar"></span>
   </div>
 </main>
 <nav>
@@ -26,6 +28,8 @@
 <script type="module">
 import { App, View, Page } from '../../lib/flatout.js';
 
+window.initPageData = { foo: 'FOO', bar: 'BAR' }
+
 class MainView extends View {
   constructor() {
     super({ rootEl: document.body, contentEl: 'main' })
@@ -44,6 +48,7 @@ class HomePage extends Page {
     <div>
      <h1>Home Page</h1>
      <p id="rendered">CSR</p>
+     <span id="foo"></span>
      <nav>
       <ul>
        <li><a href="/about">about</a></li>
