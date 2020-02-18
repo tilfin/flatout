@@ -72,6 +72,7 @@ declare module '@tilfin/flatout' {
          * @param [ctx.query] - request query data
          * @param [ctx.body] - request body
          * @param [ctx.headers] - header name and value object
+         * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
         get(path: string, ctx?: {
             query?: Record<string, any>;
@@ -87,12 +88,13 @@ declare module '@tilfin/flatout' {
          * @param [ctx.query] - request query data
          * @param [ctx.body] - request body
          * @param [ctx.headers] - header name and value object
+         * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
         post(path: string, ctx?: {
             query?: Record<string, any>;
             body?: any;
             headers?: Record<string, any>;
-        }): Promise<Response>;
+        }): Promise<HttpResponse>;
 
         /**
          * do PUT request.
@@ -102,7 +104,7 @@ declare module '@tilfin/flatout' {
          * @param [ctx.query] - request query data
          * @param [ctx.body] - request body
          * @param [ctx.headers] - header name and value object
-         * @return {Promise<Response>} Promise resolves response bodystatus: xhr.status,
+         * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
         put(path: string, ctx?: {
             query?: Record<string, any>;
@@ -118,7 +120,7 @@ declare module '@tilfin/flatout' {
          * @param [ctx.query] - request query data
          * @param [ctx.body] - request body
          * @param [ctx.headers] - header name and value object
-         * @return {Promise<Response>} Promise resolves response bodystatus: xhr.status,
+         * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
         patch(path: string, ctx?: {
             query?: Record<string, any>,
@@ -134,7 +136,7 @@ declare module '@tilfin/flatout' {
          * @param [ctx.query] - request query data
          * @param [ctx.body] - request body
          * @param [ctx.headers] - header name and value object
-         * @return {Promise<Response>} Promise resolves response bodystatus: xhr.status,
+         * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
         delete(path: string, ctx?: {
             query?: Record<string, any>,
@@ -150,6 +152,7 @@ declare module '@tilfin/flatout' {
          * @param query - request query data
          * @param body - request body
          * @param headers - header name and value object
+         * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
         exec(method: string, path: string, query: Record<string, any>, body: string | any, headers: Record<string, any>): Promise<HttpResponse>;
     }
