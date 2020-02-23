@@ -428,7 +428,11 @@ class View extends Core {
 
   _buildFromHtml(data) {
     const el = document.createElement('template');
-    el.innerHTML = this.html(data || {});
+    try {
+      el.innerHTML = this.html(data || {})
+    } catch(err) {
+      console.error(err)
+    }
     const df = document.adoptNode(el.content);
     return this._firstEl(df);
   }
