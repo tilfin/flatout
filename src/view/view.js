@@ -145,6 +145,8 @@ class View extends Core {
   }
 
   _loadFinish() {
+    console.log('View#_loadFinish', this);
+
     const ctn = this.contentEl;
     this.contentEl = this._isStr(ctn) ? this.findEl(ctn) : this.el;
 
@@ -156,8 +158,6 @@ class View extends Core {
   }
 
   _loadViewsEvts() {
-    console.log('View#_loadViewsEvts', this);
-
     this.load(this.views);
 
     eachEntry(this.views, ([name, view]) => {
