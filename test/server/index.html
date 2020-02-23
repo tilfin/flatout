@@ -6,9 +6,6 @@
 <main id="main">
   <div>
     <h1>Home Page</h1>
-    <p id="rendered">SSR</p>
-    <span id="foo"></span>
-    <span id="bar"></span>
   </div>
 </main>
 <nav>
@@ -45,17 +42,23 @@ class HomePage extends Page {
   title() { return 'Home' }
   html() {
     return `
-    <div>
-     <h1>Home Page</h1>
-     <p id="rendered">CSR</p>
-     <span id="foo"></span>
-     <nav>
-      <ul>
-       <li><a href="/about">about</a></li>
-       <li><a href="/help">help</a></li>
-      </ul>
-     </nav>
-    </div>`
+      <div>
+      <h1>Home Page</h1>
+      <span id="foo">NULL</span>
+      <span id="bar">NULL</span>
+      <nav>
+        <ul>
+        <li><a href="/about">about</a></li>
+        <li><a href="/help">help</a></li>
+        </ul>
+      </nav>
+      </div>`
+  }
+
+  completed() {
+    if (!this.hasInitData) {
+      this.data = { foo: 'FOOC' }
+    }
   }
 }
 

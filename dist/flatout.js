@@ -841,12 +841,6 @@ class View extends Core {
      */
     this.views = {};
 
-    /**
-     * Whether server side rendering or not
-     * @member {boolean}
-     */
-    this.isSSR = false;
-
     const { rootEl, ...props_ } = props;
     this._build(rootEl, props_);
   }
@@ -943,7 +937,7 @@ class View extends Core {
       }
     }
 
-    if (!this.isSSR && this.html) {
+    if (this.html) {
       this.el = this._buildFromHtml(data);
       if (parent) {
         // If this view doesn't belong to parent views
@@ -1278,6 +1272,15 @@ class View extends Core {
 * }
 */
 class Page extends View {
+  constructor(params) {
+    super(params);
+    /**
+     * Whether having initial data or not
+     * @member {boolean}
+     */
+    this.hasInitData = false;
+  }
+
   /**
    * Return document title
    */
@@ -1714,17 +1717,15 @@ class App {
   /**
    * Replace layer.
    *
-   * @param {Class<Page>} view - new page class.
+   * @param {Class<Page>} page - new page class.
    * @param {Object} ctx - passing context.
    */
-  _replaceContent(view, ctx) {
+  _replaceContent(page, ctx) {
     const ra = this._rootArea, oldPage = this._curPage;
-    let rootEl = null, data = null;
+    let data = null;
     if (oldPage) {
       oldPage.destroy();
     } else {
-      // rootEl set from SSR if initial page
-      rootEl = ra._firstEl(ra.contentEl);
       data = window.initPageData || {};
       delete window.initPageData;
     }
@@ -1732,8 +1733,8 @@ class App {
     const params = Object.assign({
       parent: ra,
       context: Object.assign({}, ra.context, ctx)
-    }, rootEl ? { rootEl, isSSR: true, data } : {});
-    this._curPage = new view(params);
+    }, data ? { data, hasInitData: true } : {});
+    this._curPage = new page(params);
   }
 
   /**

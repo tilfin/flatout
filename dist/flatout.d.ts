@@ -378,11 +378,6 @@ declare module '@tilfin/flatout' {
         views: ViewMap;
 
         /**
-         * Whether server side rendering or not
-         */
-        isSSR: boolean;
-
-        /**
          * Initialize props
          *
          * @param defaults - default data.
@@ -570,6 +565,11 @@ declare module '@tilfin/flatout' {
     }
 
     class Page extends View {
+        /**
+         * Whether having initial data or not
+         */
+        hasInitData: boolean;
+
         /**
          * Return document title
          */

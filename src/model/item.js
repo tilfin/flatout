@@ -1,7 +1,7 @@
 'use strict';
 
 import { eachEntry } from '../core/util.js'
-import Core from '../core/core.js';
+import Core from '../core/core.js'
 
 /**
  * Item.

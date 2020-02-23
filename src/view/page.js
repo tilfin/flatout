@@ -21,6 +21,15 @@ import View from './view.js'
 * }
 */
 export default class Page extends View {
+  constructor(params) {
+    super(params)
+    /**
+     * Whether having initial data or not
+     * @member {boolean}
+     */
+    this.hasInitData = false;
+  }
+
   /**
    * Return document title
    */
