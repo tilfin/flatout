@@ -52,17 +52,36 @@ declare module '@tilfin/flatout' {
          * @param {object} [opts] - options
          * @param {string} [opts.baseURL] - base URL (default empty).
          * @param {object} [opts.headers] - custom headers
-         * @param {Promise} [opts.beforeRequest] - async function called before the request
-         * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error
          * @param {string} [opts.bodyType] - body type.
          */
         constructor(opts?: {
             baseURL?: string,
             headers?: Record<string, any>,
-            beforeRequest?: Function,
-            beforeError?: Function,
             bodyType?: string
         });
+
+        /**
+         * hook async function called before the request.
+         * 
+         * @param  {String} path - request path
+         * @param  {object} [ctx] - context
+         * @param  {object} [ctx.query] - request query data
+         * @param  {object} [ctx.body] - request body
+         * @param  {object} [ctx.headers] - header name and value object
+         */
+        async beforeRequest(path: string, ctx?: {
+            query?: Record<string, any>;
+            body?: any;
+            headers?: Record<string, any>;
+        });
+
+        /**
+         * hook async function called before throw an error. 
+         * 
+         * @param  {HttpError} err - request path
+         * @return {Promise<boolean>} - if return false, stop throwing the error.
+         */
+        async beforeError(err: HttpError): Promise<boolean>;
 
         /**
          * do GET request.

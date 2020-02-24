@@ -186,14 +186,11 @@ class HttpClient {
    * @param {object} [opts] - options
    * @param {string} [opts.baseURL] - base URL (default empty).
    * @param {object} [opts.headers] - custom headers
-   * @param {Promise} [opts.beforeRequest] - async function called before the request
-   * @param {Promise} [opts.beforeError] - async function called before throw an error. if return false, stop throwing the error
+   * @param {string} [opts.bodyType] - post/put type `form` | `json`
    */
   constructor(opts = {}) {
     this.baseURL = opts.baseURL || '';
     this.headers = opts.headers || {};
-    this.beforeRequest = opts.beforeRequest || (async () => {});
-    this.beforeError = opts.beforeError || (async () => true);
 
     const bodyType = opts.bodyType || '';
     if (bodyType.includes('form')) {
@@ -201,6 +198,28 @@ class HttpClient {
     } else {
       this.contentType = 'application/json;charset=UTF-8';
     }
+  }
+
+  /**
+   * hook async function called before the request.
+   * 
+   * @param  {String} path - request path
+   * @param  {object} [ctx] - context
+   * @param  {object} [ctx.query] - request query data
+   * @param  {object} [ctx.body] - request body
+   * @param  {object} [ctx.headers] - header name and value object
+   */
+  async beforeRequest(path, ctx) {
+  }
+
+  /**
+   * hook async function called before throw an error. 
+   * 
+   * @param  {HttpError} err - request path
+   * @return {Promise<boolean>} - if return false, stop throwing the error.
+   */
+  async beforeError(err) {
+    return true
   }
 
   /**

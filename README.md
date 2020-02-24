@@ -10,6 +10,11 @@ Lightweight Single-Page-Application framework for JavaScript
 - Not use Virtual DOM
 - Keeping minimized size less than 16KB
 
+## Features
+
+- Rendering by the component views tree and data mapped for each the view
+- Realization of short codes by automatic object mapping and binding events
+
 ## Provides Classes
 
 - Core
@@ -21,7 +26,6 @@ Lightweight Single-Page-Application framework for JavaScript
 - Item
 - List
 - App
-- Router
 
 ## Document
 
@@ -49,8 +53,10 @@ $ npm run example
 
 Support 2 type
 
-* hash mode (hash path with Static Web server)
-* history mode (HTML5 history API with Web App server)
+* `HASH` mode (hash path with Static Web server)
+* `HISTORY` mode (HTML5 history API with Web App server)
+
+Specify the root path by the base tag if it isn't `/`. ex) `<base href="/<root path>/">` 
 
 ## Plain data or event handling
 
@@ -71,7 +77,7 @@ Plain data is an Object or an Array.
 <html>
 <head>
 <title>History mode</title>
-<base href="/app/"
+<base href="/app/">
 </head>
 <body>
 <nav><a href="about">About</a></nav>
@@ -88,12 +94,12 @@ class MainView extends View {
 }
 
 const routeMap = {
-  index: HomeView,   // /
-  about: AboutView,  // /about
-  ':userId': UserView  // /:userId
+  index: HomePage,   // /
+  about: AboutPage,  // /about
+  ':userId': UserPage  // /:userId
 }
 
-App.activate(MainView, routeMap, { mode: 'HISTORY '})
+App.activate(MainView, routeMap, { mode: 'HISTORY' })
 </script>
 </body>
 </html>
@@ -122,15 +128,15 @@ class MainView extends View {
 }
 
 const routeMap = {
-  index: HomeView,       // /
-  about: AboutView,      // /about
+  index: HomePage,       // /
+  about: AboutPage,      // /about
   books: {
-    index: BookListView, // /books/
-    ':bookId': BookView, // /books/:bookId
+    index: BookListPage, // /books/
+    ':bookId': BookPage, // /books/:bookId
   }
 }
 
-App.activate(MainView, routeMap, { mode: 'HASH '})
+App.activate(MainView, routeMap, { mode: 'HASH' })
 </script>
 </body>
 </html>
