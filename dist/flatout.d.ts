@@ -69,11 +69,11 @@ declare module '@tilfin/flatout' {
          * @param  {object} [ctx.body] - request body
          * @param  {object} [ctx.headers] - header name and value object
          */
-        async beforeRequest(path: string, ctx?: {
+        beforeRequest(path: string, ctx?: {
             query?: Record<string, any>;
             body?: any;
             headers?: Record<string, any>;
-        });
+        }): Promise<void>;
 
         /**
          * hook async function called before throw an error. 
@@ -81,7 +81,7 @@ declare module '@tilfin/flatout' {
          * @param  {HttpError} err - request path
          * @return {Promise<boolean>} - if return false, stop throwing the error.
          */
-        async beforeError(err: HttpError): Promise<boolean>;
+        beforeError(err: HttpError): Promise<boolean>;
 
         /**
          * do GET request.
