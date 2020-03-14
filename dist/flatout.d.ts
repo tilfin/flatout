@@ -8,6 +8,8 @@ declare module '@tilfin/flatout' {
         }
     }
 
+    type ClassType<T> = { new (...args: any[]): T }
+
     interface HttpRequest {
         method: string;
         path: string;
@@ -176,7 +178,7 @@ declare module '@tilfin/flatout' {
         exec(method: string, path: string, query: Record<string, any>, body: string | any, headers: Record<string, any>): Promise<HttpResponse>;
     }
 
-    type RouterMap = { [path: string]: typeof Page | string | RouterMap }
+    type RouterMap = { [path: string]: ClassType<Page> | string | RouterMap }
 
     namespace App {
         /**
@@ -189,7 +191,7 @@ declare module '@tilfin/flatout' {
          * @param [opts.rootPath] - history root path.
          * @param [opts.pathHead] - hash path prefix.
          */
-        export function activate(rootViewClass: typeof View, routerMap: RouterMap, opts?: {
+        export function activate(rootViewClass: ClassType<View>, routerMap: RouterMap, opts?: {
             mode: 'HISTORY' | 'HASH',
             rootPath?: string,
             pathHead?: string,
@@ -242,7 +244,7 @@ declare module '@tilfin/flatout' {
      * Item.
      * this can be an element of List.
      */
-    class Item {
+    class Item<T = any> {
         /**
          * @param defaultData - default data
          */
@@ -253,19 +255,19 @@ declare module '@tilfin/flatout' {
          * @param field - adding field name
          * @param value - adding value
          */
-        add(field: string, value: any): void;
+        add<P extends keyof T>(field: P, value: T[P]): void;
 
         /**
          * Toggle boolean field-value
          * @param field - toggling field name
          */
-        toggle(field: string): void;
+        toggle<P extends keyof T>(field: P): void;
 
         /**
          * Update the pairs of field-value.
          * @param pairs - updating target pairs
          */
-        update(pairs: Object): void;
+        update(pairs: Partial<T>): void;
 
         /**
          * Destroy me.
@@ -276,21 +278,21 @@ declare module '@tilfin/flatout' {
     /**
      * List for plain object or Item.
      */
-    class List {
+    class List<T> {
         /**
          * @param defaultData - default data array
          * @param opts - options
          * @param opts.wrapItem - Whether wrapping Item or not, or the sub class of Item.
          */
         constructor(defaultData?: any[], opts?: {
-            wrapItem: boolean | typeof Item
+            wrapItem: boolean | ClassType<T>
         });
 
         /**
          * If you dynamically change wrapping item class according to the item, override this method.
          * @param item - an item
          */
-        itemClass(item: object): typeof View;
+        itemClass(item: object): ClassType<T>;
 
         /**
          * Return an item at position.
@@ -303,27 +305,27 @@ declare module '@tilfin/flatout' {
          * @param item - item
          * @param insertIndex - optional insert position, add last if not defined
          */
-        add(item: any, insertIndex?: number): void;
+        add(item: T, insertIndex?: number): void;
 
         /**
          * Update an item at index.
          * @param item - item
          * @param index - target index
          */
-        update(item: any, index: number): void;
+        update(item: T, index: number): void;
 
         /**
          * Remove an item (specified by index).
          * @param itemOrIndex - target item or the position.
          */
-        remove(itemOrIndex: object | number): void;
+        remove(itemOrIndex: T | number): void;
 
         /**
          * Add items.
          * @param items - adding items
          * @param insertIndex - insert position
          */
-        addAll(items: any[], insertIndex?: number): void;
+        addAll(items: T[], insertIndex?: number): void;
 
         /**
          * Remove all items.
@@ -343,7 +345,7 @@ declare module '@tilfin/flatout' {
          * replace all items
          * @param newValues - new values or default empty array
          */
-        reset(newValues?: any[]): void;
+        reset(newValues?: T[]): void;
 
         /**
          * Iterates each item of self, return an index of the first item predicate returns true.
@@ -361,10 +363,10 @@ declare module '@tilfin/flatout' {
     }
 
     type EventHandler = (sender: Element, e: Event) => void
-    type ViewMap = Record<string, View>
+    type ViewMap<T = any> = { [P in keyof T]: View<T[P] | any> }
     type EventMap = Record<string, EventHandler>
 
-    class View {
+    class View<ItemData = any> {
         /**
          * Create a View.
          *
@@ -375,7 +377,7 @@ declare module '@tilfin/flatout' {
          */
         constructor(props?: {
             rootEl?: string | Element,
-            parent?: typeof View,
+            parent?: ClassType<View>,
             contentEl?: string | Element,
             [field: string]: any,
         });
@@ -383,8 +385,8 @@ declare module '@tilfin/flatout' {
         /**
          * data to elements text or value, innerHTML of elements
          */
-        get data(): any;
-        set data(value: any);
+        get data(): ItemData;
+        set data(value: ItemData);
 
         /**
          * Root element
@@ -394,21 +396,28 @@ declare module '@tilfin/flatout' {
         /**
          * Subview children of the view
          */
-        views: ViewMap;
+        views: ViewMap<ItemData>;
 
         /**
          * Initialize props
          *
          * @param defaults - default data.
          */
-        init(defaults: any): Record<string, any> | Item;
+        init(defaults: any): ItemData;
+
+        /**
+         * For implement building HTML of this view
+         *
+         * @param data - the data of this view
+         */
+        html(data: ItemData): string;
 
         /**
          * For implement creating subviews and setting listener of events.
          *
          * @param views - added subview target (ex. views.list = new ListView(..))
          */
-        load(views: ViewMap): void;
+        load(views: ViewMap<ItemData>): void;
 
         /**
          * Ssetting listener of events.
@@ -455,7 +464,7 @@ declare module '@tilfin/flatout' {
          * @param name - view name
          * @param [view] - child view. remove if null, replace one if exist
          */
-        set(name: string, view?: View): void;
+        set<Name extends keyof ItemData>(name: Name, view?: View<ItemData[Name]>): void;
 
         /**
          * Fire event
@@ -483,7 +492,7 @@ declare module '@tilfin/flatout' {
     /**
     * View for the collection of items.
     */
-    class ListView extends View {
+    class ListView<ItemData = any> extends View<List<ItemData>> {
         /**
          * @param [itemView] - item view class
          * @param [props] - Properties
@@ -491,9 +500,9 @@ declare module '@tilfin/flatout' {
          * @param [props.parent] - parent view this belongs to
          * @param [props.contentEl] - parent element of child views (specified by data-id or id value).
          */
-        constructor(itemView?: typeof View, props?: {
+        constructor(itemView?: ClassType<View<ItemData>>, props?: {
             rootEl: string | Element,
-            parent: typeof View,
+            parent: ClassType<View>,
             contentEl: string | Element
         });
 
@@ -502,14 +511,14 @@ declare module '@tilfin/flatout' {
          *
          * @param item - an item
          */
-        itemViewClass(item: any | Item): typeof View;
+        itemViewClass(item: ItemData): ClassType<View<ItemData>>;
 
         /**
          * Add an item to list
          *
          * @param item - an item
          */
-        addItem(item: any | Item): View
+        addItem(item: ItemData): View<ItemData>;
     
         /**
          * Insert an item to list at index
@@ -517,7 +526,7 @@ declare module '@tilfin/flatout' {
          * @param item - an item
          * @param index - target position
          */
-        insertItem(item: any | Item, index: number): View;
+        insertItem(item: ItemData, index: number): View<ItemData>;
 
         /**
          * Update an item at index
@@ -525,7 +534,7 @@ declare module '@tilfin/flatout' {
          * @param item - an item
          * @param index - target position
          */
-        updateItem(item: any | Item, index: number): void;
+        updateItem(item: ItemData, index: number): void;
 
         /**
          * Remove item from list
@@ -533,14 +542,14 @@ declare module '@tilfin/flatout' {
          * @param item - an item
          * @param index - target position
          */
-        removeItem(item: any | Item, index: number): void;
+        removeItem(item: ItemData, index: number): void;
 
         /**
          * Remove item with view
          *
          * @param view - an view of removing item
          */
-        removeItemByView(view: View): void;
+        removeItemByView(view: View<ItemData>): void;
 
         /**
          * If you change adding item effect, override this method.
@@ -574,7 +583,7 @@ declare module '@tilfin/flatout' {
     /**
      * A FormView is data fields to bind input, select or textarea by theirs names.
      */
-    class FormView extends View {
+    class FormView<T = any> extends View<T> {
         /**
          * Get field value as the type.
          *
@@ -583,7 +592,7 @@ declare module '@tilfin/flatout' {
         getValueOf(field: string): any;
     }
 
-    class Page extends View {
+    class Page<T = any> extends View<T> {
         /**
          * Whether having initial data or not
          */
