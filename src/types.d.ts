@@ -213,10 +213,10 @@ declare module '@tilfin/flatout' {
         /**
          * Replace a page.
          *
-         * @param {Page} page - Page view
+         * @param {Class<Page>} page - Page class
          * @param {Object} [ctx] - context
          */
-        export function replace(page: Page, ctx?: any): boolean;
+        export function replace(page: ClassType<Page>, ctx?: any): boolean;
     }
 
     class Core {

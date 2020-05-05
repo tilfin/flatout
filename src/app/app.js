@@ -70,8 +70,8 @@ class App {
   /**
    * Replace page.
    *
-   * @param {Page} page 
-   * @param {*} context 
+   * @param {Class<Page>} page - Page class
+   * @param {*} ctx - context
    */
   replace(page, ctx) {
     if (this._preCtx) {
