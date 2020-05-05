@@ -89,7 +89,7 @@ class App {
      */
     this._curPage = null;
 
-    const onMove = layer =&gt; { this._onMove(layer) };
+    const onMove = ({ view, ctx }) =&gt; { this.replace(view, ctx) };
     this._router = opts.mode === &apos;HISTORY&apos;
       ? new HistoryRouter(routeMap, onMove, opts.rootPath)
       : new HashRouter(routeMap, onMove, opts.pathHead);
@@ -122,30 +122,34 @@ class App {
     return false;
   }
 
-  _onMove({ view, ctx }) {
+  /**
+   * Replace page.
+   *
+   * @param {Page} page 
+   * @param {*} context 
+   */
+  replace(page, ctx) {
     if (this._preCtx) {
       // Merge ctx by go to layer.ctx that contains idMap
       ctx = Object.assign(ctx || {}, this._preCtx);
       this._preCtx = null;
     }
-    this._replaceContent(view, ctx);
+    this._replaceContent(page, ctx);
     this._updateTitle();
   }
 
   /**
    * Replace layer.
    *
-   * @param {Class&lt;Page&gt;} view - new page class.
+   * @param {Class&lt;Page&gt;} page - new page class.
    * @param {Object} ctx - passing context.
    */
-  _replaceContent(view, ctx) {
+  _replaceContent(page, ctx) {
     const ra = this._rootArea, oldPage = this._curPage;
-    let rootEl = null, data = null;
+    let data = null;
     if (oldPage) {
       oldPage.destroy()
     } else {
-      // rootEl set from SSR if initial page
-      rootEl = ra._firstEl(ra.contentEl);
       data = window.initPageData || {};
       delete window.initPageData;
     }
@@ -153,8 +157,8 @@ class App {
     const params = Object.assign({
       parent: ra,
       context: Object.assign({}, ra.context, ctx)
-    }, rootEl ? { rootEl, isSSR: true, data } : {});
-    this._curPage = new view(params)
+    }, data ? { data, hasInitData: true } : {});
+    this._curPage = new page(params)
   }
 
   /**

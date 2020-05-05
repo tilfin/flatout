@@ -204,6 +204,19 @@ declare module '@tilfin/flatout' {
          * @param {Object} [ctx] - context
          */
         export function go(path: string, ctx?: any): boolean;
+
+        /**
+         * Back a page.
+         */
+        export function back(): boolean;
+
+        /**
+         * Replace a page.
+         *
+         * @param {Page} page - Page view
+         * @param {Object} [ctx] - context
+         */
+        export function replace(page: Page, ctx?: any): boolean;
     }
 
     class Core {
@@ -244,7 +257,7 @@ declare module '@tilfin/flatout' {
      * Item.
      * this can be an element of List.
      */
-    class Item<T = any> {
+    class Item<T> {
         /**
          * @param defaultData - default data
          */

@@ -76,6 +76,15 @@ import View from &apos;./view.js&apos;
 * }
 */
 export default class Page extends View {
+  constructor(params) {
+    super(params)
+    /**
+     * Whether having initial data or not
+     * @member {boolean}
+     */
+    this.hasInitData = false;
+  }
+
   /**
    * Return document title
    */

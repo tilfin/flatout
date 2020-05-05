@@ -1,17 +1,16 @@
 {
-  "coverage": "57.21%",
-  "expectCount": 194,
-  "actualCount": 111,
+  "coverage": "58.46%",
+  "expectCount": 195,
+  "actualCount": 114,
   "files": {
     "src/app/app.js": {
       "expectCount": 13,
-      "actualCount": 8,
+      "actualCount": 9,
       "undocumentLines": [
         12,
         38,
         55,
-        70,
-        117
+        121
       ]
     },
     "src/app/router.js": {
@@ -52,7 +51,7 @@
     },
     "src/core/http.js": {
       "expectCount": 29,
-      "actualCount": 10,
+      "actualCount": 12,
       "undocumentLines": [
         14,
         17,
@@ -65,14 +64,12 @@
         29,
         30,
         31,
+        51,
         52,
-        53,
-        54,
-        55,
-        59,
-        196,
-        256,
-        260
+        56,
+        215,
+        275,
+        279
       ]
     },
     "src/core/util.js": {
@@ -125,30 +122,32 @@
       ]
     },
     "src/view/page.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        24
+      ]
     },
     "src/view/view.js": {
-      "expectCount": 40,
-      "actualCount": 24,
+      "expectCount": 39,
+      "actualCount": 23,
       "undocumentLines": [
         8,
-        113,
-        118,
-        153,
-        155,
-        164,
-        202,
-        209,
-        225,
-        307,
-        337,
-        353,
-        363,
-        423,
-        435,
-        442
+        107,
+        112,
+        147,
+        151,
+        160,
+        196,
+        203,
+        219,
+        301,
+        331,
+        347,
+        357,
+        417,
+        429,
+        440
       ]
     }
   }

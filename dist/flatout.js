@@ -1694,7 +1694,7 @@ class App {
      */
     this._curPage = null;
 
-    const onMove = layer => { this._onMove(layer); };
+    const onMove = ({ view, ctx }) => { this.replace(view, ctx); };
     this._router = opts.mode === 'HISTORY'
       ? new HistoryRouter(routeMap, onMove, opts.rootPath)
       : new HashRouter(routeMap, onMove, opts.pathHead);
@@ -1727,13 +1727,19 @@ class App {
     return false;
   }
 
-  _onMove({ view, ctx }) {
+  /**
+   * Replace page.
+   *
+   * @param {Page} page 
+   * @param {*} context 
+   */
+  replace(page, ctx) {
     if (this._preCtx) {
       // Merge ctx by go to layer.ctx that contains idMap
       ctx = Object.assign(ctx || {}, this._preCtx);
       this._preCtx = null;
     }
-    this._replaceContent(view, ctx);
+    this._replaceContent(page, ctx);
     this._updateTitle();
   }
 

@@ -408,12 +408,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/app/app.js~app#_onmove",
-    "class/src/app/app.js~App.html#instance-method-_onMove",
-    "src/app/app.js~App#_onMove",
-    "method"
-  ],
-  [
     "src/app/app.js~app#_prectx",
     "class/src/app/app.js~App.html#instance-member-_preCtx",
     "src/app/app.js~App#_preCtx",
@@ -465,6 +459,12 @@ window.esdocSearchIndex = [
     "src/app/app.js~app#go",
     "class/src/app/app.js~App.html#instance-method-go",
     "src/app/app.js~App#go",
+    "method"
+  ],
+  [
+    "src/app/app.js~app#replace",
+    "class/src/app/app.js~App.html#instance-method-replace",
+    "src/app/app.js~App#replace",
     "method"
   ],
   [
@@ -709,15 +709,15 @@ window.esdocSearchIndex = [
   ],
   [
     "src/core/http.js~httpclient#beforeerror",
-    "class/src/core/http.js~HttpClient.html#instance-member-beforeError",
+    "class/src/core/http.js~HttpClient.html#instance-method-beforeError",
     "src/core/http.js~HttpClient#beforeError",
-    "member"
+    "method"
   ],
   [
     "src/core/http.js~httpclient#beforerequest",
-    "class/src/core/http.js~HttpClient.html#instance-member-beforeRequest",
+    "class/src/core/http.js~HttpClient.html#instance-method-beforeRequest",
     "src/core/http.js~HttpClient#beforeRequest",
-    "member"
+    "method"
   ],
   [
     "src/core/http.js~httpclient#constructor",
@@ -1254,10 +1254,22 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/view/page.js~page#constructor",
+    "class/src/view/page.js~Page.html#instance-constructor-constructor",
+    "src/view/page.js~Page#constructor",
+    "method"
+  ],
+  [
     "src/view/page.js~page#destroy",
     "class/src/view/page.js~Page.html#instance-method-destroy",
     "src/view/page.js~Page#destroy",
     "method"
+  ],
+  [
+    "src/view/page.js~page#hasinitdata",
+    "class/src/view/page.js~Page.html#instance-member-hasInitData",
+    "src/view/page.js~Page#hasInitData",
+    "member"
   ],
   [
     "src/view/page.js~page#title",
@@ -1456,12 +1468,6 @@ window.esdocSearchIndex = [
     "class/src/view/view.js~View.html#instance-method-init",
     "src/view/view.js~View#init",
     "method"
-  ],
-  [
-    "src/view/view.js~view#isssr",
-    "class/src/view/view.js~View.html#instance-member-isSSR",
-    "src/view/view.js~View#isSSR",
-    "member"
   ],
   [
     "src/view/view.js~view#load",

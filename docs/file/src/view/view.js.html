@@ -90,12 +90,6 @@ class View extends Core {
      */
     this.views = {};
 
-    /**
-     * Whether server side rendering or not
-     * @member {boolean}
-     */
-    this.isSSR = false
-
     const { rootEl, ...props_ } = props;
     this._build(rootEl, props_);
   }
@@ -192,7 +186,7 @@ class View extends Core {
       }
     }
 
-    if (!this.isSSR &amp;&amp; this.html) {
+    if (this.html) {
       this.el = this._buildFromHtml(data);
       if (parent) {
         // If this view doesn&apos;t belong to parent views
@@ -206,6 +200,8 @@ class View extends Core {
   }
 
   _loadFinish() {
+    console.log(&apos;View#_loadFinish&apos;, this);
+
     const ctn = this.contentEl;
     this.contentEl = this._isStr(ctn) ? this.findEl(ctn) : this.el;
 
@@ -217,8 +213,6 @@ class View extends Core {
   }
 
   _loadViewsEvts() {
-    console.log(&apos;View#_loadViewsEvts&apos;, this);
-
     this.load(this.views);
 
     eachEntry(this.views, ([name, view]) =&gt; {
@@ -489,7 +483,11 @@ class View extends Core {
 
   _buildFromHtml(data) {
     const el = document.createElement(&apos;template&apos;);
-    el.innerHTML = this.html(data || {});
+    try {
+      el.innerHTML = this.html(data || {})
+    } catch(err) {
+      console.error(err)
+    }
     const df = document.adoptNode(el.content);
     return this._firstEl(df);
   }

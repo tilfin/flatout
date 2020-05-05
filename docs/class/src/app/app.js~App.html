@@ -345,6 +345,35 @@
       
     </td>
   </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/app/app.js~App.html#instance-method-replace">replace</a></span></span><span class="code" data-ice="signature">(page: <span><a href="class/src/view/page.js~Page.html">Page</a></span>, context: <span>*</span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Replace page.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
 </tbody>
 </table>
 <table class="summary" data-ice="summary">
@@ -365,35 +394,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/app/app.js~App.html#instance-method-_onMove">_onMove</a></span></span><span class="code" data-ice="signature">(objectPattern: {&quot;view&quot;: <span>*</span>, &quot;ctx&quot;: <span>*</span>})</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/app/app.js~App.html#instance-method-_replaceContent">_replaceContent</a></span></span><span class="code" data-ice="signature">(view: <span>Class</span>&lt;<span><a href="class/src/view/page.js~Page.html">Page</a></span>&gt;, ctx: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/app/app.js~App.html#instance-method-_replaceContent">_replaceContent</a></span></span><span class="code" data-ice="signature">(page: <span>Class</span>&lt;<span><a href="class/src/view/page.js~Page.html">Page</a></span>&gt;, ctx: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -904,28 +905,27 @@
   
   
 </div>
-<h2 data-ice="title">Private Methods</h2>
-
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-_onMove">
-    <span class="access" data-ice="access">private</span>
+  <h3 data-ice="anchor" id="instance-method-replace">
+    <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">_onMove</span><span class="code" data-ice="signature">(objectPattern: {&quot;view&quot;: <span>*</span>, &quot;ctx&quot;: <span>*</span>})</span>
+    <span class="code" data-ice="name">replace</span><span class="code" data-ice="signature">(page: <span><a href="class/src/view/page.js~Page.html">Page</a></span>, context: <span>*</span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app/app.js.html#lineNumber70">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app/app.js.html#lineNumber76">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>Replace page.</p>
+</div>
 
   
 
@@ -938,9 +938,15 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">objectPattern</td>
-      <td data-ice="type" class="code">{&quot;view&quot;: <span>*</span>, &quot;ctx&quot;: <span>*</span>}</td>
-      <td data-ice="appendix"><ul><li>default: {&quot;view&quot;:null,&quot;ctx&quot;:null}</li></ul></td>
+      <td data-ice="name" class="code" data-depth="0">page</td>
+      <td data-ice="type" class="code"><span><a href="class/src/view/page.js~Page.html">Page</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">context</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
 </tbody>
@@ -965,6 +971,8 @@
   
   
 </div>
+<h2 data-ice="title">Private Methods</h2>
+
 <div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-_replaceContent">
     <span class="access" data-ice="access">private</span>
@@ -973,11 +981,11 @@
     
     
     
-    <span class="code" data-ice="name">_replaceContent</span><span class="code" data-ice="signature">(view: <span>Class</span>&lt;<span><a href="class/src/view/page.js~Page.html">Page</a></span>&gt;, ctx: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
+    <span class="code" data-ice="name">_replaceContent</span><span class="code" data-ice="signature">(page: <span>Class</span>&lt;<span><a href="class/src/view/page.js~Page.html">Page</a></span>&gt;, ctx: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app/app.js.html#lineNumber86">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app/app.js.html#lineNumber92">source</a></span></span>
     </span>
   </h3>
 
@@ -998,7 +1006,7 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">view</td>
+      <td data-ice="name" class="code" data-depth="0">page</td>
       <td data-ice="type" class="code"><span>Class</span>&lt;<span><a href="class/src/view/page.js~Page.html">Page</a></span>&gt;</td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>new page class.</p>
@@ -1045,7 +1053,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app/app.js.html#lineNumber108">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app/app.js.html#lineNumber112">source</a></span></span>
     </span>
   </h3>
 

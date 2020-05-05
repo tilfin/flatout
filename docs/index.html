@@ -60,6 +60,10 @@
 <li>Not use Virtual DOM</li>
 <li>Keeping minimized size less than 16KB</li>
 </ul>
+<h2 id="features">Features</h2><ul>
+<li>Rendering by the component views tree and data mapped for each the view</li>
+<li>Realization of short codes by automatic object mapping and binding events</li>
+</ul>
 <h2 id="provides-classes">Provides Classes</h2><ul>
 <li>Core</li>
 <li>Http</li>
@@ -70,7 +74,6 @@
 <li>Item</li>
 <li>List</li>
 <li>App</li>
-<li>Router</li>
 </ul>
 <h2 id="document">Document</h2><p><a href="https://tilfin.github.io/flatout/">https://tilfin.github.io/flatout/</a></p>
 <h2 id="setup">Setup</h2><pre><code><code class="source-code prettyprint">$ npm install -save @tilfin/flatout</code>
@@ -78,9 +81,10 @@
 </code></pre><h2 id="start-example-apps">Start example apps</h2><pre><code><code class="source-code prettyprint">$ npm run example</code>
 </code></pre><h2 id="routing">Routing</h2><p>Support 2 type</p>
 <ul>
-<li>hash mode (hash path with Static Web server)</li>
-<li>history mode (HTML5 history API with Web App server)</li>
+<li><code>HASH</code> mode (hash path with Static Web server)</li>
+<li><code>HISTORY</code> mode (HTML5 history API with Web App server)</li>
 </ul>
+<p>Specify the root path by the base tag if it isn&apos;t <code>/</code>. ex) <code>&lt;base href=&quot;/&lt;root path&gt;/&quot;&gt;</code> </p>
 <h2 id="plain-data-or-event-handling">Plain data or event handling</h2><h3 id="plain-data">Plain data</h3><p>Plain data is an Object or an Array.</p>
 <h3 id="data-with-binding-views">Data with binding views</h3><ul>
 <li>An Object is an Item that you can <code>add</code>, <code>update</code> or <code>destroy</code> itself.</li>
@@ -90,7 +94,7 @@
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;History mode&lt;/title&gt;
-&lt;base href=&quot;/app/&quot;
+&lt;base href=&quot;/app/&quot;&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;nav&gt;&lt;a href=&quot;about&quot;&gt;About&lt;/a&gt;&lt;/nav&gt;
@@ -107,12 +111,12 @@ class MainView extends View {
 }
 
 const routeMap = {
-  index: HomeView,   // /
-  about: AboutView,  // /about
-  &apos;:userId&apos;: UserView  // /:userId
+  index: HomePage,   // /
+  about: AboutPage,  // /about
+  &apos;:userId&apos;: UserPage  // /:userId
 }
 
-App.activate(MainView, routeMap, { mode: &apos;HISTORY &apos;})
+App.activate(MainView, routeMap, { mode: &apos;HISTORY&apos; })
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
@@ -137,15 +141,15 @@ class MainView extends View {
 }
 
 const routeMap = {
-  index: HomeView,       // /
-  about: AboutView,      // /about
+  index: HomePage,       // /
+  about: AboutPage,      // /about
   books: {
-    index: BookListView, // /books/
-    &apos;:bookId&apos;: BookView, // /books/:bookId
+    index: BookListPage, // /books/
+    &apos;:bookId&apos;: BookPage, // /books/:bookId
   }
 }
 
-App.activate(MainView, routeMap, { mode: &apos;HASH &apos;})
+App.activate(MainView, routeMap, { mode: &apos;HASH&apos; })
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
