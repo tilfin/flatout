@@ -169,6 +169,7 @@ class View extends Core {
         if (makerEl) {
           // Embed view at marker if the node exists
           makerEl.parentNode.replaceChild(view.el, makerEl);
+          view.el.dataset.id = name;
         } else {
           this.appendEl(view.el);
         }
