@@ -235,9 +235,9 @@ declare module '@tilfin/flatout' {
         /**
          * Remove handler or listener
          * @param name - message name, '*' specify any listener.
-         * @param handler - handler registered or listener registered.
+         * @param [handler] - handler registered or listener registered. all registered handler will be removed if not specified.
          */
-        unlistened(name: string, handler: Function | object): void;
+        unlistened(name: string, handler?: Function): void;
 
         /**
          * Unescape HTML
