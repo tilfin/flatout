@@ -16,7 +16,7 @@ declare module '@tilfin/flatout' {
         headers: Record<string, any>;
     }
 
-    interface HttpResponse {
+    interface HttpResponse<T> {
         /**
          * status code
         */
@@ -30,7 +30,7 @@ declare module '@tilfin/flatout' {
         /**
          * response body
          */
-        body: any;
+        body: T;
     }
 
     /**
@@ -41,7 +41,7 @@ declare module '@tilfin/flatout' {
          * @param req request
          * @param resOrErr response or Error
          */
-        constructor(req: HttpRequest, resOrErr: HttpResponse | Error);
+        constructor(req: HttpRequest, resOrErr: HttpResponse<any> | Error);
     }
 
     /**
@@ -95,11 +95,11 @@ declare module '@tilfin/flatout' {
          * @param [ctx.headers] - header name and value object
          * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
-        get(path: string, ctx?: {
+        get<T = any>(path: string, ctx?: {
             query?: Record<string, any>;
             body?: any;
             headers?: Record<string, any>;
-        }): Promise<HttpResponse>;
+        }): Promise<HttpResponse<T>>;
 
         /**
          * do POST request.
@@ -111,11 +111,11 @@ declare module '@tilfin/flatout' {
          * @param [ctx.headers] - header name and value object
          * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
-        post(path: string, ctx?: {
+        post<T = any>(path: string, ctx?: {
             query?: Record<string, any>;
             body?: any;
             headers?: Record<string, any>;
-        }): Promise<HttpResponse>;
+        }): Promise<HttpResponse<T>>;
 
         /**
          * do PUT request.
@@ -127,11 +127,11 @@ declare module '@tilfin/flatout' {
          * @param [ctx.headers] - header name and value object
          * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
-        put(path: string, ctx?: {
+        put<T = any>(path: string, ctx?: {
             query?: Record<string, any>;
             body?: any;
             headers?: Record<string, any>;
-        }): Promise<HttpResponse>;
+        }): Promise<HttpResponse<T>>;
 
         /**
          * do PATCH request.
@@ -143,11 +143,11 @@ declare module '@tilfin/flatout' {
          * @param [ctx.headers] - header name and value object
          * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
-        patch(path: string, ctx?: {
+        patch<T = any>(path: string, ctx?: {
             query?: Record<string, any>,
             body?: any,
             headers?: Record<string, any>,
-        }): Promise<HttpResponse>;
+        }): Promise<HttpResponse<T>>;
 
         /**
          * do DELETE request.
@@ -159,11 +159,11 @@ declare module '@tilfin/flatout' {
          * @param [ctx.headers] - header name and value object
          * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
-        delete(path: string, ctx?: {
+        delete<T = any>(path: string, ctx?: {
             query?: Record<string, any>,
             body?: any,
             headers?: Record<string, any>,
-        }): Promise<HttpResponse>;
+        }): Promise<HttpResponse<T>>;
 
         /**
          * execute http request.
@@ -175,7 +175,7 @@ declare module '@tilfin/flatout' {
          * @param headers - header name and value object
          * @return {Promise<HttpResponse>} Promise resolves response bodystatus: xhr.status,
          */
-        exec(method: string, path: string, query: Record<string, any>, body: string | any, headers: Record<string, any>): Promise<HttpResponse>;
+        exec<T = any>(method: string, path: string, query: Record<string, any>, body: string | any, headers: Record<string, any>): Promise<HttpResponse<T>>;
     }
 
     type RouterMap = { [path: string]: ClassType<Page> | string | RouterMap }
