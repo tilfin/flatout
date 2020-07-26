@@ -401,6 +401,14 @@ class View extends Core {
       let rb;
       try {
         rb = handler.call(root, this, e)
+        if ('catch' in rb) {
+          rb.catch(err => {
+            console.error(err)
+          }).then(r => {
+            if (!r) e.preventDefault()
+          });
+          return
+        }
       } catch(err) {
         console.error(err)
       }
