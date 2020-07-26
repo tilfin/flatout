@@ -90,6 +90,25 @@ describe('View', () => {
     expect(clickHandler).to.have.been.called.with(view.findEl('sayButton'));
   })
 
+  it('handles async event handler', () => {
+    let clickDone = chai.spy();
+
+    class AView extends View {
+      handle(evts) {
+        evts.sayButton_click = async () => {
+          clickDone();
+        }
+      }
+    }
+
+    const view = new AView({ rootEl: 'theView', prop1: 100, data })
+    view.findEl('sayButton').dispatchEvent(new Event('click'))
+
+    setTimeout(() => {
+      expect(clickDone).to.have.been.called()
+    }, 0)
+  })
+
   describe('#set', () => {
     it('set attached handle evts', () => {
       let clickHandler = chai.spy();
