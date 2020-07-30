@@ -1232,7 +1232,7 @@ class View extends Core {
       let rb;
       try {
         rb = handler.call(root, this, e);
-        if ('catch' in rb) {
+        if (typeof rb === 'object' && rb.then) {
           rb.catch(err => {
             console.error(err);
           }).then(r => {
