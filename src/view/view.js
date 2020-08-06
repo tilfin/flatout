@@ -399,18 +399,18 @@ class View extends Core {
   _trapEvt(root, el, type, handler) {
     const hook = function(e) {
       let rb;
-      try {
-        rb = handler.call(root, this, e)
-        if (typeof rb === 'object' && rb.then) {
-          rb.catch(err => {
-            console.error(err)
-          }).then(r => {
-            if (!r) e.preventDefault()
-          });
-          return
+      if (handler.constructor.name === 'AsyncFunction') {
+        handler.call(root, this, e).catch(err => {
+          console.error(err)
+        }).then(r => {
+          if (!r) e.preventDefault()
+        })
+      } else {
+        try {
+          rb = handler.call(root, this, e)
+        } catch(err) {
+          console.error(err)
         }
-      } catch(err) {
-        console.error(err)
       }
       return rb !== undefined ? rb : false
     };
