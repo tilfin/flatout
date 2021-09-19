@@ -881,12 +881,13 @@ class View extends Core {
   }
 
   /**
-   * Initialize props
+   * Prepare data
    * 
    * @param {object} defaults - default data.
    * @return {object|Item} modified data or item.
    */
-  init(defaults) {
+  prepareData(defaults) {
+    return defaults
   }
 
   /**
@@ -934,8 +935,7 @@ class View extends Core {
     console.log('View#_build', root, props);
 
     const defaults = this._setupProps(props);
-    const data = this.init(defaults);
-    this._data = data !== undefined ? data : defaults;
+    this._data = this.prepareData(defaults);
     this._setRootNode(root, props.parent || null, this._data);
     if (this.el) this._loadFinish();
   }
@@ -1050,7 +1050,7 @@ class View extends Core {
 
   set data(value) {
     console.log('View#data=', this);
-    this._data = value;
+    this._data = this.prepareData(value);
     this._unbindData();
     this._setDataToUI();
     this._bindData();

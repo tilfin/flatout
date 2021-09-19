@@ -120,7 +120,7 @@ describe('View', () => {
       }
 
       class TestView extends View {
-        init() {
+        prepareData() {
           return new Item({ foo: 'initFooValue' })
         }
 

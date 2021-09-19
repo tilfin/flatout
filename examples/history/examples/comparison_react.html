@@ -24,7 +24,7 @@ class HelloMessage extends View {
 }
 
 class Timer extends View {
-  init() {
+  prepareData() {
     return new Item({ seconds: 0 })
   }
 
@@ -52,8 +52,9 @@ class TodoListItemView extends View {
 }
 
 class AddForm extends FormView {
-  init(defaults) {
+  prepareData(defaults) {
     defaults.newTodo = ''
+    return defaults
   }
 
   html() {
@@ -83,7 +84,7 @@ class AddForm extends FormView {
 }
 
 class TodoApp extends View {
-  init(defaults) {
+  prepareData(defaults) {
     return {
       list: new List(defaults)
     }

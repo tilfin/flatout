@@ -51,8 +51,8 @@ class MyListView extends ListView {
 
 
 class TodoItemView extends View {
-  init(defaultData) {
-    return new Item(defaultData);
+  prepareData(defaults) {
+    return new Item(defaults);
   }
 
   html(data) {
@@ -77,7 +77,7 @@ class TodoItemView extends View {
 }
 
 class MainView extends View {
-  init() {
+  prepareData() {
     return {
       todoItems: new List(defaulTodoItems.concat())
     }

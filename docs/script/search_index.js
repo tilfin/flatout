@@ -1464,12 +1464,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/view/view.js~view#init",
-    "class/src/view/view.js~View.html#instance-method-init",
-    "src/view/view.js~View#init",
-    "method"
-  ],
-  [
     "src/view/view.js~view#load",
     "class/src/view/view.js~View.html#instance-method-load",
     "src/view/view.js~View#load",
@@ -1480,6 +1474,12 @@ window.esdocSearchIndex = [
     "class/src/view/view.js~View.html#instance-member-parent",
     "src/view/view.js~View#parent",
     "member"
+  ],
+  [
+    "src/view/view.js~view#preparedata",
+    "class/src/view/view.js~View.html#instance-method-prepareData",
+    "src/view/view.js~View#prepareData",
+    "method"
   ],
   [
     "src/view/view.js~view#set",

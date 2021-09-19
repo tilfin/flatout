@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "name": "Core#unlistened",
+    "filePath": "src/core/core.js",
+    "lines": [
+      {
+        "lineNumber": 46,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 47,
+        "line": "   * Remove handler or listener"
+      },
+      {
+        "lineNumber": 48,
+        "line": "   *"
+      },
+      {
+        "lineNumber": 49,
+        "line": "   * @param {string} name - message name, '*' specify any listener."
+      },
+      {
+        "lineNumber": 50,
+        "line": "   * @param {Function} - handler registered or listener registered. all registered handler will be removed if not specified."
+      },
+      {
+        "lineNumber": 51,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 52,
+        "line": "  unlistened(name, handler) {"
+      }
+    ],
+    "codeParams": [
+      "name",
+      "handler"
+    ],
+    "docParams": [
+      "name",
+      "-"
+    ]
+  }
+]

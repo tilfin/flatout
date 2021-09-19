@@ -11,8 +11,8 @@
 import { View, View, Item } from '/lib/flatout.js';
 
 class ButtonCounterView extends View {
-  init(defaultData) {
-    return new Item(defaultData);
+  prepareData(defaults) {
+    return new Item(defaults);
   }
 
   html(data) {
