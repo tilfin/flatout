@@ -412,11 +412,12 @@ declare module '@tilfin/flatout' {
         views: ViewMap<ItemData>;
 
         /**
-         * Initialize props
+         * Prepare data
          *
          * @param defaults - default data.
+         * @return modified data or item.
          */
-        init(defaults: any): ItemData;
+         defaults(defaults: any): ItemData;
 
         /**
          * For implement building HTML of this view

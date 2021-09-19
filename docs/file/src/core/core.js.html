@@ -103,11 +103,17 @@ class Core {
    * Remove handler or listener
    *
    * @param {string} name - message name, &apos;*&apos; specify any listener.
-   * @param {Function|object} handler - handler registered or listener registered.
+   * @param {Function} - handler registered or listener registered. all registered handler will be removed if not specified.
    */
   unlistened(name, handler) {
     const set = this._F_obs.get(name);
-    if (set) set.delete(handler);
+    if (set) {
+      if (handler) {
+        set.delete(handler)
+      } else {
+        set.clear()
+      }
+    }
   }
 
   /**

@@ -25,8 +25,8 @@
 import { View, FormView, Item } from '/lib/flatout.js';
 
 class Detail extends View {
-  init(defaultData) {
-    return new Item(defaultData);
+  prepareData(defaults) {
+    return new Item(defaults);
   }
 
   html(data) {
@@ -65,7 +65,7 @@ class AutoArea extends View {
     super('#autoArea', { container: 'content' })
   }
 
-  init() {
+  prepareData() {
     return {
       detail: new Item({ name: 'Auto', age: 10 }),
       form: new Item({ name: 'Auto', age: 10 }),
@@ -106,7 +106,7 @@ class ManualArea extends View {
     super(document.getElementById('manualArea'), { container: 'content' })
   }
 
-  init() {
+  prepareData() {
     return {
       detail: new Item({ name: 'Manual', age: 20 }),
       form: new Item({ name: 'Manual', age: 20 }),

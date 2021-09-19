@@ -89,7 +89,7 @@ class GroupDetailPage extends Page {
     return 'GroupDetail'
   }
 
-  init() {
+  prepareData() {
     return groups.find('id', this.context.groupId) || {};
   }
 

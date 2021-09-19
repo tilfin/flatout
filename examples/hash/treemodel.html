@@ -71,7 +71,7 @@ class TreeNodeView extends View {
   }
 
   handle(evts) {
-    const childrenView = views.children = new ListView(TreeNodeView);
+    const childrenView = this.views.children;
 
     evts.name_click = function() {
       this.isExpaneded = !this.isExpaneded;
@@ -94,7 +94,7 @@ class TreeNodeView extends View {
 
 
 class MainView extends View {
-  init() {
+  prepareData() {
     return {
       list: treeData
     }

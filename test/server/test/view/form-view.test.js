@@ -72,9 +72,7 @@ describe('FormView', () => {
       const submitSpy = chai.spy();
 
       class SubFormView extends FormView {
-        init() {
-          this.fields = 'name age gender country startDateTime';
-        }
+        fields = 'name age gender country startDateTime';
 
         handle(evts) {
           evts.submit = submitSpy;

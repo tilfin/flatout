@@ -26,8 +26,8 @@ var defaulTodoItems = [
 ];
 
 class TodoItemView extends View {
-  init(defaultData) {
-    return new Item(defaultData);
+  prepareData(defaults) {
+    return new Item(defaults);
   }
 
   html() {
