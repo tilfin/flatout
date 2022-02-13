@@ -332,7 +332,7 @@ class HttpClient {
    * @type {*} body - response body
    */
   async exec(method, path, query, body, headers = {}) {
-    headers = Object.assign({}, this.headers, headers);
+    headers = { ...this.headers, ...headers };
 
     if (!('Content-Type' in headers)) {
       headers['Content-Type'] = this.contentType;
@@ -1748,10 +1748,10 @@ class App {
    * @param {Class<Page>} page - Page class
    * @param {*} ctx - context
    */
-  replace(page, ctx) {
+  replace(page, ctx = {}) {
     if (this._preCtx) {
       // Merge ctx by go to layer.ctx that contains idMap
-      ctx = Object.assign(ctx || {}, this._preCtx);
+      ctx = { ...ctx, ...this._preCtx };
       this._preCtx = null;
     }
     this._replaceContent(page, ctx);
@@ -1776,7 +1776,7 @@ class App {
 
     const params = Object.assign({
       parent: ra,
-      context: Object.assign({}, ra.context, ctx)
+      context: { ...ra.context, ...ctx }
     }, data ? { data, hasInitData: true } : {});
     this._curPage = new page(params);
   }
@@ -2050,7 +2050,7 @@ class FormView extends View {
   }
 
   _assignFromFields(data = {}) {
-    const result = Object.assign({}, data);
+    const result = { ...data };
 
     // FormData cooks radio buttons and no name inputs
     for (let [name, _] of new FormData(this.el)) {

@@ -61,7 +61,7 @@ class FormView extends View {
   }
 
   _assignFromFields(data = {}) {
-    const result = Object.assign({}, data)
+    const result = { ...data }
 
     // FormData cooks radio buttons and no name inputs
     for (let [name, _] of new FormData(this.el)) {

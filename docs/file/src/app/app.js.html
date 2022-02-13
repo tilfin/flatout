@@ -128,10 +128,10 @@ class App {
    * @param {Class&lt;Page&gt;} page - Page class
    * @param {*} ctx - context
    */
-  replace(page, ctx) {
+  replace(page, ctx = {}) {
     if (this._preCtx) {
       // Merge ctx by go to layer.ctx that contains idMap
-      ctx = Object.assign(ctx || {}, this._preCtx);
+      ctx = { ...ctx, ...this._preCtx };
       this._preCtx = null;
     }
     this._replaceContent(page, ctx);
@@ -156,7 +156,7 @@ class App {
 
     const params = Object.assign({
       parent: ra,
-      context: Object.assign({}, ra.context, ctx)
+      context: { ...ra.context, ...ctx }
     }, data ? { data, hasInitData: true } : {});
     this._curPage = new page(params)
   }
