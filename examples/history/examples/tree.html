@@ -78,7 +78,7 @@ class MainView extends View {
   }
 }
 
-const main = new MainView(document.querySelector('main'));
+const main = new MainView({ rootEl: document.querySelector('main') });
 main._loadFinish()
 </script>
 </body>

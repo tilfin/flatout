@@ -12,9 +12,9 @@ var groups = new List([
   ]);
 
 
-class Index extends View {
+class Root extends View {
   constructor() {
-    super(document.body, { container: 'contentBox' })
+    super({ rootEl: document.body, contentEl: 'contentBox' })
   }
 
   title(pageTitle) {
@@ -54,6 +54,12 @@ class GroupItemView extends View {
 class GroupListPage extends Page {
   title() { return 'Groups' }
 
+  prepareData() {
+    return {
+      groupList: groups
+    }
+  }
+
   html(data) {
     return `\
     <section>
@@ -66,7 +72,7 @@ class GroupListPage extends Page {
   }
 
   load(views) {
-    views.groupList = new ListView(GroupItemView, { data: groups });
+    views.groupList = new ListView(GroupItemView);
   }
 
   handle(evts) {
@@ -160,7 +166,7 @@ class Form extends Page {
   }
 }
 
-App.activate(Index, {
+App.activate(Root, {
   index: HomePage,
   groups: {
     index: GroupListPage,

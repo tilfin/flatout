@@ -1,4 +1,4 @@
-import { App, List, View, FormView, Page, ListView } from '../lib/flatout.js';
+import { App, List, View, Page, ListView } from '../lib/flatout.js';
 
 var groups = new List([
     {
@@ -14,7 +14,7 @@ var groups = new List([
 
 class Root extends View {
   constructor() {
-    super(document.body, { container: 'contentBox' });
+    super({ rootEl: document.body, contentEl: 'contentBox' });
   }
 
   title(s) {
@@ -41,7 +41,7 @@ class Home extends Page {
 
 class GroupListItem extends View {
   html(data) {
-    return `<li><a href="/groups/${data.id}">${data.name}</a></li>`
+    return /*html*/`<li><a href="/groups/${data.id}">${data.name}</a></li>`
   }
 }
 
@@ -51,7 +51,7 @@ class GroupList extends Page {
   }
 
   html(data) {
-    return `\
+    return /*html*/`\
     <section>
      <h1>Group List</h1>
      <ul data-id="groupList1"></ul>
@@ -92,7 +92,7 @@ class GroupDetail extends Page {
   }
 
   html(data) {
-    return `\
+    return /*html*/`\
     <div>
      <nav>
       <a href="../groups">Group list</a>

@@ -93,24 +93,33 @@ class TreeNodeView extends View {
   }
 }
 
-
-class MainView extends View {
-  load(views, evts) {
-    views.list = new ListView('treeRoot', TreeNodeView);
+class RootView extends View {
+  constructor() {
+    super({ rootEl: document.body })
   }
 
+  title(s) {
+    return 'Example'
+  }
+}
+
+class MainView extends View {
   title() {
     return 'Tree'
   }
 
-  async context() {
+  prepareData() {
     return {
       list: treeData
     }
   }
+
+  load(views) {
+    views.list = new ListView('treeRoot', TreeNodeView);
+  }
 }
 
-App.activate({ index: MainView }, { mode: 'HASH' });
+App.activate(RootView, { index: MainView }, { mode: 'HASH' });
 </script>
 </body>
 </html>

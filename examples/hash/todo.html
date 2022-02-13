@@ -75,6 +75,16 @@ class MainView extends View {
     super(document.body);
   }
 
+  title() {
+    return 'Todo';
+  }
+
+  prepareData() {
+    return {
+      todoList: todoItems
+    };
+  }
+
   load(views) {
     views.todoList = new MyListView('#todoList', TodoItemView);
   }
@@ -95,16 +105,6 @@ class MainView extends View {
     evts.dumpButton_click = function() {
       console.info(todoItems);
     }
-  }
-
-  title() {
-    return 'Todo';
-  }
-
-  async context() {
-    return {
-      todoList: todoItems
-    };
   }
 }
 

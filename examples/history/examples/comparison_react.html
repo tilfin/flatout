@@ -53,8 +53,10 @@ class TodoListItemView extends View {
 
 class AddForm extends FormView {
   prepareData(defaults) {
-    defaults.newTodo = ''
-    return defaults
+    return new Item({
+      nextNumber: defaults?.number ?? 0,
+      newTodo: '',
+    })
   }
 
   html() {
@@ -74,11 +76,7 @@ class AddForm extends FormView {
       }
 
       this.fire('addNewTodo', { text });
-
-      this.data = {
-        nextNumber: this.data.nextNumber + 1,
-        newTodo   : ''
-      };
+      this._data.add('nextNumber', 1);
     }
   }
 }
@@ -120,16 +118,19 @@ class MainView extends View {
 
   handle(evts) {
     evts.addTimer_click = () => {
-      this.add('timer', new Timer());
+      this.set('timer', new Timer());
     }
 
     evts.removeTimer_click = () => {
-      this.remove('timer');
+      this.set('timer');
     }
   }
 }
 
-new MainView(document.querySelector('main'), { container: 'sandbox' });
+new MainView({
+  rootEl: document.querySelector('main'),
+  contentEl: 'sandbox',
+});
 </script>
 </body>
 </html>

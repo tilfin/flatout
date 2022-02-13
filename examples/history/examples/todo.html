@@ -60,7 +60,7 @@ class TodoItemView extends View {
   }
 
   load(views) {
-    this.listen('colorChange', function(ctx) {
+    this.listened('colorChange', function(ctx) {
       $(this.el).css('backgroundColor', ctx.color);
     });
   }
@@ -84,12 +84,12 @@ class MainView extends View {
   }
 
   load(views) {
-    const msg = views.msg = new View('#msg');
-    msg.listen('colorChange', function(ctx) {
+    const msg = views.msg = new View({ rootEl: 'msg' });
+    msg.listened('colorChange', function(ctx) {
       $(this.el).css('color', ctx.color);
     });
 
-    views.todoItems = new MyListView('#todoList', TodoItemView);
+    views.todoItems = new MyListView(TodoItemView, { rootEl: 'todoList' });
   }
 
   handle(evts) {
@@ -115,7 +115,7 @@ class MainView extends View {
   }
 }
 
-new MainView(document.querySelector('body'));
+new MainView({ rootEl: document.querySelector('body') });
 </script>
 </body>
 </html>

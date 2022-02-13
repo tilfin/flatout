@@ -62,7 +62,7 @@ class AutoForm extends FormView {
 
 class AutoArea extends View {
   constructor() {
-    super('#autoArea', { container: 'content' })
+    super({ rootEl: '#autoArea', contentEl: 'content' })
   }
 
   prepareData() {
@@ -78,8 +78,8 @@ class AutoArea extends View {
   }
 
   handle(evts) {
-    evts.dataChanged = (sender, e) => {
-      this.data.detail.update(e.detail)
+    evts.dataChanged = (sender, { detail }) => {
+      this._data.detail.update(detail)
     }
   }
 }
@@ -103,7 +103,7 @@ class ManualForm extends FormView {
 
 class ManualArea extends View {
   constructor() {
-    super(document.getElementById('manualArea'), { container: 'content' })
+    super({ rootEl: document.getElementById('manualArea'), contentEl: 'content' })
   }
 
   prepareData() {
