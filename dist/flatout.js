@@ -937,7 +937,7 @@ class View extends Core {
     const defaults = this._setupProps(props);
     this._data = this.prepareData(defaults);
     this._setRootNode(root, props.parent || null, this._data);
-    if (this.el) this._loadFinish();
+    if (this.el) this._assemble();
   }
 
   _setupProps(props) {
@@ -975,8 +975,8 @@ class View extends Core {
     }
   }
 
-  _loadFinish() {
-    console.log('View#_loadFinish', this);
+  _assemble() {
+    console.log('View#_assemble', this);
 
     const ctn = this.contentEl;
     this.contentEl = this._isStr(ctn) ? this.findEl(ctn) : this.el;
@@ -994,7 +994,7 @@ class View extends Core {
     eachEntry(this.views, ([name, view]) => {
       if (!view.el) {
         view.el = this.findEl(name);
-        view._loadFinish();
+        view._assemble();
       } else if (view.el.parentNode instanceof DocumentFragment) {
         const makerEl = this.findEl(name);
         if (makerEl) {

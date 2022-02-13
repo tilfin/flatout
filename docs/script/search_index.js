@@ -1284,6 +1284,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/view/view.js~view#_assemble",
+    "class/src/view/view.js~View.html#instance-method-_assemble",
+    "src/view/view.js~View#_assemble",
+    "method"
+  ],
+  [
     "src/view/view.js~view#_binddata",
     "class/src/view/view.js~View.html#instance-method-_bindData",
     "src/view/view.js~View#_bindData",
@@ -1311,12 +1317,6 @@ window.esdocSearchIndex = [
     "src/view/view.js~view#_firstel",
     "class/src/view/view.js~View.html#instance-method-_firstEl",
     "src/view/view.js~View#_firstEl",
-    "method"
-  ],
-  [
-    "src/view/view.js~view#_loadfinish",
-    "class/src/view/view.js~View.html#instance-method-_loadFinish",
-    "src/view/view.js~View#_loadFinish",
     "method"
   ],
   [
