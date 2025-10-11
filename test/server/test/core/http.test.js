@@ -1,4 +1,5 @@
 import { HttpClient } from '/lib/core/http.js';
+import { expect } from '/modules/chai/index.js';
 
 export default describe('HttpClient', () => {
   let http;

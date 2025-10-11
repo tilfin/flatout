@@ -1,7 +1,8 @@
-const util = require('util');
-const puppeteer = require('puppeteer')
+import util from 'util'
+import puppeteer from 'puppeteer'
+import app from './server/index.js'
+import * as chai from 'chai'
 
-const app = require('./server')
 let server, browser;
 
 before(async () => {
@@ -18,7 +19,5 @@ after(async () => {
   server.close()
 })
 
-module.exports = {
-  sleep: util.promisify(setTimeout),
-  assert: require('chai').assert
-}
+export const sleep = util.promisify(setTimeout)
+export const assert = chai.assert

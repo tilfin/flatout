@@ -1,6 +1,5 @@
 import View from '/lib/view/view.js';
-
-const expect = chai.expect;
+import { expect } from '/modules/chai/index.js';
 
 class TestArea extends View {
   html(data) {

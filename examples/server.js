@@ -1,10 +1,14 @@
 'use strict';
 
-const http = require('http');
-const URL  = require('url');
-const querystring = require('querystring');
-const path = require('path');
-const fs = require('fs');
+import http from 'http'
+import { URL } from 'url'
+import querystring from 'querystring'
+import path from 'path'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 function nowTime() {
   return new Date().toISOString().substr(11)
@@ -12,7 +16,7 @@ function nowTime() {
 
 function createServer(serverName, dir) {
   return http.createServer(function(req, res){
-    const request = URL.parse(req.url, true);
+    const request = new URL(req.url, `http://${req.headers.host}`)
 
     console.log(serverName, nowTime(), req.method, request.href);
 

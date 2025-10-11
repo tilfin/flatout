@@ -1,4 +1,5 @@
 import { Item, List } from '/lib/model/item.js';
+import { expect } from '/modules/chai/index.js';
 
 describe('Item', () => {
   describe('#constructor', () => {

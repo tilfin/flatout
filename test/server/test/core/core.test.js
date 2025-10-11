@@ -1,4 +1,6 @@
 import Core from '/lib/core/core.js';
+import { expect } from '/modules/chai/index.js';
+const chai = chaiModule.use(chaiSpies);
 
 export default describe('Core', () => {
   let core;
