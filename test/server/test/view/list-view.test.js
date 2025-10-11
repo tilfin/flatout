@@ -1,5 +1,7 @@
 import ListView from '/lib/view/list-view.js';
 import View from '/lib/view/view.js';
+import { expect } from '/modules/chai/index.js';
+const chai = chaiModule.use(chaiSpies);
 
 describe('ListView', () => {
   let domView;

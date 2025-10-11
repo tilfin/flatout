@@ -1,4 +1,6 @@
 import FormView from '/lib/view/form-view.js';
+import { expect } from '/modules/chai/index.js';
+const chai = chaiModule.use(chaiSpies);
 
 describe('FormView', () => {
   let domView;

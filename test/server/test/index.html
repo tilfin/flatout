@@ -5,8 +5,7 @@
 <title>Inner Tests</title>
 <link rel="stylesheet" href="/modules/mocha/mocha.css">
 <script src="/modules/mocha/mocha.js"></script>
-<script src="/modules/chai/chai.js"></script>
-<script src="/modules/chai-spies/chai-spies.js"></script>
+<script type="module" src="/modules/chai/index.js"></script>
 </head>
 <body>
 <script>
@@ -14,7 +13,6 @@ const sleep = (msec) => {
   return new Promise((resolve, _) => setTimeout(resolve, msec))
 }
 mocha.setup('bdd');
-const expect = chai.expect;
 setTimeout(() => {
   mocha.run();  
 }, 500)

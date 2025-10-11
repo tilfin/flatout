@@ -1,8 +1,7 @@
 import View from '/lib/view/view.js';
 import ListView from '/lib/view/list-view.js';
 import { List } from '/lib/model/item.js';
-
-const expect = chai.expect;
+import { expect } from '/modules/chai/index.js';
 
 describe('ListView-List', () => {
   const rootArea = new View({ rootEl: 'areaSandBox' });

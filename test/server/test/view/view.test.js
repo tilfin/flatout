@@ -1,7 +1,7 @@
 import View from '/lib/view/view.js';
 import { Item } from '/lib/model/item.js';
-
-const expect = chai.expect;
+import { expect } from '/modules/chai/index.js';
+const chai = chaiModule.use(chaiSpies);
 
 class SubView extends View {
   html(data) {
