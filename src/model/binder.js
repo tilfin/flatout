@@ -1,27 +1,25 @@
-'use strict'
-
 /**
  * Binding DataModel and View
  * @access private
  */
 class Binder {
-  /**
-   * Constructor.
-   * 
-   * @param {Item} item - target item
-   */
-  constructor(item) {
-    this._item = item;
-    item.listened('*', this);
-  }
+	/**
+	 * Constructor.
+	 *
+	 * @param {Item} item - target item
+	 */
+	constructor(item) {
+		this._item = item;
+		item.listened("*", this);
+	}
 
-  /**
-   * Remove listening to item
-   */
-  destroy() {
-    this._item.unlistened('*', this);
-    this._item = null;
-  }
+	/**
+	 * Remove listening to item
+	 */
+	destroy() {
+		this._item.unlistened("*", this);
+		this._item = null;
+	}
 }
 
 /**
@@ -30,23 +28,23 @@ class Binder {
  * @access protected
  */
 export class ItemBinder extends Binder {
-  /**
-   * Constructor.
-   * 
-   * @param {Item} item - target data
-   * @param {View} view - target view
-   */
-  constructor(item, view) {
-    super(item)
-    this._view = view;
-  }
+	/**
+	 * Constructor.
+	 *
+	 * @param {Item} item - target data
+	 * @param {View} view - target view
+	 */
+	constructor(item, view) {
+		super(item);
+		this._view = view;
+	}
 
-  /**
-   * Updating field of view
-   */
-  update({ field, newValue, oldValue }) {
-    this._view.update(field, newValue, oldValue);
-  }
+	/**
+	 * Updating field of view
+	 */
+	update({ field, newValue, oldValue }) {
+		this._view.update(field, newValue, oldValue);
+	}
 }
 
 /**
@@ -55,39 +53,39 @@ export class ItemBinder extends Binder {
  * @access protected
  */
 export class ListBinder extends Binder {
-  /**
-   * Constructor.
-   * 
-   * @param {List} list - target data
-   * @param {ListView} listView - target view
-   */
-  constructor(list, listView) {
-    super(list)
-    this._view = listView;
-  }
+	/**
+	 * Constructor.
+	 *
+	 * @param {List} list - target data
+	 * @param {ListView} listView - target view
+	 */
+	constructor(list, listView) {
+		super(list);
+		this._view = listView;
+	}
 
-  /**
-   * Adding item to ListView at index.
-   */
-  add({ item, index }) {
-    if (index === undefined) {
-      this._view.addItem(item);
-    } else {
-      this._view.insertItem(item, index);
-    }    
-  }
+	/**
+	 * Adding item to ListView at index.
+	 */
+	add({ item, index }) {
+		if (index === undefined) {
+			this._view.addItem(item);
+		} else {
+			this._view.insertItem(item, index);
+		}
+	}
 
-  /**
-   * Updating item of ListView at index.
-   */
-  update({ item, index }) {
-    this._view.updateItem(item, index);
-  }
+	/**
+	 * Updating item of ListView at index.
+	 */
+	update({ item, index }) {
+		this._view.updateItem(item, index);
+	}
 
-  /**
-   * Removing item from ListView.
-   */
-  remove({ item, index }) {
-    this._view.removeItem(item, index);
-  }
+	/**
+	 * Removing item from ListView.
+	 */
+	remove({ item, index }) {
+		this._view.removeItem(item, index);
+	}
 }
