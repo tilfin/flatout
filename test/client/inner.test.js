@@ -1,5 +1,5 @@
-const { assert, sleep } = require('../helper')
-const pti = require('puppeteer-to-istanbul')
+import { assert, sleep } from '../helper.js'
+import pti from 'puppeteer-to-istanbul'
 
 describe('Inner tests', () => {
   let page

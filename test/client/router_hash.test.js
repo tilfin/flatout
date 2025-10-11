@@ -1,4 +1,4 @@
-const { assert, sleep } = require('../helper')
+import { assert, sleep } from '../helper.js'
 
 describe('Router works hash mode', () => {
   let page

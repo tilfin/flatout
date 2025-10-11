@@ -1,4 +1,4 @@
-const app = require('./server')
+import app from './server/index.js'
 const port = process.env.PORT || 3000;
 const server = app.listen(port)
 console.info(`Browse http://localhost:${port}/test/`)

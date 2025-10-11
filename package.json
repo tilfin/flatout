@@ -4,6 +4,7 @@
   "author": "Toshimitsu Takahashi",
   "license": "MIT",
   "description": "Lightweight Single-Page-Application framework for JavaScript",
+  "type": "module",
   "main": "dist/flatout.js",
   "types": "dist/flatout.d.ts",
   "engines": {
