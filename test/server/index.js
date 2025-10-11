@@ -3,7 +3,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import Koa from 'koa'
-import koaBody from 'koa-body'
+import { koaBody } from 'koa-body'
 import send from 'koa-send'
 
 const __filename = fileURLToPath(import.meta.url)
