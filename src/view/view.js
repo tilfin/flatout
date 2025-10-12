@@ -444,20 +444,7 @@ class View extends Core {
 			console.error(err);
 		}
 		const df = document.adoptNode(el.content);
-		return this._firstEl(df);
-	}
-
-	_firstEl(el) {
-		const fec = el.firstElementChild;
-		if (fec !== undefined) return fec;
-
-		// for Safari, Edge
-		const nodes = el.childNodes;
-		for (let i = 0, len = nodes.length; i < len; i++) {
-			const child = nodes[i];
-			if (child.nodeType === Node.ELEMENT_NODE) return child;
-		}
-		return null;
+		return df.firstElementChild;
 	}
 }
 
