@@ -6,6 +6,7 @@ import FormView from "./view/form-view.js";
 import ListView from "./view/list-view.js";
 import Page from "./view/page.js";
 import View from "./view/view.js";
+import { Part, register } from "./part.js";
 
 /*
  * flatout by @tilfin
@@ -21,4 +22,6 @@ export {
 	Page,
 	Item,
 	List,
+	Part,
+	register,
 };

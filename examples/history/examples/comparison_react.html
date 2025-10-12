@@ -116,6 +116,18 @@ class MainView extends View {
     views.timer = new Timer();
   }
 
+  html() {
+    return `\
+    <main>
+      <div id="sandbox"></div>
+      <footer>
+        <button id="addTimer">Add Timer</button>
+        <button id="removeTimer">Remove Timer</button>
+      </footer>
+    </main>
+    `
+  }
+
   handle(evts) {
     evts.addTimer_click = () => {
       this.set('timer', new Timer());
