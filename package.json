@@ -20,7 +20,7 @@
     "coverage": "nyc report --reporter=html",
     "debug": "node test/inner_debug.js",
     "dist": "./bin/dist.sh",
-    "doc": "esdoc",
+    "doc": "rm -rf docs && jsdoc -c ./jsdoc.json -r -d docs src && jsdoc2md src/**/*.js > docs/API.md",
     "example": "node examples/server.js ."
   },
   "repository": {
@@ -40,10 +40,9 @@
     "@rollup/plugin-terser": "^0.4.4",
     "chai": "^6.2.0",
     "chai-spies": "^1.1.0",
-    "esdoc": "^1.1.0",
-    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
-    "esdoc-standard-plugin": "^1.0.0",
     "fastify": "^5.6.1",
+    "jsdoc": "^4.0.5",
+    "jsdoc-to-markdown": "^9.1.3",
     "mocha": "^11.7.4",
     "nyc": "^17.1.0",
     "puppeteer": "^24.24.0",

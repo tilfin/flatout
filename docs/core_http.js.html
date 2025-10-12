@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: core/http.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: core/http.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Http Error
+ */
+export class HttpError {
+	/**
+	 * @contructor
+	 * @param req  request
+	 * @param resOrErr response or Error
+	 */
+	constructor(req, resOrErr) {
+		this.req = req;
+
+		if (typeof resOrErr === "string") {
+			this.res = null;
+
+			this.isTimeout = resOrErr === "timeout";
+			this.isAborted = resOrErr === "abort";
+			this.isNetworkError = resOrErr === "error";
+		} else {
+			this.res = resOrErr;
+
+			const code = this.res.status;
+			this.isBadRequest = code === 400;
+			this.isUnauthorized = code === 401;
+			this.isForbidden = code === 403;
+			this.isNotFound = code === 404;
+			this.isConflict = code === 409;
+			this.isServerError = code >= 500;
+		}
+	}
+}
+
+/**
+ * HTTP Client
+ *
+ * @class HttpClient
+ */
+export class HttpClient {
+	/**
+	 * Constructor.
+	 * @param {object} [opts] - options
+	 * @param {string} [opts.baseURL] - base URL (default empty).
+	 * @param {object} [opts.headers] - custom headers
+	 * @param {string} [opts.bodyType] - post/put type `form` | `json`
+	 */
+	constructor(opts = {}) {
+		this.baseURL = opts.baseURL || "";
+		this.headers = opts.headers || {};
+
+		const bodyType = opts.bodyType || "";
+		if (bodyType.includes("form")) {
+			this.contentType = "application/x-www-form-urlencoded";
+		} else {
+			this.contentType = "application/json;charset=UTF-8";
+		}
+	}
+
+	/**
+	 * hook async function called before the request.
+	 *
+	 * @param  {String} path - request path
+	 * @param  {object} [ctx] - context
+	 * @param  {object} [ctx.query] - request query data
+	 * @param  {object} [ctx.body] - request body
+	 * @param  {object} [ctx.headers] - header name and value object
+	 */
+	async beforeRequest(path, ctx) {}
+
+	/**
+	 * hook async function called before throw an error.
+	 *
+	 * @param  {HttpError} err - request path
+	 * @return {Promise&lt;boolean>} - if return false, stop throwing the error.
+	 */
+	async beforeError(err) {
+		return true;
+	}
+
+	/**
+	 * do GET request.
+	 *
+	 * @param  {String} path - request path
+	 * @param  {object} [ctx] - context
+	 * @param  {object} [ctx.query] - request query data
+	 * @param  {object} [ctx.body] - request body
+	 * @param  {object} [ctx.headers] - header name and value object
+ 	 * @returns {Promise&lt;{status:number,headers:object,body:*}>} Promise resolving to an object with response details
+	 */
+	get(path, ctx = {}) {
+		const { query, body, headers } = ctx;
+		return this.exec("GET", path, query, body, headers);
+	}
+
+	/**
+	 * do POST request.
+	 *
+	 * @param  {String} path - request path
+	 * @param  {object} [ctx] - context
+	 * @param  {object} [ctx.query] - request query data
+	 * @param  {object} [ctx.body] - request body
+	 * @param  {object} [ctx.headers] - header name and value object
+ 	 * @returns {Promise&lt;{status:number,headers:object,body:*}>} Promise resolving to an object with response details
+	 */
+	post(path, ctx = {}) {
+		const { query, body, headers } = ctx;
+		return this.exec("POST", path, query, body, headers);
+	}
+
+	/**
+	 * do PUT request.
+	 *
+	 * @param  {String} path - request path
+	 * @param  {object} [ctx] - context
+	 * @param  {object} [ctx.query] - request query data
+	 * @param  {object} [ctx.body] - request body
+	 * @param  {object} [ctx.headers] - header name and value object
+ 	 * @returns {Promise&lt;{status:number,headers:object,body:*}>} Promise resolving to an object with response details
+	 */
+	put(path, ctx = {}) {
+		const { query, body, headers } = ctx;
+		return this.exec("PUT", path, query, body, headers);
+	}
+
+	/**
+	 * do PATCH request.
+	 *
+	 * @param  {String} path - request path
+	 * @param  {object} [ctx] - context
+	 * @param  {object} [ctx.query] - request query data
+	 * @param  {object} [ctx.body] - request body
+	 * @param  {object} [ctx.headers] - header name and value object
+ 	 * @returns {Promise&lt;{status:number,headers:object,body:*}>} Promise resolving to an object with response details
+	 */
+	patch(path, ctx = {}) {
+		const { query, body, headers } = ctx;
+		return this.exec("PATCH", path, query, body, headers);
+	}
+
+	/**
+	 * do DELETE request.
+	 *
+	 * @param  {String} path - request path
+	 * @param  {object} [ctx] - context
+	 * @param  {object} [ctx.query] - request query data
+	 * @param  {object} [ctx.body] - request body
+	 * @param  {object} [ctx.headers] - header name and value object
+ 	 * @returns {Promise&lt;{status:number,headers:object,body:*}>} Promise resolving to an object with response details
+	 */
+	delete(path, ctx = {}) {
+		const { query, body, headers } = ctx;
+		return this.exec("DELETE", path, query, body, headers);
+	}
+
+	/**
+	 * execute http request.
+	 *
+	 * @param  {string} method - method
+	 * @param  {string} path - request path
+	 * @param  {object} query - request query data
+	 * @param  {string|object} body - request body
+	 * @param  {object} headers - header name and value object
+ 	 * @returns {Promise&lt;{status:number,headers:object,body:*}>} Promise resolving to an object with response details
+	 */
+	async exec(method, path, query, body, headers = {}) {
+		headers = { ...this.headers, ...headers };
+
+		if (!("Content-Type" in headers)) {
+			headers["Content-Type"] = this.contentType;
+		}
+
+		await this.beforeRequest(path, { query, body, headers });
+
+		const req = { method, path, headers };
+		let httpErr;
+		try {
+			const res = await this._request(method, path, { query, body, headers });
+			const { status } = res;
+			if (status &lt; 400) {
+				return res;
+			}
+
+			httpErr = new HttpError(req, res);
+		} catch (errType) {
+			httpErr = new HttpError(req, errType);
+		}
+
+		if ((await this.beforeError(httpErr)) !== false) {
+			throw httpErr;
+		}
+	}
+
+	_request(method, path, { query, body, headers }) {
+		let reqBody;
+		if (body) {
+			const cttType = headers["Content-Type"];
+			if (cttType.match(/\/form-data/)) {
+				reqBody = new FormData();
+				for (const field in body) {
+					reqBody.append(field, body[field]);
+				}
+				delete headers["Content-Type"]; // FormData set it with boundary
+			} else if (cttType.match(/\/json/)) {
+				reqBody = JSON.stringify(body);
+			} else {
+				reqBody = this._formatParams(body);
+			}
+		} else {
+			reqBody = undefined;
+		}
+
+		let url = path;
+		if (this.baseURL &amp;&amp; !url.match(/^[a-z]{2,5}:\/\//)) {
+			url = this.baseURL + url;
+		}
+		if (query) url += "?" + this._formatParams(query);
+
+		return new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.open(method, url, true);
+
+			for (const name in headers) {
+				xhr.setRequestHeader(name, headers[name]);
+			}
+
+			xhr.onload = (evt) => {
+				let resBody,
+					resCttType = xhr.getResponseHeader("Content-Type");
+				if (resCttType === null) {
+					resBody = null;
+				} else if (resCttType.match(/\/json/)) {
+					resBody = JSON.parse(xhr.response);
+				} else if (resCttType.match(/\/form/)) {
+					resBody = this._fromFormData(xhr.response);
+				} else {
+					resBody = xhr.response;
+				}
+
+				resolve({
+					status: xhr.status,
+					headers: xhr.getAllResponseHeaders(),
+					body: resBody,
+				});
+			};
+
+			xhr.onabort = (err) => {
+				reject("abort");
+			};
+			xhr.onerror = (err) => {
+				reject("error");
+			};
+			xhr.ontimeout = (err) => {
+				reject("timeout");
+			};
+
+			xhr.send(reqBody);
+		});
+	}
+
+	_formatParams(params) {
+		return new URLSearchParams(params).toString();
+	}
+
+	_fromFormData(body) {
+		const data = {};
+		body.split("&amp;").forEach((item) => {
+			const [key, val] = item.split("=");
+			data[decodeURIComponent(key)] = decodeURIComponent(val);
+		});
+		return data;
+	}
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-view_page.html">view/page</a></li></ul><h3>Classes</h3><ul><li><a href="Core.html">Core</a></li><li><a href="FormView.html">FormView</a></li><li><a href="HttpClient.html">HttpClient</a></li><li><a href="HttpClient_HttpClient.html">HttpClient</a></li><li><a href="HttpError.html">HttpError</a></li><li><a href="ItemBinder.html">ItemBinder</a></li><li><a href="ListBinder.html">ListBinder</a></li><li><a href="ListView.html">ListView</a></li><li><a href="View.html">View</a></li><li><a href="flatout.App.html">App</a></li><li><a href="flatout.exports.Item.html">exports.Item</a></li><li><a href="flatout.exports.List.html">exports.List</a></li><li><a href="module-view_page.html">view/page</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Oct 12 2025 11:07:50 GMT+0900 (Japan Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

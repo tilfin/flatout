@@ -1,3 +1,9 @@
+/**
+ * Module: view/page
+ *
+ * @module view/page
+ */
+
 import View from "./view.js";
 
 /**
