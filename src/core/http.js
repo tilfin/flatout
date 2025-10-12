@@ -84,10 +84,7 @@ export class HttpClient {
 	 * @param  {object} [ctx.query] - request query data
 	 * @param  {object} [ctx.body] - request body
 	 * @param  {object} [ctx.headers] - header name and value object
-	 * @return {Promise} Promise resolves response bodystatus: xhr.status,
-	 * @type {number} status - status code
-	 * @type {object} headers - response header name and value object
-	 * @type {*} body - response body
+ 	 * @returns {Promise<{status:number,headers:object,body:*}>} Promise resolving to an object with response details
 	 */
 	get(path, ctx = {}) {
 		const { query, body, headers } = ctx;
@@ -102,10 +99,7 @@ export class HttpClient {
 	 * @param  {object} [ctx.query] - request query data
 	 * @param  {object} [ctx.body] - request body
 	 * @param  {object} [ctx.headers] - header name and value object
-	 * @return {Promise} Promise resolves response bodystatus: xhr.status,
-	 * @type {number} status - status code
-	 * @type {object} headers - response header name and value object
-	 * @type {*} body - response body
+ 	 * @returns {Promise<{status:number,headers:object,body:*}>} Promise resolving to an object with response details
 	 */
 	post(path, ctx = {}) {
 		const { query, body, headers } = ctx;
@@ -120,10 +114,7 @@ export class HttpClient {
 	 * @param  {object} [ctx.query] - request query data
 	 * @param  {object} [ctx.body] - request body
 	 * @param  {object} [ctx.headers] - header name and value object
-	 * @return {Promise} Promise resolves response bodystatus: xhr.status,
-	 * @type {number} status - status code
-	 * @type {object} headers - response header name and value object
-	 * @type {*} body - response body
+ 	 * @returns {Promise<{status:number,headers:object,body:*}>} Promise resolving to an object with response details
 	 */
 	put(path, ctx = {}) {
 		const { query, body, headers } = ctx;
@@ -138,10 +129,7 @@ export class HttpClient {
 	 * @param  {object} [ctx.query] - request query data
 	 * @param  {object} [ctx.body] - request body
 	 * @param  {object} [ctx.headers] - header name and value object
-	 * @return {Promise} Promise resolves response bodystatus: xhr.status,
-	 * @type {number} status - status code
-	 * @type {object} headers - response header name and value object
-	 * @type {*} body - response body
+ 	 * @returns {Promise<{status:number,headers:object,body:*}>} Promise resolving to an object with response details
 	 */
 	patch(path, ctx = {}) {
 		const { query, body, headers } = ctx;
@@ -156,10 +144,7 @@ export class HttpClient {
 	 * @param  {object} [ctx.query] - request query data
 	 * @param  {object} [ctx.body] - request body
 	 * @param  {object} [ctx.headers] - header name and value object
-	 * @return {Promise} Promise resolves response bodystatus: xhr.status,
-	 * @type {number} status - status code
-	 * @type {object} headers - response header name and value object
-	 * @type {*} body - response body
+ 	 * @returns {Promise<{status:number,headers:object,body:*}>} Promise resolving to an object with response details
 	 */
 	delete(path, ctx = {}) {
 		const { query, body, headers } = ctx;
@@ -174,10 +159,7 @@ export class HttpClient {
 	 * @param  {object} query - request query data
 	 * @param  {string|object} body - request body
 	 * @param  {object} headers - header name and value object
-	 * @return {Promise} Promise
-	 * @type {number} status - status code
-	 * @type {object} headers - response header name and value object
-	 * @type {*} body - response body
+ 	 * @returns {Promise<{status:number,headers:object,body:*}>} Promise resolving to an object with response details
 	 */
 	async exec(method, path, query, body, headers = {}) {
 		headers = { ...this.headers, ...headers };
