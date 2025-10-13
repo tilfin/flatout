@@ -1,6 +1,10 @@
 let gParts = [];
 const gValueMap = new WeakMap();
 
+export function toJSON(obj) {
+    return JSON.stringify(obj, (_, v) => (v instanceof HTMLElement) ? gValueMap.get(v) : v);
+}
+
 export function register(map) {
     gParts = Object.keys(map);
     for (const [name, cls] of Object.entries(map)) {
@@ -10,6 +14,10 @@ export function register(map) {
 
 export class Part extends HTMLElement {
     static observedAttributes = ["kkValue"];
+
+    #evts = [];
+    #sbsc = [];
+    #listens = [];
 
     constructor() {
         super();
@@ -54,7 +62,6 @@ export class Part extends HTMLElement {
             }
         }
 
-        this._evts = [];
         for (const [key, map] of Object.entries(this.events())) {
             const el = this._findEl(key);
             if (!el) continue;
@@ -64,17 +71,19 @@ export class Part extends HTMLElement {
                 el.addEventListener(name, cb);
                 cbMap[name] = cb;
             }
-            this._evts.push([el, cbMap]);
+            this.#evts.push([el, cbMap]);
         }
 
-        this._sbsc = [];
         for (const [key, handler] of Object.entries(this.subscribe())) {
             const cb = (e) => handler(e.detail);
             document.addEventListener(`kkTopic_${key}`, cb);
-            this._sbsc.push([key, cb]);
+            this.#sbsc.push([key, cb]);
         }
 
-        this.addEventListener("kkUp", this.#upReceiver);
+        this.#listens = this.listen();
+        if (this.#listens.length) {
+            this.addEventListener("kkToss", this.#listener);
+        }
 
         this.load();
     }
@@ -84,22 +93,24 @@ export class Part extends HTMLElement {
 
         this.unload();
 
-        this.removeEventListener("kkUp", this.#upReceiver);
+        if (this.#listens.length) {
+            this.removeEventListener("kkToss", this.#listener);
+        }
 
-        for (const [el, cbMap] of this._events) {
+        for (const [el, cbMap] of this.#evts) {
             for (const [name, cb] of Object.entries(cbMap)) {
                 el.removeEventListener(name, cb);
             }
         }
-        this._events = null;
+        this.#evts = [];
 
-        for (const [key, cb] of this._sbsc) {
+        for (const [key, cb] of this.#sbsc) {
             document.removeEventListener(`kkTopic_${key}`, cb);
         }
-        this._sbsc = null;
+        this.#sbsc = [];
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback(name, _, newValue) {
         console.log(`Part attributeChanged: ${this.localName}#${this.id} ${name}=${newValue}`);
 
         if (name === "kkValue") {
@@ -160,18 +171,18 @@ export class Part extends HTMLElement {
         }
     }
 
-    add(name, delta) {
-        let v = this.get(name);
-        this.set(name, v + delta);
+    listen() {
+        return {};
     }
 
-	/**
-	 * 上位要素に向けてデータ更新イベントを発行
+    /**
+	 * 上位要素に向けてイベントを発行
 	 */
-	up(name, value) {
-        const evt = new CustomEvent("kkUp", { detail: { name, value }, bubbles: true });
+	dispatch(name, value) {
+        const evt = new CustomEvent("kkToss", { detail: { name, value }, bubbles: true });
 		this.dispatchEvent(evt);
 	}
+
 
     create(tagName, id = null, value = {}) {
         const el = document.createElement(tagName);
@@ -192,11 +203,11 @@ export class Part extends HTMLElement {
         return template.content.cloneNode(true);
     }
 
-    #upReceiver(e) {
+    #listener(e) {
         const { name, value } = e.detail;
-        if (this.id === name || this.getAttribute("data-id") === name) {
-            this.kkValue = value;
+        if (name in this.#listens) {
             e.stopPropagation();
+            this.#listens[name](value);
         }
     }
 
