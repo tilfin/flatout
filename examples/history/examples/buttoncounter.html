@@ -28,7 +28,7 @@ class ButtonCounter extends Part {
     return {
       button: {
         click: () => {
-          this.set('count', this.get('count') + 1);
+          this.add('count', 1);
         }
       }
     }

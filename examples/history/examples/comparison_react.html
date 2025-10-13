@@ -1,148 +1,161 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Comparison with React examples</title>
-</head>
-<body>
-<h1>Comparison with React examples</h1>
-<main>
-  <div id="sandbox"></div>
-  <footer>
-    <button id="addTimer">Add Timer</button>
-    <button id="removeTimer">Remove Timer</button>
-  </footer>
-</main>
-<script type="module">
-import { View, ListView, FormView, Item, List } from '/lib/flatout.js';
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Comparison with React examples</title>
+  </head>
+  <body>
+    <h1>Comparison with React examples</h1>
+    <main-view></main-view>
+    <script type="module">
+      import {
+        View,
+        ListView,
+        FormView,
+        Item,
+        List,
+        Part,
+        register,
+      } from '/lib/flatout.js';
 
-class HelloMessage extends View {
-  html(data) {
-    return `<div>Hello ${data.name}</div>`
-  }
-}
+      class HelloMessage extends View {
+        html(data) {
+          return `<div>Hello ${data.name}</div>`;
+        }
+      }
 
-class Timer extends View {
-  prepareData() {
-    return new Item({ seconds: 0 })
-  }
+      class Timer extends Part {
+        html() {
+          return `<div>Seconds: <span id="seconds"></span></div>`;
+        }
 
-  html() {
-    return `<div>Seconds: <span data-id="seconds"></span></div>`
-  }
+        data() {
+          return { seconds: 0 };
+        }
 
-  load() {
-    this.interval = setInterval(() => { this.tick() }, 1000)
-  }
+        load() {
+          this.interval = setInterval(() => {
+            this.tick();
+          }, 1000);
+        }
 
-  unload() {
-    clearInterval(this.interval)
-  }
+        unload() {
+          clearInterval(this.interval);
+        }
 
-  tick() {
-    this.data.add('seconds', 1)
-  }
-}
+        tick() {
+          this.add('seconds', 1);
+        }
+      }
 
-class TodoListItemView extends View {
-  html(data) {
-    return `<li>${data.text}</li>`
-  }
-}
+      class TodoListItemView extends View {
+        html(data) {
+          return `<li>${data.text}</li>`;
+        }
+      }
 
-class AddForm extends FormView {
-  prepareData(defaults) {
-    return new Item({
-      nextNumber: defaults?.number ?? 0,
-      newTodo: '',
-    })
-  }
+      class AddForm extends FormView {
+        prepareData(defaults) {
+          return new Item({
+            nextNumber: defaults?.number ?? 0,
+            newTodo: '',
+          });
+        }
 
-  html() {
-    return `\
+        html() {
+          return `\
     <form data-id="form">
       <label for="newTodo">What needs to be done?</label>
       <input name="newTodo">
       <button>Add #<span data-id="nextNumber"></span></button>
-    </form>`
-  }
+    </form>`;
+        }
 
-  handle(evts) {
-    evts.submit = (sender, e) => {
-      const text = this.getValueOf('newTodo');
-      if (!text) {
-        return;
+        handle(evts) {
+          evts.submit = (sender, e) => {
+            const text = this.getValueOf('newTodo');
+            if (!text) {
+              return;
+            }
+
+            this.fire('addNewTodo', { text });
+            this._data.add('nextNumber', 1);
+          };
+        }
       }
 
-      this.fire('addNewTodo', { text });
-      this._data.add('nextNumber', 1);
-    }
-  }
-}
+      class TodoApp extends View {
+        prepareData(defaults) {
+          return {
+            list: new List(defaults),
+          };
+        }
 
-class TodoApp extends View {
-  prepareData(defaults) {
-    return {
-      list: new List(defaults)
-    }
-  }
-
-  html() {
-    return `\
+        html() {
+          return `\
     <div>
       <h3>TODO</h3>
       <ul data-id="list"></ul>
       <div data-id="form"></div>
-    </div>`
-  }
+    </div>`;
+        }
 
-  load(views) {
-    views.list = new ListView(TodoListItemView);
-    views.form = new AddForm({ data: { nextNumber: this.data.list.length + 1 }});
-  }
+        load(views) {
+          views.list = new ListView(TodoListItemView);
+          views.form = new AddForm({
+            data: { nextNumber: this.data.list.length + 1 },
+          });
+        }
 
-  handle(evts) {
-    evts.form_addNewTodo = (sender, e) => {
-      this.data.list.add(e.detail)
-    }
-  }
-}
+        handle(evts) {
+          evts.form_addNewTodo = (sender, e) => {
+            this.data.list.add(e.detail);
+          };
+        }
+      }
 
-class MainView extends View {
-  load(views) {
-    views.helloMessage = new HelloMessage({ data: { name: "Taylor" }});
-    views.todoApp = new TodoApp({ data: [{ text: 'First Todo' }] });
-    views.timer = new Timer();
-  }
+      class MainView extends Part {
+        #timers = [];
 
-  html() {
-    return `\
-    <main>
-      <div id="sandbox"></div>
-      <footer>
-        <button id="addTimer">Add Timer</button>
-        <button id="removeTimer">Remove Timer</button>
-      </footer>
-    </main>
-    `
-  }
+        /*load(views) {
+          views.helloMessage = new HelloMessage({ data: { name: 'Taylor' } });
+          views.todoApp = new TodoApp({ data: [{ text: 'First Todo' }] });
+        }*/
 
-  handle(evts) {
-    evts.addTimer_click = () => {
-      this.set('timer', new Timer());
-    }
+        html() {
+          return `\
+            <main>
+              <div id="sandbox"></div>
+              <footer>
+                <button id="addTimer">Add Timer</button>
+                <button id="removeTimer">Remove Timer</button>
+                <slot></slot>
+              </footer>
+            </main>`;
+        }
 
-    evts.removeTimer_click = () => {
-      this.set('timer');
-    }
-  }
-}
+        events() {
+          return {
+            addTimer: {
+              click: () => {
+                const newTimer = this.create('c-timer', 'timer');
+                this.appendChild(newTimer);
+                this.#timers.push(newTimer);
+              },
+            },
+            removeTimer: {
+              click: () => {
+                const timer = this.#timers.pop();
+                if (!timer) return;
+                timer.remove();
+              },
+            },
+          };
+        }
+      }
 
-new MainView({
-  rootEl: document.querySelector('main'),
-  contentEl: 'sandbox',
-});
-</script>
-</body>
+      register({ 'main-view': MainView, 'c-timer': Timer });
+    </script>
+  </body>
 </html>
