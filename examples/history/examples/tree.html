@@ -6,14 +6,12 @@
 <title>flatout Tree View Example</title>
 </head>
 <body>
-<main>
- <ul id="treeRoot"></ul>
-</main>
+<tree-root></tree-root>
 
 <script type="module">
-import { View, ListView } from '/lib/flatout.js';
+import { View, Part, register } from '/lib/flatout.js';
 
-var treeData = {
+const treeData = {
   name: "Root",
   children: [
     {
@@ -40,46 +38,90 @@ var treeData = {
   ]
 };
 
-class TreeNodeView extends View {
+class TreeNode extends Part {
   html(data) {
     return `\
-    <li>
-      <p data-id="name">${data.name}</p>
-      <ul data-id="children"></ul>
-      <form data-id="addChildForm">
+    <style>
+      :host {
+        display: block;
+        margin-left: 20px;
+      }
+      #name {
+        cursor: pointer;
+        user-select: none;
+      }
+      #name:hover {
+        background-color: #eef;
+      }
+      #children {
+        margin-top: 4px;
+        margin-left: 12px;
+        border-left: 1px solid #ccc;
+        padding-left: 8px;
+      }
+    </style>
+    <div>
+      <p id="name"></p>
+      <div id="children">
+        <slot></slot>
+      </div>
+      <form id="addChildForm">
         <input type="text" name="cname"><input type="submit" value="Add child">
       </form>
-    </li>`
+    </div>`
   }
 
-  load(views) {
-    views.children = new ListView(TreeNodeView);
+  data() {
+    return {
+      name: '',
+      children: []
+    }
   }
 
-  handle(evts) {
-    evts.name_click = () => {
-      if (this.views.children.el.style.display === "none") {
-        this.views.children.el.style.display = "block";
-      } else {
-        this.views.children.el.style.display = "none";
+  get childElementName() {
+    return 'tree-node';
+  }
+
+  events() {
+    return {
+      name: { 
+        click: (p) => {
+          const targetEl = this._findEl('children')
+          if (targetEl.style.display === "none") {
+            targetEl.style.display = "block";
+          } else {
+            targetEl.style.display = "none";
+          }
+        }
+      },
+      addChildForm: {
+        submit: (form, evt) => {
+          evt.preventDefault();
+          const addedName = form.cname.value.trim();
+          const newItem = { name: addedName, children: [] };
+          this.set('children', [...this.get('children'), newItem]);
+          form.cname.value = null;
+        }
       }
     }
+  }
+}
 
-    evts.addChildForm_submit = (form, evt) => {
-      this.views.children.addItem({ name: form.cname.value, children: [] });
-      form.cname.value = null;
+class Tree extends Part {
+  html() {
+    return `<main>
+      <tree-node id="root"></tree-node>
+    </main>`
+  }
+
+  data() {
+    return {
+      root: treeData
     }
   }
 }
 
-class MainView extends View {
-  load(views) {
-    views.list = new ListView('treeRoot', TreeNodeView, { data: [treeData] });
-  }
-}
-
-const main = new MainView({ rootEl: document.querySelector('main') });
-main._loadFinish()
+register({ 'tree-root': Tree, 'tree-node': TreeNode })
 </script>
 </body>
 </html>

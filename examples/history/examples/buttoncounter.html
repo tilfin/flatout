@@ -6,33 +6,36 @@
 <title>Button Counter Example</title>
 </head>
 <body>
-<main></main>
+<main>
+  <button-counter id="counter1"></button-counter>
+  <button-counter id="counter2" count="10"></button-counter>
+</main>
 <script type="module">
-import { View, View, Item } from '/lib/flatout.js';
+import { Part, register } from '/lib/flatout.js';
 
-class ButtonCounterView extends View {
-  prepareData(defaults) {
-    return new Item(defaults);
+class ButtonCounter extends Part {
+  html() {
+    return `<button id="button">You clicked me
+      <span id="count"></span> times.
+    </button>`
   }
 
-  html(data) {
-    return `<button>You clicked me <span data-id="count"></span> times.</button>`
+  data() {
+    return { count: 0 };
   }
 
-  handle(evts) {
-    evts.click = () => {
-      this.data.add('count', 1);
+  events() {
+    return {
+      button: {
+        click: () => {
+          this.add('count', 1);
+        }
+      }
     }
   }
 }
 
-class MainView extends View {
-  load(views) {
-    views.buttonCounter = new ButtonCounterView({ data: { count: 0 }});
-  }
-}
-
-new MainView({ rootEl: document.querySelector('main') });
+register({ 'button-counter': ButtonCounter });
 </script>
 </body>
 </html>
