@@ -41,9 +41,30 @@ const treeData = {
 class TreeNode extends Part {
   html(data) {
     return `\
+    <style>
+      :host {
+        display: block;
+        margin-left: 20px;
+      }
+      #name {
+        cursor: pointer;
+        user-select: none;
+      }
+      #name:hover {
+        background-color: #eef;
+      }
+      #children {
+        margin-top: 4px;
+        margin-left: 12px;
+        border-left: 1px solid #ccc;
+        padding-left: 8px;
+      }
+    </style>
     <div>
       <p id="name"></p>
-      <div id="children"></div>
+      <div id="children">
+        <slot></slot>
+      </div>
       <form id="addChildForm">
         <input type="text" name="cname"><input type="submit" value="Add child">
       </form>
@@ -55,6 +76,10 @@ class TreeNode extends Part {
       name: '',
       children: []
     }
+  }
+
+  get childElementName() {
+    return 'tree-node';
   }
 
   events() {

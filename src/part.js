@@ -14,7 +14,7 @@ export class Part extends HTMLElement {
     constructor() {
         super();
         const sr = this.attachShadow({ mode: "open" });
-        sr.appendChild(this.#createEl());
+        sr.appendChild(this.#buildTemplate());
         this._data = this.data() || {};
     }
 
@@ -30,6 +30,10 @@ export class Part extends HTMLElement {
         for (const key in this._data) {
             if (key in cv) {
                 // only render
+                if (key === "children") {
+                    this.#resetChildren(cv[key]);
+                    continue;
+                }
                 const el = this._findEl(key);
                 const val = cv[key];
                 if (gParts.includes(el.localName)) {
@@ -103,7 +107,7 @@ export class Part extends HTMLElement {
             if (typeof nv === "object") {
                 for (const elnm in nv) this.set(elnm, nv[elnm]);
             } else {
-                this.#updateSE(this, key, nv);
+                this.#updateSE(this, "default", nv);
             }
         }
     }
@@ -133,10 +137,19 @@ export class Part extends HTMLElement {
     }
 
     get(name) {
+        if (name === "children") {
+            return Array.from(this.children);
+        }
+
         return gValueMap.get(this)?.[name];
     }
 
     set(name, val) {
+        if (name === "children") {
+            this.#resetChildren(val);
+            return;
+        }
+
         const el = this._findEl(name);
         if (!el) return;
 
@@ -160,20 +173,20 @@ export class Part extends HTMLElement {
 		this.dispatchEvent(evt);
 	}
 
-    create(tagName, id, value = {}) {
+    create(tagName, id = null, value = {}) {
         const el = document.createElement(tagName);
-        el.id = id;
+        if (id) el.id = id;
         gValueMap.set(el, value);
         return el;
     }
 
     _findEl(id) {
-        const sel = this.shadowRoot.querySelector(`#${id}`);
+        const sel = this.shadowRoot.getElementById(id);
         if (sel) return sel;
         return this.querySelector(`[data-id="${id}"]`);
     }
 
-    #createEl() {
+    #buildTemplate() {
         const template = document.createElement("template");
         template.innerHTML = this.html();
         return template.content.cloneNode(true);
@@ -203,5 +216,35 @@ export class Part extends HTMLElement {
         } else {
             el.textContent = val;
         }
+    }
+
+    #resetChildren(newItems) {
+        const curSet = new Set(this.children);
+        const newEls = [];
+        for (const item of newItems) {
+            if (item instanceof HTMLElement) {
+                // already element
+                curSet.delete(item);
+                newEls.push(item);
+            } else {
+                // convert data to new element
+                const el = this.create(this.childElementName, null, item);
+                newEls.push(el);
+            }
+        }
+        // curSet remains elements to be removed
+        curSet.forEach(el => {
+            el.remove();
+        });
+
+        newEls.forEach((newEl, i) => {
+            const curEl = this.children[i] ?? null;
+            if (newEl === curEl) return;
+            if (curEl === null) {
+                this.appendChild(newEl);
+            } else {
+                this.insertBefore(newEl, curEl);
+            }
+        });
     }
 }
